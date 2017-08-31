@@ -11,4 +11,13 @@ AdsrEnvelope::AdsrEnvelope(const uint8_t attack,
       sustain_(sustain),
       release_(release),
       phase_(0) { }
+
+void AdsrEnvelope::Tick() {
+    phase_++;
+}
+
+double AdsrEnvelope::Value() {
+    return 1.0;
+}
+
 }

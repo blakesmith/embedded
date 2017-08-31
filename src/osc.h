@@ -17,10 +17,13 @@ public:
 
     ~Osc() = default;
 
+    void Tick();
+    int16_t Value();
+
 private:
     const OscShape shape_;
-    const uint16_t freq_hz_;
-    const uint8_t amplitude_;
+    uint16_t freq_hz_;
+    uint8_t amplitude_;
 
     uint32_t phase_;
 };

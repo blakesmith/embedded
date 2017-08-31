@@ -14,6 +14,9 @@ public:
 
     ~AdsrEnvelope() = default;
 
+    void Tick();
+    double Value();
+
 private:
     const uint32_t attack_;
     const uint32_t decay_;

@@ -9,4 +9,13 @@ Osc::Osc(const OscShape shape,
       freq_hz_(freq_hz),
       amplitude_(amplitude),
       phase_(0) { }
+
+void Osc::Tick() {
+    phase_++;
+}
+
+int16_t Osc::Value() {
+    return 0;
+}
+
 }
