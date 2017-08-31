@@ -2,10 +2,11 @@
 
 namespace nome {
 
-Osc::Osc(const uint32_t sample_rate,
-         const uint32_t control_rate)
-    : sample_rate_(sample_rate),
-      control_rate_(control_rate),
+Osc::Osc(const OscShape shape,
+         const uint16_t freq_hz,
+         const uint8_t amplitude)
+    : shape_(shape),
+      freq_hz_(freq_hz),
+      amplitude_(amplitude),
       phase_(0) { }
-
 }

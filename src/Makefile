@@ -3,6 +3,7 @@ CFLAGS=-c -Wall -std=c++11 -D__LINUX__
 LDFLAGS=-lm -lasound
 
 SOURCES=nome.cc \
+	adsr_envelope.cc \
 	osc.cc
 OBJECTS=$(SOURCES:.cc=.o)
 EXECUTABLE=nome

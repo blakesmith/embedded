@@ -5,16 +5,22 @@
 
 namespace nome {
 
+enum OscShape {
+    OSC_SHAPE_SIN
+};
+
 class Osc {
 public:
-    Osc(const uint32_t sample_rate,
-        const uint32_t control_rate);
-    
+    Osc(const OscShape shape,
+        const uint16_t freq_hz,
+        const uint8_t amplitude);
+
     ~Osc() = default;
-    
+
 private:
-    const uint32_t sample_rate_;
-    const uint32_t control_rate_;
+    const OscShape shape_;
+    const uint16_t freq_hz_;
+    const uint8_t amplitude_;
 
     uint32_t phase_;
 };
