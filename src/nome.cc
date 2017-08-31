@@ -17,7 +17,6 @@ int main(int argc, char** argv) {
          current_samples += SAMPLE_BUFFER_SIZE) {
         beat.Fill(sample_buffer, SAMPLE_BUFFER_SIZE);
     }
-
     
     return 0;
 }
