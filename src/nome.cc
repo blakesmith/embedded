@@ -1,3 +1,4 @@
+#include "alsa_output.h"
 #include "beat.h"
 
 using namespace nome;
@@ -9,6 +10,7 @@ static const size_t SAMPLE_BUFFER_SIZE = 128;
 int main(int argc, char** argv) {
     int16_t sample_buffer[SAMPLE_BUFFER_SIZE];
     Beat beat(SAMPLE_RATE, CONTROL_RATE);
+    AlsaOutput sound_out(SAMPLE_RATE);
 
     uint32_t seconds = 1;
     uint32_t total_samples = SAMPLE_RATE * seconds;
@@ -16,6 +18,7 @@ int main(int argc, char** argv) {
          current_samples < total_samples;
          current_samples += SAMPLE_BUFFER_SIZE) {
         beat.Fill(sample_buffer, SAMPLE_BUFFER_SIZE);
+        sound_out.Write(sample_buffer, SAMPLE_BUFFER_SIZE);
     }
     
     return 0;

@@ -4,6 +4,7 @@ LDFLAGS=-lm -lasound
 
 SOURCES=nome.cc \
 	adsr_envelope.cc \
+	alsa_output.cc \
 	beat.cc \
 	osc.cc
 OBJECTS=$(SOURCES:.cc=.o)
