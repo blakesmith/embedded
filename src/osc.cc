@@ -89,7 +89,7 @@ Osc::Osc(const OscShape shape,
 
 void Osc::Tick() {
     double phase = phase_ + phase_increment_;
-    phase_ = (phase_ + static_cast<uint32_t>(std::round(phase))) % sin_wavetable_size;
+    phase_ = static_cast<uint32_t>(std::round(phase)) % sin_wavetable_size;
 }
 
 int16_t Osc::Value() {
