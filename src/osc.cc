@@ -83,17 +83,17 @@ Osc::Osc(const OscShape shape,
       sample_rate_(sample_rate),
       freq_hz_(freq_hz),
       amplitude_(amplitude),
-      phase_(0) {
+      phase_(0.0) {
     compute_phase_increment();
 }
 
 void Osc::Tick() {
-    double phase = phase_ + phase_increment_;
-    phase_ = static_cast<uint32_t>(std::round(phase)) % sin_wavetable_size;
+    phase_ = phase_ + phase_increment_;
 }
 
 int16_t Osc::Value() {
-    return sin_wavetable[phase_];
+    uint32_t index = static_cast<uint32_t>(std::round(phase_)) % sin_wavetable_size;
+    return sin_wavetable[index];
 }
 
 void Osc::set_freq(uint16_t freq_hz) {
