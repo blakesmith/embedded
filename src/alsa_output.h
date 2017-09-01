@@ -17,7 +17,7 @@ public:
     int Write(const int16_t* pcm_buf, size_t size);
 private:
     snd_pcm_t* pcm_device_;
-    const char* device_name_ = "hw0:0";
+    const char* device_name_ = "hw:0,0";
     const uint32_t sample_rate_;
 };
 

@@ -14,7 +14,7 @@ public:
 
     ~Beat() = default;
 
-    void Fill(int16_t* buffer, size_t size);
+    void Fill(int16_t* buffer, size_t frames, uint8_t channel_count);
 
 private:
     const uint32_t sample_rate_;
