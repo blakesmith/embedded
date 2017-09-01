@@ -7,7 +7,7 @@ Beat::Beat(const uint32_t sample_rate,
     : sample_rate_(sample_rate),
       control_rate_(control_rate),
       phase_(0),
-      osc_(OscShape::OSC_SHAPE_SIN, 440, 50),
+      osc_(OscShape::OSC_SHAPE_SIN, sample_rate, 440, 50),
       envelope_(1, 10, 0, 244) { }
 
 void Beat::Fill(int16_t* buffer, size_t size) {
