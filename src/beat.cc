@@ -12,7 +12,7 @@ Beat::Beat(const uint32_t sample_rate,
       samples_per_control_(sample_rate_ / control_rate_),
       phase_(0),
       osc_(OscShape::OSC_SHAPE_SIN, sample_rate, 1320, 50),
-      envelope_(control_rate, 255, 1, 10, 0, 244, 0) { }
+      envelope_(control_rate, 255, 1, 20, 0, 225, 0) { }
 
 void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
     for (size_t i = 0; i < frames; i++) {
