@@ -7,8 +7,8 @@ Beat::Beat(const uint32_t sample_rate,
     : sample_rate_(sample_rate),
       control_rate_(control_rate),
       phase_(0),
-      osc_(OscShape::OSC_SHAPE_SIN, sample_rate, 440, 50),
-      envelope_(control_rate, 1000, 1, 10, 0, 244) { }
+      osc_(OscShape::OSC_SHAPE_SIN, sample_rate, 1320, 50),
+      envelope_(control_rate, 255, 10, 55, 0, 195, 0) { }
 
 void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
     const uint32_t samples_per_control = sample_rate_ / control_rate_;
