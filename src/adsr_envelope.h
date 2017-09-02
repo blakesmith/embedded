@@ -27,9 +27,11 @@ public:
 
     void Tick();
     uint8_t Value();
-    void Hit();
+    void Reset();
 
     void compute_segment_positions();
+    void compute_segment_positions(uint32_t* current, uint32_t* last);
+    uint8_t compute_next_value(uint32_t current_segment_position, uint32_t last_segment_position);
     uint32_t get_last_segment_position();
 
 private:

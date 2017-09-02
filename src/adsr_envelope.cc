@@ -12,11 +12,9 @@ AdsrEnvelope::AdsrEnvelope(const uint32_t control_rate,
     : control_rate_(control_rate),
       total_duration_fixed_ms_(total_duration_fixed_ms),
       segment_values_{ attack, decay, sustain, release },
-      sustain_level_(sustain_level),
-      value_(0xFF),
-      phase_(0),
-      segment_(ENVELOPE_SEGMENT_ATTACK) {
+      sustain_level_(sustain_level) {
           compute_segment_positions();
+          Reset();
       }
 
 uint32_t AdsrEnvelope::get_last_segment_position() {
@@ -27,8 +25,8 @@ uint32_t AdsrEnvelope::get_last_segment_position() {
     }
 }
 
-void AdsrEnvelope::Tick() {
-    phase_++;
+void AdsrEnvelope::compute_segment_positions(uint32_t* current,
+                                             uint32_t* last) {
     uint32_t current_segment_position = segment_positions_[segment_];
     uint32_t last_segment_position = get_last_segment_position();
     
@@ -38,28 +36,56 @@ void AdsrEnvelope::Tick() {
         last_segment_position = get_last_segment_position();
     }
 
+    if (current != NULL) {
+        *current = current_segment_position;
+    }
+    if (last != NULL) {
+        *last = last_segment_position;
+    }
+}
+
+uint8_t AdsrEnvelope::compute_next_value(uint32_t current_segment_position,
+                                         uint32_t last_segment_position) {
     uint32_t total_segment_duration = current_segment_position - last_segment_position;
     uint32_t segment_phase = phase_ - last_segment_position;
 
     if (segment_ == ENVELOPE_SEGMENT_ATTACK) {
         // Step from 0 to 255
-        value_ = (segment_phase << 8) / total_segment_duration * 0xFF >> 8;
+        return (segment_phase << 8) / total_segment_duration * 0xFF >> 8;
     } else if (segment_ == ENVELOPE_SEGMENT_DECAY) {
         // Step from 255 to sustain_value_
-        value_ = 0xFF - ((segment_phase << 8) / total_segment_duration * (0xFF - sustain_level_) >> 8);
+        return 0xFF - ((segment_phase << 8) / total_segment_duration * (0xFF - sustain_level_) >> 8);
     } else if (segment_ == ENVELOPE_SEGMENT_SUSTAIN) {
         // Hold the sustain value
+        return value_;
     } else if (segment_ == ENVELOPE_SEGMENT_RELEASE) {
         // Step from sustain_value_ to 0
-        value_ = sustain_level_ - ((segment_phase << 8) / total_segment_duration * sustain_level_ >> 8);
+        return sustain_level_ - ((segment_phase << 8) / total_segment_duration * sustain_level_ >> 8);
+    } else {
+        // Should never get here!
+        return 0;
     }
 }
 
-void AdsrEnvelope::Hit() {
-    // phase_ = 0;
-    // segment_ = ENVELOPE_SEGMENT_ATTACK;
-    // uint32_t segment_position = advance_segment();
-    // calculate_next_value();
+void AdsrEnvelope::Tick() {
+    phase_++;
+    
+    uint32_t current_segment_position;
+    uint32_t last_segment_position;
+
+    compute_segment_positions(&current_segment_position, &last_segment_position);
+    value_ = compute_next_value(current_segment_position, last_segment_position);
+}
+
+void AdsrEnvelope::Reset() {
+    phase_ = 0;
+    segment_ = ENVELOPE_SEGMENT_ATTACK;
+
+    uint32_t current_segment_position;
+    uint32_t last_segment_position;
+
+    compute_segment_positions(&current_segment_position, &last_segment_position);
+    value_ = compute_next_value(current_segment_position, last_segment_position);
 }
 
 uint8_t AdsrEnvelope::Value() {

@@ -11,7 +11,7 @@ static const size_t FRAMES_PER_PERIOD = 128;
 int main(int argc, char** argv) {
     int rc;
     int16_t sample_buffer[FRAMES_PER_PERIOD*CHANNEL_COUNT];
-    Beat beat(SAMPLE_RATE, CONTROL_RATE);
+    Beat beat(SAMPLE_RATE, CONTROL_RATE, 140);
     AlsaOutput sound_out(SAMPLE_RATE);
 
     rc = sound_out.Start();
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
         exit(rc);
     }
 
-    uint32_t seconds = 1;
+    uint32_t seconds = 5;
     uint32_t total_samples = SAMPLE_RATE * seconds;
     for (uint32_t current_samples = 0;
          current_samples < total_samples;

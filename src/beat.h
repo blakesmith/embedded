@@ -10,7 +10,8 @@ namespace nome {
 class Beat {
 public:
     Beat(const uint32_t sample_rate,
-         const uint32_t control_rate);
+         const uint32_t control_rate,
+         const uint16_t bpm);
 
     ~Beat() = default;
 
@@ -19,7 +20,10 @@ public:
 private:
     const uint32_t sample_rate_;
     const uint32_t control_rate_;
-    
+
+    uint16_t bpm_;
+    uint16_t samples_per_beat_;
+    uint32_t samples_per_control_;
     uint32_t phase_;
     Osc osc_;
     AdsrEnvelope envelope_;
