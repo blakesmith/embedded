@@ -1,6 +1,5 @@
 #include "osc.h"
 
-#include <cmath>
 #include <cstddef>
 
 namespace nome {
@@ -83,26 +82,27 @@ Osc::Osc(const OscShape shape,
       sample_rate_(sample_rate),
       freq_hz_(freq_hz),
       amplitude_(amplitude),
-      phase_(0.0) {
+      phase_(0) {
     compute_phase_increment();
 }
 
 void Osc::Tick() {
-    phase_ = phase_ + phase_increment_;
+    phase_++;
 }
 
 int16_t Osc::Value() {
-    uint32_t index = static_cast<uint32_t>(std::round(phase_)) % sin_wavetable_size;
+    uint32_t index = ((phase_ * phase_increment_) >> 16) % sin_wavetable_size;
     return sin_wavetable[index];
 }
 
 void Osc::set_freq(uint16_t freq_hz) {
     freq_hz_ = freq_hz;
+    phase_ = 0;
     compute_phase_increment();
 }
 
 void Osc::compute_phase_increment() {
-    phase_increment_ = sin_wavetable_size * ((double)freq_hz_ / sample_rate_);
+    phase_increment_ = sin_wavetable_size * ((freq_hz_ << 16) / sample_rate_);
 }
 
 }

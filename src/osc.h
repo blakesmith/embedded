@@ -30,8 +30,8 @@ private:
     uint16_t freq_hz_;
     uint8_t amplitude_;
 
-    double phase_;
-    double phase_increment_;
+    uint32_t phase_;
+    uint32_t phase_increment_;
 };
 
 }
