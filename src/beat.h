@@ -17,7 +17,6 @@ public:
     ~Beat() = default;
 
     void Fill(int16_t* buffer, size_t frames, uint8_t channel_count);
-    void trigger_beat();
 
 private:
     const uint32_t sample_rate_;
@@ -33,6 +32,8 @@ private:
 
     Osc osc_;
     AdsrEnvelope envelope_;
+
+    void trigger_beat();
 };
 
 }

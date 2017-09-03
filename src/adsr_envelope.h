@@ -29,11 +29,6 @@ public:
     uint8_t Value();
     void Reset();
 
-    void compute_segment_positions();
-    void compute_segment_positions(uint32_t* current, uint32_t* last);
-    uint8_t compute_next_value(uint32_t current_segment_position, uint32_t last_segment_position);
-    uint32_t get_last_segment_position();
-
 private:
     // Usually sample rate / 10. AKA - 44100 / 10 = 4410
     const uint32_t control_rate_;
@@ -52,6 +47,10 @@ private:
                                 uint8_t end,
                                 uint32_t segment_phase,
                                 uint32_t total_segment_duration);
+    void compute_segment_positions();
+    void compute_segment_positions(uint32_t* current, uint32_t* last);
+    uint8_t compute_next_value(uint32_t current_segment_position, uint32_t last_segment_position);
+    uint32_t get_last_segment_position();
 };
     
 }
