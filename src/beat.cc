@@ -12,6 +12,7 @@ Beat::Beat(const uint32_t sample_rate,
       downbeat_(downbeat),
       samples_per_beat_((sample_rate * 60) / bpm),
       samples_per_control_(sample_rate_ / control_rate_),
+      total_beats_(0),
       phase_(0),
       osc_(OscShape::OSC_SHAPE_SIN, sample_rate, 1320, 50),
       envelope_(control_rate, 255, 1, 20, 0, 225, 0) { }
@@ -26,6 +27,7 @@ void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
         osc_.Tick();
         phase_++;
         if (phase_ % samples_per_beat_ == 0) {
+            total_beats_++;
             envelope_.Reset();
         }
         if (phase_ % samples_per_control_ == 0) {

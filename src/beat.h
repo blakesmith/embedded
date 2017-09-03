@@ -26,7 +26,10 @@ private:
     uint8_t downbeat_;
     uint16_t samples_per_beat_;
     uint32_t samples_per_control_;
+
+    uint32_t total_beats_;
     uint32_t phase_;
+
     Osc osc_;
     AdsrEnvelope envelope_;
 };
