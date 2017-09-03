@@ -2,6 +2,9 @@
 
 namespace nome {
 
+static const uint16_t DOWNBEAT_FREQ = 1320;
+static const uint16_t UPBEAT_FREQ = 880;
+
 Beat::Beat(const uint32_t sample_rate,
            const uint32_t control_rate,
            const uint16_t bpm,
@@ -14,7 +17,7 @@ Beat::Beat(const uint32_t sample_rate,
       samples_per_control_(sample_rate_ / control_rate_),
       total_beats_(0),
       phase_(0),
-      osc_(OscShape::OSC_SHAPE_SIN, sample_rate, 1320, 50),
+      osc_(OscShape::OSC_SHAPE_SIN, sample_rate, DOWNBEAT_FREQ, 50),
       envelope_(control_rate, 255, 1, 20, 0, 225, 0) { }
 
 void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
@@ -26,10 +29,17 @@ void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
 
         osc_.Tick();
         phase_++;
+
         if (phase_ % samples_per_beat_ == 0) {
             total_beats_++;
+            if (total_beats_ % downbeat_ == 0) {
+                osc_.set_freq(DOWNBEAT_FREQ);
+            } else if (total_beats_ % downbeat_ == 1) {
+                osc_.set_freq(UPBEAT_FREQ);
+            }
             envelope_.Reset();
         }
+
         if (phase_ % samples_per_control_ == 0) {
             envelope_.Tick();
         }
