@@ -11,7 +11,8 @@ class Beat {
 public:
     Beat(const uint32_t sample_rate,
          const uint32_t control_rate,
-         const uint16_t bpm);
+         const uint16_t bpm,
+         const uint8_t downbeat);
 
     ~Beat() = default;
 
@@ -22,6 +23,7 @@ private:
     const uint32_t control_rate_;
 
     uint16_t bpm_;
+    uint8_t downbeat_;
     uint16_t samples_per_beat_;
     uint32_t samples_per_control_;
     uint32_t phase_;

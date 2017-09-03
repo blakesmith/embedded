@@ -4,10 +4,12 @@ namespace nome {
 
 Beat::Beat(const uint32_t sample_rate,
            const uint32_t control_rate,
-           const uint16_t bpm)
+           const uint16_t bpm,
+           const uint8_t downbeat)
     : sample_rate_(sample_rate),
       control_rate_(control_rate),
       bpm_(bpm),
+      downbeat_(downbeat),
       samples_per_beat_((sample_rate * 60) / bpm),
       samples_per_control_(sample_rate_ / control_rate_),
       phase_(0),

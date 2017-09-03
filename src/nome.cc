@@ -7,11 +7,13 @@ static const uint32_t SAMPLE_RATE = 44100;
 static const uint32_t CONTROL_RATE = SAMPLE_RATE / 10;
 static const uint8_t CHANNEL_COUNT = 2;
 static const size_t FRAMES_PER_PERIOD = 128;
+static const uint16_t DEFAULT_BPM = 140;
+static const uint8_t DEFAULT_DOWNBEAT = 4;
 
 int main(int argc, char** argv) {
     int rc;
     int16_t sample_buffer[FRAMES_PER_PERIOD*CHANNEL_COUNT];
-    Beat beat(SAMPLE_RATE, CONTROL_RATE, 140);
+    Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
     AlsaOutput sound_out(SAMPLE_RATE);
 
     rc = sound_out.Start();
