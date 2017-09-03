@@ -23,7 +23,7 @@ public:
 
     void set_freq(uint16_t freq_hz);
     void compute_phase_increment();
-    void compute_next_value();
+    int16_t compute_next_value();
 
 private:
     const OscShape shape_;

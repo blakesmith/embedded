@@ -89,7 +89,7 @@ Osc::Osc(const OscShape shape,
 
 void Osc::Tick() {
     phase_++;
-    compute_next_value();
+    value_ = compute_next_value();
 }
 
 int16_t Osc::Value() {
@@ -100,21 +100,21 @@ void Osc::set_freq(uint16_t freq_hz) {
     freq_hz_ = freq_hz;
     phase_ = 0;
     compute_phase_increment();
-    compute_next_value();
+    value_ = compute_next_value();
 }
 
 void Osc::compute_phase_increment() {
     phase_increment_ = sin_wavetable_size * ((freq_hz_ << 16) / sample_rate_);
 }
 
-void Osc::compute_next_value() {
+int16_t Osc::compute_next_value() {
     uint32_t index = ((phase_ * phase_increment_) >> 16) % sin_wavetable_size;
     if (index == 0) {
         // Reset the phase to avoid overflows
         phase_ = 0;
     }
 
-    value_ = sin_wavetable[index];
+    return sin_wavetable[index];
 }
 
 }
