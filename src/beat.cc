@@ -31,13 +31,13 @@ void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
         phase_++;
 
         if (phase_ % samples_per_beat_ == 0) {
+            envelope_.Reset();
             total_beats_++;
             if (total_beats_ % downbeat_ == 0) {
                 osc_.set_freq(DOWNBEAT_FREQ);
             } else if (total_beats_ % downbeat_ == 1) {
                 osc_.set_freq(UPBEAT_FREQ);
             }
-            envelope_.Reset();
         }
 
         if (phase_ % samples_per_control_ == 0) {

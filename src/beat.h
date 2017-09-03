@@ -24,7 +24,7 @@ private:
 
     uint16_t bpm_;
     uint8_t downbeat_;
-    uint16_t samples_per_beat_;
+    uint32_t samples_per_beat_;
     uint32_t samples_per_control_;
 
     uint32_t total_beats_;
