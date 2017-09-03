@@ -44,6 +44,17 @@ void AdsrEnvelope::compute_segment_positions(uint32_t* current,
     }
 }
 
+uint8_t AdsrEnvelope::interpolate_segment(uint8_t start,
+                                          uint8_t end,
+                                          uint32_t segment_phase,
+                                          uint32_t total_segment_duration) {
+    if (start > end) {
+        return start - ((segment_phase << 8) / total_segment_duration * (start - end) >> 8);
+    } else {
+        return (segment_phase << 8) / total_segment_duration * (end - start) >> 8;
+    }
+}
+
 uint8_t AdsrEnvelope::compute_next_value(uint32_t current_segment_position,
                                          uint32_t last_segment_position) {
     uint32_t total_segment_duration = current_segment_position - last_segment_position;
@@ -51,16 +62,16 @@ uint8_t AdsrEnvelope::compute_next_value(uint32_t current_segment_position,
 
     if (segment_ == ENVELOPE_SEGMENT_ATTACK) {
         // Step from 0 to 255
-        return (segment_phase << 8) / total_segment_duration * 0xFF >> 8;
+        return interpolate_segment(0, 255, segment_phase, total_segment_duration);
     } else if (segment_ == ENVELOPE_SEGMENT_DECAY) {
         // Step from 255 to sustain_value_
-        return 0xFF - ((segment_phase << 8) / total_segment_duration * (0xFF - sustain_level_) >> 8);
+        return interpolate_segment(255, sustain_level_, segment_phase, total_segment_duration);
     } else if (segment_ == ENVELOPE_SEGMENT_SUSTAIN) {
         // Hold the sustain value
         return value_;
     } else if (segment_ == ENVELOPE_SEGMENT_RELEASE) {
         // Step from sustain_value_ to 0
-        return sustain_level_ - ((segment_phase << 8) / total_segment_duration * sustain_level_ >> 8);
+        return interpolate_segment(sustain_level_, 0, segment_phase, total_segment_duration);
     } else {
         // Should never get here!
         return 0;

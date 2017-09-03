@@ -47,6 +47,11 @@ private:
     uint32_t phase_;
     size_t segment_;
     uint32_t segment_positions_[4];
+
+    uint8_t interpolate_segment(uint8_t start,
+                                uint8_t end,
+                                uint32_t segment_phase,
+                                uint32_t total_segment_duration);
 };
     
 }
