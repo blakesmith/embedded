@@ -1,5 +1,7 @@
 CC=arm-none-eabi-g++
 OBJCOPY=arm-none-eabi-objcopy
+OPENOCD=openocd
+OPENOCD_CONFIG=/usr/share/openocd/scripts/board/stm32f4discovery.cfg
 
 STM_CUBE_ROOT=../../STM32Cube_FW_F4_V1.16.0
 
@@ -26,6 +28,12 @@ SOURCES=system_stm32f4xx.cc \
 OBJECTS=$(SOURCES:.cc=.o) startup_stm32f4xx.s
 EXECUTABLE=main.elf
 HEX=main.hex
+
+flash: $(HEX)
+	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "init"
+	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "reset halt"
+	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "flash write_image erase $(HEX)"
+	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "reset run"
 
 all: $(SOURCES) $(HEX)
 

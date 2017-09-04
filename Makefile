@@ -10,3 +10,6 @@ clean:
 
 install:
 	$(MAKE) -C $(SUBDIR) install
+
+flash:
+	$(MAKE) -C $(SUBDIR) flash
