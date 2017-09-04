@@ -20,9 +20,10 @@ LDFLAGS=-mcpu=cortex-m4 \
 	-Wl,--gc-sections
 
 SOURCES=system_stm32f4xx.cc \
+	stm32f4xx_it.cc \
 	main.cc
 
-OBJECTS=$(SOURCES:.cc=.o)
+OBJECTS=$(SOURCES:.cc=.o) startup_stm32f4xx.s
 EXECUTABLE=main.elf
 HEX=main.hex
 
