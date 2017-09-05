@@ -1,9 +1,5 @@
 #include <stm32f4xx.h>
 
-#define LED_PIN 12
-#define LED_ON() GPIOD->BSRR = (1 << LED_PIN)
-#define LED_OFF() GPIOD->BRR = (1 << LED_PIN)
-
 GPIO_InitTypeDef GPIO_LED;
 
 void Init() {
