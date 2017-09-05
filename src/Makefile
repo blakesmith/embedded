@@ -3,29 +3,51 @@ OBJCOPY=arm-none-eabi-objcopy
 OPENOCD=openocd
 OPENOCD_CONFIG=/usr/share/openocd/scripts/board/stm32f4discovery.cfg
 
-STM_CUBE_ROOT=../../STM32Cube_FW_F4_V1.16.0
+BUILDDIR=.
+
+STM_PERIPH_ROOT=../third_party/STM
+FW_CORE_DIR=$(STM_PERIPH_ROOT)/CMSIS/Device/ST/STM32F4xx
+FW_STDDRIVER_DIR=$(STM_PERIPH_ROOT)/STM32F4xx_StdPeriph_Driver
+FW_STDDRIVER_SRCDIR = $(FW_STDDRIVER_DIR)/src
+
+VPATH += $(FW_STDDRIVER_SRCDIR)
+
+ARCHFLAGS = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb-interwork -funroll-loops
+ASFLAGS = $(ARCHFLAGS)
 
 CFLAGS=-Wall \
-	-mcpu=cortex-m4 \-mlittle-endian \
+	-mcpu=cortex-m4 \
+	-mlittle-endian \
 	-mthumb \
-	-I$(STM_CUBE_ROOT)/Drivers/CMSIS/Device/ST/STM32F4xx/Include \
-	-I$(STM_CUBE_ROOT)/Drivers/CMSIS/Include \
-	-DSTM32F401xE \
+	-include stm32f4xx_conf.h \
+	-I. \
+	-I$(STM_PERIPH_ROOT)/CMSIS/Include \
+	-I$(FW_CORE_DIR)/Include \
+	-I$(FW_STDDRIVER_DIR)/inc \
+	-DSTM32F411xE \
 	-Os \
 	-c
 
 LDFLAGS=-mcpu=cortex-m4 \
 	-mlittle-endian \
 	-mthumb \
-	-DSTM32F401xE \
-	-T$(STM_CUBE_ROOT)/Projects/STM32F401-Discovery/Templates/TrueSTUDIO/STM32F401-Discovery/STM32F401CC_FLASH.ld \
+	-DSTM32F411xE \
+	-specs=nosys.specs \
+	-T$(STM_PERIPH_ROOT)/STM32F411RETx_FLASH.ld \
 	-Wl,--gc-sections
 
-SOURCES=system_stm32f4xx.cc \
+DRIVERS_C_FILES = $(notdir $(wildcard $(patsubst %,%/*.c,$(FW_STDDRIVER_SRCDIR))))
+
+C_FILES=$(DRIVERS_C_FILES)
+
+CC_FILES=system_stm32f4xx.cc \
 	stm32f4xx_it.cc \
 	main.cc
 
-OBJECTS=$(SOURCES:.cc=.o) startup_stm32f4xx.s
+AS_FILES = startup_stm32f411xe.s
+
+OBJECTS=$(CC_FILES:.cc=.o) $(C_FILES:.c=.o) $(AS_FILES:.s=.o)
+
 EXECUTABLE=main.elf
 HEX=main.hex
 
@@ -35,7 +57,7 @@ flash: $(HEX)
 	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "flash write_image erase $(HEX)"
 	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "reset run"
 
-all: $(SOURCES) $(HEX)
+all: $(HEX)
 
 clean:
 	rm -rf *.o
@@ -48,5 +70,12 @@ $(EXECUTABLE): $(OBJECTS)
 $(HEX): $(EXECUTABLE)
 	$(OBJCOPY) -Oihex $(EXECUTABLE) $@
 
-.cc.o:
-	$(CC) $(CFLAGS) $< -o $@
+$(BUILDDIR)/%.o: %.cc
+	$(CC) -c $(CFLAGS) $< -o $@
+
+$(BUILDDIR)/%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+$(BUILDDIR)/%.o: %.s
+	$(CC) -c -x assembler-with-cpp $(ASFLAGS) $< -o $@
+

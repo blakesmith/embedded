@@ -1,17 +1,31 @@
-#include <stm32f4xx.h>
+#include <stm32f4xx_conf.h>
 
-#define LED_PIN 5
-#define LED_ON() 
-#define LED_OFF()
+#define LED_PIN 12
+#define LED_ON() GPIOD->BSRR = (1 << LED_PIN)
+#define LED_OFF() GPIOD->BRR = (1 << LED_PIN)
+
+GPIO_InitTypeDef GPIO_LED;
+
+void Init() {
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+    GPIO_LED.GPIO_Pin = GPIO_Pin_12;
+    GPIO_LED.GPIO_Mode = GPIO_Mode_OUT;
+    GPIO_LED.GPIO_OType = GPIO_OType_PP;
+    GPIO_LED.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOD, &GPIO_LED);
+}
+
+void Delay(__IO uint32_t count) {
+    while (count--);
+}
 
 int main() {
-    /* Enbale GPIOA clock */
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
-    /* Configure GPIOA pin 5 as output */
-    GPIOA->MODER |= (1 << (LED_PIN << 1));
-    /* Configure GPIOA pin 5 in max speed */
-    GPIOA->OSPEEDR |= (3 << (LED_PIN << 1));
+    Init();
 
-    /* Turn on the LED */
-    LED_ON();
+    while (true) {
+        GPIO_WriteBit(GPIOD, GPIO_Pin_12, Bit_SET);
+        Delay(16800000);
+        GPIO_WriteBit(GPIOD, GPIO_Pin_12, Bit_RESET);
+        Delay(16800000);
+    }
 }
