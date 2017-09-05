@@ -1,4 +1,4 @@
-#include <stm32f4xx_conf.h>
+#include <stm32f4xx.h>
 
 #define LED_PIN 12
 #define LED_ON() GPIOD->BSRR = (1 << LED_PIN)

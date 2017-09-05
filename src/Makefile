@@ -5,15 +5,15 @@ OPENOCD_CONFIG=/usr/share/openocd/scripts/board/stm32f4discovery.cfg
 
 BUILDDIR=.
 
-STM_PERIPH_ROOT=../third_party/STM
-FW_CORE_DIR=$(STM_PERIPH_ROOT)/CMSIS/Device/ST/STM32F4xx
-FW_STDDRIVER_DIR=$(STM_PERIPH_ROOT)/STM32F4xx_StdPeriph_Driver
-FW_STDDRIVER_SRCDIR = $(FW_STDDRIVER_DIR)/src
+STM32_ROOT=../third_party/STM
+FW_CORE_DIR=$(STM32_ROOT)/CMSIS/Device/ST/STM32F4xx
+FW_STDDRIVER_DIR=$(STM32_ROOT)/STM32F4xx_StdPeriph_Driver
+FW_STDDRIVER_SRCDIR=$(FW_STDDRIVER_DIR)/src
 
 VPATH += $(FW_STDDRIVER_SRCDIR)
 
-ARCHFLAGS = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb-interwork -funroll-loops
-ASFLAGS = $(ARCHFLAGS)
+ARCHFLAGS=-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb-interwork -funroll-loops
+ASFLAGS=$(ARCHFLAGS)
 
 CFLAGS=-Wall \
 	-mcpu=cortex-m4 \
@@ -21,7 +21,7 @@ CFLAGS=-Wall \
 	-mthumb \
 	-include stm32f4xx_conf.h \
 	-I. \
-	-I$(STM_PERIPH_ROOT)/CMSIS/Include \
+	-I$(STM32_ROOT)/CMSIS/Include \
 	-I$(FW_CORE_DIR)/Include \
 	-I$(FW_STDDRIVER_DIR)/inc \
 	-DSTM32F411xE \
@@ -33,7 +33,7 @@ LDFLAGS=-mcpu=cortex-m4 \
 	-mthumb \
 	-DSTM32F411xE \
 	-specs=nosys.specs \
-	-T$(STM_PERIPH_ROOT)/STM32F411RETx_FLASH.ld \
+	-T$(STM32_ROOT)/STM32F411RETx_FLASH.ld \
 	-Wl,--gc-sections
 
 DRIVERS_C_FILES = $(notdir $(wildcard $(patsubst %,%/*.c,$(FW_STDDRIVER_SRCDIR))))
