@@ -13,13 +13,12 @@ FW_STDDRIVER_SRCDIR=$(FW_STDDRIVER_DIR)/src
 
 VPATH += $(FW_STDDRIVER_SRCDIR)
 
-ARCHFLAGS=-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb-interwork -funroll-loops
+ARCHFLAGS=-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mlittle-endian -mfpu=fpv4-sp-d16 -mthumb-interwork -funroll-loops
 ASFLAGS=$(ARCHFLAGS)
 
-CFLAGS=-Wall \
-	-mcpu=cortex-m4 \
-	-mlittle-endian \
-	-mthumb \
+CFLAGS= \
+	-Wall \
+	$(ARCHFLAGS) \
 	-include stm32f4xx_conf.h \
 	-I. \
 	-I$(STM32_ROOT)/CMSIS/Include \
@@ -29,9 +28,10 @@ CFLAGS=-Wall \
 	-Os \
 	-c
 
-LDFLAGS=-mcpu=cortex-m4 \
-	-mlittle-endian \
-	-mthumb \
+CC_FLAGS=
+
+LDFLAGS= \
+	$(ARCHFLAGS) \
 	-DSTM32F411xE \
 	-specs=nosys.specs \
 	-T$(STM32_ROOT)/STM32F411RETx_FLASH.ld \
@@ -75,10 +75,10 @@ $(HEX): $(EXECUTABLE)
 	$(OBJCOPY) -Oihex $(EXECUTABLE) $@
 
 $(BUILDDIR)/%.o: %.cc
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $(CC_FLAGS) $< -o $@
 
 $(BUILDDIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 $(BUILDDIR)/%.o: %.s
 	$(CC) -c -x assembler-with-cpp $(ASFLAGS) $< -o $@
