@@ -56,10 +56,11 @@ EXECUTABLE=main.elf
 HEX=main.hex
 
 flash: $(HEX)
-	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "init"
-	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "reset halt"
-	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "flash write_image erase $(HEX)"
-	$(OPENOCD) -f $(OPENOCD_CONFIG) -c "reset run"
+	$(OPENOCD) -f $(OPENOCD_CONFIG) \
+	-c "init" \
+	-c "reset halt" \
+	-c "flash write_image erase $(HEX)" \
+	-c "reset run"
 
 all: $(HEX)
 
