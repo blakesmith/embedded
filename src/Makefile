@@ -28,7 +28,7 @@ CFLAGS= \
 	-Os \
 	-c
 
-CC_FLAGS=
+CC_FLAGS=-fno-exceptions -fno-rtti
 
 LDFLAGS= \
 	$(ARCHFLAGS) \
