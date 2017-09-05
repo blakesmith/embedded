@@ -6,6 +6,7 @@ OPENOCD_CONFIG=/usr/share/openocd/scripts/board/stm32f4discovery.cfg
 BUILDDIR=.
 
 STM32_ROOT=../third_party/STM
+FW_CMSIS_DIR=$(STM32_ROOT)/CMSIS
 FW_CORE_DIR=$(STM32_ROOT)/CMSIS/Device/ST/STM32F4xx
 FW_STDDRIVER_DIR=$(STM32_ROOT)/STM32F4xx_StdPeriph_Driver
 FW_STDDRIVER_SRCDIR=$(FW_STDDRIVER_DIR)/src
@@ -34,6 +35,9 @@ LDFLAGS=-mcpu=cortex-m4 \
 	-DSTM32F411xE \
 	-specs=nosys.specs \
 	-T$(STM32_ROOT)/STM32F411RETx_FLASH.ld \
+	-L$(FW_CMSIS_DIR)/Lib/GCC \
+	-larm_cortexM4l_math \
+	-larm_cortexM4lf_math \
 	-Wl,--gc-sections
 
 DRIVERS_C_FILES = $(notdir $(wildcard $(patsubst %,%/*.c,$(FW_STDDRIVER_SRCDIR))))
