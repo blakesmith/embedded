@@ -1,4 +1,5 @@
 #include <stm32f4xx.h>
+#include <cstddef>
 
 #define DELAY_AMOUNT 200000
 
@@ -27,10 +28,17 @@ void BlinkLed(uint16_t pin) {
 int main() {
     Init();
 
+    static const uint16_t pins[] = {
+        GPIO_Pin_12,
+        GPIO_Pin_13,
+        GPIO_Pin_14,
+        GPIO_Pin_15
+    };
+
+
     while (true) {
-        BlinkLed(GPIO_Pin_12);
-        BlinkLed(GPIO_Pin_13);
-        BlinkLed(GPIO_Pin_14);
-        BlinkLed(GPIO_Pin_15);
+        for (size_t i = 0; i < sizeof(pins) / sizeof(uint16_t); i++) {
+            BlinkLed(pins[i]);
+        }
     }
 }
