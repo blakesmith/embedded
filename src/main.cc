@@ -1,6 +1,6 @@
 #include <stm32f4xx.h>
 
-#define DELAY_AMOUNT 400000
+#define DELAY_AMOUNT 200000
 
 GPIO_InitTypeDef GPIO_LED;
 
