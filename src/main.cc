@@ -22,7 +22,6 @@ void BlinkLed(uint16_t pin) {
     GPIO_WriteBit(GPIOD, pin, Bit_SET);
     Delay(DELAY_AMOUNT);
     GPIO_WriteBit(GPIOD, pin, Bit_RESET);
-    Delay(DELAY_AMOUNT);
 }
 
 int main() {
