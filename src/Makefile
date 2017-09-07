@@ -60,7 +60,8 @@ flash: $(HEX)
 	-c "init" \
 	-c "reset halt" \
 	-c "flash write_image erase $(HEX)" \
-	-c "reset run"
+	-c "reset run" \
+	-c "exit"
 
 all: $(HEX)
 

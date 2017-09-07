@@ -1,10 +1,12 @@
 #include <stm32f4xx.h>
 
+#define DELAY_AMOUNT 400000
+
 GPIO_InitTypeDef GPIO_LED;
 
 void Init() {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-    GPIO_LED.GPIO_Pin = GPIO_Pin_12;
+    GPIO_LED.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
     GPIO_LED.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_LED.GPIO_OType = GPIO_OType_PP;
     GPIO_LED.GPIO_Speed = GPIO_Speed_50MHz;
@@ -15,13 +17,20 @@ void Delay(__IO uint32_t count) {
     while (count--);
 }
 
+void BlinkLed(uint16_t pin) {
+    GPIO_WriteBit(GPIOD, pin, Bit_SET);
+    Delay(DELAY_AMOUNT);
+    GPIO_WriteBit(GPIOD, pin, Bit_RESET);
+    Delay(DELAY_AMOUNT);
+}
+
 int main() {
     Init();
 
     while (true) {
-        GPIO_WriteBit(GPIOD, GPIO_Pin_12, Bit_SET);
-        Delay(16800000);
-        GPIO_WriteBit(GPIOD, GPIO_Pin_12, Bit_RESET);
-        Delay(16800000);
+        BlinkLed(GPIO_Pin_12);
+        BlinkLed(GPIO_Pin_13);
+        BlinkLed(GPIO_Pin_14);
+        BlinkLed(GPIO_Pin_15);
     }
 }
