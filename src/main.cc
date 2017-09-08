@@ -33,15 +33,7 @@ void Init() {
 
 void AdvanceLedState() {
     uint32_t pins = states[current_state];
-
-    for (size_t i = 0; i < 16; i++) {
-        uint16_t pin = 1 << i;
-        if ((pins >> i & 1) == 1) {
-            GPIO_WriteBit(GPIOD, pin, Bit_SET);
-        } else {
-            GPIO_WriteBit(GPIOD, pin, Bit_RESET);
-        }
-    }
+    GPIOD->ODR = pins;
     current_state = (current_state + 1) % n_states;
 }
 
