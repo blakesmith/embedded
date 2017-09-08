@@ -1,9 +1,21 @@
 #include <stm32f4xx.h>
 #include <cstddef>
 
-#define DELAY_AMOUNT 200000
-
 GPIO_InitTypeDef GPIO_LED;
+
+static const uint32_t states[] = {
+    GPIO_Pin_12,
+    GPIO_Pin_12 | GPIO_Pin_13,
+    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14,
+    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
+    GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
+    GPIO_Pin_14 | GPIO_Pin_15,
+    GPIO_Pin_15,
+    0
+};
+
+static const size_t n_states = sizeof(states) / sizeof(uint32_t);
+static size_t current_state = 0;
 
 void Init() {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
@@ -12,32 +24,35 @@ void Init() {
     GPIO_LED.GPIO_OType = GPIO_OType_PP;
     GPIO_LED.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOD, &GPIO_LED);
+
+    uint32_t rc = SysTick_Config(SystemCoreClock / 10);
+    if (rc != 0) {
+        GPIO_WriteBit(GPIOD, GPIO_Pin_13, Bit_SET);
+    }
 }
 
-void Delay(__IO uint32_t count) {
-    while (count--);
+void AdvanceLedState() {
+    uint32_t pins = states[current_state];
+
+    for (size_t i = 0; i < 16; i++) {
+        uint16_t pin = 1 << i;
+        if ((pins >> i & 1) == 1) {
+            GPIO_WriteBit(GPIOD, pin, Bit_SET);
+        } else {
+            GPIO_WriteBit(GPIOD, pin, Bit_RESET);
+        }
+    }
+    current_state = (current_state + 1) % n_states;
 }
 
-void BlinkLed(uint16_t pin) {
-    GPIO_WriteBit(GPIOD, pin, Bit_SET);
-    Delay(DELAY_AMOUNT);
-    GPIO_WriteBit(GPIOD, pin, Bit_RESET);
+extern "C" {
+void SysTick_Handler(void) {
+    AdvanceLedState();
+}
 }
 
 int main() {
     Init();
 
-    static const uint16_t pins[] = {
-        GPIO_Pin_12,
-        GPIO_Pin_13,
-        GPIO_Pin_14,
-        GPIO_Pin_15
-    };
-
-
-    while (true) {
-        for (size_t i = 0; i < sizeof(pins) / sizeof(uint16_t); i++) {
-            BlinkLed(pins[i]);
-        }
-    }
+    while (true);
 }
