@@ -8,10 +8,13 @@ BUILDDIR=.
 STM32_ROOT=../third_party/STM
 FW_CMSIS_DIR=$(STM32_ROOT)/CMSIS
 FW_CORE_DIR=$(STM32_ROOT)/CMSIS/Device/ST/STM32F4xx
+
 FW_STDDRIVER_DIR=$(STM32_ROOT)/STM32F4xx_StdPeriph_Driver
 FW_STDDRIVER_SRCDIR=$(FW_STDDRIVER_DIR)/src
 
-VPATH += $(FW_STDDRIVER_SRCDIR)
+LOCAL_DRIVERS_SRCDIR = drivers
+
+VPATH += $(FW_STDDRIVER_SRCDIR) $(LOCAL_DRIVERS_SRCDIR)
 
 ARCHFLAGS=-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mlittle-endian -mfpu=fpv4-sp-d16 -mthumb-interwork -funroll-loops
 ASFLAGS=$(ARCHFLAGS)
@@ -41,8 +44,9 @@ LDFLAGS= \
 	-Wl,--gc-sections
 
 DRIVERS_C_FILES = $(notdir $(wildcard $(patsubst %,%/*.c,$(FW_STDDRIVER_SRCDIR))))
+LOCAL_DRIVERS_C_FILES = $(notdir $(wildcard $(patsubst %,%/*.c,$(LOCAL_DRIVERS_SRCDIR))))
 
-C_FILES=$(DRIVERS_C_FILES)
+C_FILES=$(DRIVERS_C_FILES) $(LOCAL_DRIVERS_C_FILES)
 
 CC_FILES=system_stm32f4xx.cc \
 	stm32f4xx_it.cc \
