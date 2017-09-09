@@ -22,6 +22,7 @@ ASFLAGS=$(ARCHFLAGS)
 CFLAGS= \
 	-Wall \
 	$(ARCHFLAGS) \
+	-std=c++11 \
 	-include stm32f4xx_conf.h \
 	-I. \
 	-I$(STM32_ROOT)/CMSIS/Include \
