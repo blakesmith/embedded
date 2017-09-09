@@ -11,6 +11,12 @@ static const uint32_t states[] = {
     GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
     GPIO_Pin_14 | GPIO_Pin_15,
     GPIO_Pin_15,
+    0,
+    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
+    0,
+    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
+    0,
+    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
     0
 };
 
