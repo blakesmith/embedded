@@ -11,6 +11,7 @@ public:
     ~HT16K33Display() = default;
     
     void Init();
+    void Clear();
     void ToggleColon(bool on);
     void SetBrightness(uint8_t brightness);
     void SetBlinkRate(uint8_t blink_rate);

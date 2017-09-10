@@ -50,6 +50,8 @@ void HT16K33Display::Init() {
     enable_oscillator();
     SetBlinkRate(HT16K33_BLINK_OFF);
     SetBrightness(15);
+
+    Clear();
 }
 
 void HT16K33Display::SetBrightness(uint8_t brightness) {
@@ -75,6 +77,12 @@ void HT16K33Display::ToggleColon(bool on) {
         display_buffer_[2] = 0x2;
     } else {
         display_buffer_[2] = 0;
+    }
+}
+
+void HT16K33Display::Clear() {
+    for (size_t i = 0; i < 4; i++) {
+        display_buffer_[i] = 0;
     }
 }
 
