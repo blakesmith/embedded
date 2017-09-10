@@ -45,13 +45,14 @@ LDFLAGS= \
 	-Wl,--gc-sections
 
 DRIVERS_C_FILES = $(notdir $(wildcard $(patsubst %,%/*.c,$(FW_STDDRIVER_SRCDIR))))
-LOCAL_DRIVERS_C_FILES = $(notdir $(wildcard $(patsubst %,%/*.c,$(LOCAL_DRIVERS_SRCDIR))))
+LOCAL_DRIVERS_CC_FILES = $(notdir $(wildcard $(patsubst %,%/*.cc,$(LOCAL_DRIVERS_SRCDIR))))
 
-C_FILES=$(DRIVERS_C_FILES) $(LOCAL_DRIVERS_C_FILES)
+C_FILES=$(DRIVERS_C_FILES)
 
 CC_FILES=system_stm32f4xx.cc \
 	stm32f4xx_it.cc \
-	main.cc
+	main.cc \
+	$(LOCAL_DRIVERS_CC_FILES)
 
 AS_FILES = startup_stm32f411xe.s
 
