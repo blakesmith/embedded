@@ -23,6 +23,7 @@ private:
     void write_stop();
     void write_raw(uint8_t* data, size_t size);
     void write_raw(uint16_t* data, size_t size);
+    void write_raw(uint8_t data);
     void write_display();
     void enable_oscillator();
 };

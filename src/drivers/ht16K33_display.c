@@ -71,6 +71,9 @@ void HT16K33Display::SetBlinkRate(uint8_t rate) {
 }
 
 void HT16K33Display::enable_oscillator() {
+    write_start();
+    write_raw(0x21);
+    write_stop();
 }
 
 void HT16K33Display::write_display() {
@@ -99,6 +102,10 @@ void HT16K33Display::write_raw(uint16_t* data, size_t size) {
         I2C_SendData(I2C1, data[i] >> 8);
         while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTING));
     }
+}
+
+void HT16K33Display::write_raw(uint8_t data) {
+    write_raw(&data, 1);
 }
 
 void HT16K33Display::write_raw(uint8_t* data, size_t size) {
