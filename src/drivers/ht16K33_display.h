@@ -14,6 +14,7 @@ public:
     void ToggleColon(bool on);
     void SetBrightness(uint8_t brightness);
     void SetBlinkRate(uint8_t blink_rate);
+    void WriteDisplay();
 
 private:
     uint8_t device_address_;
@@ -24,7 +25,6 @@ private:
     void write_raw(uint8_t* data, size_t size);
     void write_raw(uint16_t* data, size_t size);
     void write_raw(uint8_t data);
-    void write_display();
     void enable_oscillator();
 };
 

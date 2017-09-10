@@ -68,15 +68,23 @@ void HT16K33Display::SetBlinkRate(uint8_t rate) {
     write_stop();
 }
 
-void HT16K33Display::enable_oscillator() {
+void HT16K33Display::ToggleColon(bool on) {
+    if (on) {
+        display_buffer_[2] = 0x2;
+    } else {
+        display_buffer_[2] = 0;
+    }
+}
+
+void HT16K33Display::WriteDisplay() {
     write_start();
-    write_raw(0x21);
+    write_raw(display_buffer_, 4);
     write_stop();
 }
 
-void HT16K33Display::write_display() {
+void HT16K33Display::enable_oscillator() {
     write_start();
-    write_raw(display_buffer_, 4);
+    write_raw(0x21);
     write_stop();
 }
 
