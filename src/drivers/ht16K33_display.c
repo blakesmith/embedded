@@ -54,9 +54,8 @@ void HT16K33Display::SetBrightness(uint8_t brightness) {
     if (brightness > 15) {
         brightness = 15;
     }
-    static uint8_t data = HT16K33_CMD_BRIGHTNESS | brightness;
     write_start();
-    write_raw(&data, 1);
+    write_raw(HT16K33_CMD_BRIGHTNESS | brightness);
     write_stop();
 }
 
@@ -64,9 +63,8 @@ void HT16K33Display::SetBlinkRate(uint8_t rate) {
     if (rate > 3) {
         rate = 0;
     }
-    static uint8_t data = HT16K33_BLINK_CMD | HT16K33_BLINK_ON | (rate << 1);
     write_start();
-    write_raw(&data, 1);
+    write_raw(HT16K33_BLINK_CMD | HT16K33_BLINK_ON | (rate << 1));
     write_stop();
 }
 
