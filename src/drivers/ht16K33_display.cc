@@ -88,6 +88,7 @@ void HT16K33Display::Clear() {
 
 void HT16K33Display::WriteDisplay() {
     write_start();
+    write_raw(0x0);
     write_raw(display_buffer_, 4);
     write_stop();
 }

@@ -49,8 +49,8 @@ void AdvanceLedState() {
 }
 
 void UpdateDisplay() {
-    // display.ToggleColon(current_state % 2 == 0);
-    // display.WriteDisplay();
+    display.ToggleColon(current_state % 2 == 0);
+    display.WriteDisplay();
 }
 
 extern "C" {
@@ -62,8 +62,6 @@ void SysTick_Handler(void) {
 
 int main() {
     Init();
-    display.ToggleColon(true);
-    display.WriteDisplay();
 
     while (true);
 }
