@@ -1,7 +1,10 @@
 #include <stm32f4xx.h>
 #include <cstddef>
 
+#include "drivers/ht16K33_display.h"
+
 GPIO_InitTypeDef GPIO_LED;
+HT16K33Display display;
 
 static const uint32_t states[] = {
     GPIO_Pin_12,
@@ -31,6 +34,8 @@ void Init() {
     GPIO_LED.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOD, &GPIO_LED);
 
+    display.Init();
+
     uint32_t rc = SysTick_Config(SystemCoreClock / 10);
     if (rc != 0) {
         GPIO_WriteBit(GPIOD, GPIO_Pin_13, Bit_SET);
@@ -43,9 +48,15 @@ void AdvanceLedState() {
     current_state = (current_state + 1) % n_states;
 }
 
+void UpdateDisplay() {
+    display.ToggleColon(current_state % 2 == 0);
+    display.WriteDisplay();
+}
+
 extern "C" {
 void SysTick_Handler(void) {
     AdvanceLedState();
+//    UpdateDisplay();
 }
 }
 
