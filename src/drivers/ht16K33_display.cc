@@ -24,6 +24,19 @@
         while (I2C_GetFlagStatus(I2Cx, F)); \
     }
 
+static const uint8_t NUMBER_TABLE[] = {
+    0x3F, // 0
+    0x06, // 1
+    0x5B, // 2
+    0x4F, // 3
+    0x66, // 4
+    0x6D, // 5
+    0x7D, // 6
+    0x07, // 7
+    0x7F, // 8
+    0x6F, // 9
+};
+
 // Default address.
 static const uint8_t DEFAULT_DEVICE_ADDRESS = 0x70 << 1;
 
@@ -91,6 +104,17 @@ void HT16K33Display::SetBlinkRate(uint8_t rate) {
     write_start();
     write_raw(HT16K33_BLINK_CMD | HT16K33_BLINK_ON | (rate << 1));
     write_stop();
+}
+
+void HT16K33Display::SetNumber(uint8_t pos, uint8_t number, bool dot) {
+    if (pos > 4) {
+        pos = 0;
+    }
+    if (number > 9) {
+        number = 0;
+    }
+    uint8_t value = NUMBER_TABLE[number] | (dot << 7);
+    display_buffer_[pos] = value;
 }
 
 void HT16K33Display::ToggleColon(bool on) {
