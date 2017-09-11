@@ -9,9 +9,9 @@
 #define RCC_I2C_PERIPH RCC_APB1Periph_I2C1
 #define RCC_GPIO_PERIPH RCC_AHB1Periph_GPIOB
 
-#define GPIO_PS_SDC GPIO_PinSource6
+#define GPIO_PS_SCL GPIO_PinSource6
 #define GPIO_PS_SDA GPIO_PinSource7
-#define GPIO_PIN_SDC GPIO_Pin_6
+#define GPIO_PIN_SCL GPIO_Pin_6
 #define GPIO_PIN_SDA GPIO_Pin_7
 
 #define GPIO_AFx GPIO_AF_I2C1
@@ -46,14 +46,14 @@ void HT16K33Display::Init() {
     RCC_APB1PeriphClockCmd(RCC_I2C_PERIPH, ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_GPIO_PERIPH, ENABLE);
 
-    GPIO_PinAFConfig(GPIOx, GPIO_PS_SDC, GPIO_AFx);
+    GPIO_PinAFConfig(GPIOx, GPIO_PS_SCL, GPIO_AFx);
     GPIO_PinAFConfig(GPIOx, GPIO_PS_SDA, GPIO_AFx);
 
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_SDC | GPIO_PIN_SDA;
+    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_SCL | GPIO_PIN_SDA;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 
     I2C_StructInit(&I2C_InitStructure);
