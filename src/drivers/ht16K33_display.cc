@@ -106,14 +106,29 @@ void HT16K33Display::SetBlinkRate(uint8_t rate) {
     write_stop();
 }
 
+// Set a single number 1 - 9, in the display. Value number positions are 0, 1, 3, 4. Position 2 is the colon.
 void HT16K33Display::SetNumber(uint8_t pos, uint8_t number, bool dot) {
-    if (pos > 4) {
+    if (pos > 4 || pos == 2) {
         pos = 0;
     }
     if (number > 9) {
         number = 0;
     }
     uint8_t value = NUMBER_TABLE[number] | (dot << 7);
+    display_buffer_[pos] = value;
+}
+
+// Set a specific segment within a position. Segments are 0 - 7. Segment 7 is the dot to the right of the digit.
+// Segment 0 is the top-most LED, other segments move clockwise around the digit, with Segment 6 being the middle
+// LED (Think: The middle bar on an 8). See a picture here: https://www.adafruit.com/product/880 ... Segment 0 = A.
+void HT16K33Display::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
+    if (pos > 4 || pos == 2) {
+        pos = 0;
+    }
+    if (segment > 6) {
+        segment = 0;
+    }
+    uint8_t value = (on << segment) | (dot << 7);
     display_buffer_[pos] = value;
 }
 
