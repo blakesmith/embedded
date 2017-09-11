@@ -3,6 +3,27 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_i2c.h"
 
+#define I2Cx I2C1
+#define GPIOx GPIOB
+
+#define RCC_I2C_PERIPH RCC_APB1Periph_I2C1
+#define RCC_GPIO_PERIPH RCC_AHB1Periph_GPIOB
+
+#define GPIO_PS_SDC GPIO_PinSource6
+#define GPIO_PS_SDA GPIO_PinSource7
+#define GPIO_PIN_SDC GPIO_Pin_6
+#define GPIO_PIN_SDA GPIO_Pin_7
+
+#define GPIO_AFx GPIO_AF_I2C1
+
+#define WAIT_FOR_EVENT(E) { \
+        while (!I2C_CheckEvent(I2Cx, E));\
+    }
+
+#define WAIT_FOR_FLAG(F) { \
+        while (I2C_GetFlagStatus(I2Cx, F)); \
+    }
+
 // Default address.
 static const uint8_t DEFAULT_DEVICE_ADDRESS = 0x70 << 1;
 
@@ -22,21 +43,21 @@ void HT16K33Display::Init() {
     GPIO_InitTypeDef GPIO_InitStructure;
     I2C_InitTypeDef I2C_InitStructure;
 
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_I2C_PERIPH, ENABLE);
+    RCC_AHB1PeriphClockCmd(RCC_GPIO_PERIPH, ENABLE);
 
-    GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_I2C1);
-    GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_I2C1);
+    GPIO_PinAFConfig(GPIOx, GPIO_PS_SDC, GPIO_AFx);
+    GPIO_PinAFConfig(GPIOx, GPIO_PS_SDA, GPIO_AFx);
 
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_SDC | GPIO_PIN_SDA;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
 
     I2C_StructInit(&I2C_InitStructure);
-    I2C_DeInit(I2C1);
+    I2C_DeInit(I2Cx);
     I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
     I2C_InitStructure.I2C_ClockSpeed = 100000;
     I2C_InitStructure.I2C_OwnAddress1 = 0x35;
@@ -44,8 +65,8 @@ void HT16K33Display::Init() {
     I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
     I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
     
-    I2C_Init(I2C1, &I2C_InitStructure);
-    I2C_Cmd(I2C1, ENABLE);
+    I2C_Init(I2Cx, &I2C_InitStructure);
+    I2C_Cmd(I2Cx, ENABLE);
 
     enable_oscillator();
     SetBlinkRate(HT16K33_BLINK_OFF);
@@ -100,24 +121,24 @@ void HT16K33Display::enable_oscillator() {
 }
 
 void HT16K33Display::write_start() {
-    while(I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY));
-    I2C_GenerateSTART(I2C1, ENABLE);
-    while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
-    I2C_Send7bitAddress(I2C1, device_address_, I2C_Direction_Transmitter);
-    while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+    WAIT_FOR_FLAG(I2C_FLAG_BUSY);
+    I2C_GenerateSTART(I2Cx, ENABLE);
+    WAIT_FOR_EVENT(I2C_EVENT_MASTER_MODE_SELECT);
+    I2C_Send7bitAddress(I2Cx, device_address_, I2C_Direction_Transmitter);
+    WAIT_FOR_EVENT(I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
 }
 
 void HT16K33Display::write_stop() {
-    while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
-    I2C_GenerateSTOP(I2C1, ENABLE);
+    WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTED);
+    I2C_GenerateSTOP(I2Cx, ENABLE);
 }
 
 void HT16K33Display::write_raw(uint16_t* data, size_t size) {
     for (size_t i = 0; i < size; i++) {
-        I2C_SendData(I2C1, data[i] & 0xFF);
-        while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTING));
-        I2C_SendData(I2C1, data[i] >> 8);
-        while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTING));
+        I2C_SendData(I2Cx, data[i] & 0xFF);
+        WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_SendData(I2Cx, data[i] >> 8);
+        WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
     }
 }
 
@@ -127,7 +148,7 @@ void HT16K33Display::write_raw(uint8_t data) {
 
 void HT16K33Display::write_raw(uint8_t* data, size_t size) {
     for (size_t i = 0; i < size; i++) {
-        I2C_SendData(I2C1, data[i]);
-        while(!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTING));
+        I2C_SendData(I2Cx, data[i]);
+        WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
     }
 }
