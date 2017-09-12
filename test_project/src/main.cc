@@ -1,7 +1,7 @@
 #include <stm32f4xx.h>
 #include <cstddef>
 
-#include "drivers/ht16K33_display.h"
+#include "ht16K33_display.h"
 
 GPIO_InitTypeDef GPIO_LED;
 HT16K33Display display;
