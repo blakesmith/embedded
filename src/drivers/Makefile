@@ -2,6 +2,8 @@ CC_FILES = ht16K33_display.cc
 
 OBJECTS = $(CC_FILES:.cc=.o)
 
+default: all
+
 clean:
 	rm -rf *.o
 
