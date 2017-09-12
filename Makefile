@@ -2,6 +2,9 @@ SRC_DIR=src
 
 default: all
 
+test_project:
+	$(MAKE) -C $(SRC_DIR) test_project	
+
 all:
 	$(MAKE) -C $(SRC_DIR) all
 
