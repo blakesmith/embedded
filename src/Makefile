@@ -47,6 +47,9 @@ export TEST_PROJECT_SRCDIR = $(ROOT_DIR)/test_project
 
 all: test_project
 
+flash:
+	$(MAKE) -C $(TARGET) flash
+
 stm:
 	$(MAKE) -C $(STM_SRCDIR) all
 
