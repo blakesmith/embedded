@@ -1,6 +1,7 @@
 #ifndef NOME_AUDIO_OUTPUT_H_
 #define NOME_AUDIO_OUTPUT_H_
 
+#include <cstdint>
 #include <cstddef>
 
 class AudioOutput {

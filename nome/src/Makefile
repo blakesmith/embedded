@@ -2,25 +2,28 @@ CC_FILES=adsr_envelope.cc \
 	beat.cc \
 	osc.cc
 
-ifeq ($PLATFORM,linux)
+EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
+	$(STM32_ROOT)/stm32f4xx_i2c.o \
+	$(STM32_ROOT)/stm32f4xx_gpio.o \
+	$(STM32_ROOT)/stm32f4xx_rcc.o \
+
+ifeq ($(PLATFORM),linux)
+	CC=g++
 	CFLAGS=-c -Wall -std=c++11 -D__LINUX__
 	LDFLAGS=-lm -lasound
 	CC_FILES += main_linux.cc alsa_output.cc
+	EXTRA_OBJECTS=
 else
 	CC_FILES += main_stm32.cc stm32f4xx_it.cc system_stm32f4xx.cc
 	AS_FILES = startup_stm32f411xe.s
 endif
 
 OBJECTS=$(CC_FILES:.cc=.o) $(AS_FILES:.s=.o)
-EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
-	$(STM32_ROOT)/stm32f4xx_i2c.o \
-	$(STM32_ROOT)/stm32f4xx_gpio.o \
-	$(STM32_ROOT)/stm32f4xx_rcc.o \
 
 EXECUTABLE=nome
 HEX=$(EXECUTABLE).hex
 
-all: $(HEX)
+all: $(EXECUTABLE)
 
 $(HEX): $(EXECUTABLE)
 	$(OBJCOPY) -Oihex $(EXECUTABLE) $@
