@@ -1,4 +1,11 @@
+#include <cstdio>
+
+#include "audio_output.h"
+
+#ifdef __LINUX__
 #include "alsa_output.h"
+#endif
+
 #include "beat.h"
 
 using namespace nome;
@@ -14,12 +21,16 @@ int main(int argc, char** argv) {
     int rc;
     int16_t sample_buffer[FRAMES_PER_PERIOD*CHANNEL_COUNT];
     Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
+    #ifdef __LINUX__
     AlsaOutput sound_out(SAMPLE_RATE);
+    #else
+    NullAudioOutput sound_out;
+    #endif
 
     rc = sound_out.Start();
     if (rc < 0) {
         printf("Failed to open sound playback device!\n");
-        exit(rc);
+        return rc;
     }
 
     uint32_t seconds = 5;

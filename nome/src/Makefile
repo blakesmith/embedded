@@ -1,4 +1,5 @@
-CC_FILES= adsr_envelope.cc \
+CC_FILES= nome.cc \
+	adsr_envelope.cc \
 	beat.cc \
 	osc.cc
 

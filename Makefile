@@ -65,5 +65,6 @@ clean_all:
 	$(MAKE) -C $(LOCAL_DRIVERS_SRCDIR) clean
 	$(MAKE) -C $(STM_SRCDIR) clean
 	$(MAKE) -C $(ROOT_DIR)/test_project/src clean
+	$(MAKE) -C $(ROOT_DIR)/nome/src clean
 
 
