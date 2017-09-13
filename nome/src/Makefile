@@ -1,17 +1,23 @@
-CC_FILES= nome.cc \
-	adsr_envelope.cc \
+CC_FILES=adsr_envelope.cc \
 	beat.cc \
 	osc.cc
 
 ifeq ($PLATFORM,linux)
 	CFLAGS=-c -Wall -std=c++11 -D__LINUX__
 	LDFLAGS=-lm -lasound
-	CC_FILES += nome.cc alsa_output.cc
+	CC_FILES += main_linux.cc alsa_output.cc
+else
+	CC_FILES += main_stm32.cc stm32f4xx_it.cc system_stm32f4xx.cc
+	AS_FILES = startup_stm32f411xe.s
 endif
 
-OBJECTS=$(CC_FILES:.cc=.o)
+OBJECTS=$(CC_FILES:.cc=.o) $(AS_FILES:.s=.o)
+EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
+	$(STM32_ROOT)/stm32f4xx_i2c.o \
+	$(STM32_ROOT)/stm32f4xx_gpio.o \
+	$(STM32_ROOT)/stm32f4xx_rcc.o \
+
 EXECUTABLE=nome
-ELF_FILE=$(EXECUTABLE).elf
 HEX=$(EXECUTABLE).hex
 
 all: $(HEX)
@@ -38,5 +44,8 @@ install: all
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) $(EXTRA_OBJECTS) $(LDFLAGS) -o $@
 
-.cc.o:
-	$(CC) $(CFLAGS) $< -o $@
+%.o: %.cc
+	$(CC) $(CFLAGS) $(CC_FLAGS) $< -o $@
+
+%.o: %.s
+	$(CC) -c -x assembler-with-cpp $(ASFLAGS) $< -o $@
