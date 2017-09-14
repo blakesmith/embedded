@@ -43,16 +43,18 @@ void Init() {
     if (rc != 0) {
         GPIO_WriteBit(GPIOD, GPIO_Pin_13, Bit_SET);
     }
+
+    AdvanceLedState(0);
 }
 
 void AdvanceLedState(size_t n) {
-    uint32_t pins = states[current_state];
-    GPIOD->ODR = pins;
     if (n == 0) {
         current_state = 3;
     } else {
         current_state = (current_state + n) % n_states;
     }
+    uint32_t pins = states[current_state];
+    GPIOD->ODR = pins;
 }
 
 void UpdateDisplay() {
