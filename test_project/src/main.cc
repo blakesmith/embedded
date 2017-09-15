@@ -29,7 +29,7 @@ static const uint32_t states[] = {
 static const size_t n_states = sizeof(states) / sizeof(uint32_t);
 static size_t current_state = 0;
 
-void AdvanceLedState(size_t n);
+void AdvanceLedState(int8_t n);
 
 void InitOnboardLed() {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
@@ -86,14 +86,21 @@ void Init() {
     AdvanceLedState(0);
 }
 
-void AdvanceLedState(size_t n) {
+void AdvanceLedState(int8_t n) {
+    // if (n == 0) {
+    //     current_state = 3;
+    // } else {
+    //     current_state = (current_state + n) % n_states;
+    // }
+    // uint32_t pins = states[current_state];
+    // GPIOD->ODR = pins;
     if (n == 0) {
-        current_state = 3;
-    } else {
-        current_state = (current_state + n) % n_states;
+        GPIOD->ODR = 0;
+    } else if (n == 1) {
+        GPIOD->ODR |= GPIO_Pin_12;
+    } else if (n == -1) {
+        GPIOD->ODR |= GPIO_Pin_15;
     }
-    uint32_t pins = states[current_state];
-    GPIOD->ODR = pins;
 }
 
 void UpdateDisplay() {
@@ -103,19 +110,35 @@ void UpdateDisplay() {
 
 extern "C" {
 void SysTick_Handler(void) {
+    AdvanceLedState(0);
 }
 
 void EXTI2_IRQHandler(void) {
     EncoderAction action = knob.GetAction();
 
-    if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
-        AdvanceLedState(1);
-    } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
-        AdvanceLedState(-1);
-    } else if (action == ENC_ACTION_PUSH_BUTTON) {
-       AdvanceLedState(0);
-    }
+    AdvanceLedState(1);
+    // if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
+    //     AdvanceLedState(1);
+    // } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
+    //     AdvanceLedState(-1);
+    // } else if (action == ENC_ACTION_PUSH_BUTTON) {
+    //    AdvanceLedState(0);
+    // }
 }
+
+void EXTI9_5_IRQHandler(void) {
+    EncoderAction action = knob.GetAction();
+
+    AdvanceLedState(-1);
+    // if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
+    //     AdvanceLedState(1);
+    // } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
+    //     AdvanceLedState(-1);
+    // } else if (action == ENC_ACTION_PUSH_BUTTON) {
+    //    AdvanceLedState(0);
+    // }
+}
+
 }
 
 int main() {
