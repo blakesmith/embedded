@@ -87,20 +87,20 @@ void Init() {
 }
 
 void AdvanceLedState(int8_t n) {
-    // if (n == 0) {
-    //     current_state = 3;
-    // } else {
-    //     current_state = (current_state + n) % n_states;
-    // }
-    // uint32_t pins = states[current_state];
-    // GPIOD->ODR = pins;
     if (n == 0) {
-        GPIOD->ODR = 0;
-    } else if (n == 1) {
-        GPIOD->ODR |= GPIO_Pin_12;
-    } else if (n == -1) {
-        GPIOD->ODR |= GPIO_Pin_15;
+        current_state = 3;
+    } else {
+        current_state = (current_state + n) % n_states;
     }
+    uint32_t pins = states[current_state];
+    GPIOD->ODR = pins;
+    // if (n == 0) {
+    //     GPIOD->ODR = 0;
+    // } else if (n == 1) {
+    //     GPIOD->ODR |= GPIO_Pin_12;
+    // } else if (n == -1) {
+    //     GPIOD->ODR |= GPIO_Pin_15;
+    // }
 }
 
 void UpdateDisplay() {
@@ -116,27 +116,25 @@ void SysTick_Handler(void) {
 void EXTI2_IRQHandler(void) {
     EncoderAction action = knob.GetAction();
 
-    AdvanceLedState(1);
-    // if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
-    //     AdvanceLedState(1);
-    // } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
-    //     AdvanceLedState(-1);
-    // } else if (action == ENC_ACTION_PUSH_BUTTON) {
-    //    AdvanceLedState(0);
-    // }
+    if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
+        AdvanceLedState(1);
+    } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
+        AdvanceLedState(-1);
+    } else if (action == ENC_ACTION_PUSH_BUTTON) {
+       AdvanceLedState(0);
+    }
 }
 
 void EXTI9_5_IRQHandler(void) {
     EncoderAction action = knob.GetAction();
 
-    AdvanceLedState(-1);
-    // if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
-    //     AdvanceLedState(1);
-    // } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
-    //     AdvanceLedState(-1);
-    // } else if (action == ENC_ACTION_PUSH_BUTTON) {
-    //    AdvanceLedState(0);
-    // }
+    if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
+        AdvanceLedState(1);
+    } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
+        AdvanceLedState(-1);
+    } else if (action == ENC_ACTION_PUSH_BUTTON) {
+       AdvanceLedState(0);
+    }
 }
 
 }

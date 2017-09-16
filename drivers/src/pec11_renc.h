@@ -16,16 +16,18 @@ enum PinState {
 class Pec11RotaryEncoder {
 
 public:
-    Pec11RotaryEncoder() = default;
+    Pec11RotaryEncoder();
     ~Pec11RotaryEncoder() = default;
     void Init();
     EncoderAction GetAction();
 private:
-    PinState read_pin_state(uint32_t idr);
+    EncoderAction lookup_action();
     void disable_irq();
     void enable_irq();
     void setup_clockwise();
     void setup_counter_clockwise();
+
+    uint8_t encoder_state_;
 };
 
 #endif

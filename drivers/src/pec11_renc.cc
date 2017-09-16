@@ -18,6 +18,36 @@
 #define COUNTER_CLOCKWISE_EXTI_PORTSOURCE EXTI_PortSourceGPIOD
 #define COUNTER_CLOCKWISE_NVIC_IRQ_CHANNEL EXTI9_5_IRQn
 
+/**
+ * Computed from the quadrature output table. Algorithm is:
+ * 1. Start with pin state 0b00 (both pins low)
+ * 2. Moving through the table clockwise, shift the previous two bits twice. Append next bit state to the lower 2 bits of the 4-bit integer.
+ * 3. Moving through the table counter clockwise, shift the previous two bits twice. Append next bit state to the lower 2 bits of the 4-bit integer.
+ * 4. Go through each state in the table again, and repeat each state for the upper and lower bits of the 4-bit integer.
+ * 5. Each bit state is equal to an integer between 0 - 15 (The array length of the table below), the value is the direction of the direction the state should move.
+ */
+static const EncoderAction encoder_actions_by_state[] = {
+    ENC_ACTION_NONE,
+    ENC_ACTION_ROTATE_COUNTER_CLOCKWISE,
+    ENC_ACTION_ROTATE_CLOCKWISE,
+    ENC_ACTION_NONE,
+    ENC_ACTION_ROTATE_CLOCKWISE,
+    ENC_ACTION_NONE,
+    ENC_ACTION_NONE,
+    ENC_ACTION_ROTATE_COUNTER_CLOCKWISE,
+    ENC_ACTION_ROTATE_COUNTER_CLOCKWISE,
+    ENC_ACTION_NONE,
+    ENC_ACTION_NONE,
+    ENC_ACTION_ROTATE_CLOCKWISE,
+    ENC_ACTION_NONE,
+    ENC_ACTION_ROTATE_CLOCKWISE,
+    ENC_ACTION_ROTATE_COUNTER_CLOCKWISE,
+    ENC_ACTION_NONE,
+};
+
+Pec11RotaryEncoder::Pec11RotaryEncoder()
+    : encoder_state_(0) { }
+
 void Pec11RotaryEncoder::setup_clockwise() {
     EXTI_InitTypeDef encoder_exti;
     NVIC_InitTypeDef encoder_nvic;
@@ -106,6 +136,14 @@ void Pec11RotaryEncoder::enable_irq() {
     NVIC_Init(&encoder_nvic);
 }
 
+EncoderAction Pec11RotaryEncoder::lookup_action() {
+    bool cw_high = CLOCKWISE_GPIO->IDR & CLOCKWISE_PIN;
+    bool ccw_high = COUNTER_CLOCKWISE_GPIO->IDR & COUNTER_CLOCKWISE_PIN;
+    encoder_state_ <<= 2; // Retain the previous pin state as the upper two bits
+    encoder_state_ |= 0x0F; // Only keep the bottom 4 bits, throw away the upper 4
+    encoder_state_ |= (cw_high << 1) | ccw_high; // Shift the current state onto the lower 2 bits
+    return encoder_actions_by_state[encoder_state_];
+}
 
 EncoderAction Pec11RotaryEncoder::GetAction() {
     EncoderAction action = ENC_ACTION_NONE;
@@ -113,11 +151,11 @@ EncoderAction Pec11RotaryEncoder::GetAction() {
     disable_irq();
     
     if (EXTI_GetITStatus(CLOCKWISE_EXTI_LINE) != RESET) {
-        action = ENC_ACTION_ROTATE_CLOCKWISE;
+        action = lookup_action();
         EXTI_ClearITPendingBit(CLOCKWISE_EXTI_LINE);
     }
     if (EXTI_GetITStatus(COUNTER_CLOCKWISE_EXTI_LINE) != RESET) {
-        action = ENC_ACTION_ROTATE_COUNTER_CLOCKWISE;
+        action = lookup_action();
         EXTI_ClearITPendingBit(COUNTER_CLOCKWISE_EXTI_LINE);
     }
 
