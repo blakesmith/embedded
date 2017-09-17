@@ -46,7 +46,8 @@ static const EncoderAction encoder_actions_by_state[] = {
 };
 
 Pec11RotaryEncoder::Pec11RotaryEncoder()
-    : encoder_state_(0) { }
+    : encoder_state_(0),
+      encoder_count_(0) { }
 
 void Pec11RotaryEncoder::setup_clockwise() {
     EXTI_InitTypeDef encoder_exti;
@@ -150,6 +151,31 @@ EncoderAction Pec11RotaryEncoder::GetAction() {
     EncoderAction action = lookup_action();
     enable_irq();
     return action;
+}
+
+void Pec11RotaryEncoder::HandleInterrupt() {
+    EncoderAction action = ENC_ACTION_NONE;
+    if (EXTI_GetITStatus(CLOCKWISE_EXTI_LINE) != RESET) {
+        action = lookup_action();
+        EXTI_ClearITPendingBit(CLOCKWISE_EXTI_LINE);
+    } else if (EXTI_GetITStatus(COUNTER_CLOCKWISE_EXTI_LINE) != RESET) {
+        EXTI_ClearITPendingBit(COUNTER_CLOCKWISE_EXTI_LINE);
+        action = lookup_action();
+    }
     
+    switch (action) {
+        case ENC_ACTION_ROTATE_CLOCKWISE:
+            encoder_count_ += 1;
+            break;
+        case ENC_ACTION_ROTATE_COUNTER_CLOCKWISE:
+            encoder_count_ -= 1;
+            break;
+        case ENC_ACTION_NONE:
+            break;
+    }
+}
+
+long Pec11RotaryEncoder::GetCount() {
+    return encoder_count_;
 }
 

@@ -7,7 +7,8 @@
 GPIO_InitTypeDef GPIO_LED;
 HT16K33Display display;
 Pec11RotaryEncoder knob;
-volatile bool trigger_read = false;
+
+void SetLedState(long count);
 
 static const uint32_t states[] = {
     GPIO_Pin_12,
@@ -27,9 +28,6 @@ static const uint32_t states[] = {
 };
 
 static const size_t n_states = sizeof(states) / sizeof(uint32_t);
-static size_t current_state = 0;
-
-void AdvanceLedState(int8_t n);
 
 void InitOnboardLed() {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
@@ -83,61 +81,30 @@ void Init() {
         GPIO_WriteBit(GPIOD, GPIO_Pin_13, Bit_SET);
     }
 
-    AdvanceLedState(0);
+    SetLedState(0);
 }
 
-void AdvanceLedState(int8_t n) {
-    if (n == 0) {
-        current_state = 3;
-    } else {
-        current_state = (current_state + n) % n_states;
-    }
-    uint32_t pins = states[current_state];
+void SetLedState(long count) {
+    uint32_t pins = states[count % n_states];
     GPIOD->ODR = pins;
-    // if (n == 0) {
-    //     GPIOD->ODR = 0;
-    // } else if (n == 1) {
-    //     GPIOD->ODR |= GPIO_Pin_12;
-    // } else if (n == -1) {
-    //     GPIOD->ODR |= GPIO_Pin_14;
-    // }
 }
 
 void UpdateDisplay() {
-    display.ToggleColon(current_state % 2 == 0);
+    display.ToggleColon(true);
     display.WriteDisplay();
-}
-
-void ActionToLed(const EncoderAction action) {
-    if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
-        AdvanceLedState(1);
-    } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
-        AdvanceLedState(-1);
-    } else if (action == ENC_ACTION_PUSH_BUTTON) {
-        AdvanceLedState(0);
-    }
 }
 
 extern "C" {
 void SysTick_Handler(void) {
-    if (trigger_read) {
-        trigger_read = false;
-        ActionToLed(knob.GetAction());
-    }
+    SetLedState(knob.GetCount());
 }
 
 void EXTI2_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line2) != RESET) {
-        trigger_read = true;
-        EXTI_ClearITPendingBit(EXTI_Line2);
-    }
+    knob.HandleInterrupt();
 }
 
 void EXTI9_5_IRQHandler(void) {
-    if (EXTI_GetITStatus(EXTI_Line6) != RESET) {
-        trigger_read = true;
-        EXTI_ClearITPendingBit(EXTI_Line6);
-    }
+    knob.HandleInterrupt();
 }
 
 }
