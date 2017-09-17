@@ -2,9 +2,9 @@
 #define PEC11_RENC_H_
 
 enum EncoderAction {
-    ENC_ACTION_NONE,
-    ENC_ACTION_ROTATE_CLOCKWISE,
-    ENC_ACTION_ROTATE_COUNTER_CLOCKWISE
+    ENC_ACTION_NONE = 0,
+    ENC_ACTION_ROTATE_CLOCKWISE = 1,
+    ENC_ACTION_ROTATE_COUNTER_CLOCKWISE = -1
 };
 
 class Pec11RotaryEncoder {
@@ -14,12 +14,9 @@ public:
     ~Pec11RotaryEncoder() = default;
     void Init();
     void HandleInterrupt();
-    EncoderAction GetAction();
     long GetCount();
 private:
     EncoderAction lookup_action();
-    void disable_irq();
-    void enable_irq();
     void setup_clockwise();
     void setup_counter_clockwise();
 

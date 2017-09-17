@@ -113,30 +113,6 @@ void Pec11RotaryEncoder::Init() {
     setup_counter_clockwise();
 }
 
-void Pec11RotaryEncoder::disable_irq() {
-    NVIC_InitTypeDef encoder_nvic;
-    
-    encoder_nvic.NVIC_IRQChannel = CLOCKWISE_NVIC_IRQ_CHANNEL;
-    encoder_nvic.NVIC_IRQChannelCmd = DISABLE;
-    NVIC_Init(&encoder_nvic);
-
-    encoder_nvic.NVIC_IRQChannel = COUNTER_CLOCKWISE_NVIC_IRQ_CHANNEL;
-    encoder_nvic.NVIC_IRQChannelCmd = DISABLE;
-    NVIC_Init(&encoder_nvic);
-}
-
-void Pec11RotaryEncoder::enable_irq() {
-    NVIC_InitTypeDef encoder_nvic;
-    
-    encoder_nvic.NVIC_IRQChannel = CLOCKWISE_NVIC_IRQ_CHANNEL;
-    encoder_nvic.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&encoder_nvic);
-
-    encoder_nvic.NVIC_IRQChannel = COUNTER_CLOCKWISE_NVIC_IRQ_CHANNEL;
-    encoder_nvic.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&encoder_nvic);
-}
-
 EncoderAction Pec11RotaryEncoder::lookup_action() {
     bool cw_high = CLOCKWISE_GPIO->IDR & CLOCKWISE_PIN;
     bool ccw_high = COUNTER_CLOCKWISE_GPIO->IDR & COUNTER_CLOCKWISE_PIN;
@@ -146,15 +122,9 @@ EncoderAction Pec11RotaryEncoder::lookup_action() {
     return encoder_actions_by_state[encoder_state_];
 }
 
-EncoderAction Pec11RotaryEncoder::GetAction() {
-    disable_irq();
-    EncoderAction action = lookup_action();
-    enable_irq();
-    return action;
-}
-
 void Pec11RotaryEncoder::HandleInterrupt() {
     EncoderAction action = ENC_ACTION_NONE;
+
     if (EXTI_GetITStatus(CLOCKWISE_EXTI_LINE) != RESET) {
         action = lookup_action();
         EXTI_ClearITPendingBit(CLOCKWISE_EXTI_LINE);
@@ -162,17 +132,8 @@ void Pec11RotaryEncoder::HandleInterrupt() {
         EXTI_ClearITPendingBit(COUNTER_CLOCKWISE_EXTI_LINE);
         action = lookup_action();
     }
-    
-    switch (action) {
-        case ENC_ACTION_ROTATE_CLOCKWISE:
-            encoder_count_ += 1;
-            break;
-        case ENC_ACTION_ROTATE_COUNTER_CLOCKWISE:
-            encoder_count_ -= 1;
-            break;
-        case ENC_ACTION_NONE:
-            break;
-    }
+
+    encoder_count_ += action;
 }
 
 long Pec11RotaryEncoder::GetCount() {
