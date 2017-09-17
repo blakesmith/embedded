@@ -140,26 +140,16 @@ EncoderAction Pec11RotaryEncoder::lookup_action() {
     bool cw_high = CLOCKWISE_GPIO->IDR & CLOCKWISE_PIN;
     bool ccw_high = COUNTER_CLOCKWISE_GPIO->IDR & COUNTER_CLOCKWISE_PIN;
     encoder_state_ <<= 2; // Retain the previous pin state as the upper two bits
-    encoder_state_ |= 0x0F; // Only keep the bottom 4 bits, throw away the upper 4
-    encoder_state_ |= (cw_high << 1) | ccw_high; // Shift the current state onto the lower 2 bits
+    encoder_state_ &= 0x0F; // Only keep the bottom 4 bits, throw away the upper 4
+    encoder_state_ |= ((cw_high << 1) | ccw_high); // Shift the current state onto the lower 2 bits
     return encoder_actions_by_state[encoder_state_];
 }
 
 EncoderAction Pec11RotaryEncoder::GetAction() {
-    EncoderAction action = ENC_ACTION_NONE;
-
     disable_irq();
-    
-    if (EXTI_GetITStatus(CLOCKWISE_EXTI_LINE) != RESET) {
-        action = lookup_action();
-        EXTI_ClearITPendingBit(CLOCKWISE_EXTI_LINE);
-    }
-    if (EXTI_GetITStatus(COUNTER_CLOCKWISE_EXTI_LINE) != RESET) {
-        action = lookup_action();
-        EXTI_ClearITPendingBit(COUNTER_CLOCKWISE_EXTI_LINE);
-    }
-
+    EncoderAction action = lookup_action();
     enable_irq();
     return action;
+    
 }
 

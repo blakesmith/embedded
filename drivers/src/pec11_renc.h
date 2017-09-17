@@ -27,7 +27,7 @@ private:
     void setup_clockwise();
     void setup_counter_clockwise();
 
-    uint8_t encoder_state_;
+    volatile uint8_t encoder_state_;
 };
 
 #endif

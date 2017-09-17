@@ -7,7 +7,7 @@
 GPIO_InitTypeDef GPIO_LED;
 HT16K33Display display;
 Pec11RotaryEncoder knob;
-volatile bool button_pressed = false;
+volatile bool trigger_read = false;
 
 static const uint32_t states[] = {
     GPIO_Pin_12,
@@ -78,7 +78,7 @@ void Init() {
 //    display.Init();
     knob.Init();
 
-    uint32_t rc = SysTick_Config(SystemCoreClock / 5);
+    uint32_t rc = SysTick_Config(SystemCoreClock / 30);
     if (rc != 0) {
         GPIO_WriteBit(GPIOD, GPIO_Pin_13, Bit_SET);
     }
@@ -99,7 +99,7 @@ void AdvanceLedState(int8_t n) {
     // } else if (n == 1) {
     //     GPIOD->ODR |= GPIO_Pin_12;
     // } else if (n == -1) {
-    //     GPIOD->ODR |= GPIO_Pin_15;
+    //     GPIOD->ODR |= GPIO_Pin_14;
     // }
 }
 
@@ -108,32 +108,35 @@ void UpdateDisplay() {
     display.WriteDisplay();
 }
 
-extern "C" {
-void SysTick_Handler(void) {
-    AdvanceLedState(0);
-}
-
-void EXTI2_IRQHandler(void) {
-    EncoderAction action = knob.GetAction();
-
+void ActionToLed(const EncoderAction action) {
     if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
         AdvanceLedState(1);
     } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
         AdvanceLedState(-1);
     } else if (action == ENC_ACTION_PUSH_BUTTON) {
-       AdvanceLedState(0);
+        AdvanceLedState(0);
+    }
+}
+
+extern "C" {
+void SysTick_Handler(void) {
+    if (trigger_read) {
+        trigger_read = false;
+        ActionToLed(knob.GetAction());
+    }
+}
+
+void EXTI2_IRQHandler(void) {
+    if (EXTI_GetITStatus(EXTI_Line2) != RESET) {
+        trigger_read = true;
+        EXTI_ClearITPendingBit(EXTI_Line2);
     }
 }
 
 void EXTI9_5_IRQHandler(void) {
-    EncoderAction action = knob.GetAction();
-
-    if (action == ENC_ACTION_ROTATE_CLOCKWISE) {
-        AdvanceLedState(1);
-    } else if (action == ENC_ACTION_ROTATE_COUNTER_CLOCKWISE) {
-        AdvanceLedState(-1);
-    } else if (action == ENC_ACTION_PUSH_BUTTON) {
-       AdvanceLedState(0);
+    if (EXTI_GetITStatus(EXTI_Line6) != RESET) {
+        trigger_read = true;
+        EXTI_ClearITPendingBit(EXTI_Line6);
     }
 }
 
