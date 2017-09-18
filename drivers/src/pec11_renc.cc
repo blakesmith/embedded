@@ -158,7 +158,7 @@ EncoderAction Pec11RotaryEncoder::lookup_action() {
     return encoder_actions_by_state[encoder_state_];
 }
 
-void Pec11RotaryEncoder::HandleRotate() {
+void Pec11RotaryEncoder::HandleInterrupt() {
     EncoderAction action = ENC_ACTION_NONE;
 
     if (EXTI_GetITStatus(CLOCKWISE_EXTI_LINE) != RESET) {
@@ -169,15 +169,12 @@ void Pec11RotaryEncoder::HandleRotate() {
         action = lookup_action();
         EXTI_ClearITPendingBit(COUNTER_CLOCKWISE_EXTI_LINE);
     }
-
-    encoder_count_ += action;
-}
-
-void Pec11RotaryEncoder::HandlePress() {
     if (EXTI_GetITStatus(BUTTON_EXTI_LINE) != RESET) {
         button_pressed_ = !static_cast<bool>(GPIO_ReadInputDataBit(BUTTON_GPIO, BUTTON_PIN));
         EXTI_ClearITPendingBit(BUTTON_EXTI_LINE);
     }
+
+    encoder_count_ += action;
 }
 
 void Pec11RotaryEncoder::ResetCount() {

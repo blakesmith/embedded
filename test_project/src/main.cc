@@ -97,15 +97,15 @@ void SysTick_Handler(void) {
 }
 
 void EXTI1_IRQHandler(void) {
-    knob.HandlePress();
+    knob.HandleInterrupt();
 }
 
 void EXTI2_IRQHandler(void) {
-    knob.HandleRotate();
+    knob.HandleInterrupt();
 }
 
 void EXTI9_5_IRQHandler(void) {
-    knob.HandleRotate();
+    knob.HandleInterrupt();
 }
 }
 

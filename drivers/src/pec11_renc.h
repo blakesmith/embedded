@@ -13,8 +13,7 @@ public:
     Pec11RotaryEncoder();
     ~Pec11RotaryEncoder() = default;
     void Init();
-    void HandleRotate();
-    void HandlePress();
+    void HandleInterrupt();
     long GetCount();
     void ResetCount();
     bool GetAndClearButtonPressed();
