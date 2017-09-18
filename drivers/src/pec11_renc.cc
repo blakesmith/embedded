@@ -4,7 +4,6 @@
 
 #define CLOCKWISE_PIN GPIO_Pin_2
 #define CLOCKWISE_PINSOURCE EXTI_PinSource2
-#define CLOCKWISE_IDR GPIO_IDR_IDR_2
 #define CLOCKWISE_GPIO GPIOE
 #define CLOCKWISE_EXTI_LINE EXTI_Line2
 #define CLOCKWISE_EXTI_PORTSOURCE EXTI_PortSourceGPIOE
@@ -12,11 +11,18 @@
 
 #define COUNTER_CLOCKWISE_PIN GPIO_Pin_6
 #define COUNTER_CLOCKWISE_PINSOURCE EXTI_PinSource6
-#define COUNTER_CLOCKWISE_IDR GPIO_IDR_IDR_6
 #define COUNTER_CLOCKWISE_GPIO GPIOD
 #define COUNTER_CLOCKWISE_EXTI_LINE EXTI_Line6
 #define COUNTER_CLOCKWISE_EXTI_PORTSOURCE EXTI_PortSourceGPIOD
 #define COUNTER_CLOCKWISE_NVIC_IRQ_CHANNEL EXTI9_5_IRQn
+
+#define BUTTON_PIN GPIO_Pin_1
+#define BUTTON_PINSOURCE EXTI_PinSource1
+#define BUTTON_GPIO GPIOC
+#define BUTTON_EXTI_LINE EXTI_Line1
+#define BUTTON_EXTI_PORTSOURCE EXTI_PortSourceGPIOC
+#define BUTTON_NVIC_IRQ_CHANNEL EXTI1_IRQn
+
 
 /**
  * Computed from the quadrature output table. Algorithm is:
@@ -47,7 +53,8 @@ static const EncoderAction encoder_actions_by_state[] = {
 
 Pec11RotaryEncoder::Pec11RotaryEncoder()
     : encoder_state_(0),
-      encoder_count_(0) { }
+      encoder_count_(0),
+      button_pressed_(false) { }
 
 void Pec11RotaryEncoder::setup_clockwise() {
     EXTI_InitTypeDef encoder_exti;
@@ -87,10 +94,30 @@ void Pec11RotaryEncoder::setup_counter_clockwise() {
     NVIC_Init(&encoder_nvic);
 }
 
+void Pec11RotaryEncoder::setup_button() {
+    EXTI_InitTypeDef encoder_exti;
+    NVIC_InitTypeDef encoder_nvic;
+    
+    SYSCFG_EXTILineConfig(BUTTON_EXTI_PORTSOURCE, BUTTON_PINSOURCE);
+
+    encoder_exti.EXTI_Line = BUTTON_EXTI_LINE;
+    encoder_exti.EXTI_LineCmd = ENABLE;
+    encoder_exti.EXTI_Mode = EXTI_Mode_Interrupt;
+    encoder_exti.EXTI_Trigger = EXTI_Trigger_Falling;
+    EXTI_Init(&encoder_exti);
+
+    encoder_nvic.NVIC_IRQChannel = BUTTON_NVIC_IRQ_CHANNEL;
+    encoder_nvic.NVIC_IRQChannelPreemptionPriority = 0x0;
+    encoder_nvic.NVIC_IRQChannelSubPriority = 0x02;
+    encoder_nvic.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&encoder_nvic);
+}
+
 void Pec11RotaryEncoder::Init() {
     GPIO_InitTypeDef encoder_gpio;
 
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
 
     GPIO_StructInit(&encoder_gpio);
@@ -109,8 +136,17 @@ void Pec11RotaryEncoder::Init() {
     encoder_gpio.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(COUNTER_CLOCKWISE_GPIO, &encoder_gpio);
 
+    GPIO_StructInit(&encoder_gpio);
+    encoder_gpio.GPIO_Pin = BUTTON_PIN;
+    encoder_gpio.GPIO_Mode = GPIO_Mode_IN;
+    encoder_gpio.GPIO_PuPd = GPIO_PuPd_UP;
+    encoder_gpio.GPIO_OType = GPIO_OType_PP;
+    encoder_gpio.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init(BUTTON_GPIO, &encoder_gpio);
+
     setup_clockwise();
     setup_counter_clockwise();
+    setup_button();
 }
 
 EncoderAction Pec11RotaryEncoder::lookup_action() {
@@ -122,21 +158,39 @@ EncoderAction Pec11RotaryEncoder::lookup_action() {
     return encoder_actions_by_state[encoder_state_];
 }
 
-void Pec11RotaryEncoder::HandleInterrupt() {
+void Pec11RotaryEncoder::HandleRotate() {
     EncoderAction action = ENC_ACTION_NONE;
 
     if (EXTI_GetITStatus(CLOCKWISE_EXTI_LINE) != RESET) {
         action = lookup_action();
         EXTI_ClearITPendingBit(CLOCKWISE_EXTI_LINE);
-    } else if (EXTI_GetITStatus(COUNTER_CLOCKWISE_EXTI_LINE) != RESET) {
-        EXTI_ClearITPendingBit(COUNTER_CLOCKWISE_EXTI_LINE);
+    }
+    if (EXTI_GetITStatus(COUNTER_CLOCKWISE_EXTI_LINE) != RESET) {
         action = lookup_action();
+        EXTI_ClearITPendingBit(COUNTER_CLOCKWISE_EXTI_LINE);
     }
 
     encoder_count_ += action;
 }
 
+void Pec11RotaryEncoder::HandlePress() {
+    if (EXTI_GetITStatus(BUTTON_EXTI_LINE) != RESET) {
+        button_pressed_ = !static_cast<bool>(GPIO_ReadInputDataBit(BUTTON_GPIO, BUTTON_PIN));
+        EXTI_ClearITPendingBit(BUTTON_EXTI_LINE);
+    }
+}
+
+void Pec11RotaryEncoder::ResetCount() {
+    encoder_count_ = 0;
+}
+
 long Pec11RotaryEncoder::GetCount() {
     return encoder_count_;
+}
+
+bool Pec11RotaryEncoder::GetAndClearButtonPressed() {
+    bool pressed = button_pressed_;
+    button_pressed_ = false;
+    return pressed;
 }
 

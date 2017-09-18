@@ -13,15 +13,21 @@ public:
     Pec11RotaryEncoder();
     ~Pec11RotaryEncoder() = default;
     void Init();
-    void HandleInterrupt();
+    void HandleRotate();
+    void HandlePress();
     long GetCount();
+    void ResetCount();
+    bool GetAndClearButtonPressed();
+    
 private:
     EncoderAction lookup_action();
     void setup_clockwise();
     void setup_counter_clockwise();
+    void setup_button();
 
     volatile uint8_t encoder_state_;
     volatile long encoder_count_;
+    volatile bool button_pressed_;
 };
 
 #endif

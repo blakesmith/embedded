@@ -11,6 +11,7 @@ Pec11RotaryEncoder knob;
 void SetLedState(long count);
 
 static const uint32_t states[] = {
+    0,
     GPIO_Pin_12,
     GPIO_Pin_12 | GPIO_Pin_13,
     GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14,
@@ -18,13 +19,6 @@ static const uint32_t states[] = {
     GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
     GPIO_Pin_14 | GPIO_Pin_15,
     GPIO_Pin_15,
-    0,
-    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
-    0,
-    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
-    0,
-    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
-    0
 };
 
 static const size_t n_states = sizeof(states) / sizeof(uint32_t);
@@ -96,17 +90,23 @@ void UpdateDisplay() {
 
 extern "C" {
 void SysTick_Handler(void) {
+    if (knob.GetAndClearButtonPressed()) {
+        knob.ResetCount();
+    }
     SetLedState(knob.GetCount());
 }
 
+void EXTI1_IRQHandler(void) {
+    knob.HandlePress();
+}
+
 void EXTI2_IRQHandler(void) {
-    knob.HandleInterrupt();
+    knob.HandleRotate();
 }
 
 void EXTI9_5_IRQHandler(void) {
-    knob.HandleInterrupt();
+    knob.HandleRotate();
 }
-
 }
 
 int main() {
