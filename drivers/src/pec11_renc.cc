@@ -27,10 +27,11 @@
 /**
  * Computed from the quadrature output table. Algorithm is:
  * 1. Start with pin state 0b00 (both pins low)
- * 2. Moving through the table clockwise, shift the previous two bits twice. Append next bit state to the lower 2 bits of the 4-bit integer.
- * 3. Moving through the table counter clockwise, shift the previous two bits twice. Append next bit state to the lower 2 bits of the 4-bit integer.
- * 4. Go through each state in the table again, and repeat each state for the upper and lower bits of the 4-bit integer.
+ * 2. Moving through the table clockwise, shift the previous two bits twice. Append next bit state to the lower 2 bits of the 4-bit integer. These get assigned ENC_ACTION_ROTATE_CLOCKWISE
+ * 3. Moving through the table counter clockwise, shift the previous two bits twice. Append next bit state to the lower 2 bits of the 4-bit integer. These get assigned ENC_ACTION_ROTATE_COUNTER_CLOCKWISE
+ * 4. Go through each state in the table again, and repeat each state for the upper and lower bits of the 4-bit integer. These get assigned ENC_ACTION_NONE.
  * 5. Each bit state is equal to an integer between 0 - 15 (The array length of the table below), the value is the direction of the direction the state should move.
+ * 6. Any gaps in the table get assigned a value of ENC_ACTION_NONE.
  */
 static const EncoderAction encoder_actions_by_state[] = {
     ENC_ACTION_NONE,
