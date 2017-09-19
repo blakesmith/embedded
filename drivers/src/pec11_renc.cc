@@ -187,7 +187,9 @@ long Pec11RotaryEncoder::GetCount() {
 
 bool Pec11RotaryEncoder::GetAndClearButtonPressed() {
     bool pressed = button_pressed_;
-    button_pressed_ = false;
+    if (pressed) {
+        button_pressed_ = false;
+    }
     return pressed;
 }
 
