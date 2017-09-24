@@ -3,6 +3,7 @@
 
 #include "ht16K33_display.h"
 #include "pec11_renc.h"
+#include "cs43l22_dac.h"
 
 GPIO_InitTypeDef GPIO_LED;
 HT16K33Display display;

@@ -1,4 +1,5 @@
-CC_FILES = ht16K33_display.cc \
+CC_FILES = cs43l22_dac.cc \
+	ht16K33_display.cc \
 	pec11_renc.cc
 
 OBJECTS = $(CC_FILES:.cc=.o)
