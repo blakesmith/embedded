@@ -14,6 +14,8 @@ static constexpr uint8_t CS_REG_PLAYBACK_CTL2 = 0x0F;
 static constexpr uint8_t CS_REG_PCMA_VOL = 0x1A;
 static constexpr uint8_t CS_REG_PCMB_VOL = 0x1B;
 static constexpr uint8_t CS_REG_TONE_CTL = 0x1F;
+static constexpr uint8_t CS_REG_MASTER_A_VOL = 0x20;
+static constexpr uint8_t CS_REG_MASTER_B_VOL = 0x21;
 static constexpr uint8_t CS_REG_SPEAKER_A_VOL = 0x24;
 static constexpr uint8_t CS_REG_SPEAKER_B_VOL = 0x25;
 static constexpr uint8_t CS_REG_LIMIT_CTL1 = 0x27;
@@ -29,6 +31,7 @@ public:
     void Init(uint8_t volume);
 private:
     void write_register(uint8_t reg, uint8_t value);
+    void set_volume(uint8_t volume);
 };
 
 #endif

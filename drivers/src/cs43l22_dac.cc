@@ -13,7 +13,8 @@ void CS43L22Dac::Init(uint8_t volume) {
     // Serial port master / slave (slave), Serial clock polarity (not inverted), DSP Mode disabled, DAC interface format (I2C)
     write_register(CS_REG_INTERFACE_CTL1, 0x04);
 
-    // TODO: Set volume
+    // Set volume the master volume
+    set_volume(volume);
     
     // Set speaker mono mode
     write_register(CS_REG_PLAYBACK_CTL2, 0x06);
@@ -39,5 +40,24 @@ void CS43L22Dac::Init(uint8_t volume) {
     write_register(CS_REG_PCMB_VOL, 0x0A);
 }
 
+// Adjust and set the volume, 0 - 255.
+void CS43L22Dac::set_volume(uint8_t volume) {
+    uint8_t converted_volume;
+    
+    // Master volume from the datasheet:
+    // 0 = -102db
+    // 230 = 0db
+    // 24 = +12db
+    if (volume > 230) {
+        converted_volume = volume - 231;
+    } else {
+        converted_volume = volume + 25;
+    }
+
+    write_register(CS_REG_MASTER_A_VOL, converted_volume);
+    write_register(CS_REG_MASTER_B_VOL, converted_volume);
+}
+
 void CS43L22Dac::write_register(uint8_t reg, uint8_t value) {
 }
+
