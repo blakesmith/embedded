@@ -5,6 +5,8 @@
 
 void CS43L22Dac::Init(uint8_t volume) {
     init_i2c();
+
+    // TODO: Init I2S?
     
     // Hold power off
     write_register(CS_REG_POW_CTL1, 0x01);
@@ -46,6 +48,7 @@ void CS43L22Dac::Init(uint8_t volume) {
 }
 
 void CS43L22Dac::init_i2c() {
+    // TODO: Implement
 }
 
 // Adjust and set the volume, 0 - 255.
