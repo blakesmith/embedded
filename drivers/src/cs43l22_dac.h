@@ -30,6 +30,7 @@ public:
     
     void Init(uint8_t volume);
 private:
+    void init_i2c();
     void write_register(uint8_t reg, uint8_t value);
     void set_volume(uint8_t volume);
 };

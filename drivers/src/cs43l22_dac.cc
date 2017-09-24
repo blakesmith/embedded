@@ -1,6 +1,11 @@
 #include "cs43l22_dac.h"
 
+#include "stm32f4xx_gpio.h"
+#include "i2c_common.h"
+
 void CS43L22Dac::Init(uint8_t volume) {
+    init_i2c();
+    
     // Hold power off
     write_register(CS_REG_POW_CTL1, 0x01);
     
@@ -38,6 +43,9 @@ void CS43L22Dac::Init(uint8_t volume) {
     // Adjust PCM volume level
     write_register(CS_REG_PCMA_VOL, 0x0A);
     write_register(CS_REG_PCMB_VOL, 0x0A);
+}
+
+void CS43L22Dac::init_i2c() {
 }
 
 // Adjust and set the volume, 0 - 255.

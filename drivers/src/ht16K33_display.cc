@@ -1,7 +1,7 @@
 #include "ht16K33_display.h"
 
 #include "stm32f4xx_gpio.h"
-#include "stm32f4xx_i2c.h"
+#include "i2c_common.h"
 
 #define I2Cx I2C1
 #define GPIOx GPIOB
@@ -15,14 +15,6 @@
 #define GPIO_PIN_SDA GPIO_Pin_7
 
 #define GPIO_AFx GPIO_AF_I2C1
-
-#define WAIT_FOR_EVENT(E) { \
-        while (!I2C_CheckEvent(I2Cx, E));\
-    }
-
-#define WAIT_FOR_FLAG(F) { \
-        while (I2C_GetFlagStatus(I2Cx, F)); \
-    }
 
 static const uint8_t NUMBER_TABLE[] = {
     0x3F, // 0
@@ -160,24 +152,24 @@ void HT16K33Display::enable_oscillator() {
 }
 
 void HT16K33Display::write_start() {
-    WAIT_FOR_FLAG(I2C_FLAG_BUSY);
+    I2C_WAIT_FOR_FLAG(I2C_FLAG_BUSY);
     I2C_GenerateSTART(I2Cx, ENABLE);
-    WAIT_FOR_EVENT(I2C_EVENT_MASTER_MODE_SELECT);
+    I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_MODE_SELECT);
     I2C_Send7bitAddress(I2Cx, device_address_, I2C_Direction_Transmitter);
-    WAIT_FOR_EVENT(I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
+    I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
 }
 
 void HT16K33Display::write_stop() {
-    WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTED);
+    I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTED);
     I2C_GenerateSTOP(I2Cx, ENABLE);
 }
 
 void HT16K33Display::write_raw(uint16_t* data, size_t size) {
     for (size_t i = 0; i < size; i++) {
         I2C_SendData(I2Cx, data[i] & 0xFF);
-        WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
         I2C_SendData(I2Cx, data[i] >> 8);
-        WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
     }
 }
 
@@ -188,6 +180,6 @@ void HT16K33Display::write_raw(uint8_t data) {
 void HT16K33Display::write_raw(uint8_t* data, size_t size) {
     for (size_t i = 0; i < size; i++) {
         I2C_SendData(I2Cx, data[i]);
-        WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
     }
 }
