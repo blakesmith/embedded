@@ -152,24 +152,24 @@ void HT16K33Display::enable_oscillator() {
 }
 
 void HT16K33Display::write_start() {
-    I2C_WAIT_FOR_FLAG(I2C_FLAG_BUSY);
+    I2C_WAIT_FOR_FLAG(I2Cx, I2C_FLAG_BUSY);
     I2C_GenerateSTART(I2Cx, ENABLE);
-    I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_MODE_SELECT);
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_MODE_SELECT);
     I2C_Send7bitAddress(I2Cx, device_address_, I2C_Direction_Transmitter);
-    I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
 }
 
 void HT16K33Display::write_stop() {
-    I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTED);
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED);
     I2C_GenerateSTOP(I2Cx, ENABLE);
 }
 
 void HT16K33Display::write_raw(uint16_t* data, size_t size) {
     for (size_t i = 0; i < size; i++) {
         I2C_SendData(I2Cx, data[i] & 0xFF);
-        I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
         I2C_SendData(I2Cx, data[i] >> 8);
-        I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
     }
 }
 
@@ -180,6 +180,6 @@ void HT16K33Display::write_raw(uint8_t data) {
 void HT16K33Display::write_raw(uint8_t* data, size_t size) {
     for (size_t i = 0; i < size; i++) {
         I2C_SendData(I2Cx, data[i]);
-        I2C_WAIT_FOR_EVENT(I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
     }
 }
