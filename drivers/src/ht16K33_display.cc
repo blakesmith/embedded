@@ -3,18 +3,18 @@
 #include "stm32f4xx_gpio.h"
 #include "i2c_common.h"
 
-#define I2Cx I2C1
-#define GPIOx GPIOB
+static constexpr I2C_TypeDef *I2Cx = I2C2;
+static constexpr GPIO_TypeDef *GPIOx = GPIOB;
 
-#define RCC_I2C_PERIPH RCC_APB1Periph_I2C1
-#define RCC_GPIO_PERIPH RCC_AHB1Periph_GPIOB
+static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C2;
+static constexpr uint32_t RCC_GPIO_PERIPH = RCC_AHB1Periph_GPIOB;
 
-#define GPIO_PS_SCL GPIO_PinSource6
-#define GPIO_PS_SDA GPIO_PinSource7
-#define GPIO_PIN_SCL GPIO_Pin_6
-#define GPIO_PIN_SDA GPIO_Pin_7
+static constexpr uint16_t GPIO_PS_SCL = GPIO_PinSource10;
+static constexpr uint16_t GPIO_PS_SDA = GPIO_PinSource11;
+static constexpr uint16_t GPIO_PIN_SCL = GPIO_Pin_10;
+static constexpr uint16_t GPIO_PIN_SDA = GPIO_Pin_11;
 
-#define GPIO_AFx GPIO_AF_I2C1
+static constexpr uint8_t GPIO_AFx = GPIO_AF_I2C2;
 
 static const uint8_t NUMBER_TABLE[] = {
     0x3F, // 0
