@@ -18,8 +18,7 @@ static constexpr uint8_t GPIO_AFx = GPIO_AF_I2C1;
 
 void CS43L22Dac::Init(uint8_t volume) {
     init_i2c();
-
-    // TODO: Init I2S?
+    init_i2s();
     
     // Hold power off
     write_register(CS_REG_POW_CTL1, 0x01);
@@ -88,6 +87,10 @@ void CS43L22Dac::init_i2c() {
     
     I2C_Init(I2Cx, &I2C_InitStructure);
     I2C_Cmd(I2Cx, ENABLE);
+}
+
+void CS43L22Dac::init_i2s() {
+    // TODO: Implement.
 }
 
 // Adjust and set the volume, 0 - 255.
