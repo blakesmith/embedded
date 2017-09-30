@@ -30,6 +30,7 @@ public:
     
     void Init(uint8_t volume);
 private:
+    void init_gpio();
     void init_i2c();
     void init_i2s();
     void write_register(uint8_t reg, uint8_t value);

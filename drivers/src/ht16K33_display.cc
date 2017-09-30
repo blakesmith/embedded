@@ -59,7 +59,7 @@ void HT16K33Display::Init() {
     GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_SCL | GPIO_PIN_SDA;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
+    GPIO_Init(GPIOx, &GPIO_InitStructure);
 
     I2C_StructInit(&I2C_InitStructure);
     I2C_DeInit(I2Cx);

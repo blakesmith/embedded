@@ -17,6 +17,7 @@ static constexpr uint16_t GPIO_PIN_SDA = GPIO_Pin_9;
 static constexpr uint8_t GPIO_AFx = GPIO_AF_I2C1;
 
 void CS43L22Dac::Init(uint8_t volume) {
+    init_gpio();
     init_i2c();
     init_i2s();
     
@@ -59,22 +60,27 @@ void CS43L22Dac::Init(uint8_t volume) {
     write_register(CS_REG_PCMB_VOL, 0x0A);
 }
 
-void CS43L22Dac::init_i2c() {
+void CS43L22Dac::init_gpio() {
     GPIO_InitTypeDef GPIO_InitStructure;
-    I2C_InitTypeDef I2C_InitStructure;
 
-    RCC_APB1PeriphClockCmd(RCC_I2C_PERIPH, ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_GPIO_PERIPH, ENABLE);
 
     GPIO_PinAFConfig(GPIOx, GPIO_PS_SCL, GPIO_AFx);
     GPIO_PinAFConfig(GPIOx, GPIO_PS_SDA, GPIO_AFx);
 
+    // I2C
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_SCL | GPIO_PIN_SDA;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
+}
+
+void CS43L22Dac::init_i2c() {
+    I2C_InitTypeDef I2C_InitStructure;
+
+    RCC_APB1PeriphClockCmd(RCC_I2C_PERIPH, ENABLE);
 
     I2C_StructInit(&I2C_InitStructure);
     I2C_DeInit(I2Cx);
