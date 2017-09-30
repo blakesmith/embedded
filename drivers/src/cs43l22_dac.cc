@@ -6,26 +6,34 @@
 // I2C
 static constexpr I2C_TypeDef *I2Cx = I2C1;
 static constexpr GPIO_TypeDef *GPIOx_I2C = GPIOB;
+
 static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C1;
 static constexpr uint32_t RCC_GPIO_I2C_PERIPH = RCC_AHB1Periph_GPIOB;
+
 static constexpr uint16_t GPIO_PS_I2C_SCL = GPIO_PinSource6;
 static constexpr uint16_t GPIO_PS_I2C_SDA = GPIO_PinSource9;
+
 static constexpr uint16_t GPIO_PIN_I2C_SCL = GPIO_Pin_6;
 static constexpr uint16_t GPIO_PIN_I2C_SDA = GPIO_Pin_9;
+
 static constexpr uint8_t GPIO_I2C_AFx = GPIO_AF_I2C1;
 
 // I2S
 static constexpr GPIO_TypeDef *GPIO1_I2S = GPIOA;
 static constexpr GPIO_TypeDef *GPIO2_I2S = GPIOC;
-static constexpr GPIO_TypeDef *GPIO3_I2S = GPIOD;
-static constexpr uint32_t RCC_GPIO_I2S_PERIPH = RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOD;
+static constexpr uint32_t RCC_GPIO_I2S_PERIPH = RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC;
+
+static constexpr uint16_t GPIO_PS_I2S_MCK = GPIO_PinSource7;
+static constexpr uint16_t GPIO_PS_I2S_CK = GPIO_PinSource10;
+static constexpr uint16_t GPIO_PS_I2S_SD = GPIO_PinSource12;
+static constexpr uint16_t GPIO_PS_I2S_WS = GPIO_PinSource4;
+
 static constexpr uint16_t GPIO_PIN_I2S_MCK = GPIO_Pin_7;
 static constexpr uint16_t GPIO_PIN_I2S_CK = GPIO_Pin_10;
 static constexpr uint16_t GPIO_PIN_I2S_SD = GPIO_Pin_12;
 static constexpr uint16_t GPIO_PIN_I2S_WS = GPIO_Pin_4;
-static constexpr uint16_t GPIO_PIN_I2S_RS = GPIO_Pin_4;
-static constexpr uint8_t GPIO_I2S_AFx = GPIO_AF_SPI2;
 
+static constexpr uint8_t GPIO_I2S_AFx = GPIO_AF_SPI3;
 
 
 void CS43L22Dac::Init(uint8_t volume) {
@@ -96,6 +104,11 @@ void CS43L22Dac::init_gpio() {
     
     GPIO_StructInit(&GPIO_InitStructure);
 
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_MCK, GPIO_I2S_AFx);
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_AFx);
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_AFx);
+    GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_AFx);
+
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_MCK | GPIO_PIN_I2S_CK \
         | GPIO_PIN_I2S_SD;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -106,9 +119,6 @@ void CS43L22Dac::init_gpio() {
 
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_WS;
     GPIO_Init(GPIO1_I2S, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_RS;
-    GPIO_Init(GPIO3_I2S, &GPIO_InitStructure);
 }
 
 void CS43L22Dac::init_i2c() {
