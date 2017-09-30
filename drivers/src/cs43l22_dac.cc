@@ -1,6 +1,8 @@
 #include "cs43l22_dac.h"
 
 #include "stm32f4xx_gpio.h"
+#include "stm32f4xx_rcc.h"
+#include "stm32f4xx_spi.h"
 #include "i2c_common.h"
 
 // I2C
@@ -19,9 +21,11 @@ static constexpr uint16_t GPIO_PIN_I2C_SDA = GPIO_Pin_9;
 static constexpr uint8_t GPIO_I2C_AFx = GPIO_AF_I2C1;
 
 // I2S
+static constexpr SPI_TypeDef *SPI_I2S = SPI3;
 static constexpr GPIO_TypeDef *GPIO1_I2S = GPIOA;
 static constexpr GPIO_TypeDef *GPIO2_I2S = GPIOC;
 static constexpr uint32_t RCC_GPIO_I2S_PERIPH = RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC;
+static constexpr uint32_t RCC_SPI_I2S_CLOCK = RCC_APB1Periph_SPI3;
 
 static constexpr uint16_t GPIO_PS_I2S_MCK = GPIO_PinSource7;
 static constexpr uint16_t GPIO_PS_I2S_CK = GPIO_PinSource10;
@@ -83,7 +87,6 @@ void CS43L22Dac::Init(uint8_t volume) {
 void CS43L22Dac::init_gpio() {
     GPIO_InitTypeDef GPIO_InitStructure;
 
-
     // I2C
     RCC_AHB1PeriphClockCmd(RCC_GPIO_I2C_PERIPH, ENABLE);
 
@@ -140,7 +143,20 @@ void CS43L22Dac::init_i2c() {
 }
 
 void CS43L22Dac::init_i2s() {
-    // TODO: Implement.
+    I2S_InitTypeDef i2s_init;
+
+    RCC_APB1PeriphClockCmd(RCC_SPI_I2S_CLOCK, ENABLE);
+    RCC_I2SCLKConfig(RCC_I2S2CLKSource_PLLI2S);
+    
+    RCC_PLLI2SCmd(ENABLE);
+    i2s_init.I2S_AudioFreq = 44100;
+    i2s_init.I2S_Standard = I2S_Standard_Phillips;
+    i2s_init.I2S_DataFormat = I2S_DataFormat_16b;
+    i2s_init.I2S_CPOL = I2S_CPOL_Low;
+    i2s_init.I2S_Mode = I2S_Mode_MasterTx;
+    i2s_init.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
+
+    I2S_Init(SPI_I2S, &i2s_init);
 }
 
 // Adjust and set the volume, 0 - 255.
