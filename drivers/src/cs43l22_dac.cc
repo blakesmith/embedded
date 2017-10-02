@@ -153,6 +153,8 @@ void CS43L22Dac::init_i2s() {
     RCC_I2SCLKConfig(RCC_I2S2CLKSource_PLLI2S);
     
     RCC_PLLI2SCmd(ENABLE);
+
+    SPI_I2S_DeInit(SPI_I2S);
     i2s_init.I2S_AudioFreq = 44100;
     i2s_init.I2S_Standard = I2S_Standard_Phillips;
     i2s_init.I2S_DataFormat = I2S_DataFormat_16b;
