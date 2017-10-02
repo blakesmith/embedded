@@ -1,6 +1,9 @@
 #ifndef CS43L22_DAC_H_
 #define CS43L22_DAC_H_
 
+#include <stm32f4xx_dma.h>
+#include <cstddef>
+
 static constexpr uint8_t DEFAULT_DEVICE_ADDRESS = 0x25 << 1;
 
 static constexpr uint8_t CS_REG_ID = 0x01;
@@ -23,6 +26,8 @@ static constexpr uint8_t CS_REG_LIMIT_CTL1 = 0x27;
 static constexpr uint8_t CS_OUT_AUTO = 0x05;
 static constexpr uint8_t CS_CLOCKING_AUTO = 0x81;
 
+static constexpr size_t DAC_BUF_SIZE = 32;
+
 class CS43L22Dac {
 public:
     CS43L22Dac() = default;
@@ -33,8 +38,13 @@ private:
     void init_gpio();
     void init_i2c();
     void init_i2s();
+    void init_dma();
     void write_register(uint8_t reg, uint8_t value);
     void set_volume(uint8_t volume);
+
+    DMA_InitTypeDef dma_tx_;
+
+    int16_t tx_dma_buf_[DAC_BUF_SIZE * 6 * 2];
 };
 
 #endif

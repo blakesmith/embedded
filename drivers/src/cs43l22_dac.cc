@@ -39,11 +39,15 @@ static constexpr uint16_t GPIO_PIN_I2S_WS = GPIO_Pin_4;
 
 static constexpr uint8_t GPIO_I2S_AFx = GPIO_AF_SPI3;
 
+static constexpr uint32_t I2S_DMA_CHANNEL = DMA_Channel_0;
+static constexpr DMA_Stream_TypeDef *I2S_DMA_STREAM = DMA1_Stream4;
+
 
 void CS43L22Dac::Init(uint8_t volume) {
     init_gpio();
     init_i2c();
     init_i2s();
+    init_dma();
     
     // Hold power off
     write_register(CS_REG_POW_CTL1, 0x01);
@@ -157,6 +161,30 @@ void CS43L22Dac::init_i2s() {
     i2s_init.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
 
     I2S_Init(SPI_I2S, &i2s_init);
+}
+
+void CS43L22Dac::init_dma() {
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
+    DMA_DeInit(I2S_DMA_STREAM);
+    
+    dma_tx_.DMA_Channel = I2S_DMA_CHANNEL;
+    dma_tx_.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI_I2S->DR));
+    dma_tx_.DMA_Memory0BaseAddr = (uint32_t)tx_dma_buf_;
+    dma_tx_.DMA_DIR = DMA_DIR_MemoryToPeripheral;
+    dma_tx_.DMA_BufferSize = (uint32_t)0xFFFE;
+    dma_tx_.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    dma_tx_.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    dma_tx_.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+    dma_tx_.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+    dma_tx_.DMA_Mode = DMA_Mode_Circular;
+    dma_tx_.DMA_Priority = DMA_Priority_High;
+    dma_tx_.DMA_FIFOMode = DMA_FIFOMode_Disable;
+    dma_tx_.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
+    dma_tx_.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+    dma_tx_.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+    
+    DMA_Init(I2S_DMA_STREAM, &dma_tx_);
+    DMA_Cmd(I2S_DMA_STREAM, ENABLE);
 }
 
 // Adjust and set the volume, 0 - 255.
