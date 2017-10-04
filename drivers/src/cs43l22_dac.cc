@@ -6,8 +6,8 @@
 #include "i2c_common.h"
 
 // I2C
-static constexpr I2C_TypeDef *I2Cx = I2C1;
-static constexpr GPIO_TypeDef *GPIOx_I2C = GPIOB;
+static I2C_TypeDef *I2Cx = I2C1;
+static GPIO_TypeDef *GPIOx_I2C = GPIOB;
 
 static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C1;
 static constexpr uint32_t RCC_GPIO_I2C_PERIPH = RCC_AHB1Periph_GPIOB;
@@ -21,9 +21,9 @@ static constexpr uint16_t GPIO_PIN_I2C_SDA = GPIO_Pin_9;
 static constexpr uint8_t GPIO_I2C_AFx = GPIO_AF_I2C1;
 
 // I2S
-static constexpr SPI_TypeDef *SPI_I2S = SPI3;
-static constexpr GPIO_TypeDef *GPIO1_I2S = GPIOA;
-static constexpr GPIO_TypeDef *GPIO2_I2S = GPIOC;
+static SPI_TypeDef *SPI_I2S = SPI3;
+static GPIO_TypeDef *GPIO1_I2S = GPIOA;
+static GPIO_TypeDef *GPIO2_I2S = GPIOC;
 static constexpr uint32_t RCC_GPIO_I2S_PERIPH = RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC;
 static constexpr uint32_t RCC_SPI_I2S_CLOCK = RCC_APB1Periph_SPI3;
 
@@ -40,7 +40,7 @@ static constexpr uint16_t GPIO_PIN_I2S_WS = GPIO_Pin_4;
 static constexpr uint8_t GPIO_I2S_AFx = GPIO_AF_SPI3;
 
 static constexpr uint32_t I2S_DMA_CHANNEL = DMA_Channel_0;
-static constexpr DMA_Stream_TypeDef *I2S_DMA_STREAM = DMA1_Stream4;
+static DMA_Stream_TypeDef *I2S_DMA_STREAM = DMA1_Stream4;
 
 
 void CS43L22Dac::Init(uint8_t volume) {

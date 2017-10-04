@@ -3,8 +3,8 @@
 #include "stm32f4xx_gpio.h"
 #include "i2c_common.h"
 
-static constexpr I2C_TypeDef *I2Cx = I2C2;
-static constexpr GPIO_TypeDef *GPIOx = GPIOB;
+static I2C_TypeDef *I2Cx = I2C2;
+static GPIO_TypeDef *GPIOx = GPIOB;
 
 static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C2;
 static constexpr uint32_t RCC_GPIO_PERIPH = RCC_AHB1Periph_GPIOB;
