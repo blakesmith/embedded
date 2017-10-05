@@ -232,5 +232,41 @@ void CS43L22Dac::set_volume(uint8_t volume) {
 }
 
 void CS43L22Dac::write_register(uint8_t reg, uint8_t value) {
+    write_start();
+    write_raw(reg);
+    write_raw(value);
+    write_stop();
 }
 
+void CS43L22Dac::write_start() {
+    I2C_WAIT_FOR_FLAG(I2Cx, I2C_FLAG_BUSY);
+    I2C_GenerateSTART(I2Cx, ENABLE);
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_MODE_SELECT);
+    I2C_Send7bitAddress(I2Cx, DEFAULT_DEVICE_ADDRESS, I2C_Direction_Transmitter);
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
+}
+
+void CS43L22Dac::write_stop() {
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED);
+    I2C_GenerateSTOP(I2Cx, ENABLE);
+}
+
+void CS43L22Dac::write_raw(uint16_t* data, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        I2C_SendData(I2Cx, data[i] & 0xFF);
+        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_SendData(I2Cx, data[i] >> 8);
+        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+    }
+}
+
+void CS43L22Dac::write_raw(uint8_t data) {
+    write_raw(&data, 1);
+}
+
+void CS43L22Dac::write_raw(uint8_t* data, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        I2C_SendData(I2Cx, data[i]);
+        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+    }
+}

@@ -42,6 +42,12 @@ private:
     void write_register(uint8_t reg, uint8_t value);
     void set_volume(uint8_t volume);
 
+    void write_start();
+    void write_stop();
+    void write_raw(uint8_t* data, size_t size);
+    void write_raw(uint16_t* data, size_t size);
+    void write_raw(uint8_t data);
+
     DMA_InitTypeDef dma_tx_;
     DMA_InitTypeDef dma_rx_;
 
