@@ -178,7 +178,7 @@ void CS43L22Dac::init_dma() {
     dma_tx_.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI_I2S->DR));
     dma_tx_.DMA_Memory0BaseAddr = (uint32_t)tx_dma_buf_;
     dma_tx_.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-    dma_tx_.DMA_BufferSize = (uint32_t)0xFFFE;
+    dma_tx_.DMA_BufferSize = DAC_BUF_SIZE;
     dma_tx_.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
     dma_tx_.DMA_MemoryInc = DMA_MemoryInc_Enable;
     dma_tx_.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
@@ -194,10 +194,10 @@ void CS43L22Dac::init_dma() {
     DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
 
     dma_rx_.DMA_Channel = I2S_DMA_RX_CHANNEL;
-    dma_rx_.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI_I2S->DR));
+    dma_rx_.DMA_PeripheralBaseAddr = (uint32_t)(&(I2S_EXT->DR));
     dma_rx_.DMA_Memory0BaseAddr = (uint32_t)rx_dma_buf_;
-    dma_rx_.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-    dma_rx_.DMA_BufferSize = (uint32_t)0xFFFE;
+    dma_rx_.DMA_DIR = DMA_DIR_PeripheralToMemory;
+    dma_rx_.DMA_BufferSize = DAC_BUF_SIZE;
     dma_rx_.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
     dma_rx_.DMA_MemoryInc = DMA_MemoryInc_Enable;
     dma_rx_.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;

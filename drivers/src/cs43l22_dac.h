@@ -26,7 +26,7 @@ static constexpr uint8_t CS_REG_LIMIT_CTL1 = 0x27;
 static constexpr uint8_t CS_OUT_AUTO = 0x05;
 static constexpr uint8_t CS_CLOCKING_AUTO = 0x81;
 
-static constexpr size_t DAC_BUF_SIZE = 32;
+static constexpr uint32_t DAC_BUF_SIZE = 32 * 6 * 2;
 
 class CS43L22Dac {
 public:
@@ -51,8 +51,8 @@ private:
     DMA_InitTypeDef dma_tx_;
     DMA_InitTypeDef dma_rx_;
 
-    int16_t tx_dma_buf_[DAC_BUF_SIZE * 6 * 2];
-    int16_t rx_dma_buf_[DAC_BUF_SIZE * 6 * 2];
+    int16_t tx_dma_buf_[DAC_BUF_SIZE];
+    int16_t rx_dma_buf_[DAC_BUF_SIZE];
 };
 
 #endif
