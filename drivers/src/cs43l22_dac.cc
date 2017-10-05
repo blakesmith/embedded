@@ -46,6 +46,7 @@ static constexpr uint8_t GPIO_I2S_RX_AFx = GPIO_AF_SPI3;
 static constexpr uint32_t I2S_DMA_RX_CHANNEL = DMA_Channel_3;
 static DMA_Stream_TypeDef *I2S_DMA_RX_STREAM = DMA1_Stream3;
 
+static IRQn_Type I2S_RX_DMA_IRQ = DMA1_Stream3_IRQn;
 
 void CS43L22Dac::Init(uint8_t volume) {
     init_gpio();
@@ -211,6 +212,12 @@ void CS43L22Dac::init_dma() {
 
     DMA_Init(I2S_DMA_RX_STREAM, &dma_rx_);
     DMA_Cmd(I2S_DMA_RX_STREAM, ENABLE);
+
+    DMA_ITConfig(I2S_DMA_RX_STREAM, DMA_IT_TC | DMA_IT_HT, ENABLE);
+    NVIC_EnableIRQ(I2S_RX_DMA_IRQ);
+
+    SPI_I2S_DMACmd(SPI_I2S, SPI_I2S_DMAReq_Tx, ENABLE);
+    SPI_I2S_DMACmd(I2S_EXT, SPI_I2S_DMAReq_Rx, ENABLE);
 }
 
 // Adjust and set the volume, 0 - 255.
