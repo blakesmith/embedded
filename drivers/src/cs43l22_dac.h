@@ -43,8 +43,10 @@ private:
     void set_volume(uint8_t volume);
 
     DMA_InitTypeDef dma_tx_;
+    DMA_InitTypeDef dma_rx_;
 
     int16_t tx_dma_buf_[DAC_BUF_SIZE * 6 * 2];
+    int16_t rx_dma_buf_[DAC_BUF_SIZE * 6 * 2];
 };
 
 #endif
