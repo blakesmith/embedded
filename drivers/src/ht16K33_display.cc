@@ -55,7 +55,7 @@ void HT16K33Display::Init() {
     GPIO_PinAFConfig(GPIOx_SCL, GPIO_PS_SCL, GPIO_AFx);
     GPIO_PinAFConfig(GPIOx_SDA, GPIO_PS_SDA, GPIO_AFx);
 
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
