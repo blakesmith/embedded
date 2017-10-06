@@ -11,6 +11,8 @@ Pec11RotaryEncoder knob;
 
 void SetLedState(long count);
 
+volatile uint32_t count = 0;
+
 static const uint32_t states[] = {
     0,
     GPIO_Pin_12,
@@ -68,15 +70,15 @@ void InitOnboardButton() {
 void Init() {
     InitOnboardLed();
 //    InitOnboardButton();
-//    display.Init();
-    knob.Init();
+    display.Init();
+//    knob.Init();
 
-    uint32_t rc = SysTick_Config(SystemCoreClock / 30);
+    uint32_t rc = SysTick_Config(SystemCoreClock / 10);
     if (rc != 0) {
         GPIO_WriteBit(GPIOD, GPIO_Pin_13, Bit_SET);
     }
 
-    SetLedState(0);
+    SetLedState(3);
 }
 
 void SetLedState(long count) {
@@ -85,16 +87,18 @@ void SetLedState(long count) {
 }
 
 void UpdateDisplay() {
-    display.ToggleColon(true);
+    display.Clear();
+    for (size_t i = 0; i < 5; i++) {
+        uint8_t segment = count % 7;
+        display.SetSegment(i, segment, true, true);
+    }
     display.WriteDisplay();
 }
 
 extern "C" {
 void SysTick_Handler(void) {
-    if (knob.GetAndClearButtonPressed()) {
-        knob.ResetCount();
-    }
-    SetLedState(knob.GetCount());
+    UpdateDisplay();
+    count++;
 }
 
 void EXTI1_IRQHandler(void) {
@@ -113,5 +117,6 @@ void EXTI9_5_IRQHandler(void) {
 int main() {
     Init();
 
+    UpdateDisplay();
     while (true);
 }

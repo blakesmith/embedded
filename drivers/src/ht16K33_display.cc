@@ -3,18 +3,19 @@
 #include "stm32f4xx_gpio.h"
 #include "i2c_common.h"
 
-static I2C_TypeDef *I2Cx = I2C1;
-static GPIO_TypeDef *GPIOx = GPIOB;
+static I2C_TypeDef *I2Cx = I2C3;
+static GPIO_TypeDef *GPIOx_SCL = GPIOA;
+static GPIO_TypeDef *GPIOx_SDA = GPIOC;
 
-static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C1;
-static constexpr uint32_t RCC_GPIO_PERIPH = RCC_AHB1Periph_GPIOB;
+static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C3;
+static constexpr uint32_t RCC_GPIO_PERIPH = RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC;
 
-static constexpr uint16_t GPIO_PS_SCL = GPIO_PinSource6;
+static constexpr uint16_t GPIO_PS_SCL = GPIO_PinSource8;
 static constexpr uint16_t GPIO_PS_SDA = GPIO_PinSource9;
-static constexpr uint16_t GPIO_PIN_SCL = GPIO_Pin_6;
+static constexpr uint16_t GPIO_PIN_SCL = GPIO_Pin_8;
 static constexpr uint16_t GPIO_PIN_SDA = GPIO_Pin_9;
 
-static constexpr uint8_t GPIO_AFx = GPIO_AF_I2C1;
+static constexpr uint8_t GPIO_AFx = GPIO_AF_I2C3;
 
 static const uint8_t NUMBER_TABLE[] = {
     0x3F, // 0
@@ -51,15 +52,18 @@ void HT16K33Display::Init() {
     RCC_APB1PeriphClockCmd(RCC_I2C_PERIPH, ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_GPIO_PERIPH, ENABLE);
 
-    GPIO_PinAFConfig(GPIOx, GPIO_PS_SCL, GPIO_AFx);
-    GPIO_PinAFConfig(GPIOx, GPIO_PS_SDA, GPIO_AFx);
+    GPIO_PinAFConfig(GPIOx_SCL, GPIO_PS_SCL, GPIO_AFx);
+    GPIO_PinAFConfig(GPIOx_SDA, GPIO_PS_SDA, GPIO_AFx);
 
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
     GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_SCL | GPIO_PIN_SDA;
-    GPIO_Init(GPIOx, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_SCL; 
+    GPIO_Init(GPIOx_SCL, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_SDA;
+    GPIO_Init(GPIOx_SDA, &GPIO_InitStructure);
 
     I2C_StructInit(&I2C_InitStructure);
     I2C_DeInit(I2Cx);
@@ -133,7 +137,7 @@ void HT16K33Display::ToggleColon(bool on) {
 }
 
 void HT16K33Display::Clear() {
-    for (size_t i = 0; i < 4; i++) {
+    for (size_t i = 0; i < 5; i++) {
         display_buffer_[i] = 0;
     }
 }
