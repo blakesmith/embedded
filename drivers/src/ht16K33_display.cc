@@ -3,18 +3,18 @@
 #include "stm32f4xx_gpio.h"
 #include "i2c_common.h"
 
-static I2C_TypeDef *I2Cx = I2C2;
+static I2C_TypeDef *I2Cx = I2C1;
 static GPIO_TypeDef *GPIOx = GPIOB;
 
-static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C2;
+static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C1;
 static constexpr uint32_t RCC_GPIO_PERIPH = RCC_AHB1Periph_GPIOB;
 
-static constexpr uint16_t GPIO_PS_SCL = GPIO_PinSource10;
-static constexpr uint16_t GPIO_PS_SDA = GPIO_PinSource11;
-static constexpr uint16_t GPIO_PIN_SCL = GPIO_Pin_10;
-static constexpr uint16_t GPIO_PIN_SDA = GPIO_Pin_11;
+static constexpr uint16_t GPIO_PS_SCL = GPIO_PinSource6;
+static constexpr uint16_t GPIO_PS_SDA = GPIO_PinSource9;
+static constexpr uint16_t GPIO_PIN_SCL = GPIO_Pin_6;
+static constexpr uint16_t GPIO_PIN_SDA = GPIO_Pin_9;
 
-static constexpr uint8_t GPIO_AFx = GPIO_AF_I2C2;
+static constexpr uint8_t GPIO_AFx = GPIO_AF_I2C1;
 
 static const uint8_t NUMBER_TABLE[] = {
     0x3F, // 0
@@ -100,7 +100,7 @@ void HT16K33Display::SetBlinkRate(uint8_t rate) {
 
 // Set a single number 1 - 9, in the display. Value number positions are 0, 1, 3, 4. Position 2 is the colon.
 void HT16K33Display::SetNumber(uint8_t pos, uint8_t number, bool dot) {
-    if (pos > 4 || pos == 2) {
+    if (pos > 5 || pos == 2) {
         pos = 0;
     }
     if (number > 9) {
@@ -121,7 +121,7 @@ void HT16K33Display::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot)
         segment = 0;
     }
     uint8_t value = (on << segment) | (dot << 7);
-    display_buffer_[pos] = value;
+    display_buffer_[pos] |= value;
 }
 
 void HT16K33Display::ToggleColon(bool on) {
@@ -141,7 +141,7 @@ void HT16K33Display::Clear() {
 void HT16K33Display::WriteDisplay() {
     write_start();
     write_raw(0x0);
-    write_raw(display_buffer_, 4);
+    write_raw(display_buffer_, 5);
     write_stop();
 }
 
