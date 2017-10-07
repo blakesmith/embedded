@@ -30,6 +30,8 @@ static const uint8_t NUMBER_TABLE[] = {
     0x6F, // 9
 };
 
+static constexpr uint8_t N_POSITIONS = 5;
+
 // Default address.
 static const uint8_t DEFAULT_DEVICE_ADDRESS = 0x70 << 1;
 
@@ -113,6 +115,31 @@ void HT16K33Display::SetNumber(uint8_t pos, uint8_t number, bool dot) {
     uint8_t value = NUMBER_TABLE[number] | (dot << 7);
     display_buffer_[pos] = value;
 }
+
+static uint16_t u16pow(uint8_t base, uint8_t exp) {
+    uint8_t p = base;
+    for (size_t i = 0; i < exp-1; i++) {
+        p *= p;
+    }
+    return p;
+}
+
+void HT16K33Display::SetNumber(uint16_t number) {
+    uint16_t scale = u16pow(10, N_POSITIONS-2);
+    uint16_t last_value = 0;
+    uint16_t remaining = number;
+    for (size_t i = 0; i < N_POSITIONS; i++) {
+        if (i == 2) {
+            continue;
+        }
+        last_value = number / scale;
+        SetNumber(i, last_value, false);
+
+        remaining = remaining - (last_value * scale);
+        scale /= 10;
+    }
+}
+
 
 // Set a specific segment within a position. Segments are 0 - 7. Segment 7 is the dot to the right of the digit.
 // Segment 0 is the top-most LED, other segments move clockwise around the digit, with Segment 6 being the middle
