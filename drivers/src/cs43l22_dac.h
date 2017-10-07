@@ -26,14 +26,28 @@ static constexpr uint8_t CS_REG_LIMIT_CTL1 = 0x27;
 static constexpr uint8_t CS_OUT_AUTO = 0x05;
 static constexpr uint8_t CS_CLOCKING_AUTO = 0x81;
 
-static constexpr uint32_t DAC_BUF_SIZE = 32 * 2;
+static constexpr uint32_t DAC_FRAME_COUNT = 32;
+static constexpr uint32_t DAC_BUF_SIZE = DAC_FRAME_COUNT * 2;
 
 class CS43L22Dac {
 public:
     CS43L22Dac() = default;
     ~CS43L22Dac() = default;
+
+    struct Frame {
+        int16_t left;
+        int16_t right;
+    };
+
+    typedef void (*DacFillCallback)(Frame *tx, size_t size);
     
-    void Init(uint8_t volume);
+    void Init(uint8_t volume, DacFillCallback fill_callback);
+    void FillTxBuffer();
+    
+    static CS43L22Dac *GetGlobalInstance() {
+        return global_dac_;
+    };
+    
 private:
     void init_gpio();
     void init_i2c();
@@ -48,9 +62,12 @@ private:
     void write_raw(uint16_t* data, size_t size);
     void write_raw(uint8_t data);
 
+    DacFillCallback fill_callback_;
     DMA_InitTypeDef dma_tx_;
 
     int16_t tx_dma_buf_[DAC_BUF_SIZE];
+
+    static CS43L22Dac* global_dac_;
 };
 
 #endif

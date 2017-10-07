@@ -5,6 +5,9 @@
 #include "stm32f4xx_spi.h"
 #include "i2c_common.h"
 
+// Static instance, for the IRQ handler
+CS43L22Dac *CS43L22Dac::global_dac_;
+
 // I2C
 static I2C_TypeDef *I2Cx = I2C1;
 static GPIO_TypeDef *GPIOx_I2C = GPIOB;
@@ -43,7 +46,10 @@ static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
 static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
 static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 
-void CS43L22Dac::Init(uint8_t volume) {
+void CS43L22Dac::Init(uint8_t volume, DacFillCallback fill_callback) {
+    global_dac_ = this;
+    fill_callback_ = fill_callback;
+    
     init_gpio();
     init_i2c();
     init_i2s();
@@ -213,6 +219,9 @@ void CS43L22Dac::set_volume(uint8_t volume) {
     write_register(CS_REG_MASTER_B_VOL, converted_volume);
 }
 
+void CS43L22Dac::FillTxBuffer() {
+}
+
 void CS43L22Dac::write_register(uint8_t reg, uint8_t value) {
     write_start();
     write_raw(reg);
@@ -257,7 +266,8 @@ extern "C" {
 void DMA1_Stream7_IRQHandler(void) {
     if (DMA_GetFlagStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
         DMA_ClearFlag(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
-        // refill tx buffer
+        
+        CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
     }
 }
 }
