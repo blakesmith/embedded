@@ -145,7 +145,7 @@ void HT16K33Display::SetNumber(uint16_t number) {
 // Segment 0 is the top-most LED, other segments move clockwise around the digit, with Segment 6 being the middle
 // LED (Think: The middle bar on an 8). See a picture here: https://www.adafruit.com/product/880 ... Segment 0 = A.
 void HT16K33Display::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
-    if (pos > 4 || pos == 2) {
+    if (pos > N_POSITIONS || pos == 2) {
         pos = 0;
     }
     if (segment > 6) {
