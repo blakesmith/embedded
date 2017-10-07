@@ -5,6 +5,8 @@
 #include "stm32f4xx_spi.h"
 #include "i2c_common.h"
 
+#include <cstring>
+
 // Static instance, for the IRQ handler
 CS43L22Dac *CS43L22Dac::global_dac_;
 
@@ -49,6 +51,8 @@ static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 void CS43L22Dac::Init(uint8_t volume, DacFillCallback fill_callback) {
     global_dac_ = this;
     fill_callback_ = fill_callback;
+
+    memset(tx_dma_buf_, 0, DAC_BUF_SIZE);
     
     init_gpio();
     init_i2c();
