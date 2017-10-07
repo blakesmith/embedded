@@ -22,7 +22,7 @@ static constexpr uint8_t GPIO_I2C_AFx = GPIO_AF_I2C1;
 
 // I2S
 static SPI_TypeDef *SPI_I2S = SPI3;
-static SPI_TypeDef *I2S_EXT = I2S2ext;
+static SPI_TypeDef *I2S_EXT = I2S3ext;
 static GPIO_TypeDef *GPIO1_I2S = GPIOA;
 static GPIO_TypeDef *GPIO2_I2S = GPIOC;
 static constexpr uint32_t RCC_GPIO_I2S_PERIPH = RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC;
