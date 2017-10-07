@@ -30,7 +30,16 @@ static const uint8_t NUMBER_TABLE[] = {
     0x6F, // 9
 };
 
+static uint16_t u16pow(uint8_t base, uint8_t exp) {
+    uint8_t p = base;
+    for (uint8_t i = 0; i < exp-1; i++) {
+        p *= p;
+    }
+    return p;
+}
+
 static constexpr uint8_t N_POSITIONS = 5;
+static const uint16_t MAX_DISPLAY_NUMBER = u16pow(10, N_POSITIONS-1) - 1;
 
 // Default address.
 static const uint8_t DEFAULT_DEVICE_ADDRESS = 0x70 << 1;
@@ -116,15 +125,13 @@ void HT16K33Display::SetNumber(uint8_t pos, uint8_t number, bool dot) {
     display_buffer_[pos] = value;
 }
 
-static uint16_t u16pow(uint8_t base, uint8_t exp) {
-    uint8_t p = base;
-    for (uint8_t i = 0; i < exp-1; i++) {
-        p *= p;
-    }
-    return p;
-}
-
+// Set a whole number, no greater than MAX_DISPLAY_NUMBER. If the
+// number specified is greater than MAX_DISPLAY_NUMBER, set it to
+// MAX_DISPLAY_NUMBER.
 void HT16K33Display::SetNumber(uint16_t number) {
+    if (number > MAX_DISPLAY_NUMBER) {
+        number = MAX_DISPLAY_NUMBER;
+    }
     uint16_t scale = u16pow(10, N_POSITIONS-2);
     uint16_t last_value = 0;
     uint16_t remaining = number;
