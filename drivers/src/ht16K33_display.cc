@@ -130,6 +130,7 @@ void HT16K33Display::SetNumber(uint16_t number) {
     uint16_t remaining = number;
     for (size_t i = 0; i < N_POSITIONS; i++) {
         if (i == 2) {
+            // Skip colon position
             continue;
         }
         last_value = number / scale;
