@@ -220,6 +220,7 @@ void CS43L22Dac::set_volume(uint8_t volume) {
 }
 
 void CS43L22Dac::FillTxBuffer() {
+    fill_callback_((Frame *)tx_dma_buf_, DAC_FRAME_COUNT);
 }
 
 void CS43L22Dac::write_register(uint8_t reg, uint8_t value) {
