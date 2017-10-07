@@ -40,7 +40,7 @@ static constexpr uint16_t GPIO_PIN_I2S_WS = GPIO_Pin_4;
 static constexpr uint8_t GPIO_I2S_TX_AFx = GPIO_AF_SPI3;
 static constexpr uint32_t I2S_DMA_TX_CHANNEL = DMA_Channel_0;
 static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
-
+static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
 static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 
 void CS43L22Dac::Init(uint8_t volume) {
@@ -189,7 +189,7 @@ void CS43L22Dac::init_dma() {
     DMA_Init(I2S_DMA_TX_STREAM, &dma_tx_);
     DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
 
-    DMA_ITConfig(I2S_DMA_TX_STREAM, DMA_IT_TC | DMA_IT_HT, ENABLE);
+    DMA_ITConfig(I2S_DMA_TX_STREAM, DMA_IT_TC, ENABLE);
     NVIC_EnableIRQ(I2S_TX_DMA_IRQ);
 
     SPI_I2S_DMACmd(SPI_I2S, SPI_I2S_DMAReq_Tx, ENABLE);
@@ -251,4 +251,13 @@ void CS43L22Dac::write_raw(uint8_t* data, size_t size) {
         I2C_SendData(I2Cx, data[i]);
         I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
     }
+}
+
+extern "C" {
+void DMA1_Stream7_IRQHandler(void) {
+    if (DMA_GetFlagStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
+        DMA_ClearFlag(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
+        // refill tx buffer
+    }
+}
 }
