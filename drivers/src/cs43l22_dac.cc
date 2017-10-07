@@ -22,7 +22,6 @@ static constexpr uint8_t GPIO_I2C_AFx = GPIO_AF_I2C1;
 
 // I2S
 static SPI_TypeDef *SPI_I2S = SPI3;
-static SPI_TypeDef *I2S_EXT = I2S3ext;
 static GPIO_TypeDef *GPIO1_I2S = GPIOA;
 static GPIO_TypeDef *GPIO2_I2S = GPIOC;
 static constexpr uint32_t RCC_GPIO_I2S_PERIPH = RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC;
@@ -40,13 +39,9 @@ static constexpr uint16_t GPIO_PIN_I2S_WS = GPIO_Pin_4;
 
 static constexpr uint8_t GPIO_I2S_TX_AFx = GPIO_AF_SPI3;
 static constexpr uint32_t I2S_DMA_TX_CHANNEL = DMA_Channel_0;
-static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream4;
+static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
 
-static constexpr uint8_t GPIO_I2S_RX_AFx = GPIO_AF_SPI3;
-static constexpr uint32_t I2S_DMA_RX_CHANNEL = DMA_Channel_3;
-static DMA_Stream_TypeDef *I2S_DMA_RX_STREAM = DMA1_Stream3;
-
-static IRQn_Type I2S_RX_DMA_IRQ = DMA1_Stream3_IRQn;
+static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 
 void CS43L22Dac::Init(uint8_t volume) {
     init_gpio();
@@ -169,7 +164,6 @@ void CS43L22Dac::init_i2s() {
     i2s_init.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
 
     I2S_Init(SPI_I2S, &i2s_init);
-    I2S_FullDuplexConfig(I2S_EXT, &i2s_init);
 }
 
 void CS43L22Dac::init_dma() {
@@ -195,30 +189,10 @@ void CS43L22Dac::init_dma() {
     DMA_Init(I2S_DMA_TX_STREAM, &dma_tx_);
     DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
 
-    dma_rx_.DMA_Channel = I2S_DMA_RX_CHANNEL;
-    dma_rx_.DMA_PeripheralBaseAddr = (uint32_t)(&(I2S_EXT->DR));
-    dma_rx_.DMA_Memory0BaseAddr = (uint32_t)rx_dma_buf_;
-    dma_rx_.DMA_DIR = DMA_DIR_PeripheralToMemory;
-    dma_rx_.DMA_BufferSize = DAC_BUF_SIZE;
-    dma_rx_.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-    dma_rx_.DMA_MemoryInc = DMA_MemoryInc_Enable;
-    dma_rx_.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-    dma_rx_.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-    dma_rx_.DMA_Mode = DMA_Mode_Circular;
-    dma_rx_.DMA_Priority = DMA_Priority_High;
-    dma_rx_.DMA_FIFOMode = DMA_FIFOMode_Disable;
-    dma_rx_.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
-    dma_rx_.DMA_MemoryBurst = DMA_MemoryBurst_Single;
-    dma_rx_.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-
-    DMA_Init(I2S_DMA_RX_STREAM, &dma_rx_);
-    DMA_Cmd(I2S_DMA_RX_STREAM, ENABLE);
-
-    DMA_ITConfig(I2S_DMA_RX_STREAM, DMA_IT_TC | DMA_IT_HT, ENABLE);
-    NVIC_EnableIRQ(I2S_RX_DMA_IRQ);
+    DMA_ITConfig(I2S_DMA_TX_STREAM, DMA_IT_TC | DMA_IT_HT, ENABLE);
+    NVIC_EnableIRQ(I2S_TX_DMA_IRQ);
 
     SPI_I2S_DMACmd(SPI_I2S, SPI_I2S_DMAReq_Tx, ENABLE);
-    SPI_I2S_DMACmd(I2S_EXT, SPI_I2S_DMAReq_Rx, ENABLE);
 }
 
 // Adjust and set the volume, 0 - 255.
