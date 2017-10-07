@@ -106,7 +106,7 @@ void HT16K33Display::SetBlinkRate(uint8_t rate) {
 
 // Set a single number 1 - 9, in the display. Value number positions are 0, 1, 3, 4. Position 2 is the colon.
 void HT16K33Display::SetNumber(uint8_t pos, uint8_t number, bool dot) {
-    if (pos > 5 || pos == 2) {
+    if (pos > N_POSITIONS || pos == 2) {
         pos = 0;
     }
     if (number > 9) {
@@ -118,7 +118,7 @@ void HT16K33Display::SetNumber(uint8_t pos, uint8_t number, bool dot) {
 
 static uint16_t u16pow(uint8_t base, uint8_t exp) {
     uint8_t p = base;
-    for (size_t i = 0; i < exp-1; i++) {
+    for (uint8_t i = 0; i < exp-1; i++) {
         p *= p;
     }
     return p;
@@ -164,7 +164,7 @@ void HT16K33Display::ToggleColon(bool on) {
 }
 
 void HT16K33Display::Clear() {
-    for (size_t i = 0; i < 5; i++) {
+    for (size_t i = 0; i < N_POSITIONS; i++) {
         display_buffer_[i] = 0;
     }
 }
@@ -172,7 +172,7 @@ void HT16K33Display::Clear() {
 void HT16K33Display::WriteDisplay() {
     write_start();
     write_raw(0x0);
-    write_raw(display_buffer_, 5);
+    write_raw(display_buffer_, N_POSITIONS);
     write_stop();
 }
 
