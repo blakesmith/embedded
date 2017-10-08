@@ -10,6 +10,7 @@ HEX=main.hex
 OBJECTS = $(CC_FILES:.cc=.o) $(AS_FILES:.s=.o)
 EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
 	$(LOCAL_DRIVERS_SRCDIR)/pec11_renc.o \
+	$(LOCAL_DRIVERS_SRCDIR)/status_led.o \
 	$(STM32_ROOT)/misc.o \
 	$(STM32_ROOT)/stm32f4xx_exti.o \
 	$(STM32_ROOT)/stm32f4xx_i2c.o \
