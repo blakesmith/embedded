@@ -41,7 +41,10 @@ public:
 
     typedef void (*DacFillCallback)(Frame *tx, size_t size);
     
-    void Init(uint8_t volume, DacFillCallback fill_callback);
+    void Init(uint8_t volume,
+              uint32_t sample_rate,
+              DacFillCallback fill_callback);
+
     void FillTxBuffer();
     
     static CS43L22Dac *GetGlobalInstance() {
@@ -62,6 +65,7 @@ private:
     void write_raw(uint16_t* data, size_t size);
     void write_raw(uint8_t data);
 
+    uint32_t sample_rate_;
     DacFillCallback fill_callback_;
     DMA_InitTypeDef dma_tx_;
 

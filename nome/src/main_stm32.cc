@@ -1,67 +1,35 @@
-#include <stm32f4xx.h>
 #include <cstddef>
 
-#include "ht16K33_display.h"
+#include "cs43l22_dac.h"
+#include "status_led.h"
 
-GPIO_InitTypeDef GPIO_LED;
-HT16K33Display display;
+#include "beat.h"
 
-static const uint32_t states[] = {
-    GPIO_Pin_12,
-    GPIO_Pin_12 | GPIO_Pin_13,
-    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14,
-    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
-    GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
-    GPIO_Pin_14 | GPIO_Pin_15,
-    GPIO_Pin_15,
-    0,
-    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
-    0,
-    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
-    0,
-    GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15,
-    0
-};
+using namespace nome;
 
-static const size_t n_states = sizeof(states) / sizeof(uint32_t);
-static size_t current_state = 0;
+static constexpr uint32_t SAMPLE_RATE = 44100;
+static constexpr uint32_t CONTROL_RATE = SAMPLE_RATE / 10;
+static constexpr uint8_t CHANNEL_COUNT = 2;
+
+static constexpr size_t FRAMES_PER_PERIOD = 128;
+static constexpr uint16_t DEFAULT_BPM = 120;
+static constexpr uint8_t DEFAULT_DOWNBEAT = 4;
+
+StatusLed status_led;
+Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
+
+void FillCallback(CS43L22Dac::Frame* frames, size_t size) {
+    beat.Fill((int16_t *)frames, size, CHANNEL_COUNT);
+}
 
 void Init() {
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-    GPIO_LED.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
-    GPIO_LED.GPIO_Mode = GPIO_Mode_OUT;
-    GPIO_LED.GPIO_OType = GPIO_OType_PP;
-    GPIO_LED.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOD, &GPIO_LED);
-
-    display.Init();
-
-    uint32_t rc = SysTick_Config(SystemCoreClock / 10);
-    if (rc != 0) {
-        GPIO_WriteBit(GPIOD, GPIO_Pin_13, Bit_SET);
-    }
-}
-
-void AdvanceLedState() {
-    uint32_t pins = states[current_state];
-    GPIOD->ODR = pins;
-    current_state = (current_state + 1) % n_states;
-}
-
-void UpdateDisplay() {
-    display.ToggleColon(current_state % 2 == 0);
-    display.WriteDisplay();
-}
-
-extern "C" {
-void SysTick_Handler(void) {
-    AdvanceLedState();
-    UpdateDisplay();
-}
+    status_led.Init();
+    CS43L22Dac::GetGlobalInstance()->Init(128, SAMPLE_RATE, &FillCallback);
 }
 
 int main() {
     Init();
+    status_led.SetOk(true);
 
     while (true);
 }

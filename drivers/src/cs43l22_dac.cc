@@ -48,8 +48,11 @@ static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
 static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
 static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 
-void CS43L22Dac::Init(uint8_t volume, DacFillCallback fill_callback) {
+void CS43L22Dac::Init(uint8_t volume,
+                      uint32_t sample_rate,
+                      DacFillCallback fill_callback) {
     global_dac_ = this;
+    sample_rate_ = sample_rate;
     fill_callback_ = fill_callback;
 
     memset(tx_dma_buf_, 0, DAC_BUF_SIZE);
@@ -166,7 +169,7 @@ void CS43L22Dac::init_i2s() {
     RCC_PLLI2SCmd(ENABLE);
 
     SPI_I2S_DeInit(SPI_I2S);
-    i2s_init.I2S_AudioFreq = 44100;
+    i2s_init.I2S_AudioFreq = sample_rate_;
     i2s_init.I2S_Standard = I2S_Standard_Phillips;
     i2s_init.I2S_DataFormat = I2S_DataFormat_16b;
     i2s_init.I2S_CPOL = I2S_CPOL_Low;
