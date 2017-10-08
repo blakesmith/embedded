@@ -67,45 +67,7 @@ void CS43L22Dac::Init(uint8_t volume,
     reset();
     init_i2c();
     init_i2s();
-    
-    // Hold power off
-    write_register(CS_REG_POW_CTL1, 0x01);
-    
-    // Set the output device to auto detect, headphone or speaker depending on if the headphones are plugged in
-    write_register(CS_REG_POW_CTL2, CS_OUT_AUTO);
-
-    // Configure the clocking control to AUTO, and enable MCLKDIV2
-    write_register(CS_REG_CLOCKING_CTL, CS_CLOCKING_AUTO);
-
-    // Serial port master / slave (slave), Serial clock polarity (not inverted), DSP Mode disabled, DAC interface format (I2C)
-    write_register(CS_REG_INTERFACE_CTL1, 0x04);
-
-    // Set volume the master volume
-    set_volume(volume);
-    
-    // Set speaker mono mode
-    write_register(CS_REG_PLAYBACK_CTL2, 0x06);
-    
-    // Set speaker attenuation level
-    write_register(CS_REG_SPEAKER_A_VOL, 0x00);
-    write_register(CS_REG_SPEAKER_B_VOL, 0x00);
-    
-    // Disable analog soft ramp
-    write_register(CS_REG_ANALOG_SR, 0x00);
-    
-    // Disable digital soft ramp
-    write_register(CS_REG_MISC_CTL, 0x04);
-    
-    // Disable limiter attack level
-    write_register(CS_REG_LIMIT_CTL1, 0x00);
-    
-    // Adjust bass and trebel levels
-    write_register(CS_REG_TONE_CTL, 0x0F);
-    
-    // Adjust PCM volume level
-    write_register(CS_REG_PCMA_VOL, 0x0A);
-    write_register(CS_REG_PCMB_VOL, 0x0A);
-    
+    init_codec(volume);
     init_dma();
 }
 
@@ -135,9 +97,6 @@ void CS43L22Dac::init_gpio() {
 
     GPIO_StructInit(&GPIO_InitStructure);
     
-    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SCL, GPIO_I2C_AFx);
-    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SDA, GPIO_I2C_AFx);
-
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2C_SCL | GPIO_PIN_I2C_SDA;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -145,15 +104,13 @@ void CS43L22Dac::init_gpio() {
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_Init(GPIOx_I2C, &GPIO_InitStructure);
 
+    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SCL, GPIO_I2C_AFx);
+    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SDA, GPIO_I2C_AFx);
+
     // I2S
     RCC_AHB1PeriphClockCmd(RCC_GPIO_I2S_PERIPH, ENABLE);
     
     GPIO_StructInit(&GPIO_InitStructure);
-
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_MCK, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_TX_AFx);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_MCK | GPIO_PIN_I2S_CK \
         | GPIO_PIN_I2S_SD;
@@ -165,6 +122,11 @@ void CS43L22Dac::init_gpio() {
 
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_WS;
     GPIO_Init(GPIO1_I2S, &GPIO_InitStructure);
+
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_MCK, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_TX_AFx);
 }
 
 void CS43L22Dac::init_i2c() {
@@ -202,6 +164,46 @@ void CS43L22Dac::init_i2s() {
     i2s_init.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
 
     I2S_Init(SPI_I2S, &i2s_init);
+}
+
+void CS43L22Dac::init_codec(uint8_t volume) {
+    // Hold power off
+    write_register(CS_REG_POW_CTL1, 0x01);
+    
+    // Set the output device to auto detect, headphone or speaker depending on if the headphones are plugged in
+    write_register(CS_REG_POW_CTL2, CS_OUT_AUTO);
+
+    // Configure the clocking control to AUTO, and enable MCLKDIV2
+    write_register(CS_REG_CLOCKING_CTL, CS_CLOCKING_AUTO);
+
+    // Serial port master / slave (slave), Serial clock polarity (not inverted), DSP Mode disabled, DAC interface format (I2C)
+    write_register(CS_REG_INTERFACE_CTL1, 0x04);
+
+    // Set volume the master volume
+    set_volume(volume);
+    
+    // Set speaker mono mode
+    write_register(CS_REG_PLAYBACK_CTL2, 0x06);
+    
+    // Set speaker attenuation level
+    write_register(CS_REG_SPEAKER_A_VOL, 0x00);
+    write_register(CS_REG_SPEAKER_B_VOL, 0x00);
+    
+    // Disable analog soft ramp
+    write_register(CS_REG_ANALOG_SR, 0x00);
+    
+    // Disable digital soft ramp
+    write_register(CS_REG_MISC_CTL, 0x04);
+    
+    // Disable limiter attack level
+    write_register(CS_REG_LIMIT_CTL1, 0x00);
+    
+    // Adjust bass and trebel levels
+    write_register(CS_REG_TONE_CTL, 0x0F);
+    
+    // Adjust PCM volume level
+    write_register(CS_REG_PCMA_VOL, 0x0A);
+    write_register(CS_REG_PCMB_VOL, 0x0A);
 }
 
 void CS43L22Dac::init_dma() {

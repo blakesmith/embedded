@@ -55,6 +55,7 @@ private:
     void init_gpio();
     void init_i2c();
     void init_i2s();
+    void init_codec(uint8_t volume);
     void init_dma();
     void reset();
     
