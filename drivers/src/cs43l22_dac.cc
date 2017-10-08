@@ -7,8 +7,15 @@
 
 #include <cstring>
 
+#define DELAY(t) {                 \
+  uint32_t timeout = t; \
+  while (true) { if ((timeout--) == 0) break; } \
+}
+
 // Static instance, for the IRQ handler
 CS43L22Dac *CS43L22Dac::global_dac_;
+
+static constexpr uint32_t DEFAULT_TIMEOUT = 0x1000 * 300;
 
 // I2C
 static I2C_TypeDef *I2Cx = I2C1;
@@ -86,6 +93,7 @@ void CS43L22Dac::reset() {
     GPIO_Init(GPIOx_AUDIO_RESET, &gpio_init);
 
     GPIO_ResetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
+    DELAY(DEFAULT_TIMEOUT);
     GPIO_SetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
 }
 
