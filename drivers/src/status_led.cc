@@ -3,10 +3,12 @@
 #include "stm32f4xx_gpio.h"
 
 static constexpr uint16_t GPIO_OK_LED = GPIO_Pin_15;
+static constexpr uint16_t GPIO_ACTIVITY_LED = GPIO_Pin_13;
 static constexpr uint16_t GPIO_ERROR_LED = GPIO_Pin_14;
 
 static constexpr uint32_t GPIO_CLK = RCC_AHB1Periph_GPIOD;
 
+static GPIO_TypeDef *GPIOx_ACTIVITY = GPIOD;
 static GPIO_TypeDef *GPIOx_OK = GPIOD;
 static GPIO_TypeDef *GPIOx_ERROR = GPIOD;
 
@@ -23,6 +25,14 @@ void StatusLed::Init() {
 
     gpio_init.GPIO_Pin = GPIO_ERROR_LED;
     GPIO_Init(GPIOx_ERROR, &gpio_init);
+
+    gpio_init.GPIO_Pin = GPIO_ACTIVITY_LED;
+    GPIO_Init(GPIOx_ACTIVITY, &gpio_init);
+}
+
+void StatusLed::SetActivity(bool on) {
+    uint16_t toggle = on ? 0xFFFF : 0;
+    GPIOx_ACTIVITY->ODR = GPIOx_ACTIVITY->ODR | (GPIO_ACTIVITY_LED & toggle);
 }
 
 void StatusLed::SetOk(bool on) {
@@ -33,6 +43,10 @@ void StatusLed::SetOk(bool on) {
 void StatusLed::SetError(bool on) {
     uint16_t toggle = on ? 0xFFFF : 0;
     GPIOx_ERROR->ODR = GPIOx_ERROR->ODR | (GPIO_ERROR_LED & toggle);
+}
+
+void StatusLed::ToggleActivity() {
+    GPIOx_ACTIVITY->ODR ^= GPIO_ACTIVITY_LED;
 }
 
 void StatusLed::ToggleOk() {

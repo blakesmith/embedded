@@ -19,6 +19,7 @@ StatusLed status_led;
 Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
 
 void FillCallback(CS43L22Dac::Frame* frames, size_t size) {
+    status_led.SetActivity(true);
     beat.Fill((int16_t *)frames, size, CHANNEL_COUNT);
 }
 

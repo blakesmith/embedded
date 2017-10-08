@@ -67,7 +67,6 @@ void CS43L22Dac::Init(uint8_t volume,
     reset();
     init_i2c();
     init_i2s();
-    init_dma();
     
     // Hold power off
     write_register(CS_REG_POW_CTL1, 0x01);
@@ -106,6 +105,8 @@ void CS43L22Dac::Init(uint8_t volume,
     // Adjust PCM volume level
     write_register(CS_REG_PCMA_VOL, 0x0A);
     write_register(CS_REG_PCMB_VOL, 0x0A);
+    
+    init_dma();
 }
 
 void CS43L22Dac::reset() {

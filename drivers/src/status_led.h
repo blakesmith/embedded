@@ -6,8 +6,10 @@ public:
     void Init();
     void ToggleOk();
     void ToggleError();
+    void ToggleActivity();
     void SetOk(bool on);
     void SetError(bool on);
+    void SetActivity(bool on);
 };
 
 #endif
