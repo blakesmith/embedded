@@ -4,7 +4,7 @@
 #include <stm32f4xx_dma.h>
 #include <cstddef>
 
-static constexpr uint8_t DEFAULT_DEVICE_ADDRESS = 0x25 << 1;
+static constexpr uint8_t DEFAULT_DEVICE_ADDRESS = 0x25 << 2;
 
 static constexpr uint8_t CS_REG_ID = 0x01;
 static constexpr uint8_t CS_REG_POW_CTL1 = 0x02;
@@ -56,6 +56,8 @@ private:
     void init_i2c();
     void init_i2s();
     void init_dma();
+    void reset();
+    
     void write_register(uint8_t reg, uint8_t value);
     void set_volume(uint8_t volume);
 

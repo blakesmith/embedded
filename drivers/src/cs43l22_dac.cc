@@ -25,6 +25,12 @@ static constexpr uint16_t GPIO_PIN_I2C_SDA = GPIO_Pin_9;
 
 static constexpr uint8_t GPIO_I2C_AFx = GPIO_AF_I2C1;
 
+// AUDIO Reset
+
+static GPIO_TypeDef *GPIOx_AUDIO_RESET = GPIOD;
+static constexpr uint32_t AUDIO_RESET_CLK = RCC_AHB1Periph_GPIOD;
+static constexpr uint16_t AUDIO_RESET_PIN = GPIO_Pin_4;
+
 // I2S
 static SPI_TypeDef *SPI_I2S = SPI3;
 static GPIO_TypeDef *GPIO1_I2S = GPIOA;
@@ -56,10 +62,12 @@ void CS43L22Dac::Init(uint8_t volume,
     fill_callback_ = fill_callback;
 
     memset(tx_dma_buf_, 0, DAC_BUF_SIZE);
-    
+
     init_gpio();
+    reset();
     init_i2c();
     init_i2s();
+    init_dma();
     
     // Hold power off
     write_register(CS_REG_POW_CTL1, 0x01);
@@ -98,8 +106,24 @@ void CS43L22Dac::Init(uint8_t volume,
     // Adjust PCM volume level
     write_register(CS_REG_PCMA_VOL, 0x0A);
     write_register(CS_REG_PCMB_VOL, 0x0A);
+}
 
-    init_dma();
+void CS43L22Dac::reset() {
+    GPIO_InitTypeDef gpio_init;
+
+    RCC_AHB1PeriphClockCmd(AUDIO_RESET_CLK, ENABLE);
+
+    GPIO_StructInit(&gpio_init);
+
+    gpio_init.GPIO_Pin = AUDIO_RESET_PIN;
+    gpio_init.GPIO_Mode = GPIO_Mode_OUT;
+    gpio_init.GPIO_Speed = GPIO_Speed_2MHz;
+    gpio_init.GPIO_OType = GPIO_OType_PP;
+    gpio_init.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    GPIO_Init(GPIOx_AUDIO_RESET, &gpio_init);
+
+    GPIO_ResetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
+    GPIO_SetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
 }
 
 void CS43L22Dac::init_gpio() {
