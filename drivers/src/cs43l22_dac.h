@@ -13,6 +13,7 @@ static constexpr uint8_t CS_REG_CLOCKING_CTL = 0x05;
 static constexpr uint8_t CS_REG_INTERFACE_CTL1 = 0x06;
 static constexpr uint8_t CS_REG_ANALOG_SR = 0x0A;
 static constexpr uint8_t CS_REG_MISC_CTL = 0x0E;
+static constexpr uint8_t CS_REG_PLAYBACK_CTL1 = 0x0D;
 static constexpr uint8_t CS_REG_PLAYBACK_CTL2 = 0x0F;
 static constexpr uint8_t CS_REG_PCMA_VOL = 0x1A;
 static constexpr uint8_t CS_REG_PCMB_VOL = 0x1B;

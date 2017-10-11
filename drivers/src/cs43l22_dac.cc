@@ -57,7 +57,7 @@ static constexpr uint16_t GPIO_PIN_I2S_CK = GPIO_Pin_10;
 static constexpr uint16_t GPIO_PIN_I2S_SD = GPIO_Pin_12;
 static constexpr uint16_t GPIO_PIN_I2S_WS = GPIO_Pin_4;
 
-static constexpr uint8_t GPIO_I2S_TX_AFx = GPIO_AF5_SPI3;
+static constexpr uint8_t GPIO_I2S_TX_AFx = GPIO_AF_SPI3;
 static constexpr uint32_t I2S_DMA_TX_CHANNEL = DMA_Channel_0;
 static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
 static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
@@ -81,6 +81,7 @@ void CS43L22Dac::Init(uint8_t volume,
 }
 
 void CS43L22Dac::Start() {
+    I2S_Cmd(SPI_I2S, ENABLE);
     DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
 }
 
@@ -98,6 +99,8 @@ void CS43L22Dac::reset() {
     gpio_init.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_Init(GPIOx_AUDIO_RESET, &gpio_init);
 
+    GPIO_ResetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
+    DELAY(DEFAULT_TIMEOUT);
     GPIO_SetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
     DELAY(DEFAULT_TIMEOUT);
 }
@@ -179,7 +182,6 @@ void CS43L22Dac::init_i2s() {
     i2s_init.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
 
     I2S_Init(SPI_I2S, &i2s_init);
-    I2S_Cmd(SPI_I2S, ENABLE);
 }
 
 void CS43L22Dac::init_codec(uint8_t volume) {
@@ -207,7 +209,7 @@ void CS43L22Dac::init_codec(uint8_t volume) {
     write_register(CS_REG_CLOCKING_CTL, CS_CLOCKING_AUTO);
 
     // Serial port master / slave (slave), Serial clock polarity (not inverted), DSP Mode disabled, DAC interface format (I2S)
-    write_register(CS_REG_INTERFACE_CTL1, 7);
+    write_register(CS_REG_INTERFACE_CTL1, 0x07);
 
     // Set volume the master volume
     set_volume(volume);
@@ -326,6 +328,7 @@ void CS43L22Dac::write_transmit_start() {
 }
 
 void CS43L22Dac::write_receive_start() {
+    I2C_AcknowledgeConfig(I2Cx, DISABLE);
     I2C_WAIT_FOR_FLAG(I2Cx, I2C_FLAG_BUSY);
     I2C_GenerateSTART(I2Cx, ENABLE);
     I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_MODE_SELECT);
@@ -334,7 +337,6 @@ void CS43L22Dac::write_receive_start() {
 }
 
 void CS43L22Dac::write_transmit_stop() {
-    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED);
     I2C_GenerateSTOP(I2Cx, ENABLE);
 }
 
