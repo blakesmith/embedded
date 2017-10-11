@@ -98,9 +98,8 @@ void CS43L22Dac::reset() {
     gpio_init.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_Init(GPIOx_AUDIO_RESET, &gpio_init);
 
-    GPIO_ResetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
-    DELAY(DEFAULT_TIMEOUT);
     GPIO_SetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
+    DELAY(DEFAULT_TIMEOUT);
 }
 
 void CS43L22Dac::init_gpio() {
@@ -184,8 +183,22 @@ void CS43L22Dac::init_i2s() {
 }
 
 void CS43L22Dac::init_codec(uint8_t volume) {
+    uint8_t reg;
+    
     // Hold power off
     write_register(CS_REG_POW_CTL1, 0x01);
+
+    // Start initialization sequence, p. 32
+
+    write_register(0x00, 0x99);
+    write_register(0x47, 0x80);
+    reg = read_register(0x32);
+    write_register(0x32, reg | 0x80);
+    reg = read_register(0x32);
+    write_register(0x32, reg & (~0x80));
+    write_register(0x00, 0x00);
+
+    // End initialization sequence
     
     // Set the output device to auto detect, headphone or speaker depending on if the headphones are plugged in
     write_register(CS_REG_POW_CTL2, CS_OUT_AUTO);
@@ -221,6 +234,9 @@ void CS43L22Dac::init_codec(uint8_t volume) {
     // Adjust PCM volume level
     write_register(CS_REG_PCMA_VOL, 0x0A);
     write_register(CS_REG_PCMB_VOL, 0x0A);
+
+    // Power up the device
+    write_register(CS_REG_POW_CTL1, 0x9E);
 }
 
 void CS43L22Dac::init_dma() {
@@ -282,13 +298,26 @@ void CS43L22Dac::FillTxBuffer() {
 }
 
 void CS43L22Dac::write_register(uint8_t reg, uint8_t value) {
-    write_start();
+    write_transmit_start();
     write_raw(reg);
     write_raw(value);
-    write_stop();
+    write_transmit_stop();
 }
 
-void CS43L22Dac::write_start() {
+uint8_t CS43L22Dac::read_register(uint8_t reg) {
+    uint8_t value;
+    
+    write_transmit_start();
+    write_raw(reg);
+    write_transmit_stop();
+    write_receive_start();
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED);
+    value = I2C_ReceiveData(I2Cx);
+    write_receive_stop();
+    return value;
+}
+
+void CS43L22Dac::write_transmit_start() {
     I2C_WAIT_FOR_FLAG(I2Cx, I2C_FLAG_BUSY);
     I2C_GenerateSTART(I2Cx, ENABLE);
     I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_MODE_SELECT);
@@ -296,8 +325,20 @@ void CS43L22Dac::write_start() {
     I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
 }
 
-void CS43L22Dac::write_stop() {
+void CS43L22Dac::write_receive_start() {
+    I2C_WAIT_FOR_FLAG(I2Cx, I2C_FLAG_BUSY);
+    I2C_GenerateSTART(I2Cx, ENABLE);
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_MODE_SELECT);
+    I2C_Send7bitAddress(I2Cx, DEFAULT_DEVICE_ADDRESS, I2C_Direction_Receiver);
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED);
+}
+
+void CS43L22Dac::write_transmit_stop() {
     I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED);
+    I2C_GenerateSTOP(I2Cx, ENABLE);
+}
+
+void CS43L22Dac::write_receive_stop() {
     I2C_GenerateSTOP(I2Cx, ENABLE);
 }
 

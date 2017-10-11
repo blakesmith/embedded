@@ -62,10 +62,14 @@ private:
     void reset();
     
     void write_register(uint8_t reg, uint8_t value);
+    uint8_t read_register(uint8_t reg);
     void set_volume(uint8_t volume);
 
-    void write_start();
-    void write_stop();
+    void write_transmit_start();
+    void write_transmit_stop();
+
+    void write_receive_start();
+    void write_receive_stop();
     void write_raw(uint8_t* data, size_t size);
     void write_raw(uint16_t* data, size_t size);
     void write_raw(uint8_t data);
