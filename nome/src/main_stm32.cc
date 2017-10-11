@@ -34,9 +34,15 @@ void Init() {
     knob.Init();
     dac.Init(128, SAMPLE_RATE, &FillCallback);
     dac.Start();
+    uint32_t rc = SysTick_Config(SystemCoreClock / 30);
+    if (rc != 0) {
+        status_led.SetError(true);
+    }
 }
 
+extern "C" {
 void update_bpm() {
+    knob.ReadState();
     uint16_t current_bpm = DEFAULT_BPM + knob.GetCount();
     display.Clear();
     display.SetNumber(current_bpm);
@@ -44,17 +50,8 @@ void update_bpm() {
     beat.SetBPM(current_bpm);
 }
 
-extern "C" {
-void EXTI1_IRQHandler(void) {
-    knob.HandleInterrupt();
-}
-
-void EXTI2_IRQHandler(void) {
-    knob.HandleInterrupt();
-}
-
-void EXTI9_5_IRQHandler(void) {
-    knob.HandleInterrupt();
+void SysTick_Handler(void) {
+    update_bpm();
 }
 }
 
@@ -64,7 +61,5 @@ int main() {
     display.SetNumber(DEFAULT_BPM);
     display.WriteDisplay();
 
-    while (true) {
-        update_bpm();
-    }
+    while (true);
 }

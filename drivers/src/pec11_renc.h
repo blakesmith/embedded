@@ -16,13 +16,11 @@ public:
     void HandleInterrupt();
     long GetCount();
     void ResetCount();
+    void ReadState();
     bool GetAndClearButtonPressed();
     
 private:
     EncoderAction lookup_action();
-    void setup_clockwise();
-    void setup_counter_clockwise();
-    void setup_button();
 
     volatile uint8_t encoder_state_;
     volatile long encoder_count_;

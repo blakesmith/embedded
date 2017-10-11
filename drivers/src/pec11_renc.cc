@@ -57,63 +57,6 @@ Pec11RotaryEncoder::Pec11RotaryEncoder()
       encoder_count_(0),
       button_pressed_(false) { }
 
-void Pec11RotaryEncoder::setup_clockwise() {
-    EXTI_InitTypeDef encoder_exti;
-    NVIC_InitTypeDef encoder_nvic;
-
-    SYSCFG_EXTILineConfig(CLOCKWISE_EXTI_PORTSOURCE, CLOCKWISE_PINSOURCE);
-
-    encoder_exti.EXTI_Line = CLOCKWISE_EXTI_LINE;
-    encoder_exti.EXTI_LineCmd = ENABLE;
-    encoder_exti.EXTI_Mode = EXTI_Mode_Interrupt;
-    encoder_exti.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
-    EXTI_Init(&encoder_exti);
-
-    encoder_nvic.NVIC_IRQChannel = CLOCKWISE_NVIC_IRQ_CHANNEL;
-    encoder_nvic.NVIC_IRQChannelPreemptionPriority = 0;
-    encoder_nvic.NVIC_IRQChannelSubPriority = 0x0;
-    encoder_nvic.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&encoder_nvic);
-}
-
-void Pec11RotaryEncoder::setup_counter_clockwise() {
-    EXTI_InitTypeDef encoder_exti;
-    NVIC_InitTypeDef encoder_nvic;
-    
-    SYSCFG_EXTILineConfig(COUNTER_CLOCKWISE_EXTI_PORTSOURCE, COUNTER_CLOCKWISE_PINSOURCE);
-
-    encoder_exti.EXTI_Line = COUNTER_CLOCKWISE_EXTI_LINE;
-    encoder_exti.EXTI_LineCmd = ENABLE;
-    encoder_exti.EXTI_Mode = EXTI_Mode_Interrupt;
-    encoder_exti.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
-    EXTI_Init(&encoder_exti);
-
-    encoder_nvic.NVIC_IRQChannel = COUNTER_CLOCKWISE_NVIC_IRQ_CHANNEL;
-    encoder_nvic.NVIC_IRQChannelPreemptionPriority = 0x01;
-    encoder_nvic.NVIC_IRQChannelSubPriority = 0x0;
-    encoder_nvic.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&encoder_nvic);
-}
-
-void Pec11RotaryEncoder::setup_button() {
-    EXTI_InitTypeDef encoder_exti;
-    NVIC_InitTypeDef encoder_nvic;
-    
-    SYSCFG_EXTILineConfig(BUTTON_EXTI_PORTSOURCE, BUTTON_PINSOURCE);
-
-    encoder_exti.EXTI_Line = BUTTON_EXTI_LINE;
-    encoder_exti.EXTI_LineCmd = ENABLE;
-    encoder_exti.EXTI_Mode = EXTI_Mode_Interrupt;
-    encoder_exti.EXTI_Trigger = EXTI_Trigger_Falling;
-    EXTI_Init(&encoder_exti);
-
-    encoder_nvic.NVIC_IRQChannel = BUTTON_NVIC_IRQ_CHANNEL;
-    encoder_nvic.NVIC_IRQChannelPreemptionPriority = 0x01;
-    encoder_nvic.NVIC_IRQChannelSubPriority = 0x01;
-    encoder_nvic.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&encoder_nvic);
-}
-
 void Pec11RotaryEncoder::Init() {
     GPIO_InitTypeDef encoder_gpio;
 
@@ -124,7 +67,7 @@ void Pec11RotaryEncoder::Init() {
     GPIO_StructInit(&encoder_gpio);
     encoder_gpio.GPIO_Pin = CLOCKWISE_PIN;
     encoder_gpio.GPIO_Mode = GPIO_Mode_IN;
-    encoder_gpio.GPIO_PuPd = GPIO_PuPd_UP;
+    encoder_gpio.GPIO_PuPd = GPIO_PuPd_DOWN;
     encoder_gpio.GPIO_OType = GPIO_OType_PP;
     encoder_gpio.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(CLOCKWISE_GPIO, &encoder_gpio);
@@ -132,7 +75,7 @@ void Pec11RotaryEncoder::Init() {
     GPIO_StructInit(&encoder_gpio);
     encoder_gpio.GPIO_Pin = COUNTER_CLOCKWISE_PIN;
     encoder_gpio.GPIO_Mode = GPIO_Mode_IN;
-    encoder_gpio.GPIO_PuPd = GPIO_PuPd_UP;
+    encoder_gpio.GPIO_PuPd = GPIO_PuPd_NOPULL;
     encoder_gpio.GPIO_OType = GPIO_OType_PP;
     encoder_gpio.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(COUNTER_CLOCKWISE_GPIO, &encoder_gpio);
@@ -144,42 +87,24 @@ void Pec11RotaryEncoder::Init() {
     encoder_gpio.GPIO_OType = GPIO_OType_PP;
     encoder_gpio.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(BUTTON_GPIO, &encoder_gpio);
-
-    setup_clockwise();
-    setup_counter_clockwise();
-    setup_button();
 }
 
 EncoderAction Pec11RotaryEncoder::lookup_action() {
-    bool cw_high = CLOCKWISE_GPIO->IDR & CLOCKWISE_PIN;
-    bool ccw_high = COUNTER_CLOCKWISE_GPIO->IDR & COUNTER_CLOCKWISE_PIN;
+    bool cw_high = GPIO_ReadInputDataBit(CLOCKWISE_GPIO, CLOCKWISE_PIN);
+    bool ccw_high = GPIO_ReadInputDataBit(COUNTER_CLOCKWISE_GPIO, COUNTER_CLOCKWISE_PIN);
     encoder_state_ <<= 2; // Retain the previous pin state as the upper two bits
     encoder_state_ &= 0x0F; // Only keep the bottom 4 bits, throw away the upper 4
     encoder_state_ |= ((cw_high << 1) | ccw_high); // Shift the current state onto the lower 2 bits
     return encoder_actions_by_state[encoder_state_];
 }
 
-void Pec11RotaryEncoder::HandleInterrupt() {
-    EncoderAction action = ENC_ACTION_NONE;
-
-    if (EXTI_GetITStatus(CLOCKWISE_EXTI_LINE) != RESET) {
-        EXTI_ClearITPendingBit(CLOCKWISE_EXTI_LINE);
-        action = lookup_action();
-    }
-    if (EXTI_GetITStatus(COUNTER_CLOCKWISE_EXTI_LINE) != RESET) {
-        EXTI_ClearITPendingBit(COUNTER_CLOCKWISE_EXTI_LINE);
-        action = lookup_action();
-    }
-    if (EXTI_GetITStatus(BUTTON_EXTI_LINE) != RESET) {
-        EXTI_ClearITPendingBit(BUTTON_EXTI_LINE);
-        button_pressed_ = !static_cast<bool>(GPIO_ReadInputDataBit(BUTTON_GPIO, BUTTON_PIN));
-    }
-
-    encoder_count_ += action;
-}
-
 void Pec11RotaryEncoder::ResetCount() {
     encoder_count_ = 0;
+}
+
+void Pec11RotaryEncoder::ReadState() {
+    encoder_count_ += lookup_action();
+    button_pressed_ = !static_cast<bool>(GPIO_ReadInputDataBit(BUTTON_GPIO, BUTTON_PIN));
 }
 
 long Pec11RotaryEncoder::GetCount() {
