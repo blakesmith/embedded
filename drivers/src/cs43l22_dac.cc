@@ -109,9 +109,6 @@ void CS43L22Dac::init_gpio() {
     // I2C
     RCC_AHB1PeriphClockCmd(RCC_GPIO_I2C_PERIPH, ENABLE);
 
-    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SCL, GPIO_I2C_AFx);
-    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SDA, GPIO_I2C_AFx);
-
     GPIO_StructInit(&GPIO_InitStructure);
     
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2C_SCL | GPIO_PIN_I2C_SDA;
@@ -121,14 +118,12 @@ void CS43L22Dac::init_gpio() {
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_Init(GPIOx_I2C, &GPIO_InitStructure);
 
+    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SCL, GPIO_I2C_AFx);
+    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SDA, GPIO_I2C_AFx);
+
     // I2S
     RCC_AHB1PeriphClockCmd(RCC_GPIO_I2S_PERIPH, ENABLE);
 
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_MCK, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_TX_AFx);
-    
     GPIO_StructInit(&GPIO_InitStructure);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_MCK | GPIO_PIN_I2S_CK \
@@ -141,6 +136,11 @@ void CS43L22Dac::init_gpio() {
 
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_WS;
     GPIO_Init(GPIO1_I2S, &GPIO_InitStructure);
+
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_MCK, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_TX_AFx);
 }
 
 void CS43L22Dac::init_i2c() {
@@ -193,8 +193,8 @@ void CS43L22Dac::init_codec(uint8_t volume) {
     // Configure the clocking control to AUTO, and enable MCLKDIV2
     write_register(CS_REG_CLOCKING_CTL, CS_CLOCKING_AUTO);
 
-    // Serial port master / slave (slave), Serial clock polarity (not inverted), DSP Mode disabled, DAC interface format (I2C)
-    write_register(CS_REG_INTERFACE_CTL1, 0x04);
+    // Serial port master / slave (slave), Serial clock polarity (not inverted), DSP Mode disabled, DAC interface format (I2S)
+    write_register(CS_REG_INTERFACE_CTL1, 7);
 
     // Set volume the master volume
     set_volume(volume);
