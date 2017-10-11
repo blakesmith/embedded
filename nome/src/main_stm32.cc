@@ -26,11 +26,11 @@ void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
 void Init() {
     status_led.Init();
     dac.Init(128, SAMPLE_RATE, &FillCallback);
+    dac.Start();
 }
 
 int main() {
     Init();
-    dac.Start();
     status_led.SetOk(true);
 
     while (true);
