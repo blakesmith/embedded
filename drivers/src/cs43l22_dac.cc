@@ -338,6 +338,7 @@ void CS43L22Dac::write_receive_start() {
 }
 
 void CS43L22Dac::write_transmit_stop() {
+    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED);
     I2C_GenerateSTOP(I2Cx, ENABLE);
 }
 

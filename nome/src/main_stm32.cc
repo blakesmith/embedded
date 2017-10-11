@@ -15,6 +15,7 @@ static constexpr size_t FRAMES_PER_PERIOD = 128;
 static constexpr uint16_t DEFAULT_BPM = 120;
 static constexpr uint8_t DEFAULT_DOWNBEAT = 4;
 
+CS43L22Dac dac;
 StatusLed status_led;
 Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
 
@@ -25,28 +26,29 @@ void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
 
 void Init() {
     status_led.Init();
-    CS43L22Dac::GetGlobalInstance()->Init(128, SAMPLE_RATE, &FillCallback);
+    dac.Init(128, SAMPLE_RATE, &FillCallback);
 }
 
 extern "C" {
 void DMA1_Stream7_IRQHandler(void) {
-    status_led.SetActivity(true);
-    if (DMA_GetITStatus(DMA1_Stream7, DMA_FLAG_TEIF7) != RESET) {
-        DMA_ClearITPendingBit(DMA1_Stream7, DMA_FLAG_TEIF7);
-        status_led.SetError(true);
+    status_led.SetError(true);
+    if (DMA_GetFlagStatus(DMA1_Stream7, DMA_FLAG_TEIF7) != RESET) {
+        DMA_ClearFlag(DMA1_Stream7, DMA_FLAG_TEIF7);
+//        status_led.SetError(true);
     }
     
-    if (DMA_GetITStatus(DMA1_Stream7, DMA_FLAG_TCIF7) != RESET) {
-        DMA_ClearITPendingBit(DMA1_Stream7, DMA_FLAG_TCIF7);
+    if (DMA_GetFlagStatus(DMA1_Stream7, DMA_FLAG_TCIF7) != RESET) {
+        DMA_ClearFlag(DMA1_Stream7, DMA_FLAG_TCIF7);
+        status_led.ToggleActivity();
 
-        CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
+        dac.FillTxBuffer();
     }
 }
 }
 
 int main() {
     Init();
-    CS43L22Dac::GetGlobalInstance()->Start();
+    dac.Start();
     status_led.SetOk(true);
 
     while (true);
