@@ -27,6 +27,11 @@ Beat::Beat(const uint32_t sample_rate,
     }
 }
 
+void Beat::SetBPM(uint16_t bpm) {
+    bpm_ = bpm;
+    samples_per_beat_ = ((sample_rate_ * 60) / bpm);
+}
+
 void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
     for (size_t i = 0; i < frames; i++) {
         for (size_t j = 0; j < channel_count; j++) {

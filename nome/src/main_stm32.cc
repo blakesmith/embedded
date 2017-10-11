@@ -41,6 +41,7 @@ void update_bpm() {
     display.Clear();
     display.SetNumber(current_bpm);
     display.WriteDisplay();
+    beat.SetBPM(current_bpm);
 }
 
 extern "C" {
