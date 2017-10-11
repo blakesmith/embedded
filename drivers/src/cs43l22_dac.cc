@@ -83,6 +83,7 @@ void CS43L22Dac::Init(uint8_t volume,
 }
 
 void CS43L22Dac::Start() {
+    FillTxBuffer();
     I2S_Cmd(SPI_I2S, ENABLE);
     DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
 }

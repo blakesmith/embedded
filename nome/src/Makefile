@@ -44,7 +44,7 @@ flash: $(HEX)
 linux: $(SOURCES) $(EXECUTABLE)
 
 clean:
-	rm -rf *.o $(EXECUTABLE)
+	rm -rf *.o $(EXECUTABLE) $(HEX)
 
 install: all
 	cp $(EXECUTABLE) /usr/local/bin

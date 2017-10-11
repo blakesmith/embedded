@@ -27,8 +27,8 @@ static constexpr uint8_t CS_REG_LIMIT_CTL1 = 0x27;
 static constexpr uint8_t CS_OUT_AUTO = 0x05;
 static constexpr uint8_t CS_CLOCKING_AUTO = 0x81;
 
-static constexpr uint32_t DAC_FRAME_COUNT = 128;
-static constexpr uint32_t DAC_BUF_SIZE = DAC_FRAME_COUNT * 2;
+static constexpr size_t DAC_FRAME_COUNT = 128;
+static constexpr size_t DAC_BUF_SIZE = DAC_FRAME_COUNT * 2;
 
 class CS43L22Dac {
 public:
