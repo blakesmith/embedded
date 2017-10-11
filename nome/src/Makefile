@@ -3,13 +3,16 @@ CC_FILES=adsr_envelope.cc \
 	osc.cc
 
 EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
+	$(LOCAL_DRIVERS_SRCDIR)/pec11_renc.o \
 	$(LOCAL_DRIVERS_SRCDIR)/status_led.o \
 	$(LOCAL_DRIVERS_SRCDIR)/cs43l22_dac.o \
 	$(STM32_ROOT)/stm32f4xx_dma.o \
+	$(STM32_ROOT)/stm32f4xx_exti.o \
 	$(STM32_ROOT)/stm32f4xx_i2c.o \
 	$(STM32_ROOT)/stm32f4xx_gpio.o \
 	$(STM32_ROOT)/stm32f4xx_rcc.o \
 	$(STM32_ROOT)/stm32f4xx_spi.o \
+	$(STM32_ROOT)/stm32f4xx_syscfg.o \
 	$(STM32_ROOT)/misc.o \
 
 ifeq ($(PLATFORM),linux)
