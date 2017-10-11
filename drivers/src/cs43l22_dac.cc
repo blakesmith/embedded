@@ -57,7 +57,7 @@ static constexpr uint16_t GPIO_PIN_I2S_CK = GPIO_Pin_10;
 static constexpr uint16_t GPIO_PIN_I2S_SD = GPIO_Pin_12;
 static constexpr uint16_t GPIO_PIN_I2S_WS = GPIO_Pin_4;
 
-static constexpr uint8_t GPIO_I2S_TX_AFx = GPIO_AF_SPI3;
+static constexpr uint8_t GPIO_I2S_TX_AFx = GPIO_AF5_SPI3;
 static constexpr uint32_t I2S_DMA_TX_CHANNEL = DMA_Channel_0;
 static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
 static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
@@ -81,7 +81,6 @@ void CS43L22Dac::Init(uint8_t volume,
 }
 
 void CS43L22Dac::Start() {
-    I2S_Cmd(SPI_I2S, ENABLE);
     DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
 }
 
@@ -181,6 +180,7 @@ void CS43L22Dac::init_i2s() {
     i2s_init.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
 
     I2S_Init(SPI_I2S, &i2s_init);
+    I2S_Cmd(SPI_I2S, ENABLE);
 }
 
 void CS43L22Dac::init_codec(uint8_t volume) {
@@ -228,7 +228,8 @@ void CS43L22Dac::init_dma() {
     
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
     DMA_DeInit(I2S_DMA_TX_STREAM);
-    
+
+    DMA_StructInit(&dma_tx_);
     dma_tx_.DMA_Channel = I2S_DMA_TX_CHANNEL;
     dma_tx_.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI_I2S->DR));
     dma_tx_.DMA_Memory0BaseAddr = (uint32_t)tx_dma_buf_;
@@ -277,7 +278,7 @@ void CS43L22Dac::set_volume(uint8_t volume) {
 }
 
 void CS43L22Dac::FillTxBuffer() {
-    fill_callback_((Frame *)tx_dma_buf_, DAC_FRAME_COUNT);
+    fill_callback_((Frame *)tx_dma_buf_, DAC_FRAME_COUNT, DAC_BUF_SIZE);
 }
 
 void CS43L22Dac::write_register(uint8_t reg, uint8_t value) {
@@ -322,8 +323,8 @@ void CS43L22Dac::write_raw(uint8_t* data, size_t size) {
 
 // extern "C" {
 // void DMA1_Stream7_IRQHandler(void) {
-//     if (DMA_GetFlagStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
-//         DMA_ClearFlag(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
+//     if (DMA_GetITStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
+//         DMA_ClearITPendingBit(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
         
 //         CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
 //     }

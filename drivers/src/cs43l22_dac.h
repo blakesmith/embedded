@@ -39,7 +39,7 @@ public:
         int16_t right;
     };
 
-    typedef void (*DacFillCallback)(Frame *tx, size_t size);
+    typedef void (*DacFillCallback)(Frame *tx, size_t n_frames, size_t buf_size);
     
     void Init(uint8_t volume,
               uint32_t sample_rate,
