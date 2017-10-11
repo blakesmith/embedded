@@ -96,7 +96,7 @@ void CS43L22Dac::reset() {
     gpio_init.GPIO_Mode = GPIO_Mode_OUT;
     gpio_init.GPIO_Speed = GPIO_Speed_2MHz;
     gpio_init.GPIO_OType = GPIO_OType_PP;
-    gpio_init.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
     GPIO_Init(GPIOx_AUDIO_RESET, &gpio_init);
 
     GPIO_ResetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
@@ -245,6 +245,8 @@ void CS43L22Dac::init_dma() {
     NVIC_InitTypeDef nvic_init;
     
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
+
+    DMA_Cmd(I2S_DMA_TX_STREAM, DISABLE);
     DMA_DeInit(I2S_DMA_TX_STREAM);
 
     DMA_StructInit(&dma_tx_);
@@ -263,14 +265,13 @@ void CS43L22Dac::init_dma() {
     dma_tx_.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
     dma_tx_.DMA_MemoryBurst = DMA_MemoryBurst_Single;
     dma_tx_.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-    
     DMA_Init(I2S_DMA_TX_STREAM, &dma_tx_);
 
     DMA_ITConfig(I2S_DMA_TX_STREAM, DMA_IT_TC | DMA_IT_TE, ENABLE);
 
     nvic_init.NVIC_IRQChannel = I2S_TX_DMA_IRQ;
     nvic_init.NVIC_IRQChannelPreemptionPriority = 0;
-    nvic_init.NVIC_IRQChannelPreemptionPriority = 1;
+    nvic_init.NVIC_IRQChannelSubPriority = 1;
     nvic_init.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&nvic_init);
 
