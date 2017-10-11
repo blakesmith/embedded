@@ -69,8 +69,10 @@ void CS43L22Dac::Init(uint8_t volume,
     global_dac_ = this;
     sample_rate_ = sample_rate;
     fill_callback_ = fill_callback;
+    current_buffer_ = tx_dma_buf0_;
 
-    memset(tx_dma_buf_, 0, DAC_BUF_SIZE);
+    memset(tx_dma_buf0_, 0, DAC_BUF_SIZE);
+    memset(tx_dma_buf1_, 0, DAC_BUF_SIZE);
 
     init_gpio();
     reset();
@@ -252,7 +254,7 @@ void CS43L22Dac::init_dma() {
     DMA_StructInit(&dma_tx_);
     dma_tx_.DMA_Channel = I2S_DMA_TX_CHANNEL;
     dma_tx_.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI_I2S->DR));
-    dma_tx_.DMA_Memory0BaseAddr = (uint32_t)tx_dma_buf_;
+    dma_tx_.DMA_Memory0BaseAddr = (uint32_t)tx_dma_buf0_;
     dma_tx_.DMA_DIR = DMA_DIR_MemoryToPeripheral;
     dma_tx_.DMA_BufferSize = DAC_BUF_SIZE;
     dma_tx_.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
@@ -267,6 +269,8 @@ void CS43L22Dac::init_dma() {
     dma_tx_.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
     DMA_Init(I2S_DMA_TX_STREAM, &dma_tx_);
 
+    DMA_DoubleBufferModeConfig(I2S_DMA_TX_STREAM, (uint32_t)tx_dma_buf1_, DMA_Memory_1);
+    DMA_DoubleBufferModeCmd(I2S_DMA_TX_STREAM, ENABLE);
     DMA_ITConfig(I2S_DMA_TX_STREAM, DMA_IT_TC | DMA_IT_TE, ENABLE);
 
     nvic_init.NVIC_IRQChannel = I2S_TX_DMA_IRQ;
@@ -297,7 +301,12 @@ void CS43L22Dac::set_volume(uint8_t volume) {
 }
 
 void CS43L22Dac::FillTxBuffer() {
-    fill_callback_((Frame *)tx_dma_buf_, DAC_FRAME_COUNT, DAC_BUF_SIZE);
+    fill_callback_((Frame *)current_buffer_, DAC_FRAME_COUNT, DAC_BUF_SIZE);
+    if (current_buffer_ == tx_dma_buf0_) {
+        current_buffer_ = tx_dma_buf1_;
+    } else {
+        current_buffer_ = tx_dma_buf0_;
+    }
 }
 
 void CS43L22Dac::write_register(uint8_t reg, uint8_t value) {
