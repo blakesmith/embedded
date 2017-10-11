@@ -46,6 +46,8 @@ public:
               DacFillCallback fill_callback);
 
     void FillTxBuffer();
+
+    void Start();
     
     static CS43L22Dac *GetGlobalInstance() {
         return global_dac_;

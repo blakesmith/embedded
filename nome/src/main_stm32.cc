@@ -28,8 +28,25 @@ void Init() {
     CS43L22Dac::GetGlobalInstance()->Init(128, SAMPLE_RATE, &FillCallback);
 }
 
+extern "C" {
+void DMA1_Stream7_IRQHandler(void) {
+    status_led.SetActivity(true);
+    if (DMA_GetFlagStatus(DMA1_Stream7, DMA_FLAG_TEIF7) != RESET) {
+        DMA_ClearFlag(DMA1_Stream7, DMA_FLAG_TEIF7);
+        status_led.SetError(true);
+    }
+    
+    if (DMA_GetFlagStatus(DMA1_Stream7, DMA_FLAG_TCIF7) != RESET) {
+        DMA_ClearFlag(DMA1_Stream7, DMA_FLAG_TCIF7);
+
+        CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
+    }
+}
+}
+
 int main() {
     Init();
+    CS43L22Dac::GetGlobalInstance()->Start();
     status_led.SetOk(true);
 
     while (true);

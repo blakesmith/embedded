@@ -10,6 +10,7 @@ EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
 	$(STM32_ROOT)/stm32f4xx_gpio.o \
 	$(STM32_ROOT)/stm32f4xx_rcc.o \
 	$(STM32_ROOT)/stm32f4xx_spi.o \
+	$(STM32_ROOT)/misc.o \
 
 ifeq ($(PLATFORM),linux)
 	CC=g++

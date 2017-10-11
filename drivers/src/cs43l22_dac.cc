@@ -3,6 +3,8 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_spi.h"
+#include "misc.h"
+
 #include "i2c_common.h"
 
 #include <cstring>
@@ -78,6 +80,11 @@ void CS43L22Dac::Init(uint8_t volume,
     init_dma();
 }
 
+void CS43L22Dac::Start() {
+    I2S_Cmd(SPI_I2S, ENABLE);
+    DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
+}
+
 void CS43L22Dac::reset() {
     GPIO_InitTypeDef gpio_init;
 
@@ -103,6 +110,9 @@ void CS43L22Dac::init_gpio() {
     // I2C
     RCC_AHB1PeriphClockCmd(RCC_GPIO_I2C_PERIPH, ENABLE);
 
+    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SCL, GPIO_I2C_AFx);
+    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SDA, GPIO_I2C_AFx);
+
     GPIO_StructInit(&GPIO_InitStructure);
     
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2C_SCL | GPIO_PIN_I2C_SDA;
@@ -112,11 +122,13 @@ void CS43L22Dac::init_gpio() {
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_Init(GPIOx_I2C, &GPIO_InitStructure);
 
-    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SCL, GPIO_I2C_AFx);
-    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SDA, GPIO_I2C_AFx);
-
     // I2S
     RCC_AHB1PeriphClockCmd(RCC_GPIO_I2S_PERIPH, ENABLE);
+
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_MCK, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_TX_AFx);
+    GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_TX_AFx);
     
     GPIO_StructInit(&GPIO_InitStructure);
 
@@ -130,11 +142,6 @@ void CS43L22Dac::init_gpio() {
 
     GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_WS;
     GPIO_Init(GPIO1_I2S, &GPIO_InitStructure);
-
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_MCK, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_TX_AFx);
 }
 
 void CS43L22Dac::init_i2c() {
@@ -158,11 +165,13 @@ void CS43L22Dac::init_i2c() {
 void CS43L22Dac::init_i2s() {
     I2S_InitTypeDef i2s_init;
 
-    RCC_APB1PeriphClockCmd(RCC_SPI_I2S_CLOCK, ENABLE);
     RCC_I2SCLKConfig(RCC_I2S2CLKSource_PLLI2S);
-    
     RCC_PLLI2SCmd(ENABLE);
 
+    while (RCC_GetFlagStatus(RCC_FLAG_PLLI2SRDY) == RESET);
+
+    RCC_APB1PeriphClockCmd(RCC_SPI_I2S_CLOCK, ENABLE);
+    
     SPI_I2S_DeInit(SPI_I2S);
     i2s_init.I2S_AudioFreq = sample_rate_;
     i2s_init.I2S_Standard = I2S_Standard_Phillips;
@@ -215,6 +224,8 @@ void CS43L22Dac::init_codec(uint8_t volume) {
 }
 
 void CS43L22Dac::init_dma() {
+    NVIC_InitTypeDef nvic_init;
+    
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
     DMA_DeInit(I2S_DMA_TX_STREAM);
     
@@ -235,10 +246,14 @@ void CS43L22Dac::init_dma() {
     dma_tx_.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
     
     DMA_Init(I2S_DMA_TX_STREAM, &dma_tx_);
-    DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
 
-    DMA_ITConfig(I2S_DMA_TX_STREAM, DMA_IT_TC, ENABLE);
-    NVIC_EnableIRQ(I2S_TX_DMA_IRQ);
+    DMA_ITConfig(I2S_DMA_TX_STREAM, DMA_IT_TC | DMA_IT_TE, ENABLE);
+
+    nvic_init.NVIC_IRQChannel = I2S_TX_DMA_IRQ;
+    nvic_init.NVIC_IRQChannelPreemptionPriority = 0;
+    nvic_init.NVIC_IRQChannelPreemptionPriority = 1;
+    nvic_init.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&nvic_init);
 
     SPI_I2S_DMACmd(SPI_I2S, SPI_I2S_DMAReq_Tx, ENABLE);
 }
@@ -305,12 +320,12 @@ void CS43L22Dac::write_raw(uint8_t* data, size_t size) {
     }
 }
 
-extern "C" {
-void DMA1_Stream7_IRQHandler(void) {
-    if (DMA_GetFlagStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
-        DMA_ClearFlag(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
+// extern "C" {
+// void DMA1_Stream7_IRQHandler(void) {
+//     if (DMA_GetFlagStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
+//         DMA_ClearFlag(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
         
-        CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
-    }
-}
-}
+//         CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
+//     }
+// }
+// }
