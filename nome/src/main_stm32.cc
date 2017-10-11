@@ -20,30 +20,12 @@ StatusLed status_led;
 Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
 
 void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
-    status_led.SetActivity(true);
     beat.Fill((int16_t *)frames, n_frames, CHANNEL_COUNT);
 }
 
 void Init() {
     status_led.Init();
     dac.Init(128, SAMPLE_RATE, &FillCallback);
-}
-
-extern "C" {
-void DMA1_Stream7_IRQHandler(void) {
-    status_led.SetError(true);
-    if (DMA_GetFlagStatus(DMA1_Stream7, DMA_FLAG_TEIF7) != RESET) {
-        DMA_ClearFlag(DMA1_Stream7, DMA_FLAG_TEIF7);
-//        status_led.SetError(true);
-    }
-    
-    if (DMA_GetFlagStatus(DMA1_Stream7, DMA_FLAG_TCIF7) != RESET) {
-        DMA_ClearFlag(DMA1_Stream7, DMA_FLAG_TCIF7);
-        status_led.ToggleActivity();
-
-        dac.FillTxBuffer();
-    }
-}
 }
 
 int main() {

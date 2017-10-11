@@ -366,12 +366,12 @@ void CS43L22Dac::write_raw(uint8_t* data, size_t size) {
     }
 }
 
-// extern "C" {
-// void DMA1_Stream7_IRQHandler(void) {
-//     if (DMA_GetITStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
-//         DMA_ClearITPendingBit(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
+extern "C" {
+void DMA1_Stream7_IRQHandler(void) {
+    if (DMA_GetFlagStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
+        DMA_ClearFlag(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
         
-//         CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
-//     }
-// }
-// }
+        CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
+    }
+}
+}
