@@ -1,6 +1,7 @@
 #include <cstddef>
 
 #include "cs43l22_dac.h"
+#include "ht16K33_display.h"
 #include "status_led.h"
 
 #include "beat.h"
@@ -17,6 +18,7 @@ static constexpr uint8_t DEFAULT_DOWNBEAT = 4;
 
 CS43L22Dac dac;
 StatusLed status_led;
+HT16K33Display display;
 Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
 
 void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
@@ -25,6 +27,7 @@ void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
 
 void Init() {
     status_led.Init();
+    display.Init();
     dac.Init(128, SAMPLE_RATE, &FillCallback);
     dac.Start();
 }
@@ -32,6 +35,8 @@ void Init() {
 int main() {
     Init();
     status_led.SetOk(true);
+    display.SetNumber(DEFAULT_BPM);
+    display.WriteDisplay();
 
     while (true);
 }

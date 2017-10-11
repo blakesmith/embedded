@@ -31,15 +31,15 @@ static const uint8_t NUMBER_TABLE[] = {
 };
 
 static uint16_t u16pow(uint8_t base, uint8_t exp) {
-    uint8_t p = base;
+    uint16_t p = base;
     for (uint8_t i = 0; i < exp-1; i++) {
-        p *= p;
+        p *= base;
     }
     return p;
 }
 
 static constexpr uint8_t N_POSITIONS = 5;
-static const uint16_t MAX_DISPLAY_NUMBER = u16pow(10, N_POSITIONS-1) - 1;
+static const uint16_t MAX_DISPLAY_NUMBER = u16pow(10, N_POSITIONS) - 1;
 
 // Default address.
 static const uint8_t DEFAULT_DEVICE_ADDRESS = 0x70 << 1;
@@ -93,6 +93,7 @@ void HT16K33Display::Init() {
     SetBrightness(15);
 
     Clear();
+    WriteDisplay();
 }
 
 void HT16K33Display::SetBrightness(uint8_t brightness) {
@@ -133,15 +134,19 @@ void HT16K33Display::SetNumber(uint16_t number) {
         number = MAX_DISPLAY_NUMBER;
     }
     uint16_t scale = u16pow(10, N_POSITIONS-2);
-    uint16_t last_value = 0;
+    uint8_t last_value = 0;
     uint16_t remaining = number;
+    bool non_zero_written = false;
     for (size_t i = 0; i < N_POSITIONS; i++) {
         if (i == 2) {
             // Skip colon position
             continue;
         }
-        last_value = number / scale;
-        SetNumber(i, last_value, false);
+        last_value = remaining / scale;
+        if (last_value != 0 || non_zero_written) {
+            SetNumber(i, last_value, false);
+            non_zero_written = true;
+        }
 
         remaining = remaining - (last_value * scale);
         scale /= 10;
