@@ -28,8 +28,12 @@ void Init() {
 }
 
 void loop() {
-    if (user_interface.Update()) {
-        beat.SetBPM(settings.current_bpm);
+    switch (user_interface.Update()) {
+        case UI_REFRESH_BPM:
+            beat.SetBPM(settings.current_bpm);
+            break;
+        case UI_REFRESH_NONE:
+            break;
     }
 }
 

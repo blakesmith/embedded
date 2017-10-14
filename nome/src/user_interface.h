@@ -8,6 +8,11 @@
 
 namespace nome {
 
+enum UserInterfaceRefresh {
+    UI_REFRESH_NONE,
+    UI_REFRESH_BPM,
+};
+
 class UserInterface {
 
 public:
@@ -16,7 +21,7 @@ public:
     
     void Init();
     void SetOk(bool ok);
-    bool Update();
+    UserInterfaceRefresh Update();
     void RefreshDisplay();
 
 private:

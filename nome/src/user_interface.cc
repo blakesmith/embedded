@@ -18,20 +18,20 @@ void UserInterface::RefreshDisplay() {
     display_.WriteDisplay();
 }
 
-bool UserInterface::Update() {
+UserInterfaceRefresh UserInterface::Update() {
     knob_.ReadState();
     if (knob_.GetButtonAction() == BUTTON_ACTION_UP) {
         knob_.ResetCount();
-        return true;
+        return UI_REFRESH_BPM;
     }
     if (knob_offset_ != knob_.GetCount()) {
         settings_.current_bpm += knob_.GetCount() - knob_offset_;
         knob_offset_ = knob_.GetCount();
         RefreshDisplay();
-        return true;
+        return UI_REFRESH_BPM;
     }
 
-    return false;
+    return UI_REFRESH_NONE;
 }
 
 void UserInterface::SetOk(bool ok) {
