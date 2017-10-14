@@ -2,26 +2,11 @@
 
 #include "pec11_renc.h"
 
-#define CLOCKWISE_PIN GPIO_Pin_2
-#define CLOCKWISE_PINSOURCE EXTI_PinSource2
-#define CLOCKWISE_GPIO GPIOE
-#define CLOCKWISE_EXTI_LINE EXTI_Line2
-#define CLOCKWISE_EXTI_PORTSOURCE EXTI_PortSourceGPIOE
-#define CLOCKWISE_NVIC_IRQ_CHANNEL EXTI2_IRQn
-
-#define COUNTER_CLOCKWISE_PIN GPIO_Pin_6
-#define COUNTER_CLOCKWISE_PINSOURCE EXTI_PinSource6
-#define COUNTER_CLOCKWISE_GPIO GPIOD
-#define COUNTER_CLOCKWISE_EXTI_LINE EXTI_Line6
-#define COUNTER_CLOCKWISE_EXTI_PORTSOURCE EXTI_PortSourceGPIOD
-#define COUNTER_CLOCKWISE_NVIC_IRQ_CHANNEL EXTI9_5_IRQn
-
-#define BUTTON_PIN GPIO_Pin_1
-#define BUTTON_PINSOURCE EXTI_PinSource1
-#define BUTTON_GPIO GPIOC
-#define BUTTON_EXTI_LINE EXTI_Line1
-#define BUTTON_EXTI_PORTSOURCE EXTI_PortSourceGPIOC
-#define BUTTON_NVIC_IRQ_CHANNEL EXTI1_IRQn
+static constexpr uint32_t GPIO_CLOCK = RCC_AHB1Periph_GPIOD;
+static GPIO_TypeDef *GPIOx = GPIOD;
+static constexpr uint8_t CLOCKWISE_PIN = GPIO_Pin_2;
+static constexpr uint8_t COUNTER_CLOCKWISE_PIN = GPIO_Pin_3;
+static constexpr uint8_t BUTTON_PIN = GPIO_Pin_6;
 
 
 /**
@@ -60,25 +45,15 @@ Pec11RotaryEncoder::Pec11RotaryEncoder()
 void Pec11RotaryEncoder::Init() {
     GPIO_InitTypeDef encoder_gpio;
 
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+    RCC_AHB1PeriphClockCmd(GPIO_CLOCK, ENABLE);
 
     GPIO_StructInit(&encoder_gpio);
-    encoder_gpio.GPIO_Pin = CLOCKWISE_PIN;
+    encoder_gpio.GPIO_Pin = CLOCKWISE_PIN | COUNTER_CLOCKWISE_PIN;
     encoder_gpio.GPIO_Mode = GPIO_Mode_IN;
-    encoder_gpio.GPIO_PuPd = GPIO_PuPd_DOWN;
+    encoder_gpio.GPIO_PuPd = GPIO_PuPd_UP;
     encoder_gpio.GPIO_OType = GPIO_OType_PP;
     encoder_gpio.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_Init(CLOCKWISE_GPIO, &encoder_gpio);
-
-    GPIO_StructInit(&encoder_gpio);
-    encoder_gpio.GPIO_Pin = COUNTER_CLOCKWISE_PIN;
-    encoder_gpio.GPIO_Mode = GPIO_Mode_IN;
-    encoder_gpio.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    encoder_gpio.GPIO_OType = GPIO_OType_PP;
-    encoder_gpio.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_Init(COUNTER_CLOCKWISE_GPIO, &encoder_gpio);
+    GPIO_Init(GPIOx, &encoder_gpio);
 
     GPIO_StructInit(&encoder_gpio);
     encoder_gpio.GPIO_Pin = BUTTON_PIN;
@@ -86,16 +61,19 @@ void Pec11RotaryEncoder::Init() {
     encoder_gpio.GPIO_PuPd = GPIO_PuPd_UP;
     encoder_gpio.GPIO_OType = GPIO_OType_PP;
     encoder_gpio.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_Init(BUTTON_GPIO, &encoder_gpio);
+    GPIO_Init(GPIOx, &encoder_gpio);
 }
 
-EncoderAction Pec11RotaryEncoder::lookup_action() {
-    bool cw_high = GPIO_ReadInputDataBit(CLOCKWISE_GPIO, CLOCKWISE_PIN);
-    bool ccw_high = GPIO_ReadInputDataBit(COUNTER_CLOCKWISE_GPIO, COUNTER_CLOCKWISE_PIN);
+EncoderAction Pec11RotaryEncoder::lookup_action(uint8_t pin_state) {
+    uint8_t cw_high = (pin_state & CLOCKWISE_PIN) != (uint32_t)Bit_RESET ?
+        (uint8_t)Bit_SET :
+        (uint8_t)Bit_RESET;
+    uint8_t ccw_high = (pin_state & COUNTER_CLOCKWISE_PIN) != (uint32_t)Bit_RESET ?
+        (uint8_t)Bit_SET :
+        (uint8_t)Bit_RESET;
     encoder_state_ <<= 2; // Retain the previous pin state as the upper two bits
-    encoder_state_ &= 0x0F; // Only keep the bottom 4 bits, throw away the upper 4
-    encoder_state_ |= ((cw_high << 1) | ccw_high); // Shift the current state onto the lower 2 bits
-    return encoder_actions_by_state[encoder_state_];
+    encoder_state_ |= ((cw_high << 1) | ccw_high) & 0x03; // Shift the current state onto the lower 2 bits
+    return encoder_actions_by_state[encoder_state_ & 0x0F]; // Only keep the bottom 4 bits, throw away the upper 4, lookup in table
 }
 
 void Pec11RotaryEncoder::ResetCount() {
@@ -103,8 +81,9 @@ void Pec11RotaryEncoder::ResetCount() {
 }
 
 void Pec11RotaryEncoder::ReadState() {
-    encoder_count_ += lookup_action();
-    button_pressed_ = !static_cast<bool>(GPIO_ReadInputDataBit(BUTTON_GPIO, BUTTON_PIN));
+    uint8_t pin_state = GPIOx->IDR;
+    encoder_count_ += (int8_t)lookup_action(pin_state);
+    button_pressed_ = !static_cast<bool>(GPIO_ReadInputDataBit(GPIOx, BUTTON_PIN));
 }
 
 long Pec11RotaryEncoder::GetCount() {

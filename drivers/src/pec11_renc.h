@@ -20,11 +20,11 @@ public:
     bool GetAndClearButtonPressed();
     
 private:
-    EncoderAction lookup_action();
+    EncoderAction lookup_action(uint8_t pin_state);
 
-    volatile uint8_t encoder_state_;
-    volatile long encoder_count_;
-    volatile bool button_pressed_;
+    uint8_t encoder_state_;
+    long encoder_count_;
+    bool button_pressed_;
 };
 
 #endif
