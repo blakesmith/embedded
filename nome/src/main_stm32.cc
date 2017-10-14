@@ -36,6 +36,8 @@ void loop() {
             beat.SetDownbeat(settings.current_downbeat);
             break;
         case UI_REFRESH_VOLUME:
+            dac.SetVolume(settings.current_volume);
+            break;
         case UI_REFRESH_NONE:
             break;
     }

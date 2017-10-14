@@ -215,7 +215,7 @@ void CS43L22Dac::init_codec(uint8_t volume) {
     write_register(CS_REG_INTERFACE_CTL1, 0x07);
 
     // Set volume the master volume
-    set_volume(volume);
+    SetVolume(volume);
     
     // Set speaker mono mode
     write_register(CS_REG_PLAYBACK_CTL2, 0x06);
@@ -284,7 +284,7 @@ void CS43L22Dac::init_dma() {
 }
 
 // Adjust and set the volume, 0 - 255.
-void CS43L22Dac::set_volume(uint8_t volume) {
+void CS43L22Dac::SetVolume(uint8_t volume) {
     uint8_t converted_volume;
     
     // Master volume from the datasheet:
