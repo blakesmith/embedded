@@ -158,14 +158,23 @@ void HT16K33Display::SetChar(uint8_t pos, char ch) {
         pos = 0;
     }
     switch (ch) {
-        case 'B':
-            display_buffer_[pos] = 0x7F;
+        case 'b':
+            display_buffer_[pos] = 0x7C;
             break;
-        case 'D':
-            display_buffer_[pos] = 0x3F;
+        case 'd':
+            display_buffer_[pos] = 0x5E;
             break;
         case 'P':
             display_buffer_[pos] = 0x73;
+            break;
+        case 'v':
+            display_buffer_[pos] = 28;
+            break;
+        case 'O':
+            display_buffer_[pos] = 0x3F;
+            break;
+        case 'L':
+            display_buffer_[pos] = 56;
             break;
         default:
             break;

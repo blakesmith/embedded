@@ -19,6 +19,7 @@ public:
     
     uint16_t current_bpm;
     uint8_t current_downbeat;
+    uint8_t current_volume;
 };
 
 }

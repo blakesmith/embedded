@@ -23,7 +23,7 @@ void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
 
 void Init() {
     user_interface.Init();
-    dac.Init(128, settings.sample_rate, &FillCallback);
+    dac.Init(settings.current_volume, settings.sample_rate, &FillCallback);
     dac.Start();
 }
 

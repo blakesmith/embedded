@@ -50,6 +50,7 @@ private:
 
     void draw_bpm();
     void draw_downbeat();
+    void draw_volume();
 };
     
 }

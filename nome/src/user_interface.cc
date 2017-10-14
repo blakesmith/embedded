@@ -4,7 +4,8 @@ namespace nome {
 
 static const UserInterface::ScreenState ALL_SCREENS[] = {
     UserInterface::ScreenState::SCREEN_STATE_BPM,
-    UserInterface::ScreenState::SCREEN_STATE_DOWNBEAT
+    UserInterface::ScreenState::SCREEN_STATE_DOWNBEAT,
+    UserInterface::ScreenState::SCREEN_STATE_VOLUME
 };
 
 static const size_t ALL_SCREENS_SIZE = sizeof(ALL_SCREENS) / sizeof(UserInterface::ScreenState);
@@ -32,9 +33,9 @@ void UserInterface::next_screen() {
 
 void UserInterface::draw_bpm() {
     if (showing_banner_) {
-        display_.SetChar(0, 'B');
+        display_.SetChar(0, 'b');
         display_.SetChar(1, 'P');
-        display_.SetChar(2, 'M');
+        display_.SetChar(3, 'M');
     } else {
         display_.SetNumber(settings_.current_bpm);
     }
@@ -42,10 +43,20 @@ void UserInterface::draw_bpm() {
 
 void UserInterface::draw_downbeat() {
     if (showing_banner_) {
-        display_.SetChar(0, 'D');
-        display_.SetChar(1, 'B');
+        display_.SetChar(0, 'd');
+        display_.SetChar(1, 'b');
     } else {
         display_.SetNumber(settings_.current_downbeat);
+    }
+}
+
+void UserInterface::draw_volume() {
+    if (showing_banner_) {
+        display_.SetChar(0, 'v');
+        display_.SetChar(1, 'O');
+        display_.SetChar(3, 'L');
+    } else {
+        display_.SetNumber(settings_.current_volume);
     }
 }
 
@@ -58,6 +69,10 @@ void UserInterface::refresh_display() {
         }
         case SCREEN_STATE_DOWNBEAT: {
             draw_downbeat();
+            break;
+        }
+        case SCREEN_STATE_VOLUME: {
+            draw_volume();
             break;
         }
         default:
@@ -77,6 +92,7 @@ UserInterfaceRefresh UserInterface::knob_action_for_screen(ScreenState screen, l
             return UI_REFRESH_DOWNBEAT;
         }
         case SCREEN_STATE_VOLUME:
+            settings_.current_volume += knob_offset;
             return UI_REFRESH_VOLUME;
         default:
             return UI_REFRESH_NONE;
