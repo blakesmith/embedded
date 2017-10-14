@@ -11,14 +11,16 @@ namespace nome {
 enum UserInterfaceRefresh {
     UI_REFRESH_NONE,
     UI_REFRESH_BPM,
+    UI_REFRESH_DOWNBEAT,
+    UI_REFRESH_VOLUME,
 };
 
 class UserInterface {
 
     enum ScreenState {
-        BPM,
-        DOWNBEAT,
-        VOLUME
+        SCREEN_STATE_BPM,
+        SCREEN_STATE_DOWNBEAT,
+        SCREEN_STATE_VOLUME
     };
 
 public:
@@ -36,9 +38,11 @@ private:
 
     long knob_offset_;
     Settings& settings_;
+    ScreenState current_screen_;
 
     void refresh_display();
     UserInterfaceRefresh poll_events();
+    UserInterfaceRefresh refresh_for_screen();
 };
     
 }
