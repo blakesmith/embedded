@@ -40,6 +40,9 @@ void Init() {
 
 void update_bpm() {
     knob.ReadState();
+    if (knob.GetButtonAction() == BUTTON_ACTION_UP) {
+        knob.ResetCount();
+    }
     if (current_bpm != DEFAULT_BPM + knob.GetCount()) {
         current_bpm = DEFAULT_BPM + knob.GetCount();
         display.Clear();
