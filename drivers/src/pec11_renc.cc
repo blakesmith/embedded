@@ -61,10 +61,10 @@ void Pec11RotaryEncoder::Init() {
 }
 
 EncoderAction Pec11RotaryEncoder::lookup_action(uint32_t pin_state) {
-    uint8_t cw_high = read_pin(pin_state, CLOCKWISE_PIN);
-    uint8_t ccw_high = read_pin(pin_state, COUNTER_CLOCKWISE_PIN);
+    uint8_t cw_pin = read_pin(pin_state, CLOCKWISE_PIN);
+    uint8_t ccw_pin = read_pin(pin_state, COUNTER_CLOCKWISE_PIN);
     encoder_state_ <<= 2; // Retain the previous pin state as the upper two bits
-    encoder_state_ |= ((cw_high << 1) | ccw_high) & 0x03; // Shift the current state onto the lower 2 bits
+    encoder_state_ |= ((cw_pin << 1) | ccw_pin) & 0x03; // Shift the current state onto the lower 2 bits
     return encoder_actions_by_state[encoder_state_ & 0x0F]; // Only keep the bottom 4 bits, throw away the upper 4, lookup in table
 }
 
