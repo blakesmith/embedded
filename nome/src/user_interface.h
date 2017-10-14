@@ -4,20 +4,28 @@
 #include "pec11_renc.h"
 #include "ht16K33_display.h"
 #include "status_led.h"
+#include "settings.h"
 
 namespace nome {
 
 class UserInterface {
 
 public:
+    UserInterface(Settings& settings);
+    ~UserInterface() = default;
+    
     void Init();
     void SetOk(bool ok);
+    bool Update();
+    void RefreshDisplay();
 
 private:
-    Pec11RotaryEncoder knob;
-    HT16K33Display display;
-    StatusLed status_led;
+    StatusLed status_led_;
+    Pec11RotaryEncoder knob_;
+    HT16K33Display display_;
 
+    long knob_offset_;
+    Settings& settings_;
 };
     
 }
