@@ -13,11 +13,10 @@ public:
     Pec11RotaryEncoder();
     ~Pec11RotaryEncoder() = default;
     void Init();
-    void HandleInterrupt();
-    long GetCount();
     void ResetCount();
     void ReadState();
-    bool GetAndClearButtonPressed();
+    long GetCount();
+    bool GetButtonPressed();
     
 private:
     EncoderAction lookup_action(uint32_t pin_state);
