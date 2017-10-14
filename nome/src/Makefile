@@ -1,6 +1,7 @@
 CC_FILES=adsr_envelope.cc \
 	beat.cc \
 	settings.cc \
+	user_interface.cc \
 	osc.cc
 
 EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \

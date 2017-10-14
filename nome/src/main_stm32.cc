@@ -3,10 +3,10 @@
 #include "cs43l22_dac.h"
 #include "pec11_renc.h"
 #include "ht16K33_display.h"
-#include "status_led.h"
 
 #include "beat.h"
 #include "settings.h"
+#include "user_interface.h"
 
 using namespace nome;
 
@@ -15,6 +15,7 @@ StatusLed status_led;
 HT16K33Display display;
 Pec11RotaryEncoder knob;
 Settings settings;
+UserInterface user_interface;
 
 Beat beat(settings.sample_rate,
           settings.control_rate,
@@ -28,9 +29,9 @@ void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
 static uint16_t current_bpm = 0;
 
 void Init() {
-    status_led.Init();
     display.Init();
     knob.Init();
+    user_interface.Init();
     dac.Init(128, settings.sample_rate, &FillCallback);
     dac.Start();
 }
@@ -42,7 +43,6 @@ void refresh_display() {
     display.Clear();
     display.SetNumber(settings.current_bpm);
     display.WriteDisplay();
-    beat.SetBPM(settings.current_bpm);
 }
 
 void update_ui() {
@@ -54,12 +54,13 @@ void update_ui() {
         settings.current_bpm += knob.GetCount() - current_offset;
         current_offset = knob.GetCount();
         refresh_display();
+        beat.SetBPM(settings.current_bpm);
     }
 }
 
 int main() {
     Init();
-    status_led.SetOk(true);
+    user_interface.SetOk(true);
     refresh_display();
 
     while (true) {
