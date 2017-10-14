@@ -40,7 +40,6 @@ void loop() {
 int main() {
     Init();
     user_interface.SetOk(true);
-    user_interface.RefreshDisplay();
 
     while (true) {
         loop();

@@ -15,6 +15,12 @@ enum UserInterfaceRefresh {
 
 class UserInterface {
 
+    enum ScreenState {
+        BPM,
+        DOWNBEAT,
+        VOLUME
+    };
+
 public:
     UserInterface(Settings& settings);
     ~UserInterface() = default;
@@ -22,7 +28,6 @@ public:
     void Init();
     void SetOk(bool ok);
     UserInterfaceRefresh Update();
-    void RefreshDisplay();
 
 private:
     StatusLed status_led_;
@@ -31,6 +36,9 @@ private:
 
     long knob_offset_;
     Settings& settings_;
+
+    void refresh_display();
+    UserInterfaceRefresh poll_events();
 };
     
 }
