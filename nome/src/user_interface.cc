@@ -73,7 +73,7 @@ uint16_t* UserInterface::knob_value_for_screen(ScreenState screen) {
 
 UserInterfaceRefresh UserInterface::poll_events() {
     knob_.ReadState();
-    if (knob_.GetButtonAction() == BUTTON_ACTION_UP) {
+    if (knob_.GetButtonAction() == BUTTON_ACTION_DOWN) {
         next_screen();
         return UI_REFRESH_NONE;
     }
