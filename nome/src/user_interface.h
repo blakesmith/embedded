@@ -17,13 +17,13 @@ enum UserInterfaceRefresh {
 
 class UserInterface {
 
+public:
     enum ScreenState {
         SCREEN_STATE_BPM,
         SCREEN_STATE_DOWNBEAT,
         SCREEN_STATE_VOLUME
     };
 
-public:
     UserInterface(Settings& settings);
     ~UserInterface() = default;
     
@@ -38,6 +38,7 @@ private:
 
     long knob_offset_;
     Settings& settings_;
+    size_t current_screen_position_;
     ScreenState current_screen_;
 
     void refresh_display();
@@ -45,6 +46,7 @@ private:
     
     UserInterfaceRefresh refresh_for_screen(ScreenState screen);
     uint16_t *knob_value_for_screen(ScreenState screen);
+    void next_screen();
 };
     
 }

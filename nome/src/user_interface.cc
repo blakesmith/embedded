@@ -2,15 +2,30 @@
 
 namespace nome {
 
+static const UserInterface::ScreenState ALL_SCREENS[] = {
+    UserInterface::ScreenState::SCREEN_STATE_BPM,
+    UserInterface::ScreenState::SCREEN_STATE_DOWNBEAT
+};
+
+static const size_t ALL_SCREENS_SIZE = sizeof(ALL_SCREENS) / sizeof(UserInterface::ScreenState);
+
 UserInterface::UserInterface(Settings& settings)
     : knob_offset_(0),
       settings_(settings),
-      current_screen_(SCREEN_STATE_BPM) { }
+      current_screen_position_(0),
+      current_screen_(ALL_SCREENS[current_screen_position_]) { }
 
 void UserInterface::Init() {
     status_led_.Init();
     knob_.Init();
     display_.Init();
+}
+
+void UserInterface::next_screen() {
+    knob_offset_ = 0;
+    knob_.ResetCount();
+    current_screen_position_ = (current_screen_position_ + 1) % ALL_SCREENS_SIZE;
+    current_screen_ = ALL_SCREENS[current_screen_position_];
 }
 
 void UserInterface::refresh_display() {
@@ -59,8 +74,8 @@ uint16_t* UserInterface::knob_value_for_screen(ScreenState screen) {
 UserInterfaceRefresh UserInterface::poll_events() {
     knob_.ReadState();
     if (knob_.GetButtonAction() == BUTTON_ACTION_UP) {
-        knob_.ResetCount();
-        return UI_REFRESH_BPM;
+        next_screen();
+        return UI_REFRESH_NONE;
     }
     if (knob_offset_ != knob_.GetCount()) {
         uint16_t* knob_value = knob_value_for_screen(current_screen_);
