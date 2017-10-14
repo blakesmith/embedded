@@ -79,7 +79,7 @@ void Pec11RotaryEncoder::ReadState() {
 }
 
 long Pec11RotaryEncoder::GetCount() {
-    return encoder_count_;
+    return encoder_count_ / 4;
 }
 
 bool Pec11RotaryEncoder::GetButtonPressed() {

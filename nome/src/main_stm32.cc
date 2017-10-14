@@ -28,7 +28,7 @@ void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
     beat.Fill((int16_t *)frames, n_frames, CHANNEL_COUNT);
 }
 
-static uint16_t current_bpm = DEFAULT_BPM;
+static uint16_t current_bpm = 0;
 
 void Init() {
     status_led.Init();
