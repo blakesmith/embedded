@@ -42,7 +42,9 @@ private:
 
     void refresh_display();
     UserInterfaceRefresh poll_events();
-    UserInterfaceRefresh refresh_for_screen();
+    
+    UserInterfaceRefresh refresh_for_screen(ScreenState screen);
+    uint16_t *knob_value_for_screen(ScreenState screen);
 };
     
 }

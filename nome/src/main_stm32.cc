@@ -32,6 +32,10 @@ void loop() {
         case UI_REFRESH_BPM:
             beat.SetBPM(settings.current_bpm);
             break;
+        case UI_REFRESH_DOWNBEAT:
+            beat.SetDownbeat(settings.current_downbeat);
+            break;
+        case UI_REFRESH_VOLUME:
         case UI_REFRESH_NONE:
             break;
     }

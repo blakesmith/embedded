@@ -19,17 +19,21 @@ Beat::Beat(const uint32_t sample_rate,
       phase_(0),
       osc_(OscShape::OSC_SHAPE_SIN, sample_rate, DOWNBEAT_FREQ, 50),
       envelope_(control_rate, 255, 1, 20, 0, 225, 0) {
-
-    if (downbeat_ == 0) {
-        osc_.set_freq(UPBEAT_FREQ);
-    } else {
-        osc_.set_freq(DOWNBEAT_FREQ);
-    }
+    SetDownbeat(downbeat_);
 }
 
 void Beat::SetBPM(uint16_t bpm) {
     bpm_ = bpm;
     samples_per_beat_ = ((sample_rate_ * 60) / bpm);
+}
+
+void Beat::SetDownbeat(uint8_t downbeat) {
+    downbeat_ = downbeat;
+    if (downbeat_ == 0) {
+        osc_.set_freq(UPBEAT_FREQ);
+    } else {
+        osc_.set_freq(DOWNBEAT_FREQ);
+    }
 }
 
 void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {

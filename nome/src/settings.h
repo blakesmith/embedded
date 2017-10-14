@@ -18,7 +18,7 @@ public:
     const size_t frames_per_period;
     
     uint16_t current_bpm;
-    uint8_t current_downbeat;
+    uint16_t current_downbeat;
 };
 
 }

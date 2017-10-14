@@ -18,6 +18,7 @@ public:
 
     void Fill(int16_t* buffer, size_t frames, uint8_t channel_count);
     void SetBPM(uint16_t bpm);
+    void SetDownbeat(uint8_t downbeat);
 
 private:
     const uint32_t sample_rate_;

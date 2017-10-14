@@ -14,13 +14,26 @@ void UserInterface::Init() {
 }
 
 void UserInterface::refresh_display() {
-    display_.Clear();
-    display_.SetNumber(settings_.current_bpm);
-    display_.WriteDisplay();
+    switch (current_screen_) {
+        case SCREEN_STATE_BPM: {
+            display_.Clear();
+            display_.SetNumber(settings_.current_bpm);
+            display_.WriteDisplay();
+            break;
+        }
+        case SCREEN_STATE_DOWNBEAT: {
+            display_.Clear();
+            display_.SetNumber(settings_.current_downbeat);
+            display_.WriteDisplay();
+            break;
+        }
+        default:
+            break;
+    }
 }
 
-UserInterfaceRefresh UserInterface::refresh_for_screen() {
-    switch (current_screen_) {
+UserInterfaceRefresh UserInterface::refresh_for_screen(ScreenState screen) {
+    switch (screen) {
         case SCREEN_STATE_BPM:
             return UI_REFRESH_BPM;
         case SCREEN_STATE_DOWNBEAT:
@@ -32,6 +45,17 @@ UserInterfaceRefresh UserInterface::refresh_for_screen() {
     }
 }
 
+uint16_t* UserInterface::knob_value_for_screen(ScreenState screen) {
+    switch (screen) {
+        case SCREEN_STATE_BPM:
+            return &(settings_.current_bpm);
+        case SCREEN_STATE_DOWNBEAT:
+            return &(settings_.current_downbeat);
+        default:
+            return nullptr;
+    }
+}
+
 UserInterfaceRefresh UserInterface::poll_events() {
     knob_.ReadState();
     if (knob_.GetButtonAction() == BUTTON_ACTION_UP) {
@@ -39,9 +63,12 @@ UserInterfaceRefresh UserInterface::poll_events() {
         return UI_REFRESH_BPM;
     }
     if (knob_offset_ != knob_.GetCount()) {
-        settings_.current_bpm += knob_.GetCount() - knob_offset_;
-        knob_offset_ = knob_.GetCount();
-        return refresh_for_screen();
+        uint16_t* knob_value = knob_value_for_screen(current_screen_);
+        if (knob_value != nullptr) {
+            *knob_value += knob_.GetCount() - knob_offset_;
+            knob_offset_ = knob_.GetCount();
+        }
+        return refresh_for_screen(current_screen_);
     }
 
     return UI_REFRESH_NONE;
