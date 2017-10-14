@@ -40,13 +40,16 @@ private:
     Settings& settings_;
     size_t current_screen_position_;
     ScreenState current_screen_;
+    bool showing_banner_;
 
     void refresh_display();
     UserInterfaceRefresh poll_events();
     
-    UserInterfaceRefresh refresh_for_screen(ScreenState screen);
-    uint16_t *knob_value_for_screen(ScreenState screen);
+    UserInterfaceRefresh knob_action_for_screen(ScreenState screen, long knob_offset);
     void next_screen();
+
+    void draw_bpm();
+    void draw_downbeat();
 };
     
 }

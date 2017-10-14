@@ -13,7 +13,8 @@ UserInterface::UserInterface(Settings& settings)
     : knob_offset_(0),
       settings_(settings),
       current_screen_position_(0),
-      current_screen_(ALL_SCREENS[current_screen_position_]) { }
+      current_screen_(ALL_SCREENS[current_screen_position_]),
+      showing_banner_(true) { }
 
 void UserInterface::Init() {
     status_led_.Init();
@@ -23,51 +24,62 @@ void UserInterface::Init() {
 
 void UserInterface::next_screen() {
     knob_offset_ = 0;
+    showing_banner_ = true;
     knob_.ResetCount();
     current_screen_position_ = (current_screen_position_ + 1) % ALL_SCREENS_SIZE;
     current_screen_ = ALL_SCREENS[current_screen_position_];
 }
 
+void UserInterface::draw_bpm() {
+    if (showing_banner_) {
+        display_.SetChar(0, 'B');
+        display_.SetChar(1, 'P');
+        display_.SetChar(2, 'M');
+    } else {
+        display_.SetNumber(settings_.current_bpm);
+    }
+}
+
+void UserInterface::draw_downbeat() {
+    if (showing_banner_) {
+        display_.SetChar(0, 'D');
+        display_.SetChar(1, 'B');
+    } else {
+        display_.SetNumber(settings_.current_downbeat);
+    }
+}
+
 void UserInterface::refresh_display() {
+    display_.Clear();
     switch (current_screen_) {
         case SCREEN_STATE_BPM: {
-            display_.Clear();
-            display_.SetNumber(settings_.current_bpm);
-            display_.WriteDisplay();
+            draw_bpm();
             break;
         }
         case SCREEN_STATE_DOWNBEAT: {
-            display_.Clear();
-            display_.SetNumber(settings_.current_downbeat);
-            display_.WriteDisplay();
+            draw_downbeat();
             break;
         }
         default:
             break;
     }
+    display_.WriteDisplay();
 }
 
-UserInterfaceRefresh UserInterface::refresh_for_screen(ScreenState screen) {
+UserInterfaceRefresh UserInterface::knob_action_for_screen(ScreenState screen, long knob_offset) {
     switch (screen) {
-        case SCREEN_STATE_BPM:
+        case SCREEN_STATE_BPM: {
+            settings_.current_bpm += knob_offset;
             return UI_REFRESH_BPM;
-        case SCREEN_STATE_DOWNBEAT:
+        }
+        case SCREEN_STATE_DOWNBEAT: {
+            settings_.current_downbeat += knob_offset;
             return UI_REFRESH_DOWNBEAT;
+        }
         case SCREEN_STATE_VOLUME:
             return UI_REFRESH_VOLUME;
         default:
             return UI_REFRESH_NONE;
-    }
-}
-
-uint16_t* UserInterface::knob_value_for_screen(ScreenState screen) {
-    switch (screen) {
-        case SCREEN_STATE_BPM:
-            return &(settings_.current_bpm);
-        case SCREEN_STATE_DOWNBEAT:
-            return &(settings_.current_downbeat);
-        default:
-            return nullptr;
     }
 }
 
@@ -78,12 +90,10 @@ UserInterfaceRefresh UserInterface::poll_events() {
         return UI_REFRESH_NONE;
     }
     if (knob_offset_ != knob_.GetCount()) {
-        uint16_t* knob_value = knob_value_for_screen(current_screen_);
-        if (knob_value != nullptr) {
-            *knob_value += knob_.GetCount() - knob_offset_;
-            knob_offset_ = knob_.GetCount();
-        }
-        return refresh_for_screen(current_screen_);
+        showing_banner_ = false;
+        UserInterfaceRefresh refresh_action = knob_action_for_screen(current_screen_, knob_.GetCount() - knob_offset_);
+        knob_offset_ = knob_.GetCount();
+        return refresh_action;
     }
 
     return UI_REFRESH_NONE;

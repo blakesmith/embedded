@@ -153,9 +153,28 @@ void HT16K33Display::SetNumber(uint16_t number) {
     }
 }
 
+void HT16K33Display::SetChar(uint8_t pos, char ch) {
+    if (pos > N_POSITIONS || pos == 2) {
+        pos = 0;
+    }
+    switch (ch) {
+        case 'B':
+            display_buffer_[pos] = 0x7F;
+            break;
+        case 'D':
+            display_buffer_[pos] = 0x3F;
+            break;
+        case 'P':
+            display_buffer_[pos] = 0x73;
+            break;
+        default:
+            break;
+    }
+}
+
 
 // Set a specific segment within a position. Segments are 0 - 7. Segment 7 is the dot to the right of the digit.
-// Segment 0 is the top-most LED, other segments move clockwise around the digit, with Segment 6 being the middle
+// Segment 0 is the middle LED, other segments move clockwise around the digit, starting at the top-most led (Top led = 1)
 // LED (Think: The middle bar on an 8). See a picture here: https://www.adafruit.com/product/880 ... Segment 0 = A.
 void HT16K33Display::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
     if (pos > N_POSITIONS || pos == 2) {

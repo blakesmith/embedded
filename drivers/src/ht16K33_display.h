@@ -17,6 +17,7 @@ public:
     void SetBlinkRate(uint8_t blink_rate);
     void SetNumber(uint8_t pos, uint8_t number, bool dot);
     void SetNumber(uint16_t number);
+    void SetChar(uint8_t pos, char ch);
     void SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot);
     void WriteDisplay();
 
