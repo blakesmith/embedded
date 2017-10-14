@@ -20,7 +20,7 @@ public:
     bool GetAndClearButtonPressed();
     
 private:
-    EncoderAction lookup_action(uint8_t pin_state);
+    EncoderAction lookup_action(uint32_t pin_state);
 
     uint8_t encoder_state_;
     long encoder_count_;
