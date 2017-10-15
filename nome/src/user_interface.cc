@@ -37,6 +37,7 @@ void UserInterface::draw_bpm() {
         display_.SetChar(1, 'P');
         display_.SetChar(3, 'M');
     } else {
+        display_.SetChar(0, 'b');
         display_.SetNumber(settings_.current_bpm);
     }
 }
@@ -46,6 +47,7 @@ void UserInterface::draw_downbeat() {
         display_.SetChar(0, 'd');
         display_.SetChar(1, 'b');
     } else {
+        display_.SetChar(0, 'd');
         display_.SetNumber(settings_.current_downbeat);
     }
 }
@@ -56,6 +58,7 @@ void UserInterface::draw_volume() {
         display_.SetChar(1, 'O');
         display_.SetChar(3, 'L');
     } else {
+        display_.SetChar(0, 'v');
         display_.SetNumber(settings_.current_volume);
     }
 }
