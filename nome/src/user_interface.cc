@@ -17,7 +17,7 @@ UserInterface::UserInterface(Settings& settings, const BeatMonitor& beat_monitor
       current_screen_position_(0),
       current_screen_(ALL_SCREENS[current_screen_position_]),
       screen_banner_timer_(0x400),
-      user_input_timeout_(0x800) { }
+      user_input_timeout_(0x2000) { }
 
 void UserInterface::Init() {
     status_led_.Init();
