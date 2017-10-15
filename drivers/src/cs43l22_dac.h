@@ -1,7 +1,6 @@
 #ifndef CS43L22_DAC_H_
 #define CS43L22_DAC_H_
 
-#include <stm32f4xx_dma.h>
 #include <cstddef>
 
 static constexpr uint8_t DEFAULT_DEVICE_ADDRESS = 0x25 << 2;
@@ -77,7 +76,6 @@ private:
 
     uint32_t sample_rate_;
     DacFillCallback fill_callback_;
-    DMA_InitTypeDef dma_tx_;
 
     int16_t *current_buffer_;
     int16_t tx_dma_buf0_[DAC_BUF_SIZE];

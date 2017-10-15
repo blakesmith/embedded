@@ -1,5 +1,6 @@
 #include "cs43l22_dac.h"
 
+#include "stm32f4xx_dma.h"
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 #include "stm32f4xx_spi.h"
@@ -245,6 +246,7 @@ void CS43L22Dac::init_codec(uint8_t volume) {
 }
 
 void CS43L22Dac::init_dma() {
+    DMA_InitTypeDef dma_init;
     NVIC_InitTypeDef nvic_init;
     
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
@@ -252,23 +254,23 @@ void CS43L22Dac::init_dma() {
     DMA_Cmd(I2S_DMA_TX_STREAM, DISABLE);
     DMA_DeInit(I2S_DMA_TX_STREAM);
 
-    DMA_StructInit(&dma_tx_);
-    dma_tx_.DMA_Channel = I2S_DMA_TX_CHANNEL;
-    dma_tx_.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI_I2S->DR));
-    dma_tx_.DMA_Memory0BaseAddr = (uint32_t)tx_dma_buf0_;
-    dma_tx_.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-    dma_tx_.DMA_BufferSize = DAC_BUF_SIZE;
-    dma_tx_.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-    dma_tx_.DMA_MemoryInc = DMA_MemoryInc_Enable;
-    dma_tx_.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-    dma_tx_.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-    dma_tx_.DMA_Mode = DMA_Mode_Circular;
-    dma_tx_.DMA_Priority = DMA_Priority_High;
-    dma_tx_.DMA_FIFOMode = DMA_FIFOMode_Disable;
-    dma_tx_.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
-    dma_tx_.DMA_MemoryBurst = DMA_MemoryBurst_Single;
-    dma_tx_.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-    DMA_Init(I2S_DMA_TX_STREAM, &dma_tx_);
+    DMA_StructInit(&dma_init);
+    dma_init.DMA_Channel = I2S_DMA_TX_CHANNEL;
+    dma_init.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI_I2S->DR));
+    dma_init.DMA_Memory0BaseAddr = (uint32_t)tx_dma_buf0_;
+    dma_init.DMA_DIR = DMA_DIR_MemoryToPeripheral;
+    dma_init.DMA_BufferSize = DAC_BUF_SIZE;
+    dma_init.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    dma_init.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    dma_init.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+    dma_init.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+    dma_init.DMA_Mode = DMA_Mode_Circular;
+    dma_init.DMA_Priority = DMA_Priority_High;
+    dma_init.DMA_FIFOMode = DMA_FIFOMode_Disable;
+    dma_init.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
+    dma_init.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+    dma_init.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+    DMA_Init(I2S_DMA_TX_STREAM, &dma_init);
 
     DMA_DoubleBufferModeConfig(I2S_DMA_TX_STREAM, (uint32_t)tx_dma_buf1_, DMA_Memory_1);
     DMA_DoubleBufferModeCmd(I2S_DMA_TX_STREAM, ENABLE);
