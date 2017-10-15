@@ -34,6 +34,7 @@ class UserInterface {
 
 public:
     enum ScreenState {
+        SCREEN_STATE_SLEEP,
         SCREEN_STATE_BPM,
         SCREEN_STATE_DOWNBEAT,
         SCREEN_STATE_VOLUME
@@ -57,16 +58,21 @@ private:
     
     ScreenState current_screen_;
     Timer screen_banner_timer_;
+    Timer user_input_timeout_;
 
     void refresh_display();
     UserInterfaceRefresh poll_events();
     
     UserInterfaceRefresh knob_action_for_screen(ScreenState screen, int8_t knob_offset);
     void next_screen();
+    bool screen_is_sleeping() const;
+    void enable_sleep_screen();
+    void disable_sleep_screen();
 
     void draw_bpm();
     void draw_downbeat();
     void draw_volume();
+    void draw_sleep_screen();
 
     void tick_screen_timer();
     void start_screen_timer();

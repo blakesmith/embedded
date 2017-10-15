@@ -15,7 +15,8 @@ UserInterface::UserInterface(Settings& settings)
       settings_(settings),
       current_screen_position_(0),
       current_screen_(ALL_SCREENS[current_screen_position_]),
-      screen_banner_timer_(0x400) { }
+      screen_banner_timer_(0x400),
+      user_input_timeout_(0x800) { }
 
 void UserInterface::Init() {
     status_led_.Init();
@@ -29,6 +30,20 @@ void UserInterface::next_screen() {
     knob_.ResetCount();
     current_screen_position_ = (current_screen_position_ + 1) % ALL_SCREENS_SIZE;
     current_screen_ = ALL_SCREENS[current_screen_position_];
+
+}
+
+void UserInterface::enable_sleep_screen() {
+    current_screen_ = SCREEN_STATE_SLEEP;
+}
+
+void UserInterface::disable_sleep_screen() {
+    screen_banner_timer_.Reset();
+    current_screen_ = ALL_SCREENS[current_screen_position_];
+}
+
+bool UserInterface::screen_is_sleeping() const {
+    return current_screen_ == SCREEN_STATE_SLEEP;
 }
 
 void UserInterface::draw_bpm() {
@@ -63,9 +78,21 @@ void UserInterface::draw_volume() {
     }
 }
 
+void UserInterface::draw_sleep_screen() {
+    display_.SetNumber(1000);
+}
+
 void UserInterface::refresh_display() {
+    if (!screen_is_sleeping() && user_input_timeout_.IsComplete()) {
+        enable_sleep_screen();
+    }
+
     display_.Clear();
     switch (current_screen_) {
+        case SCREEN_STATE_SLEEP: {
+            draw_sleep_screen();
+            break;
+        }
         case SCREEN_STATE_BPM: {
             draw_bpm();
             break;
@@ -86,6 +113,10 @@ void UserInterface::refresh_display() {
 
 UserInterfaceRefresh UserInterface::knob_action_for_screen(ScreenState screen, int8_t knob_offset) {
     switch (screen) {
+        case SCREEN_STATE_SLEEP: {
+            disable_sleep_screen();
+            return UI_REFRESH_NONE;
+        }
         case SCREEN_STATE_BPM: {
             settings_.AddBPM(knob_offset);
             return UI_REFRESH_BPM;
@@ -105,10 +136,16 @@ UserInterfaceRefresh UserInterface::knob_action_for_screen(ScreenState screen, i
 UserInterfaceRefresh UserInterface::poll_events() {
     knob_.ReadState();
     if (knob_.GetButtonAction() == BUTTON_ACTION_DOWN) {
-        next_screen();
+        user_input_timeout_.Reset();
+        if (screen_is_sleeping()) {
+            disable_sleep_screen();
+        } else {
+            next_screen();
+        }
         return UI_REFRESH_NONE;
     }
     if (knob_offset_ != knob_.GetCount()) {
+        user_input_timeout_.Reset();
         screen_banner_timer_.Stop();
         UserInterfaceRefresh refresh_action = knob_action_for_screen(current_screen_,
                                                                      static_cast<int8_t>(knob_.GetCount() - knob_offset_));
@@ -121,6 +158,7 @@ UserInterfaceRefresh UserInterface::poll_events() {
 
 UserInterfaceRefresh UserInterface::Update() {
     screen_banner_timer_.Tick();
+    user_input_timeout_.Tick();
     refresh_display();
     return poll_events();
 }
