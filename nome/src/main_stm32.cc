@@ -17,13 +17,20 @@ Beat beat(settings.GetSampleRate(),
           settings.GetBPM(),
           settings.GetDownbeat());
 
-void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
+static uint8_t scale_volume(uint8_t volume) {
+    if (volume > 15) {
+        volume = 11;
+    }
+    return volume * 13;
+}
+
+static void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
     beat.Fill((int16_t *)frames, n_frames, settings.GetChannelCount());
 }
 
 void Init() {
     user_interface.Init();
-    dac.Init(settings.GetVolume(),
+    dac.Init(scale_volume(settings.GetVolume()),
              settings.GetSampleRate(),
              &FillCallback);
     dac.Start();
@@ -38,7 +45,7 @@ void loop() {
             beat.SetDownbeat(settings.GetDownbeat());
             break;
         case UI_REFRESH_VOLUME:
-            dac.SetVolume(settings.GetVolume());
+            dac.SetVolume(scale_volume(settings.GetVolume()));
             break;
         case UI_REFRESH_NONE:
             break;

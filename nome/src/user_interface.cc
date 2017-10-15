@@ -84,7 +84,7 @@ void UserInterface::refresh_display() {
     display_.WriteDisplay();
 }
 
-UserInterfaceRefresh UserInterface::knob_action_for_screen(ScreenState screen, uint8_t knob_offset) {
+UserInterfaceRefresh UserInterface::knob_action_for_screen(ScreenState screen, int8_t knob_offset) {
     switch (screen) {
         case SCREEN_STATE_BPM: {
             settings_.AddBPM(knob_offset);
@@ -111,7 +111,7 @@ UserInterfaceRefresh UserInterface::poll_events() {
     if (knob_offset_ != knob_.GetCount()) {
         showing_banner_ = false;
         UserInterfaceRefresh refresh_action = knob_action_for_screen(current_screen_,
-                                                                     static_cast<uint8_t>(knob_.GetCount() - knob_offset_));
+                                                                     static_cast<int8_t>(knob_.GetCount() - knob_offset_));
         knob_offset_ = knob_.GetCount();
         return refresh_action;
     }

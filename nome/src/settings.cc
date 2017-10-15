@@ -2,24 +2,46 @@
 
 namespace nome {
 
+static constexpr uint8_t MAX_VOLUME = 0x0F;
+static constexpr uint8_t MAX_DOWNBEAT = 0x0F;
+static constexpr uint16_t MAX_BPM = 0x200;
+
 Settings::Settings()
     : sample_rate_(44100),
       control_rate_(sample_rate_ / 10),
       channel_count_(2),
       current_bpm_(120),
       current_downbeat_(4),
-      current_volume_(128) { }
+      current_volume_(11) { }
 
 void Settings::AddBPM(int16_t bpm) {
-    current_bpm_ += bpm;
+    int16_t value = (int16_t)current_bpm_ + bpm;
+    if (value < 0) {
+        value = 0;
+    } else if (value > MAX_BPM) {
+        value = MAX_BPM;
+    }
+    current_bpm_ = (uint16_t)value;
 }
 
 void Settings::AddDownbeat(int8_t downbeat) {
-    current_downbeat_ += downbeat;
+    int8_t value = (int8_t)current_downbeat_ + downbeat;
+    if (value < 0) {
+        value = 0;
+    } else if (value > MAX_DOWNBEAT) {
+        value = MAX_DOWNBEAT;
+    }
+    current_downbeat_ = (uint8_t)value;
 }
 
 void Settings::AddVolume(int8_t volume) {
-    current_volume_ += volume;
+    int8_t value = (int8_t)current_volume_ + volume;
+    if (value < 0) {
+        value = 0;
+    } else if (value > MAX_VOLUME) {
+        value = MAX_VOLUME;
+    }
+    current_volume_ = (uint8_t)value;
 }
 
 uint32_t Settings::GetSampleRate() const {
