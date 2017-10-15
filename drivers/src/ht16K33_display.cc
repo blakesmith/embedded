@@ -136,6 +136,13 @@ void HT16K33Display::SetNumber(uint16_t number) {
     uint16_t scale = u16pow(10, N_POSITIONS-2);
     uint8_t last_value = 0;
     uint16_t remaining = number;
+
+    // Special case 0, because of display padding
+    if (number == 0) {
+        SetNumber(N_POSITIONS-1, 0, false);
+        return;
+    }
+
     bool non_zero_written = false;
     for (size_t i = 0; i < N_POSITIONS; i++) {
         if (i == 2) {
