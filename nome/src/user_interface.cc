@@ -15,9 +15,10 @@ UserInterface::UserInterface(Settings& settings)
       settings_(settings),
       current_screen_position_(0),
       current_screen_(ALL_SCREENS[current_screen_position_]),
-      showing_banner_(true) { }
+      screen_timer_(0) { }
 
 void UserInterface::Init() {
+    start_screen_timer();
     status_led_.Init();
     knob_.Init();
     display_.Init();
@@ -25,14 +26,14 @@ void UserInterface::Init() {
 
 void UserInterface::next_screen() {
     knob_offset_ = 0;
-    showing_banner_ = true;
+    start_screen_timer();
     knob_.ResetCount();
     current_screen_position_ = (current_screen_position_ + 1) % ALL_SCREENS_SIZE;
     current_screen_ = ALL_SCREENS[current_screen_position_];
 }
 
 void UserInterface::draw_bpm() {
-    if (showing_banner_) {
+    if (showing_banner()) {
         display_.SetChar(0, 'b');
         display_.SetChar(1, 'P');
         display_.SetChar(3, 'M');
@@ -43,7 +44,7 @@ void UserInterface::draw_bpm() {
 }
 
 void UserInterface::draw_downbeat() {
-    if (showing_banner_) {
+    if (showing_banner()) {
         display_.SetChar(0, 'd');
         display_.SetChar(1, 'b');
     } else {
@@ -53,7 +54,7 @@ void UserInterface::draw_downbeat() {
 }
 
 void UserInterface::draw_volume() {
-    if (showing_banner_) {
+    if (showing_banner()) {
         display_.SetChar(0, 'v');
         display_.SetChar(1, 'O');
         display_.SetChar(3, 'L');
@@ -109,7 +110,7 @@ UserInterfaceRefresh UserInterface::poll_events() {
         return UI_REFRESH_NONE;
     }
     if (knob_offset_ != knob_.GetCount()) {
-        showing_banner_ = false;
+        stop_screen_timer();
         UserInterfaceRefresh refresh_action = knob_action_for_screen(current_screen_,
                                                                      static_cast<int8_t>(knob_.GetCount() - knob_offset_));
         knob_offset_ = knob_.GetCount();
@@ -120,12 +121,34 @@ UserInterfaceRefresh UserInterface::poll_events() {
 }
 
 UserInterfaceRefresh UserInterface::Update() {
+    tick_screen_timer();
     refresh_display();
     return poll_events();
 }
 
 void UserInterface::SetOk(bool ok) {
     status_led_.SetOk(ok);
+}
+
+bool UserInterface::showing_banner() const {
+    return screen_timer_ != 0;
+}
+
+void UserInterface::tick_screen_timer() {
+    int32_t value = screen_timer_ - 1;
+    if (value < 0) {
+        screen_timer_ = 0;
+    } else {
+        screen_timer_ = value;
+    }
+}
+
+void UserInterface::stop_screen_timer() {
+    screen_timer_ = 0;
+}
+
+void UserInterface::start_screen_timer() {
+    screen_timer_ = 0x400;
 }
 
 }

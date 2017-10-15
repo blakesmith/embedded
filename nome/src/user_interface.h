@@ -40,7 +40,7 @@ private:
     Settings& settings_;
     size_t current_screen_position_;
     ScreenState current_screen_;
-    bool showing_banner_;
+    uint32_t screen_timer_;
 
     void refresh_display();
     UserInterfaceRefresh poll_events();
@@ -51,6 +51,11 @@ private:
     void draw_bpm();
     void draw_downbeat();
     void draw_volume();
+
+    void tick_screen_timer();
+    void start_screen_timer();
+    void stop_screen_timer();
+    bool showing_banner() const;
 };
     
 }
