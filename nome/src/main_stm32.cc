@@ -12,31 +12,33 @@ CS43L22Dac dac;
 Settings settings;
 UserInterface user_interface(settings);
 
-Beat beat(settings.sample_rate,
-          settings.control_rate,
-          settings.current_bpm,
-          settings.current_downbeat);
+Beat beat(settings.GetSampleRate(),
+          settings.GetControlRate(),
+          settings.GetBPM(),
+          settings.GetDownbeat());
 
 void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_size) {
-    beat.Fill((int16_t *)frames, n_frames, settings.channel_count);
+    beat.Fill((int16_t *)frames, n_frames, settings.GetChannelCount());
 }
 
 void Init() {
     user_interface.Init();
-    dac.Init(settings.current_volume, settings.sample_rate, &FillCallback);
+    dac.Init(settings.GetVolume(),
+             settings.GetSampleRate(),
+             &FillCallback);
     dac.Start();
 }
 
 void loop() {
     switch (user_interface.Update()) {
         case UI_REFRESH_BPM:
-            beat.SetBPM(settings.current_bpm);
+            beat.SetBPM(settings.GetBPM());
             break;
         case UI_REFRESH_DOWNBEAT:
-            beat.SetDownbeat(settings.current_downbeat);
+            beat.SetDownbeat(settings.GetDownbeat());
             break;
         case UI_REFRESH_VOLUME:
-            dac.SetVolume(settings.current_volume);
+            dac.SetVolume(settings.GetVolume());
             break;
         case UI_REFRESH_NONE:
             break;

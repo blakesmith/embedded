@@ -38,7 +38,7 @@ void UserInterface::draw_bpm() {
         display_.SetChar(3, 'M');
     } else {
         display_.SetChar(0, 'b');
-        display_.SetNumber(settings_.current_bpm);
+        display_.SetNumber(settings_.GetBPM());
     }
 }
 
@@ -48,7 +48,7 @@ void UserInterface::draw_downbeat() {
         display_.SetChar(1, 'b');
     } else {
         display_.SetChar(0, 'd');
-        display_.SetNumber(settings_.current_downbeat);
+        display_.SetNumber(settings_.GetDownbeat());
     }
 }
 
@@ -59,7 +59,7 @@ void UserInterface::draw_volume() {
         display_.SetChar(3, 'L');
     } else {
         display_.SetChar(0, 'v');
-        display_.SetNumber(settings_.current_volume);
+        display_.SetNumber(settings_.GetVolume());
     }
 }
 
@@ -84,18 +84,18 @@ void UserInterface::refresh_display() {
     display_.WriteDisplay();
 }
 
-UserInterfaceRefresh UserInterface::knob_action_for_screen(ScreenState screen, long knob_offset) {
+UserInterfaceRefresh UserInterface::knob_action_for_screen(ScreenState screen, uint8_t knob_offset) {
     switch (screen) {
         case SCREEN_STATE_BPM: {
-            settings_.current_bpm += knob_offset;
+            settings_.AddBPM(knob_offset);
             return UI_REFRESH_BPM;
         }
         case SCREEN_STATE_DOWNBEAT: {
-            settings_.current_downbeat += knob_offset;
+            settings_.AddDownbeat(knob_offset);
             return UI_REFRESH_DOWNBEAT;
         }
         case SCREEN_STATE_VOLUME:
-            settings_.current_volume += knob_offset;
+            settings_.AddVolume(knob_offset);
             return UI_REFRESH_VOLUME;
         default:
             return UI_REFRESH_NONE;
@@ -110,7 +110,8 @@ UserInterfaceRefresh UserInterface::poll_events() {
     }
     if (knob_offset_ != knob_.GetCount()) {
         showing_banner_ = false;
-        UserInterfaceRefresh refresh_action = knob_action_for_screen(current_screen_, knob_.GetCount() - knob_offset_);
+        UserInterfaceRefresh refresh_action = knob_action_for_screen(current_screen_,
+                                                                     static_cast<uint8_t>(knob_.GetCount() - knob_offset_));
         knob_offset_ = knob_.GetCount();
         return refresh_action;
     }

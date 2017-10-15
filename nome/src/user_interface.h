@@ -45,7 +45,7 @@ private:
     void refresh_display();
     UserInterfaceRefresh poll_events();
     
-    UserInterfaceRefresh knob_action_for_screen(ScreenState screen, long knob_offset);
+    UserInterfaceRefresh knob_action_for_screen(ScreenState screen, uint8_t knob_offset);
     void next_screen();
 
     void draw_bpm();

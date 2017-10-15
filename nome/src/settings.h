@@ -10,16 +10,25 @@ public:
     Settings();
     ~Settings() = default;
 
-    uint16_t AddAndGetBPM(int8_t bpm);
+    void AddBPM(int16_t bpm);
+    void AddDownbeat(int8_t downbeat);
+    void AddVolume(int8_t volume);
+
+    uint32_t GetSampleRate() const;
+    uint32_t GetControlRate() const;
+    uint8_t GetChannelCount() const;
+    uint16_t GetBPM() const;
+    uint8_t GetDownbeat() const;
+    uint8_t GetVolume() const;
     
-    const uint32_t sample_rate;
-    const uint32_t control_rate;
-    const uint8_t channel_count;
-    const size_t frames_per_period;
-    
-    uint16_t current_bpm;
-    uint8_t current_downbeat;
-    uint8_t current_volume;
+private:
+    const uint32_t sample_rate_;
+    const uint32_t control_rate_;
+    const uint8_t channel_count_;
+
+    uint16_t current_bpm_;
+    uint8_t current_downbeat_;
+    uint8_t current_volume_;
 };
 
 }
