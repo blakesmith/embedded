@@ -15,6 +15,21 @@ enum UserInterfaceRefresh {
     UI_REFRESH_VOLUME,
 };
 
+class Timer {
+public:
+    Timer(uint32_t starting_count);
+    ~Timer() = default;
+        
+    void Tick();
+    void Reset();
+    void Stop();
+    
+    bool IsComplete() const;
+private:
+    const uint32_t starting_count_;
+    uint32_t count_;
+};
+    
 class UserInterface {
 
 public:
@@ -39,8 +54,9 @@ private:
     long knob_offset_;
     Settings& settings_;
     size_t current_screen_position_;
+    
     ScreenState current_screen_;
-    uint32_t screen_timer_;
+    Timer screen_banner_timer_;
 
     void refresh_display();
     UserInterfaceRefresh poll_events();

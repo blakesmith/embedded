@@ -15,10 +15,9 @@ UserInterface::UserInterface(Settings& settings)
       settings_(settings),
       current_screen_position_(0),
       current_screen_(ALL_SCREENS[current_screen_position_]),
-      screen_timer_(0) { }
+      screen_banner_timer_(0x400) { }
 
 void UserInterface::Init() {
-    start_screen_timer();
     status_led_.Init();
     knob_.Init();
     display_.Init();
@@ -26,7 +25,7 @@ void UserInterface::Init() {
 
 void UserInterface::next_screen() {
     knob_offset_ = 0;
-    start_screen_timer();
+    screen_banner_timer_.Reset();
     knob_.ResetCount();
     current_screen_position_ = (current_screen_position_ + 1) % ALL_SCREENS_SIZE;
     current_screen_ = ALL_SCREENS[current_screen_position_];
@@ -110,7 +109,7 @@ UserInterfaceRefresh UserInterface::poll_events() {
         return UI_REFRESH_NONE;
     }
     if (knob_offset_ != knob_.GetCount()) {
-        stop_screen_timer();
+        screen_banner_timer_.Stop();
         UserInterfaceRefresh refresh_action = knob_action_for_screen(current_screen_,
                                                                      static_cast<int8_t>(knob_.GetCount() - knob_offset_));
         knob_offset_ = knob_.GetCount();
@@ -121,7 +120,7 @@ UserInterfaceRefresh UserInterface::poll_events() {
 }
 
 UserInterfaceRefresh UserInterface::Update() {
-    tick_screen_timer();
+    screen_banner_timer_.Tick();
     refresh_display();
     return poll_events();
 }
@@ -131,24 +130,33 @@ void UserInterface::SetOk(bool ok) {
 }
 
 bool UserInterface::showing_banner() const {
-    return screen_timer_ != 0;
+    return !screen_banner_timer_.IsComplete();
 }
 
-void UserInterface::tick_screen_timer() {
-    int32_t value = screen_timer_ - 1;
+Timer::Timer(uint32_t starting_count)
+    : starting_count_(starting_count) {
+    Reset();
+}
+
+void Timer::Tick() {
+    int32_t value = count_ - 1;
     if (value < 0) {
-        screen_timer_ = 0;
+        count_ = 0;
     } else {
-        screen_timer_ = value;
+        count_ = value;
     }
 }
 
-void UserInterface::stop_screen_timer() {
-    screen_timer_ = 0;
+void Timer::Stop() {
+    count_ = 0;
 }
 
-void UserInterface::start_screen_timer() {
-    screen_timer_ = 0x400;
+void Timer::Reset() {
+    count_ = starting_count_;
+}
+
+bool Timer::IsComplete() const {
+    return count_ == 0;
 }
 
 }
