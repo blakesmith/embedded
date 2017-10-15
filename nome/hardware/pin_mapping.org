@@ -1,6 +1,7 @@
 #+TITLE: Nome Production Pin Mapping for STM32F4 series MCU
 
-UFQFPN48 Packaging Pinout
+UFQFPN48 Packaging Pinout.
+
 
 | Nome Function         | Pin Number | Pin Name | Alternative Function |
 |-----------------------+------------+----------+----------------------|
@@ -19,3 +20,10 @@ UFQFPN48 Packaging Pinout
 | Status LED OK         |         29 | PA8      | None, GPIO           |
 | Status LED Error      |         30 | PA9      | None, GPIO           |
 | Status LED Activity   |         31 | PA10     | None, GPIO           |
+
+Part Numbers
+
+| Part Number | Flash Memory | Packaging | Pin Count | Link                                                                                            |
+|-------------+--------------+-----------+-----------+-------------------------------------------------------------------------------------------------|
+| STMF411CEU6 | 512K         | UFQFPN    |        48 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F411CEU6/497-14907-ND/4935720 |
+|             |              |           |           |                                                                                                 |
