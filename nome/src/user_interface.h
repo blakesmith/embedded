@@ -1,6 +1,8 @@
 #ifndef NOME_USER_INTERFACE_H_
 #define NOME_USER_INTERFACE_H_
 
+#include "beat.h"
+
 #include "pec11_renc.h"
 #include "ht16K33_display.h"
 #include "status_led.h"
@@ -40,7 +42,7 @@ public:
         SCREEN_STATE_VOLUME
     };
 
-    UserInterface(Settings& settings);
+    UserInterface(Settings& settings, const BeatMonitor& beat_monitor);
     ~UserInterface() = default;
     
     void Init();
@@ -52,8 +54,10 @@ private:
     Pec11RotaryEncoder knob_;
     HT16K33Display display_;
 
-    long knob_offset_;
     Settings& settings_;
+    const BeatMonitor& beat_monitor_;
+
+    long knob_offset_;
     size_t current_screen_position_;
     
     ScreenState current_screen_;

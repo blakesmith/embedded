@@ -10,12 +10,13 @@ using namespace nome;
 
 CS43L22Dac dac;
 Settings settings;
-UserInterface user_interface(settings);
-
 Beat beat(settings.GetSampleRate(),
           settings.GetControlRate(),
           settings.GetBPM(),
           settings.GetDownbeat());
+UserInterface user_interface(settings, beat.GetMonitor());
+
+
 
 static uint8_t scale_volume(uint8_t volume) {
     if (volume > 15) {

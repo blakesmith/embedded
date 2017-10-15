@@ -18,7 +18,8 @@ Beat::Beat(const uint32_t sample_rate,
       total_beats_(0),
       phase_(0),
       osc_(OscShape::OSC_SHAPE_SIN, sample_rate, DOWNBEAT_FREQ, 50),
-      envelope_(control_rate, 255, 1, 20, 0, 225, 0) {
+      envelope_(control_rate, 255, 1, 20, 0, 225, 0),
+      monitor_(&total_beats_) {
     SetDownbeat(downbeat_);
 }
 
@@ -66,6 +67,17 @@ void Beat::trigger_beat() {
             osc_.set_freq(UPBEAT_FREQ);
         }
     }
+}
+
+const BeatMonitor& Beat::GetMonitor() {
+    return monitor_;
+}
+
+BeatMonitor::BeatMonitor(uint32_t* total_beats)
+    : total_beats_(total_beats) { }
+
+uint32_t BeatMonitor::GetTotalBeats() const {
+    return *total_beats_;
 }
 
 }

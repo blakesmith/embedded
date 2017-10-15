@@ -7,6 +7,18 @@
 #include <cstddef>
 
 namespace nome {
+
+class BeatMonitor {
+public:
+    BeatMonitor(uint32_t* total_beats);
+    ~BeatMonitor() = default;
+
+    uint32_t GetTotalBeats() const;
+
+private:
+    uint32_t* total_beats_;
+};
+    
 class Beat {
 public:
     Beat(const uint32_t sample_rate,
@@ -19,6 +31,7 @@ public:
     void Fill(int16_t* buffer, size_t frames, uint8_t channel_count);
     void SetBPM(uint16_t bpm);
     void SetDownbeat(uint8_t downbeat);
+    const BeatMonitor& GetMonitor();
 
 private:
     const uint32_t sample_rate_;
@@ -34,6 +47,8 @@ private:
 
     Osc osc_;
     AdsrEnvelope envelope_;
+
+    BeatMonitor monitor_;
 
     void trigger_beat();
 };

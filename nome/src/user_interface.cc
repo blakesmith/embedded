@@ -10,9 +10,10 @@ static const UserInterface::ScreenState ALL_SCREENS[] = {
 
 static const size_t ALL_SCREENS_SIZE = sizeof(ALL_SCREENS) / sizeof(UserInterface::ScreenState);
 
-UserInterface::UserInterface(Settings& settings)
-    : knob_offset_(0),
-      settings_(settings),
+UserInterface::UserInterface(Settings& settings, const BeatMonitor& beat_monitor)
+    : settings_(settings),
+      beat_monitor_(beat_monitor),
+      knob_offset_(0),
       current_screen_position_(0),
       current_screen_(ALL_SCREENS[current_screen_position_]),
       screen_banner_timer_(0x400),
@@ -46,6 +47,17 @@ bool UserInterface::screen_is_sleeping() const {
     return current_screen_ == SCREEN_STATE_SLEEP;
 }
 
+void UserInterface::draw_sleep_screen() {
+    uint32_t total_beats = beat_monitor_.GetTotalBeats();
+    bool colon_on = total_beats % 2 == 0;
+    uint8_t dot_position = total_beats % 4;
+    if (dot_position >= 2) {
+        dot_position++;
+    }
+    display_.SetSegment(dot_position, 0, false, true);
+    display_.ToggleColon(colon_on);
+}
+
 void UserInterface::draw_bpm() {
     if (showing_banner()) {
         display_.SetChar(0, 'b');
@@ -76,10 +88,6 @@ void UserInterface::draw_volume() {
         display_.SetChar(0, 'v');
         display_.SetNumber(settings_.GetVolume());
     }
-}
-
-void UserInterface::draw_sleep_screen() {
-    display_.SetNumber(1000);
 }
 
 void UserInterface::refresh_display() {
