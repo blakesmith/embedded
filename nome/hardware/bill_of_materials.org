@@ -10,3 +10,10 @@
 | AS1115-BSST LED Driver                  |        1 |             5.00 | https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597                    |
 
 
+
+* Power Consumption
+
+| Name        | Total mA | Voltage |
+|-------------+----------+---------|
+| STMF411CEU6 | 160      | 3.3V    |
+| CS43L22 DAC | 10       |         |
