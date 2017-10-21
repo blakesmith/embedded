@@ -1,13 +1,16 @@
 #+TITLE: Nome Bill of Materials
 
-| Name                                    | Quantity | Single Unit Cost | Link                                                                                                  |
-|-----------------------------------------+----------+------------------+-------------------------------------------------------------------------------------------------------|
-| STMF411CEU6 MCU                         |        1 |             6.89 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F411CEU6/497-14907-ND/4935720       |
-| PEC11R-4215F-S24 Rotary Encoder         |        1 |             1.68 | https://www.digikey.com/product-detail/en/bourns-inc/PEC11R-4215K-S0024/PEC11R-4215K-S0024-ND/4499662 |
-| CS43L22 DAC                             |        1 |             5.96 | https://www.digikey.com/product-detail/en/cirrus-logic-inc/CS43L22-CNZ/598-1650-ND/2024884            |
-| SJ-2524-SMT-TR Headphone Jack           |        1 |             0.98 | https://www.digikey.com/product-detail/en/cui-inc/SJ-2524-SMT-TR/CP-2524SJCT-ND/669703                |
-| LTP-3784G LED 7-segment 4-Digit display |        1 |             3.96 | https://www.digikey.com/product-detail/en/lite-on-inc/LTC-4727JS/160-1547-5-ND/408220                 |
-| AS1115-BSST LED Driver                  |        1 |             5.00 | https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597                    |
+| Name                                    | Quantity | Single Unit Cost | Link                                                                                                          |
+|-----------------------------------------+----------+------------------+---------------------------------------------------------------------------------------------------------------|
+| STMF411CEU6 MCU                         |        1 |             6.89 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F411CEU6/497-14907-ND/4935720               |
+| PEC11R-4215F-S24 Rotary Encoder         |        1 |             1.68 | https://www.digikey.com/product-detail/en/bourns-inc/PEC11R-4215K-S0024/PEC11R-4215K-S0024-ND/4499662         |
+| CS43L22 DAC                             |        1 |             5.96 | https://www.digikey.com/product-detail/en/cirrus-logic-inc/CS43L22-CNZ/598-1650-ND/2024884                    |
+| SJ-2524-SMT-TR Headphone Jack           |        1 |             0.98 | https://www.digikey.com/product-detail/en/cui-inc/SJ-2524-SMT-TR/CP-2524SJCT-ND/669703                        |
+| LTP-3784G LED 7-segment 4-Digit display |        1 |             3.96 | https://www.digikey.com/product-detail/en/lite-on-inc/LTC-4727JS/160-1547-5-ND/408220                         |
+| AS1115-BSST LED Driver                  |        1 |             5.00 | https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597                            |
+| LM1117 1.8V linear regulator            |        1 |             1.14 | https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-1.8-NOPB/LM1117MP-1.8-NOPBDKR-ND/1243938 |
+| LM1117 3.3V linear regulator            |        1 |             1.14 | https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-3.3-NOPB/LM1117MP-3.3-NOPBCT-ND/308024   |
+
 
 1. CS43L22 needs C0G or equivalent caps for 150pF caps
 2. CS43L22 needs Low ESR, X7R/X5R dialectric caps for FLY, and -VHPFILT caps
@@ -16,7 +19,8 @@
 
 * Power Consumption
 
-| Name        | Total mA | Voltage |
-|-------------+----------+---------|
-| STMF411CEU6 | 160      | 3.3V    |
-| CS43L22 DAC | 10       |         |
+| Name        | Max mA | Voltage |
+|-------------+--------+---------|
+| STMF411CEU6 |    160 | 3.3V    |
+| CS43L22 DAC |     10 | 1.8V    |
+| Speaker     |    150 |         |
