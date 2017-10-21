@@ -1,3 +1,9 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP LTC-4727JS
+D 4 digit 7 segment Green LED, common anode
+K 4 digit 7 segment Green LED, common anode
+F http://www.kingbright.com/attachments/file/psearch/000/00/00/CA56-12CGKWA(Ver.9A).pdf
+$ENDCMP
+#
 #End Doc Library
