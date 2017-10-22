@@ -17,7 +17,6 @@ UFQFPN48 Packaging Pinout.
 | Rotary Encoder Ch. A  |         11 | PA1      | None, GPIO           |
 | Rotary Encoder Ch. B  |         12 | PA2      | None, GPIO           |
 | Rotary Encoder Button |         13 | PA3      | None, GPIO           |
-| Status LED Power      |         32 | PA11     | None, GPIO           |
 | Status LED OK         |         31 | PA10     | None, GPIO           |
 | Status LED Error      |         30 | PA9      | None, GPIO           |
 | Status LED Activity   |         29 | PA8      | None, GPIO           |

@@ -1011,16 +1011,12 @@ F 3 "" H 5550 5550 50  0001 C CNN
 	1    5550 5550
 	0    -1   -1   0   
 $EndComp
-Text Label 5550 5300 1    60   ~ 0
-LED_Pow
 Text Label 5850 5300 1    60   ~ 0
 LED_Ok
 Text Label 6150 5300 1    60   ~ 0
 LED_Err
 Text Label 6450 5300 1    60   ~ 0
 LED_Act
-Text Label 4800 4100 0    60   ~ 0
-LED_Pow
 Text Label 4800 4200 0    60   ~ 0
 LED_Ok
 Text Label 4800 4300 0    60   ~ 0
@@ -1558,8 +1554,6 @@ Wire Wire Line
 Wire Wire Line
 	6450 5400 6450 5200
 Wire Wire Line
-	4550 4100 5200 4100
-Wire Wire Line
 	4550 4200 5200 4200
 Wire Wire Line
 	4550 4300 5200 4300
@@ -1651,4 +1645,17 @@ Wire Wire Line
 	4150 3650 4150 2950
 Text Label 4150 3150 1    60   ~ 0
 JTRST
+$Comp
+L +3.3V #PWR?
+U 1 1 59EDA31D
+P 5550 5200
+F 0 "#PWR?" H 5550 5050 50  0001 C CNN
+F 1 "+3.3V" H 5550 5340 50  0000 C CNN
+F 2 "" H 5550 5200 50  0001 C CNN
+F 3 "" H 5550 5200 50  0001 C CNN
+	1    5550 5200
+	1    0    0    -1  
+$EndComp
+Text Label 5550 5300 2    60   ~ 0
+3.3V
 $EndSCHEMATC
