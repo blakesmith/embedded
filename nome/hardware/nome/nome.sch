@@ -1714,17 +1714,9 @@ Wire Wire Line
 Wire Wire Line
 	5250 11450 6400 11450
 Wire Wire Line
-	4750 11250 4550 11250
-Wire Wire Line
-	4550 11150 4550 11450
-Wire Wire Line
 	4400 11150 4750 11150
 Wire Wire Line
 	4400 11150 4400 11250
-Connection ~ 4550 11150
-Wire Wire Line
-	4550 11450 4750 11450
-Connection ~ 4550 11250
 Wire Wire Line
 	4750 11050 4400 11050
 Wire Wire Line
@@ -1776,4 +1768,14 @@ Wire Wire Line
 Wire Wire Line
 	1450 11450 1450 10750
 Connection ~ 1450 10750
+Wire Wire Line
+	4750 11250 4600 11250
+Wire Wire Line
+	4600 11250 4600 11150
+Connection ~ 4600 11150
+Wire Wire Line
+	4750 11450 4500 11450
+Wire Wire Line
+	4500 11450 4500 11150
+Connection ~ 4500 11150
 $EndSCHEMATC
