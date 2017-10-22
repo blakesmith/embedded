@@ -1133,7 +1133,6 @@ NoConn ~ 3250 3900
 NoConn ~ 3250 4000
 NoConn ~ 3250 4100
 NoConn ~ 3250 4200
-NoConn ~ 3250 4300
 NoConn ~ 3250 4600
 NoConn ~ 3650 4850
 NoConn ~ 3750 4850
@@ -1594,37 +1593,6 @@ F 3 "" H 3750 2800 50  0001 C CNN
 	1    3750 2800
 	-1   0    0    1   
 $EndComp
-$Comp
-L Conn_01x05_Male J2
-U 1 1 59ED75CA
-P 1000 5350
-F 0 "J2" H 1000 5650 50  0000 C CNN
-F 1 "JTAG_Conn_01x05_Male" H 1000 5050 50  0000 C CNN
-F 2 "" H 1000 5350 50  0001 C CNN
-F 3 "" H 1000 5350 50  0001 C CNN
-	1    1000 5350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1200 5150 1400 5150
-Text Label 1400 5150 0    60   ~ 0
-JTDI
-Wire Wire Line
-	1200 5250 1400 5250
-Text Label 1400 5250 0    60   ~ 0
-JTDO
-Wire Wire Line
-	1200 5350 1400 5350
-Text Label 1400 5350 0    60   ~ 0
-JTCK
-Wire Wire Line
-	1200 5450 1400 5450
-Text Label 1400 5450 0    60   ~ 0
-JTMS
-Wire Wire Line
-	1200 5550 1400 5550
-Text Label 1400 5550 0    60   ~ 0
-JTRST
 Wire Wire Line
 	4550 3900 5200 3900
 Text Label 4900 3900 0    60   ~ 0
@@ -1658,4 +1626,105 @@ F 3 "" H 5550 5200 50  0001 C CNN
 $EndComp
 Text Label 5550 5300 2    60   ~ 0
 3.3V
+$Comp
+L Conn_02x05_Odd_Even J?
+U 1 1 59EDA6EA
+P 1250 5350
+F 0 "J?" H 1300 5650 50  0000 C CNN
+F 1 "Conn_02x05_Odd_Even" H 1300 5050 50  0000 C CNN
+F 2 "" H 1250 5350 50  0001 C CNN
+F 3 "" H 1250 5350 50  0001 C CNN
+	1    1250 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1550 5150 1850 5150
+Text Label 1600 5150 0    60   ~ 0
+JTMS
+Wire Wire Line
+	1550 5250 1850 5250
+Text Label 1600 5250 0    60   ~ 0
+JTCK
+Wire Wire Line
+	1550 5350 1850 5350
+Text Label 1600 5350 0    60   ~ 0
+JTDO
+Wire Wire Line
+	1550 5450 1850 5450
+Text Label 1600 5450 0    60   ~ 0
+JTDI
+Wire Wire Line
+	1550 5550 2700 5550
+Wire Wire Line
+	1050 5350 850  5350
+Wire Wire Line
+	850  5250 850  5550
+Wire Wire Line
+	700  5250 1050 5250
+Wire Wire Line
+	700  5250 700  5350
+Connection ~ 850  5250
+$Comp
+L GND #PWR?
+U 1 1 59EDB933
+P 700 5350
+F 0 "#PWR?" H 700 5100 50  0001 C CNN
+F 1 "GND" H 700 5200 50  0000 C CNN
+F 2 "" H 700 5350 50  0001 C CNN
+F 3 "" H 700 5350 50  0001 C CNN
+	1    700  5350
+	1    0    0    -1  
+$EndComp
+NoConn ~ 1050 5450
+Wire Wire Line
+	850  5550 1050 5550
+Connection ~ 850  5350
+Wire Wire Line
+	1050 5150 700  5150
+Wire Wire Line
+	700  5150 700  4950
+$Comp
+L +3.3V #PWR?
+U 1 1 59EDBC98
+P 700 4950
+F 0 "#PWR?" H 700 4800 50  0001 C CNN
+F 1 "+3.3V" H 700 5090 50  0000 C CNN
+F 2 "" H 700 4950 50  0001 C CNN
+F 3 "" H 700 4950 50  0001 C CNN
+	1    700  4950
+	1    0    0    -1  
+$EndComp
+Text Label 700  5000 0    60   ~ 0
+3.3V
+$Comp
+L GND #PWR?
+U 1 1 59EDC1EB
+P 2250 5950
+F 0 "#PWR?" H 2250 5700 50  0001 C CNN
+F 1 "GND" H 2250 5800 50  0000 C CNN
+F 2 "" H 2250 5950 50  0001 C CNN
+F 3 "" H 2250 5950 50  0001 C CNN
+	1    2250 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C?
+U 1 1 59EDC25D
+P 2250 5800
+F 0 "C?" H 2275 5900 50  0000 L CNN
+F 1 "C" H 2275 5700 50  0000 L CNN
+F 2 "" H 2288 5650 50  0001 C CNN
+F 3 "" H 2250 5800 50  0001 C CNN
+	1    2250 5800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 5550 2250 5650
+Connection ~ 2250 5550
+Text Label 2400 5550 0    60   ~ 0
+RESET
+Wire Wire Line
+	3250 4300 2200 4300
+Text Label 2250 4300 0    60   ~ 0
+RESET
 $EndSCHEMATC
