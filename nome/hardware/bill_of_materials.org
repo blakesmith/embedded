@@ -26,6 +26,8 @@
 | 51.1 ohm 0805 resistor                  |        2 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-0751R1L/311-51.1CRCT-ND/730961                       |
 | 25 ohm 0805 resistor                    |        1 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-0724R9L/311-24.9CRCT-ND/730706                       |
 | 10k ohm 0805 resistor                   |        1 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805JR-0710KL/311-10KARCT-ND/731188                         |
+| On/Off SPDT Slider Switch               |        1 |             0.53 | https://www.digikey.com/product-detail/en/c-k/JS102011SAQN/401-1999-1-ND/1640114                              |
+
 
 
 1. CS43L22 needs C0G or equivalent caps for 150pF caps
