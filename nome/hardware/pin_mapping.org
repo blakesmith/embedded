@@ -12,14 +12,15 @@ UFQFPN48 Packaging Pinout.
 | DAC AUDIO RESET       |         15 | PA5      | None, GPIO           |
 | DAC I2C_SCL           |         41 | PB6      | I2C1_SCL             |
 | DAC I2C_SDA           |         46 | PB9      | I2C1_SDA             |
-| Display I2C_SCL       |         21 | PB10     | I2C2_SCL             |
-| Display I2C_SDA       |         39 | PB3      | I2C2_SDA             |
+| Display I2C_SCL       |         41 | PB6      | I2C1_SCL             |
+| Display I2C_SDA       |         46 | PB9      | I2C1_SDA             |
 | Rotary Encoder Ch. A  |         11 | PA1      | None, GPIO           |
 | Rotary Encoder Ch. B  |         12 | PA2      | None, GPIO           |
 | Rotary Encoder Button |         13 | PA3      | None, GPIO           |
-| Status LED OK         |         29 | PA8      | None, GPIO           |
+| Status LED Power      |         32 | PA11     | None, GPIO           |
+| Status LED OK         |         31 | PA10     | None, GPIO           |
 | Status LED Error      |         30 | PA9      | None, GPIO           |
-| Status LED Activity   |         31 | PA10     | None, GPIO           |
+| Status LED Activity   |         29 | PA8      | None, GPIO           |
 
 Part Numbers
 

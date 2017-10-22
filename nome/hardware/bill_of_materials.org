@@ -10,6 +10,12 @@
 | AS1115-BSST LED Driver                  |        1 |             5.00 | https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597                            |
 | LM1117 1.8V linear regulator            |        1 |             1.14 | https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-1.8-NOPB/LM1117MP-1.8-NOPBDKR-ND/1243938 |
 | LM1117 3.3V linear regulator            |        1 |             1.14 | https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-3.3-NOPB/LM1117MP-3.3-NOPBCT-ND/308024   |
+| LTST-C171TBKT LED 0805 Blue             |        1 |             0.50 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171TBKT/160-1645-1-ND/573585                      |
+| LTST-C171TBKT LED 0805 Orange           |        1 |             0.33 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171AKT/160-1419-1-ND/386784                       |
+| LTST-C171TBKT LED 0805 Red              |        1 |             0.31 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800                      |
+| LTST-C171TBKT LED 0805 Green            |        1 |             0.29 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792                       |
+
+
 
 
 1. CS43L22 needs C0G or equivalent caps for 150pF caps
