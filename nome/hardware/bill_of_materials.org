@@ -14,7 +14,8 @@
 | LTST-C171TBKT LED 0805 Orange           |        1 |             0.33 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171AKT/160-1419-1-ND/386784                       |
 | LTST-C171TBKT LED 0805 Red              |        1 |             0.31 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800                      |
 | LTST-C171TBKT LED 0805 Green            |        1 |             0.29 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792                       |
-| 5-pin header                            |        1 |             0.18 | https://www.digikey.com/product-detail/en/sullins-connector-solutions/PREC005SFAN-RC/S1212EC-05-ND/2774969    |
+| 10-pin header JTAG/SWD                  |        1 |             0.28 | https://www.digikey.com/product-detail/en/on-shore-technology-inc/302-S101/ED1543-ND/2178422                  |
+
 
 
 
