@@ -21,6 +21,11 @@ UFQFPN48 Packaging Pinout.
 | Status LED OK         |         31 | PA10     | None, GPIO           |
 | Status LED Error      |         30 | PA9      | None, GPIO           |
 | Status LED Activity   |         29 | PA8      | None, GPIO           |
+| JTMS-SWDIO            |         34 | PA13     | JTMS-SWDIO           |
+| JTCK-SWCLK            |         37 | PA14     | JTCK-SWCLK           |
+| JTDI                  |         38 | PA15     | JTDI                 |
+| JTDO-SWO              |         39 | PB3      | JTDO-SWO             |
+| JTRST                 |         40 | PB4      | JTRST                |
 
 Part Numbers
 

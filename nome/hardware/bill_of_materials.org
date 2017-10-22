@@ -14,6 +14,7 @@
 | LTST-C171TBKT LED 0805 Orange           |        1 |             0.33 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171AKT/160-1419-1-ND/386784                       |
 | LTST-C171TBKT LED 0805 Red              |        1 |             0.31 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800                      |
 | LTST-C171TBKT LED 0805 Green            |        1 |             0.29 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792                       |
+| 5-pin header                            |        1 |             0.18 | https://www.digikey.com/product-detail/en/sullins-connector-solutions/PREC005SFAN-RC/S1212EC-05-ND/2774969    |
 
 
 
@@ -29,4 +30,9 @@
 |-------------+--------+---------|
 | STMF411CEU6 |    160 | 3.3V    |
 | CS43L22 DAC |     10 | 1.8V    |
+| AS1115      |    335 | 3.3V    |
 | Speaker     |    150 |         |
+| LED Blue    |     20 | 3.3V    |
+| LED Green   |     30 | 2.1V    |
+| LED Orange  |     30 | 2.1V    |
+| LED Red     |     30 | 2.1V    |
