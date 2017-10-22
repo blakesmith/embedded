@@ -16,9 +16,12 @@
 | LTST-C171TBKT LED 0805 Green            |        1 |             0.29 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792                       |
 | 10-pin header JTAG/SWD                  |        1 |             0.28 | https://www.digikey.com/product-detail/en/on-shore-technology-inc/302-S101/ED1543-ND/2178422                  |
 | DC Barrel Jack, 5.5mm OD, 2.1mm ID      |        1 |             0.60 | https://www.digikey.com/product-detail/en/cui-inc/PJ-002A/CP-002A-ND/96962                                    |
-
-
-
+| 0.1uF 0805 cap                          |       12 |             0.10 | https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427                 |
+| 1uf 0805 X7R cap                        |        6 |             0.21 | https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437                 |
+| 150pF 0805 C0G cap                      |        2 |             0.13 | https://www.digikey.com/product-detail/en/avx-corporation/08055A151JAT2A/478-1318-1-ND/564350                 |
+| 10uf 0805 cap                           |        2 |             0.16 | https://www.digikey.com/product-detail/en/avx-corporation/0805ZD106KAT2A/478-5167-1-ND/1913257                |
+| 4.7uf 0805 cap                          |        2 |             0.36 | https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447                 |
+| 0.022uf 0805 cap                        |        2 |             0.27 | https://www.digikey.com/product-detail/en/avx-corporation/08051C223KAT2A/478-1360-1-ND/564392                 |
 
 
 1. CS43L22 needs C0G or equivalent caps for 150pF caps
