@@ -22,6 +22,10 @@
 | 10uf 0805 cap                           |        2 |             0.16 | https://www.digikey.com/product-detail/en/avx-corporation/0805ZD106KAT2A/478-5167-1-ND/1913257                |
 | 4.7uf 0805 cap                          |        2 |             0.36 | https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447                 |
 | 0.022uf 0805 cap                        |        2 |             0.27 | https://www.digikey.com/product-detail/en/avx-corporation/08051C223KAT2A/478-1360-1-ND/564392                 |
+| 40 ohm 0805 resistor                    |        3 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-0740R2L/311-40.2CRCT-ND/730887                       |
+| 51.1 ohm 0805 resistor                  |        2 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-0751R1L/311-51.1CRCT-ND/730961                       |
+| 25 ohm 0805 resistor                    |        1 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-0724R9L/311-24.9CRCT-ND/730706                       |
+| 10k ohm 0805 resistor                   |        1 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805JR-0710KL/311-10KARCT-ND/731188                         |
 
 
 1. CS43L22 needs C0G or equivalent caps for 150pF caps
