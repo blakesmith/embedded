@@ -48,25 +48,14 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L VCC #PWR3
-U 1 1 59E41ED9
-P 1250 11400
-F 0 "#PWR3" H 1250 11250 50  0001 C CNN
-F 1 "VCC" H 1250 11550 50  0000 C CNN
-F 2 "" H 1250 11400 50  0001 C CNN
-F 3 "" H 1250 11400 50  0001 C CNN
-	1    1250 11400
-	1    0    0    -1  
-$EndComp
-$Comp
 L Battery_Cell BT1
 U 1 1 59E41EFD
-P 1250 11850
-F 0 "BT1" H 1350 11950 50  0000 L CNN
-F 1 "Battery_Cell" H 1350 11850 50  0000 L CNN
-F 2 "" V 1250 11910 50  0001 C CNN
-F 3 "" V 1250 11910 50  0001 C CNN
-	1    1250 11850
+P 1450 11650
+F 0 "BT1" H 1550 11750 50  0000 L CNN
+F 1 "Battery_Cell" H 1550 11650 50  0000 L CNN
+F 2 "" V 1450 11710 50  0001 C CNN
+F 3 "" V 1450 11710 50  0001 C CNN
+	1    1450 11650
 	1    0    0    -1  
 $EndComp
 Text Label 2600 9750 0    60   ~ 0
@@ -1272,8 +1261,8 @@ F 3 "" H 2500 3350 50  0001 C CNN
 $EndComp
 Text Label 2500 3400 0    60   ~ 0
 3.3V
-Text Notes 1900 6600 0    60   ~ 0
-UI Display
+Text Notes 1900 6600 0    60   ~ 12
+User Interface
 Wire Wire Line
 	2800 10750 3450 10750
 Wire Wire Line
@@ -1284,8 +1273,6 @@ Wire Wire Line
 	1250 10750 2200 10750
 Wire Wire Line
 	2500 11050 2500 11250
-Wire Wire Line
-	1250 10750 1250 11300
 Wire Wire Line
 	10300 3150 10300 2600
 Wire Wire Line
@@ -1500,7 +1487,7 @@ Wire Wire Line
 Wire Wire Line
 	1900 9550 1600 9550
 Wire Wire Line
-	1250 12150 1250 11950
+	1250 11850 1250 12150
 Wire Wire Line
 	1250 12700 1250 12550
 Wire Wire Line
@@ -1584,8 +1571,6 @@ Wire Wire Line
 Wire Wire Line
 	3100 4600 2400 4600
 Wire Wire Line
-	1250 11400 1250 11650
-Wire Wire Line
 	4000 7000 9300 7000
 Wire Wire Line
 	9300 7000 9300 7850
@@ -1653,9 +1638,7 @@ Connection ~ 1450 7000
 Wire Wire Line
 	1450 8800 1450 7950
 Wire Wire Line
-	1250 11350 1800 11350
-Wire Wire Line
-	1800 11350 1800 11600
+	1800 10750 1800 11600
 Wire Wire Line
 	1800 11600 2200 11600
 Wire Wire Line
@@ -1760,4 +1743,37 @@ Wire Wire Line
 	3100 3600 2500 3600
 Wire Wire Line
 	2500 3600 2500 3350
+Text Notes 1250 10500 0    60   ~ 12
+Power
+Text Notes 4350 10500 0    60   ~ 12
+JTAG / SWD
+Text Notes 10900 7650 0    60   ~ 12
+Status LED
+Text Notes 7200 2050 0    60   ~ 12
+Audio
+Text Notes 1600 1700 0    60   ~ 12
+Microcontroller
+$Comp
+L Barrel_Jack J?
+U 1 1 59EE6474
+P 800 11750
+F 0 "J?" H 800 11960 50  0000 C CNN
+F 1 "Barrel_Jack" H 800 11575 50  0000 C CNN
+F 2 "" H 850 11710 50  0001 C CNN
+F 3 "" H 850 11710 50  0001 C CNN
+	1    800  11750
+	1    0    0    -1  
+$EndComp
+Connection ~ 1800 10750
+Wire Wire Line
+	1450 11750 1100 11750
+Wire Wire Line
+	1250 11850 1100 11850
+Wire Wire Line
+	1100 11650 1250 11650
+Wire Wire Line
+	1250 11650 1250 10750
+Wire Wire Line
+	1450 11450 1450 10750
+Connection ~ 1450 10750
 $EndSCHEMATC
