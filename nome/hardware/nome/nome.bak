@@ -1242,7 +1242,7 @@ Text Label 2500 3400 0    60   ~ 0
 3.3V
 Text Notes 1900 6600 0    60   ~ 12
 User Interface
-Text Notes 900  9950 0    60   ~ 12
+Text Notes 1000 10400 0    60   ~ 12
 Power
 Text Notes 6550 10500 0    60   ~ 12
 JTAG / SWD
@@ -2006,4 +2006,7 @@ Wire Wire Line
 	3050 11300 3200 11300
 Connection ~ 3200 11300
 NoConn ~ 4250 11200
+NoConn ~ 1000 11750
+NoConn ~ 1000 11850
+NoConn ~ 1000 11950
 $EndSCHEMATC
