@@ -1,0 +1,8 @@
+#+TITLE: Nome Todo List
+
+* TODOS
+** TODO Update Li-Po program resistor to be 5K (200mAh) instead of 10K (100mAh)
+** TODO Pick out a Micro USB connector, double check that footprint matches
+** TODO Double check PEC11 footprint
+** TODO Double check schematic
+** TODO Begin layout
