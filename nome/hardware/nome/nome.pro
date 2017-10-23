@@ -1,4 +1,4 @@
-update=Sun 15 Oct 2017 09:15:23 PM CDT
+update=Sun 22 Oct 2017 09:42:50 PM CDT
 version=1
 last_client=kicad
 [pcbnew]
@@ -62,3 +62,4 @@ LibName30=atmel
 LibName31=contrib
 LibName32=valves
 LibName33=/home/blake/projects/stm32/nome/hardware/nome
+LibName34=/home/blake/projects/stm32/nome/hardware/open-project
