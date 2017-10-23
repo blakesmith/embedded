@@ -1,3 +1,5 @@
 (fp_lib_table
   (lib (name nome)(type KiCad)(uri "$(KIPRJMOD)/nome.pretty")(options "")(descr ""))
+  (lib (name open-project)(type Legacy)(uri /home/blake/projects/stm32/nome/hardware/open-project.mod)(options "")(descr ""))
+  (lib (name third_party)(type KiCad)(uri /home/blake/projects/stm32/nome/hardware/third_party.pretty)(options "")(descr ""))
 )
