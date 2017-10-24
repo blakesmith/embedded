@@ -3,6 +3,8 @@
 * TODOS
 ** TODO Update Li-Po program resistor to be 5K (200mAh) instead of 10K (100mAh)
 ** TODO Pick out a Micro USB connector, double check that footprint matches
+** TODO Pick out a rotary encoder knob
+** TODO Switch to an orange 7-segment display
 ** TODO Double check PEC11 footprint
 ** TODO Double check schematic
 ** TODO Begin layout
