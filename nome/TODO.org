@@ -4,6 +4,6 @@
 ** DONE Update Li-Po program resistor to be 5K (200mAh) instead of 10K (100mAh)
 ** DONE Pick out a Micro USB connector, double check that footprint matches
 ** DONE Pick out a rotary encoder knob
-** TODO Double check PEC11 footprint
+** DONE Double check PEC11 footprint
 ** TODO Double check schematic
 ** TODO Begin layout
