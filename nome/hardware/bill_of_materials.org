@@ -11,6 +11,7 @@
 | LM1117 1.8V linear regulator            |        1 |             1.14 | https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-1.8-NOPB/LM1117MP-1.8-NOPBDKR-ND/1243938   |
 | LM1117 3.3V linear regulator            |        1 |             1.14 | https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-3.3-NOPB/LM1117MP-3.3-NOPBCT-ND/308024     |
 | MCP73831T-2ACI/OT LiPo Charger          |        1 |             0.59 | https://www.digikey.com/product-detail/en/microchip-technology/MCP73831T-2ACI-OT/MCP73831T-2ACI-OTCT-ND/1979802 |
+| FCI Micro USB Connector                 |        1 |             0.46 | https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378                    |
 | JST B2B-PH-SM4 Connector                |        1 |             0.55 | https://www.digikey.com/product-detail/en/jst-sales-america-inc/B2B-PH-SM4-TB-LF-SN/455-1734-1-ND/926831        |
 | LTST-C171TBKT LED 0805 Blue             |        1 |             0.50 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171TBKT/160-1645-1-ND/573585                        |
 | LTST-C171TBKT LED 0805 Orange           |        1 |             0.33 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171AKT/160-1419-1-ND/386784                         |
@@ -28,7 +29,7 @@
 | 25 ohm 0805 resistor                    |        1 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-0724R9L/311-24.9CRCT-ND/730706                         |
 | 470 ohm 0805 resistor                   |        2 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805JR-07470RL/311-470ARCT-ND/731280                          |
 | 10k ohm 0805 resistor                   |        1 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805JR-0710KL/311-10KARCT-ND/731188                           |
-| 4.7k ohm 0805 resistor                  |        1 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-074K7L/311-4.70KCRCT-ND/730876 |
+| 4.7k ohm 0805 resistor                  |        1 |             0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-074K7L/311-4.70KCRCT-ND/730876                         |
 | On/Off SPDT Slider Switch               |        1 |             0.53 | https://www.digikey.com/product-detail/en/c-k/JS102011SAQN/401-1999-1-ND/1640114                                |
 
 
