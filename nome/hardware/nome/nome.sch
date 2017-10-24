@@ -1984,4 +1984,10 @@ Wire Wire Line
 Connection ~ 13100 2050
 Wire Wire Line
 	13100 2050 13100 1750
+Text Notes 11450 13000 0    60   ~ 0
+Nome metronome
+Text Notes 12250 13150 0    60   ~ 0
+10/24/17
+Text Notes 14650 13150 0    60   ~ 0
+A
 $EndSCHEMATC
