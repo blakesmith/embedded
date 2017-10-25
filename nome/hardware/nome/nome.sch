@@ -192,8 +192,6 @@ F 3 "" H 2050 3650 50  0001 C CNN
 	1    2050 3650
 	1    0    0    -1  
 $EndComp
-Text Label 2050 3550 0    60   ~ 0
-GND
 $Comp
 L C C3
 U 1 1 59E79936
@@ -759,8 +757,6 @@ F 3 "" H 2050 2350 50  0001 C CNN
 	1    2050 2350
 	1    0    0    -1  
 $EndComp
-Text Label 2050 2500 0    60   ~ 0
-3.3V
 $Comp
 L LM1117-1.8 U1
 U 1 1 59EBCE5C
@@ -1663,8 +1659,6 @@ Wire Wire Line
 Wire Wire Line
 	10100 1100 10100 1300
 Wire Wire Line
-	8150 4600 8150 4800
-Wire Wire Line
 	8150 4150 8150 4350
 Wire Wire Line
 	9250 4150 8150 4150
@@ -2007,4 +2001,6 @@ Wire Wire Line
 Wire Wire Line
 	1750 3600 2050 3600
 Connection ~ 2050 3600
+Wire Wire Line
+	8150 4650 8150 4800
 $EndSCHEMATC
