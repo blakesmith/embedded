@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2
+EESchema Schematic File Version 3
 LIBS:power
 LIBS:device
 LIBS:switches
@@ -34,7 +34,7 @@ LIBS:valves
 LIBS:nome
 LIBS:open-project
 LIBS:nome-cache
-EELAYER 25 0
+EELAYER 26 0
 EELAYER END
 $Descr User 15748 13780
 encoding utf-8
@@ -135,17 +135,6 @@ F 3 "" H 5500 4250 50  0001 C CNN
 $EndComp
 Text Label 5500 4250 0    60   ~ 0
 GND
-$Comp
-L C C7
-U 1 1 59E789E3
-P 5500 3850
-F 0 "C7" H 5525 3950 50  0000 L CNN
-F 1 "0.1uF" H 5525 3750 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 5538 3700 50  0001 C CNN
-F 3 "" H 5500 3850 50  0001 C CNN
-	1    5500 3850
-	1    0    0    -1  
-$EndComp
 $Comp
 L STMF411CEU6 U4
 U 1 1 59E41970
@@ -1126,7 +1115,7 @@ U 1 1 59EDA6EA
 P 7150 11250
 F 0 "J2" H 7200 11550 50  0000 C CNN
 F 1 "JTAG_SWD" H 7200 10950 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x10_Pitch2.54mm" H 7150 11250 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch2.54mm" H 7150 11250 50  0001 C CNN
 F 3 "" H 7150 11250 50  0001 C CNN
 	1    7150 11250
 	1    0    0    -1  
@@ -1700,8 +1689,6 @@ Wire Wire Line
 Wire Wire Line
 	4150 11750 4150 11600
 Wire Wire Line
-	1750 2650 1750 4300
-Wire Wire Line
 	1450 2650 2050 2650
 Wire Wire Line
 	1450 4400 1450 2650
@@ -1711,8 +1698,6 @@ Wire Wire Line
 	1750 4300 3100 4300
 Wire Wire Line
 	2050 3400 1750 3400
-Wire Wire Line
-	2050 2350 2050 3650
 Connection ~ 2050 3400
 Connection ~ 2050 2650
 Connection ~ 1750 2650
@@ -1722,13 +1707,9 @@ Wire Wire Line
 Wire Wire Line
 	4000 1800 3300 1800
 Wire Wire Line
-	3650 1300 3650 1800
-Wire Wire Line
 	3200 3550 3200 1300
 Wire Wire Line
 	3300 1800 3300 3550
-Wire Wire Line
-	4000 1100 4000 1950
 Connection ~ 4000 1800
 Connection ~ 4000 1300
 Connection ~ 3650 1300
@@ -1742,8 +1723,6 @@ Wire Wire Line
 Wire Wire Line
 	5500 4050 5100 4050
 Wire Wire Line
-	5500 3400 5500 4250
-Wire Wire Line
 	4400 3600 5500 3600
 Connection ~ 4700 5750
 Connection ~ 4700 5300
@@ -1751,8 +1730,6 @@ Wire Wire Line
 	4300 5300 4300 4750
 Wire Wire Line
 	4700 5300 4300 5300
-Wire Wire Line
-	4700 5100 4700 5900
 Wire Wire Line
 	4200 5750 4700 5750
 Wire Wire Line
@@ -1984,4 +1961,50 @@ Wire Wire Line
 Connection ~ 13100 2050
 Wire Wire Line
 	13100 2050 13100 1750
+Text Notes 11450 13000 0    60   ~ 0
+Nome metronome
+Text Notes 12250 13150 0    60   ~ 0
+10/24/17
+Text Notes 14650 13150 0    60   ~ 0
+A
+Wire Wire Line
+	4000 1400 4000 1100
+Wire Wire Line
+	4000 1700 4000 1800
+Wire Wire Line
+	3650 1400 3650 1300
+Wire Wire Line
+	3650 1700 3650 1800
+Wire Wire Line
+	1750 2650 1750 2900
+Wire Wire Line
+	1750 3400 1750 3200
+Wire Wire Line
+	2050 2350 2050 2900
+Wire Wire Line
+	2050 3200 2050 3650
+$Comp
+L C C7
+U 1 1 59E789E3
+P 5500 3850
+F 0 "C7" H 5525 3950 50  0000 L CNN
+F 1 "0.1uF" H 5525 3750 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 5538 3700 50  0001 C CNN
+F 3 "" H 5500 3850 50  0001 C CNN
+	1    5500 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5500 3700 5500 3400
+Wire Wire Line
+	5500 4000 5500 4250
+Wire Wire Line
+	4700 5100 4700 5350
+Wire Wire Line
+	4700 5650 4700 5900
+Wire Wire Line
+	1750 4300 1750 3600
+Wire Wire Line
+	1750 3600 2050 3600
+Connection ~ 2050 3600
 $EndSCHEMATC
