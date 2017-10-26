@@ -6,4 +6,8 @@
 ** DONE Pick out a rotary encoder knob
 ** DONE Double check PEC11 footprint
 ** DONE Double check schematic
-** TODO Begin layout
+** DONE Begin layout
+** TODO Double check power rail track widths
+** TODO Double check switch footprint position
+** TODO Digital vs. Analog plane
+** TODO Add logo / rev
