@@ -1498,11 +1498,7 @@ Wire Wire Line
 	13400 1750 13500 1750
 Connection ~ 9900 1750
 Wire Wire Line
-	9050 1750 9900 1750
-Wire Wire Line
-	9050 3450 9050 1750
-Wire Wire Line
-	9250 3450 9050 3450
+	8400 3450 9250 3450
 Wire Wire Line
 	3400 4750 3400 5300
 Wire Wire Line
@@ -2003,4 +1999,23 @@ Wire Wire Line
 Connection ~ 2050 3600
 Wire Wire Line
 	8150 4650 8150 4800
+Text Label 3600 2850 0    60   ~ 0
+GND
+Wire Wire Line
+	8400 3450 8400 2750
+Wire Wire Line
+	8400 2750 8600 2750
+Wire Wire Line
+	8600 2750 8600 2900
+$Comp
+L GND #PWR?
+U 1 1 59F27A93
+P 8600 2900
+F 0 "#PWR?" H 8600 2650 50  0001 C CNN
+F 1 "GND" H 8605 2727 50  0000 C CNN
+F 2 "" H 8600 2900 50  0001 C CNN
+F 3 "" H 8600 2900 50  0001 C CNN
+	1    8600 2900
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
