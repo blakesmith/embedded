@@ -11,6 +11,5 @@
 ** DONE Double check cap & resistor label visibility
 ** DONE Double check USB & Jack alignment
 ** DONE Double check power rail track widths
-** TODO Add mounting holes
-** TODO Digital vs. Analog plane
+** DONE Add mounting holes
 ** TODO Add logo / rev
