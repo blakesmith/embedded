@@ -12,4 +12,4 @@
 ** DONE Double check USB & Jack alignment
 ** DONE Double check power rail track widths
 ** DONE Add mounting holes
-** TODO Add logo / rev
+** DONE Add logo / rev
