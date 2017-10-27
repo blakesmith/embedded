@@ -10,6 +10,7 @@
 ** DONE Double check switch footprint position
 ** DONE Double check cap & resistor label visibility
 ** DONE Double check USB & Jack alignment
-** TODO Double check power rail track widths
+** DONE Double check power rail track widths
+** TODO Add mounting holes
 ** TODO Digital vs. Analog plane
 ** TODO Add logo / rev
