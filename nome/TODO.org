@@ -7,9 +7,9 @@
 ** DONE Double check PEC11 footprint
 ** DONE Double check schematic
 ** DONE Begin layout
+** DONE Double check switch footprint position
+** DONE Double check cap & resistor label visibility
+** DONE Double check USB & Jack alignment
 ** TODO Double check power rail track widths
-** TODO Double check switch footprint position
-** TODO Double check cap & resistor label visibility
-** TODO Double check USB & Jack alignment
 ** TODO Digital vs. Analog plane
 ** TODO Add logo / rev

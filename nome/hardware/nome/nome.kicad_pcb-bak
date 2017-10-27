@@ -3,7 +3,7 @@
 (general
   (thickness 1.6)
   (drawings 8)
-  (tracks 922)
+  (tracks 921)
   (zones 0)
   (modules 59)
   (nets 107)
@@ -2326,7 +2326,7 @@
   )
 
   (module nome:CK_SPDT (layer F.Cu) (tedit 59ED0DC0) (tstamp 59F67467)
-    (at 102.108 78.74 90)
+    (at 101.6 78.74 90)
     (path /59EEDFE5)
     (fp_text reference SW1 (at 5 -5 90) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -2979,7 +2979,6 @@
   (segment (start 51.872 53.896) (end 54.364 56.388) (width 0.1524) (layer F.Cu) (net 5))
   (segment (start 54.364 56.388) (end 62.992 56.388) (width 0.1524) (layer F.Cu) (net 5))
   (segment (start 51.872 51.308) (end 51.872 47.534) (width 0.1524) (layer F.Cu) (net 5))
-  (segment (start 25.456 74.8536) (end 25.456 76.481) (width 0.1524) (layer F.Cu) (net 5))
   (segment (start 70.9495 58.42) (end 68.9175 56.388) (width 0.1524) (layer B.Cu) (net 5))
   (segment (start 68.9175 56.388) (end 62.992 56.388) (width 0.1524) (layer B.Cu) (net 5))
   (via (at 62.992 56.388) (size 0.6858) (drill 0.3302) (layers F.Cu B.Cu) (net 5))
