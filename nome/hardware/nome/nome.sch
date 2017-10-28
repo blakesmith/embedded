@@ -139,13 +139,13 @@ L STMF411CEU6 U4
 U 1 1 59E41970
 P 3750 4150
 F 0 "U4" H 3700 4150 60  0000 C CNN
-F 1 "STMF411CEU6" H 3700 4150 60  0000 C CNN
+F 1 "STM32F413CGU6" H 3750 4000 60  0000 C CNN
 F 2 "Housings_QFP:LQFP-48_7x7mm_Pitch0.5mm" H 3700 4150 60  0001 C CNN
-F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/b3/a5/46/3b/b4/e5/4c/85/DM00115249.pdf/files/DM00115249.pdf/jcr:content/translations/en.DM00115249.pdf" H 3700 4150 60  0001 C CNN
-F 4 "497-14907-ND" H 3750 4150 60  0001 C CNN "S1PN"
-F 5 "https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F411CEU6/497-14907-ND/4935720" H 3750 4150 60  0001 C CNN "S1PL"
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/group3/f6/1d/4a/d9/f9/96/43/2a/DM00282249/files/DM00282249.pdf/jcr:content/translations/en.DM00282249.pdf" H 3700 4150 60  0001 C CNN
+F 4 "497-17017-ND" H 3750 4150 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F413CGU6/497-17017-ND/6564709" H 3750 4150 60  0001 C CNN "S1PL"
 F 6 "STMicroelectronics" H 3750 4150 60  0001 C CNN "MFN"
-F 7 "STM32F411CEU6" H 3750 4150 60  0001 C CNN "MFP"
+F 7 "STM32F413CGU6" H 3750 4150 60  0001 C CNN "MFP"
 	1    3750 4150
 	1    0    0    -1  
 $EndComp
@@ -563,8 +563,11 @@ P 14050 1000
 F 0 "LS1" H 14100 1225 50  0000 R CNN
 F 1 "Speaker" H 14100 1150 50  0000 R CNN
 F 2 "nome:WirePad-1x2-2.54mm" H 14050 800 50  0001 C CNN
-F 3 "" H 14040 950 50  0001 C CNN
-F 4 "Value" H 0   0   60  0001 C CNN "S1PL"
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Mallory%20Sonalert%20PDFs/PSR-57N08A01-AQ.PDF" H 14040 950 50  0001 C CNN
+F 4 "https://www.digikey.com/product-detail/en/mallory-sonalert-products-inc/PSR-57N08A01-AQ/458-1136-ND/2071452" H 0   0   60  0001 C CNN "S1PL"
+F 5 "458-1136-ND" H 0   0   60  0001 C CNN "S1PN"
+F 6 "Mallory Sonalert Products Inc." H 0   0   60  0001 C CNN "MFN"
+F 7 "PSR-57N08A01-AQ" H 0   0   60  0001 C CNN "MFP"
 	1    14050 1000
 	1    0    0    -1  
 $EndComp
@@ -864,11 +867,11 @@ P 4950 10750
 F 0 "U1" H 4800 10875 50  0000 C CNN
 F 1 "LM1117-1.8" H 4950 10875 50  0000 L CNN
 F 2 "TO_SOT_Packages_SMD:SOT-223" H 4950 10750 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/lm1117.pdf" H 4950 10750 50  0001 C CNN
-F 4 "LM1117MP-1.8/NOPBDKR-ND" H 4950 10750 60  0001 C CNN "S1PN"
-F 5 "https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-1.8-NOPB/LM1117MP-1.8-NOPBDKR-ND/1243938" H 4950 10750 60  0001 C CNN "S1PL"
-F 6 "Texas Instruments" H 4950 10750 60  0001 C CNN "MFN"
-F 7 "LM1117MP-1.8/NOPB" H 4950 10750 60  0001 C CNN "MFP"
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/99/3b/7d/91/91/51/4b/be/CD00000544.pdf/files/CD00000544.pdf/jcr:content/translations/en.CD00000544.pdf" H 4950 10750 50  0001 C CNN
+F 4 "497-7308-1-ND" H 4950 10750 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S18TR/497-7308-1-ND/1883983" H 4950 10750 60  0001 C CNN "S1PL"
+F 6 "STMicroelectronics" H 4950 10750 60  0001 C CNN "MFN"
+F 7 "LD1117S18TR" H 4950 10750 60  0001 C CNN "MFP"
 	1    4950 10750
 	1    0    0    -1  
 $EndComp
@@ -882,10 +885,10 @@ F 0 "U2" H 4800 11725 50  0000 C CNN
 F 1 "LM1117-3.3" H 4950 11725 50  0000 L CNN
 F 2 "TO_SOT_Packages_SMD:SOT-223" H 4950 11600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/lm1117.pdf" H 4950 11600 50  0001 C CNN
-F 4 "LM1117MP-3.3/NOPBCT-ND" H 4950 11600 60  0001 C CNN "S1PN"
-F 5 "https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-3.3-NOPB/LM1117MP-3.3-NOPBCT-ND/308024" H 4950 11600 60  0001 C CNN "S1PL"
-F 6 "Texas Instruments" H 4950 11600 60  0001 C CNN "MFN"
-F 7 "LM1117MP-3.3/NOPB" H 4950 11600 60  0001 C CNN "MFP"
+F 4 "LM1117MP-3.3/NOPBCT-ND" H 4950 11600 60  0001 C CNN "497-1242-6-ND"
+F 5 "https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S33TR/497-1242-6-ND/1706544" H 4950 11600 60  0001 C CNN "S1PL"
+F 6 "STMicroelectronics" H 4950 11600 60  0001 C CNN "MFN"
+F 7 "LD1117S33TR" H 4950 11600 60  0001 C CNN "MFP"
 	1    4950 11600
 	1    0    0    -1  
 $EndComp

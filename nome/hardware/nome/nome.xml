@@ -1,0 +1,1726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/blake/projects/stm32/nome/hardware/nome/nome.sch</source>
+    <date>Sat 28 Oct 2017 02:59:17 PM CDT</date>
+    <tool>Eeschema no-vcs-found-a562525~60~ubuntu16.04.1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>nome.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U6">
+      <value>CS43L22</value>
+      <footprint>Housings_DFN_QFN:QFN-40-1EP_6x6mm_Pitch0.5mm</footprint>
+      <datasheet>https://d3uzseaevmutz1.cloudfront.net/pubs/proDatasheet/CS43L22_F2.pdf</datasheet>
+      <fields>
+        <field name="S1PN">598-1650-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/cirrus-logic-inc/CS43L22-CNZ/598-1650-ND/2024884</field>
+        <field name="MFN">Cirrus Logic Inc.</field>
+        <field name="MFP">CS43L22-CNZ</field>
+      </fields>
+      <libsource lib="nome" part="CS43L22"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E6BCC3</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E787C7</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>STM32F413CGU6</value>
+      <footprint>Housings_QFP:LQFP-48_7x7mm_Pitch0.5mm</footprint>
+      <datasheet>http://www.st.com/content/ccc/resource/technical/document/datasheet/group3/f6/1d/4a/d9/f9/96/43/2a/DM00282249/files/DM00282249.pdf/jcr:content/translations/en.DM00282249.pdf</datasheet>
+      <fields>
+        <field name="S1PN">497-17017-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F413CGU6/497-17017-ND/6564709</field>
+        <field name="MFN">STMicroelectronics</field>
+        <field name="MFP">STM32F413CGU6</field>
+      </fields>
+      <libsource lib="nome" part="STMF411CEU6"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E41970</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>4.7uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/cx5r.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1415-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZD475KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E78528</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E77FCD</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1405-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZC105KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E79936</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7995F</tstamp>
+    </comp>
+    <comp ref="SW2">
+      <value>Rotary_Encoder_Switch</value>
+      <footprint>nome:PEC11</footprint>
+      <datasheet>http://www.bourns.com/docs/Product-Datasheets/PEC11R.pdf</datasheet>
+      <fields>
+        <field name="S1PN">PEC11R-4215K-S0024-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/bourns-inc/PEC11R-4215K-S0024/PEC11R-4215K-S0024-ND/4499662</field>
+        <field name="MFN">Bourns Inc.</field>
+        <field name="MFP">PEC11R-4215K-S0024</field>
+      </fields>
+      <libsource lib="device" part="Rotary_Encoder_Switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7A30B</tstamp>
+    </comp>
+    <comp ref="C15">
+      <value>1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1405-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZC105KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7B0EB</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1405-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZC105KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7B30C</tstamp>
+    </comp>
+    <comp ref="C19">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7B806</tstamp>
+    </comp>
+    <comp ref="C23">
+      <value>1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1405-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZC105KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7BA94</tstamp>
+    </comp>
+    <comp ref="C21">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7BAC7</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>10uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/cx5r.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-5167-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZD106KAT2A/478-5167-1-ND/1913257</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZD106KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7CECD</tstamp>
+    </comp>
+    <comp ref="C11">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7D0C7</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E7D120</tstamp>
+    </comp>
+    <comp ref="C24">
+      <value>10uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/cx5r.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-5167-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZD106KAT2A/478-5167-1-ND/1913257</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZD106KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E82294</tstamp>
+    </comp>
+    <comp ref="C22">
+      <value>1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1405-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZC105KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E82493</tstamp>
+    </comp>
+    <comp ref="C18">
+      <value>150pF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/C0GNP0-Dielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1318-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055A151JAT2A/478-1318-1-ND/564350</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055A151JAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E8284B</tstamp>
+    </comp>
+    <comp ref="C20">
+      <value>150pF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/C0GNP0-Dielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1318-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055A151JAT2A/478-1318-1-ND/564350</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055A151JAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E82AEA</tstamp>
+    </comp>
+    <comp ref="LS1">
+      <value>Speaker</value>
+      <footprint>nome:WirePad-1x2-2.54mm</footprint>
+      <datasheet>https://media.digikey.com/pdf/Data%20Sheets/Mallory%20Sonalert%20PDFs/PSR-57N08A01-AQ.PDF</datasheet>
+      <fields>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/mallory-sonalert-products-inc/PSR-57N08A01-AQ/458-1136-ND/2071452</field>
+        <field name="S1PN">458-1136-ND</field>
+        <field name="MFN">Mallory Sonalert Products Inc.</field>
+        <field name="MFP">PSR-57N08A01-AQ</field>
+      </fields>
+      <libsource lib="device" part="Speaker"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E82ECF</tstamp>
+    </comp>
+    <comp ref="C14">
+      <value>1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1405-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZC105KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E8470E</tstamp>
+    </comp>
+    <comp ref="C16">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E84A6B</tstamp>
+    </comp>
+    <comp ref="C17">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E84F64</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>0.022uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1360-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08051C223KAT2A/478-1360-1-ND/564392</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08051C223KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E96545</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>51.1</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-51.1CRCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805FR-0751R1L/311-51.1CRCT-ND/730961</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805FR-0751R1L</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E9659C</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>0.022uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1360-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08051C223KAT2A/478-1360-1-ND/564392</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08051C223KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E96D04</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>51.1</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-51.1CRCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805FR-0751R1L/311-51.1CRCT-ND/730961</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805FR-0751R1L</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E96D63</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>LM1117-1.8</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-223</footprint>
+      <datasheet>http://www.st.com/content/ccc/resource/technical/document/datasheet/99/3b/7d/91/91/51/4b/be/CD00000544.pdf/files/CD00000544.pdf/jcr:content/translations/en.CD00000544.pdf</datasheet>
+      <fields>
+        <field name="S1PN">497-7308-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S18TR/497-7308-1-ND/1883983</field>
+        <field name="MFN">STMicroelectronics</field>
+        <field name="MFP">LD1117S18TR</field>
+      </fields>
+      <libsource lib="regul" part="LM1117-1.8"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EBCE5C</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>LM1117-3.3</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-223</footprint>
+      <datasheet>http://www.ti.com/lit/ds/symlink/lm1117.pdf</datasheet>
+      <fields>
+        <field name="497-1242-6-ND">LM1117MP-3.3/NOPBCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S33TR/497-1242-6-ND/1706544</field>
+        <field name="MFN">STMicroelectronics</field>
+        <field name="MFP">LD1117S33TR</field>
+      </fields>
+      <libsource lib="regul" part="LM1117-3.3"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EBD530</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>AS1115</value>
+      <footprint>Housings_SSOP:QSOP-24_3.9x8.7mm_Pitch0.635mm</footprint>
+      <datasheet>http://ams.com/eng/content/download/18430/343782</datasheet>
+      <fields>
+        <field name="S1PN">AS1115-BSSTCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597</field>
+        <field name="MFN">ams</field>
+        <field name="MFP">AS1115-BSST</field>
+      </fields>
+      <libsource lib="nome" part="AS1115"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EC3D68</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10k</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-10KARCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805JR-0710KL/311-10KARCT-ND/731188</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805JR-0710KL</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EC64B4</tstamp>
+    </comp>
+    <comp ref="U5">
+      <value>LTC-4727JS</value>
+      <footprint>nome:LTC-4727</footprint>
+      <datasheet>https://media.digikey.com/pdf/Data%20Sheets/Lite-On%20PDFs/LTC-4727JS.pdf</datasheet>
+      <fields>
+        <field name="S1PN">160-1547-5-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/lite-on-inc/LTC-4727JS/160-1547-5-ND/408220</field>
+        <field name="MFN">Lite-On Inc.</field>
+        <field name="MFP">LTC-4727JS</field>
+      </fields>
+      <libsource lib="nome" part="LTC-4727JS"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EC78C2</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EC7FF1</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>LED Orange</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <datasheet>http://optoelectronics.liteon.com/upload/download/DS-22-99-0170/LTST-C171AKT.pdf</datasheet>
+      <fields>
+        <field name="S1PN">160-1419-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171AKT/160-1419-1-ND/386784</field>
+        <field name="MFN">Lite-On Inc.</field>
+        <field name="MFP">LTST-C171AKT</field>
+      </fields>
+      <libsource lib="device" part="LED"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59ECB766</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>LED Red</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <datasheet>http://optoelectronics.liteon.com/upload/download/DS22-2000-109/LTST-C171KRKT.pdf</datasheet>
+      <fields>
+        <field name="S1PN">160-1427-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800</field>
+        <field name="MFN">Lite-On Inc.</field>
+        <field name="MFP">LTST-C171KRK</field>
+      </fields>
+      <libsource lib="device" part="LED"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59ECB7DD</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>LED Green</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <datasheet>https://media.digikey.com/pdf/Data%20Sheets/Lite-On%20PDFs/LTST-C171GKT.pdf</datasheet>
+      <fields>
+        <field name="S1PN">160-1423-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792</field>
+        <field name="MFN">Lite-On Inc.</field>
+        <field name="MFP">LTST-C171GKT</field>
+      </fields>
+      <libsource lib="device" part="LED"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59ECB8E0</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>LED Blue</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <datasheet>http://optoelectronics.liteon.com/upload/download/DS22-2000-233/LTST-C171TBKT(0630).pdf</datasheet>
+      <fields>
+        <field name="S1PN">160-1645-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171TBKT/160-1645-1-ND/573585</field>
+        <field name="MFN">Lite-On Inc.</field>
+        <field name="MFP">LTST-C171TBKT</field>
+      </fields>
+      <libsource lib="device" part="LED"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59ECB959</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>25</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-24.9CRCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805FR-0724R9L/311-24.9CRCT-ND/730706</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805FR-0724R9L</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59ECD1A0</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>40</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-40.2CRCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805FR-0740R2L/311-40.2CRCT-ND/730887</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805FR-0740R2L</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59ECD35A</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>40</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-40.2CRCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805FR-0740R2L/311-40.2CRCT-ND/730887</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805FR-0740R2L</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59ECD4E9</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>40</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-40.2CRCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805FR-0740R2L/311-40.2CRCT-ND/730887</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805FR-0740R2L</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59ECD626</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>JTAG_SWD</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_2x05_Pitch2.54mm</footprint>
+      <datasheet>http://www.on-shore.com/wp-content/uploads/2015/09/302-sxxx.pdf</datasheet>
+      <fields>
+        <field name="S1PN">ED1543-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/on-shore-technology-inc/302-S101/ED1543-ND/2178422</field>
+        <field name="MFN">On Shore Technology Inc.</field>
+        <field name="MFP">302-S101</field>
+      </fields>
+      <libsource lib="nome-cache" part="Conn_02x05_Odd_Even"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EDA6EA</tstamp>
+    </comp>
+    <comp ref="C26">
+      <value>4.7uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/cx5r.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1415-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZD475KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EDD613</tstamp>
+    </comp>
+    <comp ref="J4">
+      <value>7SEG_DEBUG</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/Harwin_Product_Catalog_page_208.pdf</datasheet>
+      <fields>
+        <field name="S1PN">952-2265-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/harwin-inc/M20-9990445/952-2265-ND/3728229</field>
+        <field name="MFN">Harwin Inc.</field>
+        <field name="MFP">M20-9990445</field>
+      </fields>
+      <libsource lib="nome-cache" part="Conn_01x04"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EEB3FD</tstamp>
+    </comp>
+    <comp ref="SW1">
+      <value>SW_SPDT</value>
+      <footprint>nome:CK_SPDT</footprint>
+      <datasheet>http://www.ckswitches.com/media/1422/js.pdf</datasheet>
+      <fields>
+        <field name="S1PN">401-1999-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/c-k/JS102011SAQN/401-1999-1-ND/1640114</field>
+        <field name="MFN">C&amp;K</field>
+        <field name="MFP">JS102011SAQN</field>
+      </fields>
+      <libsource lib="nome-cache" part="SW_SPDT"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EEDFE5</tstamp>
+    </comp>
+    <comp ref="C27">
+      <value>4.7uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/cx5r.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1415-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZD475KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF03DA</tstamp>
+    </comp>
+    <comp ref="U8">
+      <value>MCP73831</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23-5_HandSoldering</footprint>
+      <datasheet>http://ww1.microchip.com/downloads/en/DeviceDoc/20001060AQ.pdf</datasheet>
+      <fields>
+        <field name="S1PN">MCP73831T-2ACI/OTCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/microchip-technology/MCP73831T-2ACI-OT/MCP73831T-2ACI-OTCT-ND/1979802</field>
+        <field name="MFN">Microchip Technology</field>
+        <field name="MFP">MCP73831T-2ACI/OT</field>
+      </fields>
+      <libsource lib="open-project" part="MCP73831"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF0F9D</tstamp>
+    </comp>
+    <comp ref="U7">
+      <value>MICRO-B_USB</value>
+      <footprint>open-project:MICRO-B_USB</footprint>
+      <datasheet>http://portal.fciconnect.com/Comergent/fci/drawing/10118192.pdf</datasheet>
+      <fields>
+        <field name="S1PN">609-4613-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378</field>
+        <field name="MFP">10118192-0001LF</field>
+        <field name="MFN">Amphenol FCI</field>
+      </fields>
+      <libsource lib="open-project" part="MICRO-B_USB"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF1058</tstamp>
+    </comp>
+    <comp ref="C28">
+      <value>4.7uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/cx5r.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1415-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZD475KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF12EB</tstamp>
+    </comp>
+    <comp ref="C29">
+      <value>4.7uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/cx5r.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1415-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">0805ZD475KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF1FFF</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>4.7k</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-4.70KCRCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805FR-074K7L/311-4.70KCRCT-ND/730876</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805FR-074K7L</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF248D</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>470</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-470ARCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805JR-07470RL/311-470ARCT-ND/731280</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805JR-07470RL</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF4541</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>LED Red</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <datasheet>http://optoelectronics.liteon.com/upload/download/DS22-2000-109/LTST-C171KRKT.pdf</datasheet>
+      <fields>
+        <field name="S1PN">160-1427-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800</field>
+        <field name="MFN">Lite-On Inc.</field>
+        <field name="MFP">LTST-C171KRK</field>
+      </fields>
+      <libsource lib="device" part="LED"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF45D4</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>470</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <datasheet>http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf</datasheet>
+      <fields>
+        <field name="S1PN">311-470ARCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/yageo/RC0805JR-07470RL/311-470ARCT-ND/731280</field>
+        <field name="MFN">Yageo</field>
+        <field name="MFP">RC0805JR-07470RL</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF4E4D</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>LED Green</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <datasheet>https://media.digikey.com/pdf/Data%20Sheets/Lite-On%20PDFs/LTST-C171GKT.pdf</datasheet>
+      <fields>
+        <field name="S1PN">160-1423-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792</field>
+        <field name="MFN">Lite-On Inc.</field>
+        <field name="MFP">LTST-C171GKT</field>
+      </fields>
+      <libsource lib="device" part="LED"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF4EDC</tstamp>
+    </comp>
+    <comp ref="J3">
+      <value>JST</value>
+      <footprint>third_party:JST_PH_B2B-PH-SM4-TB_02x2.00mm_Straight</footprint>
+      <datasheet>http://www.jst-mfg.com/product/pdf/eng/ePH.pdf</datasheet>
+      <fields>
+        <field name="S1PN">455-1734-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/jst-sales-america-inc/B2B-PH-SM4-TB-LF-SN/455-1734-1-ND/926831</field>
+        <field name="MFN">JST Sales America Inc.</field>
+        <field name="MFP">B2B-PH-SM4-TB(LF)(SN)</field>
+      </fields>
+      <libsource lib="nome-cache" part="Conn_01x02_Female"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59EF56AB</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>SJ-2524</value>
+      <footprint>nome:SJ-2524</footprint>
+      <datasheet>http://www.cui.com/product/resource/sj-252x-smt-series.pdf</datasheet>
+      <fields>
+        <field name="S1PN">CP-2524SJCT-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/cui-inc/SJ-2524-SMT-TR/CP-2524SJCT-ND/669703</field>
+        <field name="MFN">CUI Inc.</field>
+        <field name="MFP">SJ-2524-SMT-TR</field>
+      </fields>
+      <libsource lib="nome" part="SJ-2524"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59F00B3E</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>0.1uF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <datasheet>http://datasheets.avx.com/X7RDielectric.pdf</datasheet>
+      <fields>
+        <field name="S1PN">478-1395-1-ND</field>
+        <field name="S1PL">https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427</field>
+        <field name="MFN">AVX Corporation</field>
+        <field name="MFP">08055C104KAT2A</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59E789E3</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="nome" part="AS1115">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">AS1115</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SDA" type="input"/>
+        <pin num="2" name="DIG0" type="input"/>
+        <pin num="3" name="DIG1" type="input"/>
+        <pin num="4" name="DIG2" type="input"/>
+        <pin num="5" name="DIG3" type="input"/>
+        <pin num="6" name="GND" type="input"/>
+        <pin num="7" name="DIG4" type="input"/>
+        <pin num="8" name="DIG5" type="input"/>
+        <pin num="9" name="DIG6" type="input"/>
+        <pin num="10" name="DIG7" type="input"/>
+        <pin num="11" name="KEYA" type="input"/>
+        <pin num="12" name="KEYB" type="input"/>
+        <pin num="13" name="ISET" type="input"/>
+        <pin num="14" name="SCL" type="input"/>
+        <pin num="15" name="SEGA" type="input"/>
+        <pin num="16" name="SEGF" type="input"/>
+        <pin num="17" name="SEGB" type="input"/>
+        <pin num="18" name="SEGG" type="input"/>
+        <pin num="19" name="VDD" type="input"/>
+        <pin num="20" name="SEGC" type="input"/>
+        <pin num="21" name="SEGE" type="input"/>
+        <pin num="22" name="SEGDP" type="input"/>
+        <pin num="23" name="SEGD" type="input"/>
+        <pin num="24" name="IRQ" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="C">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="nome" part="CS43L22">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">CS43L22</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SDA" type="input"/>
+        <pin num="2" name="SCL" type="input"/>
+        <pin num="3" name="AD0" type="input"/>
+        <pin num="4" name="SPKR_OUTA+" type="input"/>
+        <pin num="5" name="VP" type="input"/>
+        <pin num="6" name="SPKR_OUTA-" type="input"/>
+        <pin num="7" name="SPKR_OUTB+" type="input"/>
+        <pin num="8" name="VP" type="input"/>
+        <pin num="9" name="SPKR_OUTB-" type="input"/>
+        <pin num="10" name="-VHPFILT" type="input"/>
+        <pin num="11" name="FLYN" type="input"/>
+        <pin num="12" name="FLYP" type="input"/>
+        <pin num="13" name="+VHP" type="input"/>
+        <pin num="14" name="HP/LINE_OUTB" type="input"/>
+        <pin num="15" name="HP/LINE_OUTA" type="input"/>
+        <pin num="16" name="VA" type="input"/>
+        <pin num="17" name="AGND" type="input"/>
+        <pin num="18" name="FILT+" type="input"/>
+        <pin num="19" name="VQ" type="input"/>
+        <pin num="20" name="TSTO" type="input"/>
+        <pin num="21" name="AIN4A" type="input"/>
+        <pin num="22" name="AIN4B" type="input"/>
+        <pin num="23" name="AIN3A" type="input"/>
+        <pin num="24" name="AIN3B" type="input"/>
+        <pin num="25" name="AIN2A" type="input"/>
+        <pin num="26" name="AIN2B" type="input"/>
+        <pin num="27" name="AFILTA" type="input"/>
+        <pin num="28" name="AFILTB" type="input"/>
+        <pin num="29" name="AIN1A" type="input"/>
+        <pin num="30" name="AIN1B" type="input"/>
+        <pin num="31" name="SPKR/HP" type="input"/>
+        <pin num="32" name="~RESET" type="input"/>
+        <pin num="33" name="VL" type="input"/>
+        <pin num="34" name="VD" type="input"/>
+        <pin num="35" name="DGND" type="input"/>
+        <pin num="36" name="TSTO" type="input"/>
+        <pin num="37" name="MCLK" type="input"/>
+        <pin num="38" name="SCLK" type="input"/>
+        <pin num="39" name="SDIN" type="input"/>
+        <pin num="40" name="LRCK" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="nome-cache" part="Conn_01x02_Female">
+      <footprints>
+        <fp>Connector*:*_??x*mm*</fp>
+        <fp>Connector*:*1x??x*mm*</fp>
+        <fp>Socket?Strip?Straight?1X*</fp>
+        <fp>Socket?Strip?Angled?1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_Female</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="nome-cache" part="Conn_01x04">
+      <footprints>
+        <fp>Connector*:*_??x*mm*</fp>
+        <fp>Connector*:*1x??x*mm*</fp>
+        <fp>Pin?Header?Straight?1X*</fp>
+        <fp>Pin?Header?Angled?1X*</fp>
+        <fp>Socket?Strip?Straight?1X*</fp>
+        <fp>Socket?Strip?Angled?1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="nome-cache" part="Conn_02x05_Odd_Even">
+      <footprints>
+        <fp>Connector*:*2x??x*mm*</fp>
+        <fp>Connector*:*2x???Pitch*</fp>
+        <fp>Pin_Header_Straight_2X*</fp>
+        <fp>Pin_Header_Angled_2X*</fp>
+        <fp>Socket_Strip_Straight_2X*</fp>
+        <fp>Socket_Strip_Angled_2X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_02x05_Odd_Even</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+        <pin num="10" name="Pin_10" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="LED">
+      <description>LED generic</description>
+      <footprints>
+        <fp>LED*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="regul" part="LM1117-1.8">
+      <aliases>
+        <alias>LM1117-2.5</alias>
+        <alias>LM1117-3.3</alias>
+        <alias>LM1117-5.0</alias>
+        <alias>TLV1117-15</alias>
+        <alias>TLV1117-18</alias>
+        <alias>TLV1117-25</alias>
+        <alias>TLV1117-33</alias>
+        <alias>TLV1117-50</alias>
+      </aliases>
+      <description>800mA Low-Dropout Linear Regulator, 1.8V fixed output, TO-220/TO-252/TO-263/SOT-223</description>
+      <docs>http://www.ti.com/lit/ds/symlink/lm1117.pdf</docs>
+      <footprints>
+        <fp>SOT?223*</fp>
+        <fp>TO?263*</fp>
+        <fp>TO?252*</fp>
+        <fp>TO?220*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM1117-1.8</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VO" type="power_out"/>
+        <pin num="3" name="VI" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="nome" part="LTC-4727JS">
+      <description>4 digit 7 segment Green LED, common anode</description>
+      <docs>http://www.kingbright.com/attachments/file/psearch/000/00/00/CA56-12CGKWA(Ver.9A).pdf</docs>
+      <footprints>
+        <fp>*CA56*12CGKWA*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LTC-4727JS</field>
+        <field name="Footprint">Displays_7-Segment:LTC-4727JS</field>
+      </fields>
+      <pins>
+        <pin num="1" name="CC_DIG1" type="input"/>
+        <pin num="2" name="CC_DIG2" type="input"/>
+        <pin num="3" name="AN_D" type="input"/>
+        <pin num="4" name="CC_L1-L3" type="input"/>
+        <pin num="5" name="AN_E" type="input"/>
+        <pin num="6" name="CC_DIG3" type="input"/>
+        <pin num="7" name="AN_DP" type="input"/>
+        <pin num="8" name="CC_DIG4" type="input"/>
+        <pin num="9" name="NO_CONN" type="input"/>
+        <pin num="10" name="NO_PIN" type="input"/>
+        <pin num="11" name="AN_F" type="input"/>
+        <pin num="12" name="NO_PIN" type="input"/>
+        <pin num="13" name="AN_C_L3" type="input"/>
+        <pin num="14" name="AN_A_L1" type="input"/>
+        <pin num="15" name="AN_G" type="input"/>
+        <pin num="16" name="AN_B_L2" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="open-project" part="MCP73831">
+      <description>Li-Polymer Charge Management Controller</description>
+      <footprints>
+        <fp>SOT23-5</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP73831</field>
+      </fields>
+      <pins>
+        <pin num="1" name="STAT" type="input"/>
+        <pin num="2" name="VSS" type="input"/>
+        <pin num="3" name="VBAT" type="input"/>
+        <pin num="4" name="VDD" type="input"/>
+        <pin num="5" name="PROG" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="open-project" part="MICRO-B_USB">
+      <description>Micro-B USB connector</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MICRO-B_USB</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBUS" type="input"/>
+        <pin num="2" name="D-" type="input"/>
+        <pin num="3" name="D+" type="input"/>
+        <pin num="4" name="ID" type="input"/>
+        <pin num="5" name="GND" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="R">
+      <description>Resistor</description>
+      <footprints>
+        <fp>R_*</fp>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="Rotary_Encoder_Switch">
+      <description>Rotary encoder, dual channel, incremental quadrate outputs, with switch</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">Rotary_Encoder_Switch</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="input"/>
+        <pin num="2" name="C" type="input"/>
+        <pin num="3" name="B" type="input"/>
+        <pin num="4" name="~" type="input"/>
+        <pin num="5" name="~" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="nome" part="SJ-2524">
+      <description>3-pin audio jack receptable (stereo/TRS connector) with 2 switching contacts</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">SJ-2524</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="nome" part="STMF411CEU6">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">STMF411CEU6</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBAT" type="input"/>
+        <pin num="2" name="PC13" type="input"/>
+        <pin num="3" name="PC14-OSC32_IN" type="input"/>
+        <pin num="4" name="PC15-OSC32_OUT" type="input"/>
+        <pin num="5" name="PH0-OSC_IN" type="input"/>
+        <pin num="6" name="PH0-OSC_OUT" type="input"/>
+        <pin num="7" name="NRST" type="input"/>
+        <pin num="8" name="VSSA/VREF-" type="input"/>
+        <pin num="9" name="VDDA/VREF+" type="input"/>
+        <pin num="10" name="PA0" type="input"/>
+        <pin num="11" name="PA1" type="input"/>
+        <pin num="12" name="PA2" type="input"/>
+        <pin num="13" name="PA3" type="input"/>
+        <pin num="14" name="PA4" type="input"/>
+        <pin num="15" name="PA5" type="input"/>
+        <pin num="16" name="PA6" type="input"/>
+        <pin num="17" name="PA7" type="input"/>
+        <pin num="18" name="PB0" type="input"/>
+        <pin num="19" name="PB1" type="input"/>
+        <pin num="20" name="PB2" type="input"/>
+        <pin num="21" name="PB10" type="input"/>
+        <pin num="22" name="VCAP_1" type="input"/>
+        <pin num="23" name="VSS" type="input"/>
+        <pin num="24" name="VDD" type="input"/>
+        <pin num="25" name="PB12" type="input"/>
+        <pin num="26" name="PB13" type="input"/>
+        <pin num="27" name="PB14" type="input"/>
+        <pin num="28" name="PB15" type="input"/>
+        <pin num="29" name="PA8" type="input"/>
+        <pin num="30" name="PA9" type="input"/>
+        <pin num="31" name="PA10" type="input"/>
+        <pin num="32" name="PA11" type="input"/>
+        <pin num="33" name="PA12" type="input"/>
+        <pin num="34" name="PA13" type="input"/>
+        <pin num="35" name="VSS" type="input"/>
+        <pin num="36" name="VDD" type="input"/>
+        <pin num="37" name="PA14" type="input"/>
+        <pin num="38" name="PA15" type="input"/>
+        <pin num="39" name="PB3" type="input"/>
+        <pin num="40" name="PB4" type="input"/>
+        <pin num="41" name="PB5" type="input"/>
+        <pin num="42" name="PB6" type="input"/>
+        <pin num="43" name="PB7" type="input"/>
+        <pin num="44" name="BOOT0" type="input"/>
+        <pin num="45" name="PB8" type="input"/>
+        <pin num="46" name="PB9" type="input"/>
+        <pin num="47" name="VSS" type="input"/>
+        <pin num="48" name="VDD" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="nome-cache" part="SW_SPDT">
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_SPDT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="B" type="passive"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="Speaker">
+      <description>speaker</description>
+      <fields>
+        <field name="Reference">LS</field>
+        <field name="Value">Speaker</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="input"/>
+        <pin num="2" name="2" type="input"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
+    </library>
+    <library logical="regul">
+      <uri>/usr/share/kicad/library/regul.lib</uri>
+    </library>
+    <library logical="nome">
+      <uri>/home/blake/projects/stm32/nome/hardware/nome.lib</uri>
+    </library>
+    <library logical="open-project">
+      <uri>/home/blake/projects/stm32/nome/hardware/open-project.lib</uri>
+    </library>
+    <library logical="nome-cache">
+      <uri>/home/blake/projects/stm32/nome/hardware/nome/nome-cache.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(C9-Pad1)">
+      <node ref="C9" pin="1"/>
+      <node ref="R6" pin="2"/>
+    </net>
+    <net code="2" name="Net-(C10-Pad1)">
+      <node ref="C10" pin="1"/>
+      <node ref="R7" pin="2"/>
+    </net>
+    <net code="3" name="Net-(D6-Pad2)">
+      <node ref="D6" pin="2"/>
+      <node ref="R9" pin="2"/>
+    </net>
+    <net code="4" name="Net-(R8-Pad1)">
+      <node ref="R8" pin="1"/>
+      <node ref="U8" pin="1"/>
+      <node ref="R9" pin="1"/>
+    </net>
+    <net code="5" name="Net-(D5-Pad1)">
+      <node ref="D5" pin="1"/>
+      <node ref="R8" pin="2"/>
+    </net>
+    <net code="6" name="Net-(C27-Pad1)">
+      <node ref="C27" pin="1"/>
+      <node ref="U8" pin="4"/>
+      <node ref="U7" pin="1"/>
+      <node ref="D5" pin="2"/>
+    </net>
+    <net code="7" name="Net-(C24-Pad1)">
+      <node ref="U6" pin="18"/>
+      <node ref="C24" pin="1"/>
+    </net>
+    <net code="8" name="Net-(C20-Pad2)">
+      <node ref="C20" pin="2"/>
+      <node ref="U6" pin="28"/>
+    </net>
+    <net code="9" name="Net-(C18-Pad2)">
+      <node ref="U6" pin="27"/>
+      <node ref="C18" pin="2"/>
+    </net>
+    <net code="10" name="Net-(C22-Pad1)">
+      <node ref="U6" pin="19"/>
+      <node ref="C22" pin="1"/>
+    </net>
+    <net code="11" name="Net-(J3-Pad2)">
+      <node ref="J3" pin="2"/>
+      <node ref="SW1" pin="1"/>
+    </net>
+    <net code="12" name="Net-(SW1-Pad3)">
+      <node ref="SW1" pin="3"/>
+    </net>
+    <net code="13" name="Net-(U7-Pad2)">
+      <node ref="U7" pin="2"/>
+    </net>
+    <net code="14" name="Net-(U7-Pad3)">
+      <node ref="U7" pin="3"/>
+    </net>
+    <net code="15" name="Net-(U7-Pad4)">
+      <node ref="U7" pin="4"/>
+    </net>
+    <net code="16" name="GND">
+      <node ref="R5" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="U4" pin="8"/>
+      <node ref="U6" pin="3"/>
+      <node ref="C20" pin="1"/>
+      <node ref="C18" pin="1"/>
+      <node ref="C22" pin="2"/>
+      <node ref="C24" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="C5" pin="2"/>
+      <node ref="C19" pin="2"/>
+      <node ref="U4" pin="23"/>
+      <node ref="U4" pin="47"/>
+      <node ref="C12" pin="2"/>
+      <node ref="C11" pin="2"/>
+      <node ref="C8" pin="2"/>
+      <node ref="U4" pin="44"/>
+      <node ref="C21" pin="2"/>
+      <node ref="C23" pin="2"/>
+      <node ref="U6" pin="35"/>
+      <node ref="U6" pin="17"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="R2" pin="2"/>
+      <node ref="R3" pin="2"/>
+      <node ref="U4" pin="35"/>
+      <node ref="C13" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="R4" pin="2"/>
+      <node ref="SW2" pin="4"/>
+      <node ref="SW2" pin="2"/>
+      <node ref="C29" pin="2"/>
+      <node ref="C26" pin="1"/>
+      <node ref="R7" pin="1"/>
+      <node ref="U3" pin="6"/>
+      <node ref="J2" pin="3"/>
+      <node ref="R10" pin="1"/>
+      <node ref="J2" pin="5"/>
+      <node ref="D6" pin="1"/>
+      <node ref="J1" pin="1"/>
+      <node ref="C28" pin="2"/>
+      <node ref="U7" pin="5"/>
+      <node ref="U8" pin="2"/>
+      <node ref="C27" pin="2"/>
+      <node ref="SW1" pin="2"/>
+      <node ref="C16" pin="2"/>
+      <node ref="C17" pin="2"/>
+      <node ref="J4" pin="1"/>
+      <node ref="R6" pin="1"/>
+      <node ref="U2" pin="1"/>
+      <node ref="C14" pin="2"/>
+      <node ref="J2" pin="9"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="17" name="Net-(J2-Pad7)">
+      <node ref="J2" pin="7"/>
+    </net>
+    <net code="18" name="/JTDI">
+      <node ref="J2" pin="8"/>
+      <node ref="U4" pin="38"/>
+    </net>
+    <net code="19" name="/JTMS">
+      <node ref="U4" pin="34"/>
+      <node ref="J2" pin="2"/>
+    </net>
+    <net code="20" name="/JTCK">
+      <node ref="U4" pin="37"/>
+      <node ref="J2" pin="4"/>
+    </net>
+    <net code="21" name="/JTDO">
+      <node ref="J2" pin="6"/>
+      <node ref="U4" pin="39"/>
+    </net>
+    <net code="22" name="/RESET">
+      <node ref="U4" pin="7"/>
+      <node ref="J2" pin="10"/>
+    </net>
+    <net code="23" name="Net-(C26-Pad2)">
+      <node ref="C26" pin="2"/>
+      <node ref="U4" pin="22"/>
+    </net>
+    <net code="24" name="Net-(R10-Pad2)">
+      <node ref="U8" pin="5"/>
+      <node ref="R10" pin="2"/>
+    </net>
+    <net code="25" name="Net-(C28-Pad1)">
+      <node ref="C29" pin="1"/>
+      <node ref="C28" pin="1"/>
+      <node ref="J3" pin="1"/>
+      <node ref="U2" pin="3"/>
+      <node ref="U8" pin="3"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="26" name="+3V3">
+      <node ref="C5" pin="1"/>
+      <node ref="U4" pin="24"/>
+      <node ref="R1" pin="1"/>
+      <node ref="C4" pin="1"/>
+      <node ref="C2" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="U2" pin="2"/>
+      <node ref="C7" pin="1"/>
+      <node ref="U3" pin="19"/>
+      <node ref="U4" pin="48"/>
+      <node ref="D1" pin="2"/>
+      <node ref="C1" pin="1"/>
+      <node ref="U4" pin="36"/>
+      <node ref="C6" pin="1"/>
+      <node ref="J4" pin="4"/>
+      <node ref="U4" pin="1"/>
+      <node ref="U4" pin="9"/>
+      <node ref="J2" pin="1"/>
+    </net>
+    <net code="27" name="Net-(D1-Pad1)">
+      <node ref="D1" pin="1"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="28" name="Net-(D2-Pad1)">
+      <node ref="R3" pin="1"/>
+      <node ref="D2" pin="1"/>
+    </net>
+    <net code="29" name="Net-(D4-Pad1)">
+      <node ref="D4" pin="1"/>
+      <node ref="R5" pin="1"/>
+    </net>
+    <net code="30" name="Net-(D3-Pad1)">
+      <node ref="D3" pin="1"/>
+      <node ref="R4" pin="1"/>
+    </net>
+    <net code="31" name="/HP_A">
+      <node ref="U6" pin="15"/>
+      <node ref="J1" pin="2"/>
+      <node ref="C9" pin="2"/>
+    </net>
+    <net code="32" name="/SPKR_HP">
+      <node ref="U6" pin="31"/>
+      <node ref="J1" pin="4"/>
+    </net>
+    <net code="33" name="/HP_B">
+      <node ref="J1" pin="3"/>
+      <node ref="U6" pin="14"/>
+      <node ref="C10" pin="2"/>
+    </net>
+    <net code="34" name="/ENC_BUTTON">
+      <node ref="U4" pin="13"/>
+      <node ref="SW2" pin="5"/>
+    </net>
+    <net code="35" name="Net-(C13-Pad1)">
+      <node ref="U6" pin="10"/>
+      <node ref="C13" pin="1"/>
+    </net>
+    <net code="36" name="Net-(C15-Pad2)">
+      <node ref="U6" pin="12"/>
+      <node ref="C15" pin="2"/>
+    </net>
+    <net code="37" name="Net-(C15-Pad1)">
+      <node ref="U6" pin="11"/>
+      <node ref="C15" pin="1"/>
+    </net>
+    <net code="38" name="Net-(U3-Pad5)">
+      <node ref="U5" pin="6"/>
+      <node ref="U3" pin="5"/>
+    </net>
+    <net code="39" name="Net-(U3-Pad7)">
+      <node ref="U3" pin="7"/>
+      <node ref="U5" pin="8"/>
+    </net>
+    <net code="40" name="Net-(U3-Pad15)">
+      <node ref="U5" pin="14"/>
+      <node ref="U3" pin="15"/>
+    </net>
+    <net code="41" name="Net-(U3-Pad17)">
+      <node ref="U5" pin="16"/>
+      <node ref="U3" pin="17"/>
+    </net>
+    <net code="42" name="Net-(U3-Pad23)">
+      <node ref="U5" pin="3"/>
+      <node ref="U3" pin="23"/>
+    </net>
+    <net code="43" name="Net-(U3-Pad21)">
+      <node ref="U5" pin="5"/>
+      <node ref="U3" pin="21"/>
+    </net>
+    <net code="44" name="Net-(U3-Pad16)">
+      <node ref="U3" pin="16"/>
+      <node ref="U5" pin="11"/>
+    </net>
+    <net code="45" name="Net-(U3-Pad18)">
+      <node ref="U5" pin="15"/>
+      <node ref="U3" pin="18"/>
+    </net>
+    <net code="46" name="Net-(U3-Pad22)">
+      <node ref="U3" pin="22"/>
+      <node ref="U5" pin="7"/>
+    </net>
+    <net code="47" name="Net-(U3-Pad4)">
+      <node ref="U5" pin="4"/>
+      <node ref="U3" pin="4"/>
+    </net>
+    <net code="48" name="Net-(R1-Pad2)">
+      <node ref="U3" pin="13"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="49" name="Net-(U3-Pad20)">
+      <node ref="U5" pin="13"/>
+      <node ref="U3" pin="20"/>
+    </net>
+    <net code="50" name="/DAC_WS">
+      <node ref="U6" pin="40"/>
+      <node ref="U4" pin="14"/>
+    </net>
+    <net code="51" name="/DAC_SD">
+      <node ref="U6" pin="39"/>
+      <node ref="U4" pin="41"/>
+    </net>
+    <net code="52" name="/DAC_CK">
+      <node ref="U4" pin="25"/>
+      <node ref="U6" pin="38"/>
+    </net>
+    <net code="53" name="/DAC_MCK">
+      <node ref="U4" pin="21"/>
+      <node ref="U6" pin="37"/>
+    </net>
+    <net code="54" name="/ENC_A">
+      <node ref="SW2" pin="1"/>
+      <node ref="U4" pin="11"/>
+    </net>
+    <net code="55" name="Net-(U3-Pad2)">
+      <node ref="U5" pin="1"/>
+      <node ref="U3" pin="2"/>
+    </net>
+    <net code="56" name="Net-(U3-Pad3)">
+      <node ref="U5" pin="2"/>
+      <node ref="U3" pin="3"/>
+    </net>
+    <net code="57" name="Net-(U4-Pad17)">
+      <node ref="U4" pin="17"/>
+    </net>
+    <net code="58" name="Net-(U4-Pad27)">
+      <node ref="U4" pin="27"/>
+    </net>
+    <net code="59" name="Net-(U4-Pad18)">
+      <node ref="U4" pin="18"/>
+    </net>
+    <net code="60" name="Net-(U4-Pad28)">
+      <node ref="U4" pin="28"/>
+    </net>
+    <net code="61" name="Net-(U4-Pad19)">
+      <node ref="U4" pin="19"/>
+    </net>
+    <net code="62" name="/SPKR_A_POS">
+      <node ref="U6" pin="4"/>
+      <node ref="LS1" pin="2"/>
+    </net>
+    <net code="63" name="/SPKR_A_NEG">
+      <node ref="U6" pin="6"/>
+      <node ref="LS1" pin="1"/>
+    </net>
+    <net code="64" name="Net-(U6-Pad36)">
+      <node ref="U6" pin="36"/>
+    </net>
+    <net code="65" name="Net-(U6-Pad30)">
+      <node ref="U6" pin="30"/>
+    </net>
+    <net code="66" name="Net-(U6-Pad29)">
+      <node ref="U6" pin="29"/>
+    </net>
+    <net code="67" name="Net-(U6-Pad26)">
+      <node ref="U6" pin="26"/>
+    </net>
+    <net code="68" name="Net-(U6-Pad25)">
+      <node ref="U6" pin="25"/>
+    </net>
+    <net code="69" name="Net-(U6-Pad24)">
+      <node ref="U6" pin="24"/>
+    </net>
+    <net code="70" name="Net-(U6-Pad23)">
+      <node ref="U6" pin="23"/>
+    </net>
+    <net code="71" name="Net-(U6-Pad22)">
+      <node ref="U6" pin="22"/>
+    </net>
+    <net code="72" name="Net-(U6-Pad21)">
+      <node ref="U6" pin="21"/>
+    </net>
+    <net code="73" name="/ENC_B">
+      <node ref="U4" pin="12"/>
+      <node ref="SW2" pin="3"/>
+    </net>
+    <net code="74" name="Net-(U6-Pad7)">
+      <node ref="U6" pin="7"/>
+    </net>
+    <net code="75" name="Net-(U6-Pad9)">
+      <node ref="U6" pin="9"/>
+    </net>
+    <net code="76" name="Net-(U6-Pad20)">
+      <node ref="U6" pin="20"/>
+    </net>
+    <net code="77" name="Net-(U4-Pad33)">
+      <node ref="U4" pin="33"/>
+    </net>
+    <net code="78" name="Net-(U4-Pad32)">
+      <node ref="U4" pin="32"/>
+    </net>
+    <net code="79" name="Net-(U4-Pad20)">
+      <node ref="U4" pin="20"/>
+    </net>
+    <net code="80" name="Net-(U4-Pad43)">
+      <node ref="U4" pin="43"/>
+    </net>
+    <net code="81" name="Net-(U4-Pad45)">
+      <node ref="U4" pin="45"/>
+    </net>
+    <net code="82" name="Net-(U4-Pad16)">
+      <node ref="U4" pin="16"/>
+    </net>
+    <net code="83" name="Net-(U4-Pad26)">
+      <node ref="U4" pin="26"/>
+    </net>
+    <net code="84" name="Net-(U4-Pad2)">
+      <node ref="U4" pin="2"/>
+    </net>
+    <net code="85" name="Net-(U4-Pad3)">
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="86" name="Net-(U4-Pad4)">
+      <node ref="U4" pin="4"/>
+    </net>
+    <net code="87" name="Net-(U4-Pad5)">
+      <node ref="U4" pin="5"/>
+    </net>
+    <net code="88" name="Net-(U4-Pad6)">
+      <node ref="U4" pin="6"/>
+    </net>
+    <net code="89" name="Net-(U4-Pad10)">
+      <node ref="U4" pin="10"/>
+    </net>
+    <net code="90" name="Net-(U3-Pad9)">
+      <node ref="U3" pin="9"/>
+    </net>
+    <net code="91" name="Net-(U3-Pad10)">
+      <node ref="U3" pin="10"/>
+    </net>
+    <net code="92" name="/7SEG_SDA">
+      <node ref="U3" pin="1"/>
+      <node ref="U6" pin="1"/>
+      <node ref="J4" pin="3"/>
+      <node ref="U4" pin="46"/>
+    </net>
+    <net code="93" name="/7SEG_SCL">
+      <node ref="J4" pin="2"/>
+      <node ref="U3" pin="14"/>
+      <node ref="U6" pin="2"/>
+      <node ref="U4" pin="42"/>
+    </net>
+    <net code="94" name="Net-(U3-Pad8)">
+      <node ref="U3" pin="8"/>
+    </net>
+    <net code="95" name="/LED_Ok">
+      <node ref="U4" pin="31"/>
+      <node ref="D2" pin="2"/>
+    </net>
+    <net code="96" name="/LED_Err">
+      <node ref="D3" pin="2"/>
+      <node ref="U4" pin="30"/>
+    </net>
+    <net code="97" name="/LED_Act">
+      <node ref="D4" pin="2"/>
+      <node ref="U4" pin="29"/>
+    </net>
+    <net code="98" name="Net-(U5-Pad9)">
+      <node ref="U5" pin="9"/>
+    </net>
+    <net code="99" name="Net-(U3-Pad24)">
+      <node ref="U3" pin="24"/>
+    </net>
+    <net code="100" name="Net-(U3-Pad11)">
+      <node ref="U3" pin="11"/>
+    </net>
+    <net code="101" name="Net-(U3-Pad12)">
+      <node ref="U3" pin="12"/>
+    </net>
+    <net code="102" name="Net-(U5-Pad10)">
+      <node ref="U5" pin="10"/>
+    </net>
+    <net code="103" name="Net-(U5-Pad12)">
+      <node ref="U5" pin="12"/>
+    </net>
+    <net code="104" name="/JTRST">
+      <node ref="U4" pin="40"/>
+    </net>
+    <net code="105" name="+1V8">
+      <node ref="C12" pin="1"/>
+      <node ref="U1" pin="2"/>
+      <node ref="C19" pin="1"/>
+      <node ref="U6" pin="8"/>
+      <node ref="U6" pin="5"/>
+      <node ref="U6" pin="16"/>
+      <node ref="U6" pin="34"/>
+      <node ref="C11" pin="1"/>
+      <node ref="U6" pin="33"/>
+      <node ref="U6" pin="13"/>
+      <node ref="C23" pin="1"/>
+      <node ref="C21" pin="1"/>
+      <node ref="C8" pin="1"/>
+      <node ref="C17" pin="1"/>
+      <node ref="C16" pin="1"/>
+      <node ref="C14" pin="1"/>
+    </net>
+    <net code="106" name="/DAC_RST">
+      <node ref="U4" pin="15"/>
+      <node ref="U6" pin="32"/>
+    </net>
+  </nets>
+</export>
