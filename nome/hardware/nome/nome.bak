@@ -546,7 +546,11 @@ P 9100 5900
 F 0 "C16" H 9125 6000 50  0000 L CNN
 F 1 "0.1uF" H 9125 5800 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 9138 5750 50  0001 C CNN
-F 3 "" H 9100 5900 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 9100 5900 50  0001 C CNN
+F 4 "478-1395-1-ND" H 9100 5900 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 9100 5900 60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 9100 5900 60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 9100 5900 60  0001 C CNN "MFP"
 	1    9100 5900
 	1    0    0    -1  
 $EndComp
@@ -920,7 +924,11 @@ P 11800 8450
 F 0 "D4" H 11800 8550 50  0000 C CNN
 F 1 "LED Orange" H 11800 8350 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 11800 8450 50  0001 C CNN
-F 3 "" H 11800 8450 50  0001 C CNN
+F 3 "http://optoelectronics.liteon.com/upload/download/DS-22-99-0170/LTST-C171AKT.pdf" H 11800 8450 50  0001 C CNN
+F 4 "160-1419-1-ND" H 11800 8450 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171AKT/160-1419-1-ND/386784" H 11800 8450 60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 11800 8450 60  0001 C CNN "MFN"
+F 7 "LTST-C171AKT" H 11800 8450 60  0001 C CNN "MFP"
 	1    11800 8450
 	0    -1   -1   0   
 $EndComp
@@ -931,7 +939,11 @@ P 11500 8450
 F 0 "D3" H 11500 8550 50  0000 C CNN
 F 1 "LED Red" H 11500 8350 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 11500 8450 50  0001 C CNN
-F 3 "" H 11500 8450 50  0001 C CNN
+F 3 "http://optoelectronics.liteon.com/upload/download/DS22-2000-109/LTST-C171KRKT.pdf" H 11500 8450 50  0001 C CNN
+F 4 "160-1427-1-ND" H 11500 8450 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800" H 11500 8450 60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 11500 8450 60  0001 C CNN "MFN"
+F 7 "LTST-C171KRK" H 11500 8450 60  0001 C CNN "MFP"
 	1    11500 8450
 	0    -1   -1   0   
 $EndComp
@@ -942,7 +954,11 @@ P 11200 8450
 F 0 "D2" H 11200 8550 50  0000 C CNN
 F 1 "LED Green" H 11200 8350 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 11200 8450 50  0001 C CNN
-F 3 "" H 11200 8450 50  0001 C CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Lite-On%20PDFs/LTST-C171GKT.pdf" H 11200 8450 50  0001 C CNN
+F 4 "160-1423-1-ND" H 11200 8450 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792" H 11200 8450 60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 11200 8450 60  0001 C CNN "MFN"
+F 7 "LTST-C171GKT" H 11200 8450 60  0001 C CNN "MFP"
 	1    11200 8450
 	0    -1   -1   0   
 $EndComp
@@ -953,7 +969,11 @@ P 10900 8450
 F 0 "D1" H 10900 8550 50  0000 C CNN
 F 1 "LED Blue" H 10900 8350 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 10900 8450 50  0001 C CNN
-F 3 "" H 10900 8450 50  0001 C CNN
+F 3 "http://optoelectronics.liteon.com/upload/download/DS22-2000-233/LTST-C171TBKT(0630).pdf" H 10900 8450 50  0001 C CNN
+F 4 "160-1645-1-ND" H 10900 8450 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171TBKT/160-1645-1-ND/573585" H 10900 8450 60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 10900 8450 60  0001 C CNN "MFN"
+F 7 "LTST-C171TBKT" H 10900 8450 60  0001 C CNN "MFP"
 	1    10900 8450
 	0    -1   -1   0   
 $EndComp
@@ -1131,7 +1151,11 @@ P 7150 11250
 F 0 "J2" H 7200 11550 50  0000 C CNN
 F 1 "JTAG_SWD" H 7200 10950 50  0000 C CNN
 F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch2.54mm" H 7150 11250 50  0001 C CNN
-F 3 "" H 7150 11250 50  0001 C CNN
+F 3 "http://www.on-shore.com/wp-content/uploads/2015/09/302-sxxx.pdf" H 7150 11250 50  0001 C CNN
+F 4 "ED1543-ND" H 7150 11250 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/on-shore-technology-inc/302-S101/ED1543-ND/2178422" H 7150 11250 60  0001 C CNN "S1PL"
+F 6 "On Shore Technology Inc." H 7150 11250 60  0001 C CNN "MFN"
+F 7 "302-S101" H 7150 11250 60  0001 C CNN "MFP"
 	1    7150 11250
 	1    0    0    -1  
 $EndComp
@@ -1226,7 +1250,11 @@ P 4150 11400
 F 0 "SW1" H 4150 11570 50  0000 C CNN
 F 1 "SW_SPDT" H 4150 11200 50  0000 C CNN
 F 2 "nome:CK_SPDT" H 4150 11400 50  0001 C CNN
-F 3 "" H 4150 11400 50  0001 C CNN
+F 3 "http://www.ckswitches.com/media/1422/js.pdf" H 4150 11400 50  0001 C CNN
+F 4 "401-1999-1-ND" H 4150 11400 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/c-k/JS102011SAQN/401-1999-1-ND/1640114" H 4150 11400 60  0001 C CNN "S1PL"
+F 6 "C&K" H 4150 11400 60  0001 C CNN "MFN"
+F 7 "JS102011SAQN" H 4150 11400 60  0001 C CNN "MFP"
 	1    4150 11400
 	0    -1   -1   0   
 $EndComp
@@ -1248,7 +1276,11 @@ P 2650 10850
 F 0 "U8" H 2650 10600 50  0000 C CNN
 F 1 "MCP73831" H 2650 11050 50  0000 C CNN
 F 2 "TO_SOT_Packages_SMD:SOT-23-5_HandSoldering" H 2650 10850 60  0001 C CNN
-F 3 "" H 2650 10850 60  0000 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001060AQ.pdf" H 2650 10850 60  0001 C CNN
+F 4 "MCP73831T-2ACI/OTCT-ND" H 2650 10850 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/microchip-technology/MCP73831T-2ACI-OT/MCP73831T-2ACI-OTCT-ND/1979802" H 2650 10850 60  0001 C CNN "S1PL"
+F 6 "Microchip Technology" H 2650 10850 60  0001 C CNN "MFN"
+F 7 "MCP73831T-2ACI/OT" H 2650 10850 60  0001 C CNN "MFP"
 	1    2650 10850
 	1    0    0    -1  
 $EndComp
@@ -1259,7 +1291,11 @@ P 800 11850
 F 0 "U7" H 800 11550 50  0000 C CNN
 F 1 "MICRO-B_USB" H 800 12150 50  0000 C CNN
 F 2 "open-project:MICRO-B_USB" H 800 11850 60  0001 C CNN
-F 3 "" H 800 11850 60  0000 C CNN
+F 3 "http://portal.fciconnect.com/Comergent/fci/drawing/10118192.pdf" H 800 11850 60  0001 C CNN
+F 4 "609-4613-1-ND" H 800 11850 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378" H 800 11850 60  0001 C CNN "S1PL"
+F 6 "10118192-0001LF" H 800 11850 60  0001 C CNN "MFP"
+F 7 "Amphenol FCI" H 800 11850 60  0001 C CNN "MFN"
 	1    800  11850
 	1    0    0    -1  
 $EndComp
@@ -1391,7 +1427,11 @@ P 4250 10750
 F 0 "J3" H 4250 10850 50  0000 C CNN
 F 1 "JST" H 4250 10550 50  0000 C CNN
 F 2 "third_party:JST_PH_B2B-PH-SM4-TB_02x2.00mm_Straight" H 4250 10750 50  0001 C CNN
-F 3 "" H 4250 10750 50  0001 C CNN
+F 3 "http://www.jst-mfg.com/product/pdf/eng/ePH.pdf" H 4250 10750 50  0001 C CNN
+F 4 "455-1734-1-ND" H 4250 10750 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/jst-sales-america-inc/B2B-PH-SM4-TB-LF-SN/455-1734-1-ND/926831" H 4250 10750 60  0001 C CNN "S1PL"
+F 6 "JST Sales America Inc." H 4250 10750 60  0001 C CNN "MFN"
+F 7 "B2B-PH-SM4-TB(LF)(SN)" H 4250 10750 60  0001 C CNN "MFP"
 	1    4250 10750
 	1    0    0    -1  
 $EndComp

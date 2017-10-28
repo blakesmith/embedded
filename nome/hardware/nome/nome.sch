@@ -113,7 +113,11 @@ P 4700 5500
 F 0 "C6" H 4725 5600 50  0000 L CNN
 F 1 "0.1uF" H 4725 5400 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4738 5350 50  0001 C CNN
-F 3 "" H 4700 5500 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 4700 5500 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    4700 5500
 	1    0    0    -1  
 $EndComp
@@ -152,7 +156,11 @@ P 4000 1550
 F 0 "C5" H 4025 1650 50  0000 L CNN
 F 1 "4.7uF" H 4025 1450 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4038 1400 50  0001 C CNN
-F 3 "" H 4000 1550 50  0001 C CNN
+F 3 "http://datasheets.avx.com/cx5r.pdf" H 4000 1550 50  0001 C CNN
+F 4 "478-1415-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZD475KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    4000 1550
 	1    0    0    -1  
 $EndComp
@@ -176,7 +184,11 @@ P 3650 1550
 F 0 "C4" H 3675 1650 50  0000 L CNN
 F 1 "0.1uF" H 3675 1450 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 3688 1400 50  0001 C CNN
-F 3 "" H 3650 1550 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 3650 1550 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    3650 1550
 	1    0    0    -1  
 $EndComp
@@ -198,7 +210,11 @@ P 2050 3050
 F 0 "C3" H 2075 3150 50  0000 L CNN
 F 1 "1uF" H 2075 2950 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2088 2900 50  0001 C CNN
-F 3 "" H 2050 3050 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 2050 3050 50  0001 C CNN
+F 4 "478-1405-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZC105KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    2050 3050
 	1    0    0    -1  
 $EndComp
@@ -209,7 +225,11 @@ P 1750 3050
 F 0 "C2" H 1775 3150 50  0000 L CNN
 F 1 "0.1uF" H 1775 2950 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1788 2900 50  0001 C CNN
-F 3 "" H 1750 3050 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 1750 3050 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    1750 3050
 	1    0    0    -1  
 $EndComp
@@ -263,7 +283,11 @@ P 9050 4950
 F 0 "C15" H 9075 5050 50  0000 L CNN
 F 1 "1uF" H 9075 4850 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 9088 4800 50  0001 C CNN
-F 3 "" H 9050 4950 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 9050 4950 50  0001 C CNN
+F 4 "478-1405-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZC105KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    9050 4950
 	1    0    0    -1  
 $EndComp
@@ -274,7 +298,11 @@ P 8150 4500
 F 0 "C13" H 8175 4600 50  0000 L CNN
 F 1 "1uF" H 8175 4400 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 8188 4350 50  0001 C CNN
-F 3 "" H 8150 4500 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 8150 4500 50  0001 C CNN
+F 4 "478-1405-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZC105KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    8150 4500
 	1    0    0    -1  
 $EndComp
@@ -320,7 +348,11 @@ P 10250 2000
 F 0 "C19" H 10275 2100 50  0000 L CNN
 F 1 "0.1uF" H 10275 1900 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 10288 1850 50  0001 C CNN
-F 3 "" H 10250 2000 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 10250 2000 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    10250 2000
 	1    0    0    -1  
 $EndComp
@@ -333,7 +365,11 @@ P 11150 2700
 F 0 "C23" H 11175 2800 50  0000 L CNN
 F 1 "1uF" H 11175 2600 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 11188 2550 50  0001 C CNN
-F 3 "" H 11150 2700 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 11150 2700 50  0001 C CNN
+F 4 "478-1405-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZC105KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    11150 2700
 	1    0    0    -1  
 $EndComp
@@ -344,7 +380,11 @@ P 10700 2700
 F 0 "C21" H 10725 2800 50  0000 L CNN
 F 1 "0.1uF" H 10725 2600 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 10738 2550 50  0001 C CNN
-F 3 "" H 10700 2700 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 10700 2700 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    10700 2700
 	1    0    0    -1  
 $EndComp
@@ -366,7 +406,11 @@ P 7500 3900
 F 0 "C8" H 7525 4000 50  0000 L CNN
 F 1 "10uF" H 7525 3800 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 7538 3750 50  0001 C CNN
-F 3 "" H 7500 3900 50  0001 C CNN
+F 3 "http://datasheets.avx.com/cx5r.pdf" H 7500 3900 50  0001 C CNN
+F 4 "478-5167-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZD106KAT2A/478-5167-1-ND/1913257" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZD106KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    7500 3900
 	1    0    0    -1  
 $EndComp
@@ -388,7 +432,11 @@ P 7900 3050
 F 0 "C11" H 7925 3150 50  0000 L CNN
 F 1 "0.1uF" H 7925 2950 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 7938 2900 50  0001 C CNN
-F 3 "" H 7900 3050 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 7900 3050 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    7900 3050
 	1    0    0    -1  
 $EndComp
@@ -399,7 +447,11 @@ P 7900 3950
 F 0 "C12" H 7925 4050 50  0000 L CNN
 F 1 "0.1uF" H 7925 3850 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 7938 3800 50  0001 C CNN
-F 3 "" H 7900 3950 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 7900 3950 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    7900 3950
 	1    0    0    -1  
 $EndComp
@@ -451,7 +503,11 @@ P 11400 5050
 F 0 "C24" H 11425 5150 50  0000 L CNN
 F 1 "10uF" H 11425 4950 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 11438 4900 50  0001 C CNN
-F 3 "" H 11400 5050 50  0001 C CNN
+F 3 "http://datasheets.avx.com/cx5r.pdf" H 11400 5050 50  0001 C CNN
+F 4 "478-5167-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZD106KAT2A/478-5167-1-ND/1913257" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZD106KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    11400 5050
 	1    0    0    -1  
 $EndComp
@@ -462,7 +518,11 @@ P 10800 5100
 F 0 "C22" H 10825 5200 50  0000 L CNN
 F 1 "1uF" H 10825 5000 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 10838 4950 50  0001 C CNN
-F 3 "" H 10800 5100 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 10800 5100 50  0001 C CNN
+F 4 "478-1405-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZC105KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    10800 5100
 	1    0    0    -1  
 $EndComp
@@ -473,7 +533,11 @@ P 10200 5650
 F 0 "C18" H 10225 5750 50  0000 L CNN
 F 1 "150pF" H 10225 5550 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 10238 5500 50  0001 C CNN
-F 3 "" H 10200 5650 50  0001 C CNN
+F 3 "http://datasheets.avx.com/C0GNP0-Dielectric.pdf" H 10200 5650 50  0001 C CNN
+F 4 "478-1318-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055A151JAT2A/478-1318-1-ND/564350" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055A151JAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    10200 5650
 	1    0    0    -1  
 $EndComp
@@ -484,7 +548,11 @@ P 10550 5650
 F 0 "C20" H 10575 5750 50  0000 L CNN
 F 1 "150pF" H 10575 5550 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 10588 5500 50  0001 C CNN
-F 3 "" H 10550 5650 50  0001 C CNN
+F 3 "http://datasheets.avx.com/C0GNP0-Dielectric.pdf" H 10550 5650 50  0001 C CNN
+F 4 "478-1318-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055A151JAT2A/478-1318-1-ND/564350" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055A151JAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    10550 5650
 	1    0    0    -1  
 $EndComp
@@ -496,6 +564,7 @@ F 0 "LS1" H 14100 1225 50  0000 R CNN
 F 1 "Speaker" H 14100 1150 50  0000 R CNN
 F 2 "nome:WirePad-1x2-2.54mm" H 14050 800 50  0001 C CNN
 F 3 "" H 14040 950 50  0001 C CNN
+F 4 "Value" H 0   0   60  0001 C CNN "S1PL"
 	1    14050 1000
 	1    0    0    -1  
 $EndComp
@@ -524,7 +593,11 @@ P 8700 5900
 F 0 "C14" H 8725 6000 50  0000 L CNN
 F 1 "1uF" H 8725 5800 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 8738 5750 50  0001 C CNN
-F 3 "" H 8700 5900 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 8700 5900 50  0001 C CNN
+F 4 "478-1405-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZC105KAT2A/478-1405-1-ND/564437" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZC105KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    8700 5900
 	1    0    0    -1  
 $EndComp
@@ -546,7 +619,11 @@ P 9100 5900
 F 0 "C16" H 9125 6000 50  0000 L CNN
 F 1 "0.1uF" H 9125 5800 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 9138 5750 50  0001 C CNN
-F 3 "" H 9100 5900 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 9100 5900 50  0001 C CNN
+F 4 "478-1395-1-ND" H 9100 5900 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 9100 5900 60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 9100 5900 60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 9100 5900 60  0001 C CNN "MFP"
 	1    9100 5900
 	1    0    0    -1  
 $EndComp
@@ -557,7 +634,11 @@ P 9550 5850
 F 0 "C17" H 9575 5950 50  0000 L CNN
 F 1 "0.1uF" H 9575 5750 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 9588 5700 50  0001 C CNN
-F 3 "" H 9550 5850 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 9550 5850 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    9550 5850
 	1    0    0    -1  
 $EndComp
@@ -578,7 +659,11 @@ P 13250 1750
 F 0 "C9" H 13275 1850 50  0000 L CNN
 F 1 "0.022uF" H 13275 1650 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 13288 1600 50  0001 C CNN
-F 3 "" H 13250 1750 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 13250 1750 50  0001 C CNN
+F 4 "478-1360-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08051C223KAT2A/478-1360-1-ND/564392" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08051C223KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    13250 1750
 	0    1    1    0   
 $EndComp
@@ -589,7 +674,11 @@ P 13650 1750
 F 0 "R6" V 13730 1750 50  0000 C CNN
 F 1 "51.1" V 13650 1750 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 13580 1750 50  0001 C CNN
-F 3 "" H 13650 1750 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 13650 1750 50  0001 C CNN
+F 4 "311-51.1CRCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805FR-0751R1L/311-51.1CRCT-ND/730961" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805FR-0751R1L" H 0   0   60  0001 C CNN "MFP"
 	1    13650 1750
 	0    1    1    0   
 $EndComp
@@ -613,7 +702,11 @@ P 13250 2450
 F 0 "C10" H 13275 2550 50  0000 L CNN
 F 1 "0.022uF" H 13275 2350 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 13288 2300 50  0001 C CNN
-F 3 "" H 13250 2450 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 13250 2450 50  0001 C CNN
+F 4 "478-1360-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08051C223KAT2A/478-1360-1-ND/564392" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08051C223KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    13250 2450
 	0    1    1    0   
 $EndComp
@@ -624,7 +717,11 @@ P 13650 2450
 F 0 "R7" V 13730 2450 50  0000 C CNN
 F 1 "51.1" V 13650 2450 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 13580 2450 50  0001 C CNN
-F 3 "" H 13650 2450 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 13650 2450 50  0001 C CNN
+F 4 "311-51.1CRCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805FR-0751R1L/311-51.1CRCT-ND/730961" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805FR-0751R1L" H 0   0   60  0001 C CNN "MFP"
 	1    13650 2450
 	0    1    1    0   
 $EndComp
@@ -854,7 +951,11 @@ P 2600 7100
 F 0 "R1" V 2680 7100 50  0000 C CNN
 F 1 "10k" V 2600 7100 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 2530 7100 50  0001 C CNN
-F 3 "" H 2600 7100 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 2600 7100 50  0001 C CNN
+F 4 "311-10KARCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805JR-0710KL/311-10KARCT-ND/731188" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805JR-0710KL" H 0   0   60  0001 C CNN "MFP"
 	1    2600 7100
 	0    -1   -1   0   
 $EndComp
@@ -883,7 +984,11 @@ P 1450 7800
 F 0 "C1" H 1475 7900 50  0000 L CNN
 F 1 "0.1uF" H 1475 7700 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1488 7650 50  0001 C CNN
-F 3 "" H 1450 7800 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 1450 7800 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    1450 7800
 	1    0    0    -1  
 $EndComp
@@ -920,7 +1025,11 @@ P 11800 8450
 F 0 "D4" H 11800 8550 50  0000 C CNN
 F 1 "LED Orange" H 11800 8350 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 11800 8450 50  0001 C CNN
-F 3 "" H 11800 8450 50  0001 C CNN
+F 3 "http://optoelectronics.liteon.com/upload/download/DS-22-99-0170/LTST-C171AKT.pdf" H 11800 8450 50  0001 C CNN
+F 4 "160-1419-1-ND" H 11800 8450 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171AKT/160-1419-1-ND/386784" H 11800 8450 60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 11800 8450 60  0001 C CNN "MFN"
+F 7 "LTST-C171AKT" H 11800 8450 60  0001 C CNN "MFP"
 	1    11800 8450
 	0    -1   -1   0   
 $EndComp
@@ -931,7 +1040,11 @@ P 11500 8450
 F 0 "D3" H 11500 8550 50  0000 C CNN
 F 1 "LED Red" H 11500 8350 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 11500 8450 50  0001 C CNN
-F 3 "" H 11500 8450 50  0001 C CNN
+F 3 "http://optoelectronics.liteon.com/upload/download/DS22-2000-109/LTST-C171KRKT.pdf" H 11500 8450 50  0001 C CNN
+F 4 "160-1427-1-ND" H 11500 8450 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800" H 11500 8450 60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 11500 8450 60  0001 C CNN "MFN"
+F 7 "LTST-C171KRK" H 11500 8450 60  0001 C CNN "MFP"
 	1    11500 8450
 	0    -1   -1   0   
 $EndComp
@@ -942,7 +1055,11 @@ P 11200 8450
 F 0 "D2" H 11200 8550 50  0000 C CNN
 F 1 "LED Green" H 11200 8350 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 11200 8450 50  0001 C CNN
-F 3 "" H 11200 8450 50  0001 C CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Lite-On%20PDFs/LTST-C171GKT.pdf" H 11200 8450 50  0001 C CNN
+F 4 "160-1423-1-ND" H 11200 8450 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792" H 11200 8450 60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 11200 8450 60  0001 C CNN "MFN"
+F 7 "LTST-C171GKT" H 11200 8450 60  0001 C CNN "MFP"
 	1    11200 8450
 	0    -1   -1   0   
 $EndComp
@@ -953,7 +1070,11 @@ P 10900 8450
 F 0 "D1" H 10900 8550 50  0000 C CNN
 F 1 "LED Blue" H 10900 8350 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 10900 8450 50  0001 C CNN
-F 3 "" H 10900 8450 50  0001 C CNN
+F 3 "http://optoelectronics.liteon.com/upload/download/DS22-2000-233/LTST-C171TBKT(0630).pdf" H 10900 8450 50  0001 C CNN
+F 4 "160-1645-1-ND" H 10900 8450 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171TBKT/160-1645-1-ND/573585" H 10900 8450 60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 10900 8450 60  0001 C CNN "MFN"
+F 7 "LTST-C171TBKT" H 10900 8450 60  0001 C CNN "MFP"
 	1    10900 8450
 	0    -1   -1   0   
 $EndComp
@@ -976,7 +1097,11 @@ P 10900 8900
 F 0 "R2" V 10980 8900 50  0000 C CNN
 F 1 "25" V 10900 8900 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 10830 8900 50  0001 C CNN
-F 3 "" H 10900 8900 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 10900 8900 50  0001 C CNN
+F 4 "311-24.9CRCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805FR-0724R9L/311-24.9CRCT-ND/730706" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805FR-0724R9L" H 0   0   60  0001 C CNN "MFP"
 	1    10900 8900
 	1    0    0    -1  
 $EndComp
@@ -987,7 +1112,11 @@ P 11200 8900
 F 0 "R3" V 11280 8900 50  0000 C CNN
 F 1 "40" V 11200 8900 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 11130 8900 50  0001 C CNN
-F 3 "" H 11200 8900 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 11200 8900 50  0001 C CNN
+F 4 "311-40.2CRCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805FR-0740R2L/311-40.2CRCT-ND/730887" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805FR-0740R2L" H 0   0   60  0001 C CNN "MFP"
 	1    11200 8900
 	1    0    0    -1  
 $EndComp
@@ -998,7 +1127,11 @@ P 11500 8900
 F 0 "R4" V 11580 8900 50  0000 C CNN
 F 1 "40" V 11500 8900 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 11430 8900 50  0001 C CNN
-F 3 "" H 11500 8900 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 11500 8900 50  0001 C CNN
+F 4 "311-40.2CRCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805FR-0740R2L/311-40.2CRCT-ND/730887" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805FR-0740R2L" H 0   0   60  0001 C CNN "MFP"
 	1    11500 8900
 	1    0    0    -1  
 $EndComp
@@ -1009,7 +1142,11 @@ P 11800 8900
 F 0 "R5" V 11880 8900 50  0000 C CNN
 F 1 "40" V 11800 8900 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 11730 8900 50  0001 C CNN
-F 3 "" H 11800 8900 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 11800 8900 50  0001 C CNN
+F 4 "311-40.2CRCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805FR-0740R2L/311-40.2CRCT-ND/730887" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805FR-0740R2L" H 0   0   60  0001 C CNN "MFP"
 	1    11800 8900
 	1    0    0    -1  
 $EndComp
@@ -1131,7 +1268,11 @@ P 7150 11250
 F 0 "J2" H 7200 11550 50  0000 C CNN
 F 1 "JTAG_SWD" H 7200 10950 50  0000 C CNN
 F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch2.54mm" H 7150 11250 50  0001 C CNN
-F 3 "" H 7150 11250 50  0001 C CNN
+F 3 "http://www.on-shore.com/wp-content/uploads/2015/09/302-sxxx.pdf" H 7150 11250 50  0001 C CNN
+F 4 "ED1543-ND" H 7150 11250 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/on-shore-technology-inc/302-S101/ED1543-ND/2178422" H 7150 11250 60  0001 C CNN "S1PL"
+F 6 "On Shore Technology Inc." H 7150 11250 60  0001 C CNN "MFN"
+F 7 "302-S101" H 7150 11250 60  0001 C CNN "MFP"
 	1    7150 11250
 	1    0    0    -1  
 $EndComp
@@ -1179,7 +1320,11 @@ P 4100 5700
 F 0 "C26" H 4125 5800 50  0000 L CNN
 F 1 "4.7uF" H 4125 5600 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4138 5550 50  0001 C CNN
-F 3 "" H 4100 5700 50  0001 C CNN
+F 3 "http://datasheets.avx.com/cx5r.pdf" H 4100 5700 50  0001 C CNN
+F 4 "478-1415-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZD475KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    4100 5700
 	-1   0    0    1   
 $EndComp
@@ -1215,7 +1360,11 @@ P 1700 7400
 F 0 "J4" H 1700 7600 50  0000 C CNN
 F 1 "7SEG_DEBUG" H 1700 7100 50  0000 C CNN
 F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 1700 7400 50  0001 C CNN
-F 3 "" H 1700 7400 50  0001 C CNN
+F 3 "https://cdn.harwin.com/pdfs/Harwin_Product_Catalog_page_208.pdf" H 1700 7400 50  0001 C CNN
+F 4 "952-2265-ND" H 1700 7400 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/harwin-inc/M20-9990445/952-2265-ND/3728229" H 1700 7400 60  0001 C CNN "S1PL"
+F 6 "Harwin Inc." H 1700 7400 60  0001 C CNN "MFN"
+F 7 "M20-9990445" H 1700 7400 60  0001 C CNN "MFP"
 	1    1700 7400
 	-1   0    0    1   
 $EndComp
@@ -1226,7 +1375,11 @@ P 4150 11400
 F 0 "SW1" H 4150 11570 50  0000 C CNN
 F 1 "SW_SPDT" H 4150 11200 50  0000 C CNN
 F 2 "nome:CK_SPDT" H 4150 11400 50  0001 C CNN
-F 3 "" H 4150 11400 50  0001 C CNN
+F 3 "http://www.ckswitches.com/media/1422/js.pdf" H 4150 11400 50  0001 C CNN
+F 4 "401-1999-1-ND" H 4150 11400 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/c-k/JS102011SAQN/401-1999-1-ND/1640114" H 4150 11400 60  0001 C CNN "S1PL"
+F 6 "C&K" H 4150 11400 60  0001 C CNN "MFN"
+F 7 "JS102011SAQN" H 4150 11400 60  0001 C CNN "MFP"
 	1    4150 11400
 	0    -1   -1   0   
 $EndComp
@@ -1237,7 +1390,11 @@ P 1200 11100
 F 0 "C27" H 1225 11200 50  0000 L CNN
 F 1 "4.7uF" H 1225 11000 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1238 10950 50  0001 C CNN
-F 3 "" H 1200 11100 50  0001 C CNN
+F 3 "http://datasheets.avx.com/cx5r.pdf" H 1200 11100 50  0001 C CNN
+F 4 "478-1415-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZD475KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    1200 11100
 	1    0    0    -1  
 $EndComp
@@ -1248,7 +1405,11 @@ P 2650 10850
 F 0 "U8" H 2650 10600 50  0000 C CNN
 F 1 "MCP73831" H 2650 11050 50  0000 C CNN
 F 2 "TO_SOT_Packages_SMD:SOT-23-5_HandSoldering" H 2650 10850 60  0001 C CNN
-F 3 "" H 2650 10850 60  0000 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20001060AQ.pdf" H 2650 10850 60  0001 C CNN
+F 4 "MCP73831T-2ACI/OTCT-ND" H 2650 10850 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/microchip-technology/MCP73831T-2ACI-OT/MCP73831T-2ACI-OTCT-ND/1979802" H 2650 10850 60  0001 C CNN "S1PL"
+F 6 "Microchip Technology" H 2650 10850 60  0001 C CNN "MFN"
+F 7 "MCP73831T-2ACI/OT" H 2650 10850 60  0001 C CNN "MFP"
 	1    2650 10850
 	1    0    0    -1  
 $EndComp
@@ -1259,7 +1420,11 @@ P 800 11850
 F 0 "U7" H 800 11550 50  0000 C CNN
 F 1 "MICRO-B_USB" H 800 12150 50  0000 C CNN
 F 2 "open-project:MICRO-B_USB" H 800 11850 60  0001 C CNN
-F 3 "" H 800 11850 60  0000 C CNN
+F 3 "http://portal.fciconnect.com/Comergent/fci/drawing/10118192.pdf" H 800 11850 60  0001 C CNN
+F 4 "609-4613-1-ND" H 800 11850 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378" H 800 11850 60  0001 C CNN "S1PL"
+F 6 "10118192-0001LF" H 800 11850 60  0001 C CNN "MFP"
+F 7 "Amphenol FCI" H 800 11850 60  0001 C CNN "MFN"
 	1    800  11850
 	1    0    0    -1  
 $EndComp
@@ -1270,7 +1435,11 @@ P 3450 11050
 F 0 "C28" H 3475 11150 50  0000 L CNN
 F 1 "4.7uF" H 3475 10950 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 3488 10900 50  0001 C CNN
-F 3 "" H 3450 11050 50  0001 C CNN
+F 3 "http://datasheets.avx.com/cx5r.pdf" H 3450 11050 50  0001 C CNN
+F 4 "478-1415-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZD475KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    3450 11050
 	1    0    0    -1  
 $EndComp
@@ -1292,7 +1461,11 @@ P 3700 11050
 F 0 "C29" H 3725 11150 50  0000 L CNN
 F 1 "4.7uF" H 3725 10950 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 3738 10900 50  0001 C CNN
-F 3 "" H 3700 11050 50  0001 C CNN
+F 3 "http://datasheets.avx.com/cx5r.pdf" H 3700 11050 50  0001 C CNN
+F 4 "478-1415-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/0805ZD475KAT2A/478-1415-1-ND/564447" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "0805ZD475KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    3700 11050
 	1    0    0    -1  
 $EndComp
@@ -1314,7 +1487,11 @@ P 3200 11100
 F 0 "R10" V 3280 11100 50  0000 C CNN
 F 1 "4.7k" V 3200 11100 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 3130 11100 50  0001 C CNN
-F 3 "" H 3200 11100 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 3200 11100 50  0001 C CNN
+F 4 "311-4.70KCRCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805FR-074K7L/311-4.70KCRCT-ND/730876" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805FR-074K7L" H 0   0   60  0001 C CNN "MFP"
 	1    3200 11100
 	-1   0    0    1   
 $EndComp
@@ -1336,7 +1513,11 @@ P 1950 10950
 F 0 "R8" V 2030 10950 50  0000 C CNN
 F 1 "470" V 1950 10950 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 1880 10950 50  0001 C CNN
-F 3 "" H 1950 10950 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 1950 10950 50  0001 C CNN
+F 4 "311-470ARCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805JR-07470RL/311-470ARCT-ND/731280" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805JR-07470RL" H 0   0   60  0001 C CNN "MFP"
 	1    1950 10950
 	0    1    1    0   
 $EndComp
@@ -1347,7 +1528,11 @@ P 1550 10950
 F 0 "D5" H 1550 11050 50  0000 C CNN
 F 1 "LED Red" H 1550 10850 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 1550 10950 50  0001 C CNN
-F 3 "" H 1550 10950 50  0001 C CNN
+F 3 "http://optoelectronics.liteon.com/upload/download/DS22-2000-109/LTST-C171KRKT.pdf" H 1550 10950 50  0001 C CNN
+F 4 "160-1427-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 0   0   60  0001 C CNN "MFN"
+F 7 "LTST-C171KRK" H 0   0   60  0001 C CNN "MFP"
 	1    1550 10950
 	-1   0    0    1   
 $EndComp
@@ -1358,7 +1543,11 @@ P 1950 11350
 F 0 "R9" V 2030 11350 50  0000 C CNN
 F 1 "470" V 1950 11350 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 1880 11350 50  0001 C CNN
-F 3 "" H 1950 11350 50  0001 C CNN
+F 3 "http://www.yageo.com.tw/exep/pages/download/literatures/PYu-R_INT-thick_7.pdf" H 1950 11350 50  0001 C CNN
+F 4 "311-470ARCT-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/yageo/RC0805JR-07470RL/311-470ARCT-ND/731280" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Yageo" H 0   0   60  0001 C CNN "MFN"
+F 7 "RC0805JR-07470RL" H 0   0   60  0001 C CNN "MFP"
 	1    1950 11350
 	0    1    1    0   
 $EndComp
@@ -1369,7 +1558,11 @@ P 1550 11350
 F 0 "D6" H 1550 11450 50  0000 C CNN
 F 1 "LED Green" H 1550 11250 50  0000 C CNN
 F 2 "LEDs:LED_0805_HandSoldering" H 1550 11350 50  0001 C CNN
-F 3 "" H 1550 11350 50  0001 C CNN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/Lite-On%20PDFs/LTST-C171GKT.pdf" H 1550 11350 50  0001 C CNN
+F 4 "160-1423-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171GKT/160-1423-1-ND/386792" H 0   0   60  0001 C CNN "S1PL"
+F 6 "Lite-On Inc." H 0   0   60  0001 C CNN "MFN"
+F 7 "LTST-C171GKT" H 0   0   60  0001 C CNN "MFP"
 	1    1550 11350
 	1    0    0    -1  
 $EndComp
@@ -1391,7 +1584,11 @@ P 4250 10750
 F 0 "J3" H 4250 10850 50  0000 C CNN
 F 1 "JST" H 4250 10550 50  0000 C CNN
 F 2 "third_party:JST_PH_B2B-PH-SM4-TB_02x2.00mm_Straight" H 4250 10750 50  0001 C CNN
-F 3 "" H 4250 10750 50  0001 C CNN
+F 3 "http://www.jst-mfg.com/product/pdf/eng/ePH.pdf" H 4250 10750 50  0001 C CNN
+F 4 "455-1734-1-ND" H 4250 10750 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/jst-sales-america-inc/B2B-PH-SM4-TB-LF-SN/455-1734-1-ND/926831" H 4250 10750 60  0001 C CNN "S1PL"
+F 6 "JST Sales America Inc." H 4250 10750 60  0001 C CNN "MFN"
+F 7 "B2B-PH-SM4-TB(LF)(SN)" H 4250 10750 60  0001 C CNN "MFP"
 	1    4250 10750
 	1    0    0    -1  
 $EndComp
@@ -2003,7 +2200,11 @@ P 5500 3850
 F 0 "C7" H 5525 3950 50  0000 L CNN
 F 1 "0.1uF" H 5525 3750 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 5538 3700 50  0001 C CNN
-F 3 "" H 5500 3850 50  0001 C CNN
+F 3 "http://datasheets.avx.com/X7RDielectric.pdf" H 5500 3850 50  0001 C CNN
+F 4 "478-1395-1-ND" H 0   0   60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427" H 0   0   60  0001 C CNN "S1PL"
+F 6 "AVX Corporation" H 0   0   60  0001 C CNN "MFN"
+F 7 "08055C104KAT2A" H 0   0   60  0001 C CNN "MFP"
 	1    5500 3850
 	1    0    0    -1  
 $EndComp
