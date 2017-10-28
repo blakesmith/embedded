@@ -1,15 +1,8 @@
 EESchema Schematic File Version 3
 LIBS:power
 LIBS:device
-LIBS:switches
-LIBS:relays
-LIBS:motors
-LIBS:transistors
-LIBS:conn
 LIBS:linear
 LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
 LIBS:adc-dac
 LIBS:memory
 LIBS:xilinx
@@ -24,13 +17,11 @@ LIBS:audio
 LIBS:interface
 LIBS:digital-audio
 LIBS:philips
-LIBS:display
 LIBS:cypress
 LIBS:siliconi
 LIBS:opto
 LIBS:atmel
 LIBS:contrib
-LIBS:valves
 LIBS:nome
 LIBS:open-project
 LIBS:nome-cache
@@ -78,7 +69,11 @@ P 9850 3700
 F 0 "U6" H 9150 3100 60  0000 C CNN
 F 1 "CS43L22" H 9850 3700 60  0000 C CNN
 F 2 "Housings_DFN_QFN:QFN-40-1EP_6x6mm_Pitch0.5mm" H 9900 3650 60  0001 C CNN
-F 3 "" H 9900 3650 60  0001 C CNN
+F 3 "https://d3uzseaevmutz1.cloudfront.net/pubs/proDatasheet/CS43L22_F2.pdf" H 9900 3650 60  0001 C CNN
+F 4 "598-1650-ND" H 9850 3700 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/cirrus-logic-inc/CS43L22-CNZ/598-1650-ND/2024884" H 9850 3700 60  0001 C CNN "S1PL"
+F 6 "Cirrus Logic Inc." H 9850 3700 60  0001 C CNN "MFN"
+F 7 "CS43L22-CNZ" H 9850 3700 60  0001 C CNN "MFP"
 	1    9850 3700
 	1    0    0    -1  
 $EndComp
@@ -142,7 +137,11 @@ P 3750 4150
 F 0 "U4" H 3700 4150 60  0000 C CNN
 F 1 "STMF411CEU6" H 3700 4150 60  0000 C CNN
 F 2 "Housings_QFP:LQFP-48_7x7mm_Pitch0.5mm" H 3700 4150 60  0001 C CNN
-F 3 "" H 3700 4150 60  0001 C CNN
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/b3/a5/46/3b/b4/e5/4c/85/DM00115249.pdf/files/DM00115249.pdf/jcr:content/translations/en.DM00115249.pdf" H 3700 4150 60  0001 C CNN
+F 4 "497-14907-ND" H 3750 4150 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F411CEU6/497-14907-ND/4935720" H 3750 4150 60  0001 C CNN "S1PL"
+F 6 "STMicroelectronics" H 3750 4150 60  0001 C CNN "MFN"
+F 7 "STM32F411CEU6" H 3750 4150 60  0001 C CNN "MFP"
 	1    3750 4150
 	1    0    0    -1  
 $EndComp
@@ -223,7 +222,11 @@ P 2200 9650
 F 0 "SW2" H 2200 9910 50  0000 C CNN
 F 1 "Rotary_Encoder_Switch" H 2200 9390 50  0000 C CNN
 F 2 "nome:PEC11" H 2100 9810 50  0001 C CNN
-F 3 "" H 2200 9910 50  0001 C CNN
+F 3 "http://www.bourns.com/docs/Product-Datasheets/PEC11R.pdf" H 2200 9910 50  0001 C CNN
+F 4 "PEC11R-4215K-S0024-ND" H 2200 9650 60  0001 C CNN "S1PN"
+F 5 "https://www.digikey.com/product-detail/en/bourns-inc/PEC11R-4215K-S0024/PEC11R-4215K-S0024-ND/4499662" H 2200 9650 60  0001 C CNN "S1PL"
+F 6 "Bourns Inc." H 2200 9650 60  0001 C CNN "MFN"
+F 7 "PEC11R-4215K-S0024" H 2200 9650 60  0001 C CNN "MFP"
 	1    2200 9650
 	-1   0    0    1   
 $EndComp
@@ -2008,10 +2011,10 @@ Wire Wire Line
 Wire Wire Line
 	8600 2750 8600 2900
 $Comp
-L GND #PWR?
+L GND #PWR048
 U 1 1 59F27A93
 P 8600 2900
-F 0 "#PWR?" H 8600 2650 50  0001 C CNN
+F 0 "#PWR048" H 8600 2650 50  0001 C CNN
 F 1 "GND" H 8605 2727 50  0000 C CNN
 F 2 "" H 8600 2900 50  0001 C CNN
 F 3 "" H 8600 2900 50  0001 C CNN
