@@ -24,7 +24,11 @@ ifeq ($(PLATFORM),linux)
 	CC_FILES += main_linux.cc alsa_output.cc
 	EXTRA_OBJECTS=
 else
-	CC_FILES += main_stm32.cc stm32f4xx_it.cc system_stm32f4xx.cc
+	CC_FILES += main_stm32.cc \
+	stm32f4xx_it.cc \
+	system_stm32f4xx.cc \
+	gpio_bus.cc
+
 	AS_FILES = startup_stm32f411xe.s
 endif
 
