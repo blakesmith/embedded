@@ -15,7 +15,7 @@ public:
         OPEN_DRAIN
     };
 
-    enum class PushPull {
+    enum class PuPd {
         UP,
         DOWN
     };
@@ -28,7 +28,7 @@ public:
     GPIOPin(uint16_t pin,
             Mode mode,
             OType otype,
-            PushPull push_pull,
+            PuPd pupd,
             Speed speed);
     
     ~GPIOPin() = default;
@@ -39,13 +39,14 @@ private:
     uint32_t pin_number_;
     Mode mode_;
     OType otype_;
-    PushPull push_pull_;
+    PuPd pupd_;
     Speed speed_;
     
     uint32_t lookup_pin_number_for(uint16_t pin_number);
     GPIOMode_TypeDef lookup_mode_for(Mode mode);
     GPIOOType_TypeDef lookup_output_for(OType otype);
-    GPIOPuPd_TypeDef lookup_push_pull_for(PushPull push_pull);
+    GPIOPuPd_TypeDef lookup_push_pull_for(PuPd pupd);
+    GPIOSpeed_TypeDef lookup_speed_for(Speed speed);
 };
 
 #endif
