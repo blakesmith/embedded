@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>/home/blake/projects/stm32/nome/hardware/nome/nome.sch</source>
-    <date>Sat 28 Oct 2017 02:59:17 PM CDT</date>
+    <date>Sat 28 Oct 2017 03:07:25 PM CDT</date>
     <tool>Eeschema no-vcs-found-a562525~60~ubuntu16.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -428,9 +428,9 @@
     <comp ref="U2">
       <value>LM1117-3.3</value>
       <footprint>TO_SOT_Packages_SMD:SOT-223</footprint>
-      <datasheet>http://www.ti.com/lit/ds/symlink/lm1117.pdf</datasheet>
+      <datasheet>http://www.st.com/content/ccc/resource/technical/document/datasheet/99/3b/7d/91/91/51/4b/be/CD00000544.pdf/files/CD00000544.pdf/jcr:content/translations/en.CD00000544.pdf</datasheet>
       <fields>
-        <field name="497-1242-6-ND">LM1117MP-3.3/NOPBCT-ND</field>
+        <field name="S1PN">497-1242-6-ND</field>
         <field name="S1PL">https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S33TR/497-1242-6-ND/1706544</field>
         <field name="MFN">STMicroelectronics</field>
         <field name="MFP">LD1117S33TR</field>
