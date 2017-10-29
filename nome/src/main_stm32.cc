@@ -8,13 +8,14 @@
 
 using namespace nome;
 
+Pinout pinout;
 CS43L22Dac dac;
 Settings settings;
 Beat beat(settings.GetSampleRate(),
           settings.GetControlRate(),
           settings.GetBPM(),
           settings.GetDownbeat());
-UserInterface user_interface(settings, beat.GetMonitor());
+UserInterface user_interface(settings, pinout, beat.GetMonitor());
 
 
 
@@ -30,6 +31,7 @@ static void FillCallback(CS43L22Dac::Frame* frames, size_t n_frames, size_t buf_
 }
 
 void Init() {
+    pinout.Init();
     user_interface.Init();
     dac.Init(scale_volume(settings.GetVolume()),
              settings.GetSampleRate(),

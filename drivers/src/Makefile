@@ -1,4 +1,6 @@
-CC_FILES = cs43l22_dac.cc \
+CC_FILES = gpio_bus.cc \
+	gpio_pin.cc \
+	cs43l22_dac.cc \
 	ht16K33_display.cc \
 	pec11_renc.cc \
 	status_led.cc

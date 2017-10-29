@@ -4,7 +4,9 @@ CC_FILES=adsr_envelope.cc \
 	user_interface.cc \
 	osc.cc
 
-EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
+EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/gpio_bus.o \
+	$(LOCAL_DRIVERS_SRCDIR)/gpio_pin.o \
+	$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
 	$(LOCAL_DRIVERS_SRCDIR)/pec11_renc.o \
 	$(LOCAL_DRIVERS_SRCDIR)/status_led.o \
 	$(LOCAL_DRIVERS_SRCDIR)/cs43l22_dac.o \
@@ -27,8 +29,6 @@ else
 	CC_FILES += main_stm32.cc \
 	stm32f4xx_it.cc \
 	system_stm32f4xx.cc \
-	gpio_bus.cc \
-	gpio_pin.cc \
 	pinout.cc
 
 	AS_FILES = startup_stm32f411xe.s

@@ -2,6 +2,7 @@
 #define NOME_USER_INTERFACE_H_
 
 #include "beat.h"
+#include "pinout.h"
 
 #include "pec11_renc.h"
 #include "ht16K33_display.h"
@@ -42,7 +43,9 @@ public:
         SCREEN_STATE_VOLUME
     };
 
-    UserInterface(Settings& settings, const BeatMonitor& beat_monitor);
+    UserInterface(Settings& settings,
+                  Pinout& pinout,
+                  const BeatMonitor& beat_monitor);
     ~UserInterface() = default;
     
     void Init();

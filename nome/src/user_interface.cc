@@ -10,8 +10,14 @@ static const UserInterface::ScreenState ALL_SCREENS[] = {
 
 static const size_t ALL_SCREENS_SIZE = sizeof(ALL_SCREENS) / sizeof(UserInterface::ScreenState);
 
-UserInterface::UserInterface(Settings& settings, const BeatMonitor& beat_monitor)
-    : settings_(settings),
+UserInterface::UserInterface(
+    Settings& settings,
+    Pinout& pinout,
+    const BeatMonitor& beat_monitor)
+    : status_led_(pinout.led_ok,
+                  pinout.led_error,
+                  pinout.led_activity),
+      settings_(settings),
       beat_monitor_(beat_monitor),
       knob_offset_(0),
       current_screen_position_(0),
