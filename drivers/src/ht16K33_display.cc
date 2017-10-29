@@ -43,12 +43,12 @@ HT16K33Display::HT16K33Display(I2CBus& i2c_bus)
       device_address_(DEFAULT_DEVICE_ADDRESS) { }
 
 void HT16K33Display::Init() {
-//    enable_oscillator();
-    // SetBlinkRate(HT16K33_BLINK_OFF);
-    // SetBrightness(15);
+    enable_oscillator();
+    SetBlinkRate(HT16K33_BLINK_OFF);
+    SetBrightness(15);
 
-    // Clear();
-    // WriteDisplay();
+    Clear();
+    WriteDisplay();
 }
 
 void HT16K33Display::SetBrightness(uint8_t brightness) {
