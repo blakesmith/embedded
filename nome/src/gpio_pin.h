@@ -3,6 +3,8 @@
 
 #include "stm32f4xx_gpio.h"
 
+#include "gpio_bus.h"
+
 class GPIOPin {
 public:
     enum class Mode {
@@ -29,7 +31,7 @@ public:
         NONE
     };
 
-    GPIOPin(GPIO_TypeDef* gpiox,
+    GPIOPin(GPIOBus& bus,
             uint16_t pin);
     
     ~GPIOPin() = default;
@@ -46,7 +48,7 @@ public:
 
 private:
     uint32_t pin_number_;
-    GPIO_TypeDef* gpiox_;
+    GPIOBus& bus_;
 
     Mode mode_;
     OType otype_;

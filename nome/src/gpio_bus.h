@@ -1,11 +1,9 @@
 #ifndef GPIO_BUS_H_
 #define GPIO_BUS_H_
 
-#include "gpio_pin.h"
-
 class GPIOBus {
 public:
-    enum class BusId {
+    enum class Id {
         A,
         B,
         C,
@@ -13,17 +11,18 @@ public:
         E
     };
     
-    GPIOBus(BusId id);
+    GPIOBus(Id id);
     ~GPIOBus() = default;
     
     void Init();
+    GPIO_TypeDef* get_gpiox();
     
 private:
-    BusId bus_id_;
+    Id bus_id_;
     GPIO_TypeDef* gpiox_;
 
-    GPIO_TypeDef* lookup_gpio_typedef(BusId id);
-    uint32_t lookup_clock_for(BusId id);
+    GPIO_TypeDef* lookup_gpio_typedef(Id id);
+    uint32_t lookup_clock_for(Id id);
 };
 
 #endif
