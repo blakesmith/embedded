@@ -144,3 +144,7 @@ void GPIOPin::set_speed(Speed speed) {
 void GPIOPin::set_alternative_function(Af af) {
     this->af_ = af;
 }
+
+GPIOBus& GPIOPin::get_bus() {
+    return bus_;
+}

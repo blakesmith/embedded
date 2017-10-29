@@ -5,6 +5,18 @@ GPIOBus::GPIOBus(Id id)
     gpiox_ = lookup_gpio_typedef(id);
 }
 
+void GPIOBus::Init() {
+    RCC_AHB1PeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
+}
+
+uint32_t GPIOBus::ReadAll() {
+    return gpiox_->IDR;
+}
+
+GPIO_TypeDef* GPIOBus::get_gpiox() {
+    return gpiox_;
+}
+
 GPIO_TypeDef* GPIOBus::lookup_gpio_typedef(Id id) {
     switch (id) {
         case Id::A: return GPIOA;
@@ -25,13 +37,5 @@ uint32_t GPIOBus::lookup_clock_for(Id id) {
         case Id::E: return RCC_AHB1Periph_GPIOE;
         default: return 0;
     }
-}
-
-void GPIOBus::Init() {
-    RCC_AHB1PeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
-}
-
-GPIO_TypeDef* GPIOBus::get_gpiox() {
-    return gpiox_;
 }
 

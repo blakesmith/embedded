@@ -15,6 +15,7 @@ public:
     ~GPIOBus() = default;
     
     void Init();
+    uint32_t ReadAll();
     GPIO_TypeDef* get_gpiox();
     
 private:

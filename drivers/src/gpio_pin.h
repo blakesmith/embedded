@@ -46,6 +46,7 @@ public:
 
     void Set(bool on);
     void Toggle();
+    uint8_t Read();
     
     void Init();
     
@@ -54,6 +55,7 @@ public:
     void set_pupd(PuPd pupd);
     void set_speed(Speed speed);
     void set_alternative_function(Af af);
+    GPIOBus& get_bus();
 
 private:
     uint32_t pin_number_;
