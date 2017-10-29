@@ -6,8 +6,31 @@ GPIOPin::GPIOPin(GPIOBus& bus,
       mode_(Mode::NONE),
       otype_(OType::NONE),
       pupd_(PuPd::NONE),
-      speed_(Speed::NONE) {
+      speed_(Speed::NONE),
+      af_(Af::NONE) {
     pin_number_ = lookup_pin_number_for(pin);
+    pin_source_ = lookup_pin_source_for(pin);
+}
+
+uint16_t GPIOPin::lookup_pin_source_for(uint16_t pin) {
+    switch (pin) {
+        case 1: return GPIO_PinSource1;
+        case 2: return GPIO_PinSource2;
+        case 3: return GPIO_PinSource3;
+        case 4: return GPIO_PinSource4;
+        case 5: return GPIO_PinSource5;
+        case 6: return GPIO_PinSource6;
+        case 7: return GPIO_PinSource7;
+        case 8: return GPIO_PinSource8;
+        case 9: return GPIO_PinSource9;
+        case 10: return GPIO_PinSource10;
+        case 11: return GPIO_PinSource11;
+        case 12: return GPIO_PinSource12;
+        case 13: return GPIO_PinSource13;
+        case 14: return GPIO_PinSource14;
+        case 15: return GPIO_PinSource15;
+        default: return 0;
+    }
 }
 
 uint32_t GPIOPin::lookup_pin_number_for(uint16_t pin) {
@@ -31,10 +54,20 @@ uint32_t GPIOPin::lookup_pin_number_for(uint16_t pin) {
     }
 }
 
+uint8_t GPIOPin::lookup_alternative_function_for(Af af) {
+    switch (af) {
+        case Af::I2C_1: return GPIO_AF_I2C1;
+        case Af::I2C_2: return GPIO_AF_I2C2;
+        case Af::I2C_3: return GPIO_AF_I2C3;
+        default: return 0;
+    }
+}
+
 GPIOMode_TypeDef GPIOPin::lookup_mode_for(Mode mode) {
     switch (mode) {
         case Mode::IN: return GPIO_Mode_IN;
         case Mode::OUT: return GPIO_Mode_OUT;
+        case Mode::AF: return GPIO_Mode_AF;
         default: return GPIO_Mode_IN;
     }
 }
@@ -51,7 +84,7 @@ GPIOPuPd_TypeDef GPIOPin::lookup_push_pull_for(PuPd pupd) {
     switch (pupd) {
         case PuPd::UP: return GPIO_PuPd_UP;
         case PuPd::DOWN: return GPIO_PuPd_DOWN;
-        default: return GPIO_PuPd_UP;
+        default: return GPIO_PuPd_NOPULL;
     }
 }
 
@@ -66,6 +99,12 @@ GPIOSpeed_TypeDef GPIOPin::lookup_speed_for(Speed speed) {
 void GPIOPin::Init() {
     GPIO_InitTypeDef gpio_init;
 
+    if (af_ != Af::NONE) {
+        GPIO_PinAFConfig(bus_.get_gpiox(),
+                         pin_source_,
+                         lookup_alternative_function_for(af_));
+    }
+
     GPIO_StructInit(&gpio_init);
 
     gpio_init.GPIO_Pin = pin_number_;
@@ -73,7 +112,7 @@ void GPIOPin::Init() {
     gpio_init.GPIO_OType = lookup_output_for(otype_);
     gpio_init.GPIO_Speed = lookup_speed_for(speed_);
     gpio_init.GPIO_PuPd = lookup_push_pull_for(pupd_);
-
+    
     GPIO_Init(bus_.get_gpiox(), &gpio_init);
 }
 
@@ -100,4 +139,8 @@ void GPIOPin::set_pupd(PuPd pupd) {
 
 void GPIOPin::set_speed(Speed speed) {
     this->speed_ = speed;
+}
+
+void GPIOPin::set_alternative_function(Af af) {
+    this->af_ = af;
 }
