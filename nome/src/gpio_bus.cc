@@ -36,4 +36,6 @@ void GPIOBus::EnablePin(GPIOPin& pin) {
 
     pin.PopulateInit(&gpio_init);
     GPIO_Init(gpiox_, &gpio_init);
+
+    pin.SetGpio(gpiox_);
 }

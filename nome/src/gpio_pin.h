@@ -34,9 +34,12 @@ public:
     ~GPIOPin() = default;
 
     void PopulateInit(GPIO_InitTypeDef* gpio_init);
+    void SetGpio(GPIO_TypeDef* gpiox);
 
 private:
     uint32_t pin_number_;
+    GPIO_TypeDef* gpiox_;
+
     Mode mode_;
     OType otype_;
     PuPd pupd_;

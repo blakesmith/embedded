@@ -76,3 +76,7 @@ void GPIOPin::PopulateInit(GPIO_InitTypeDef* gpio_init) {
     gpio_init->GPIO_Speed = lookup_speed_for(speed_);
     gpio_init->GPIO_PuPd = lookup_push_pull_for(pupd_);
 }
+
+void GPIOPin::SetGpio(GPIO_TypeDef* gpiox) {
+    this->gpiox_ = gpiox;
+}
