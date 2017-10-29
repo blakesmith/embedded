@@ -15,6 +15,11 @@ struct Pinout {
     GPIOPin led_error;
     GPIOPin led_activity;
 
+    // Pec11 rotary encoder
+    GPIOPin encoder_clockwise;
+    GPIOPin encoder_counter_clockwise;
+    GPIOPin encoder_button;
+
     // I2C
     GPIOPin i2c_scl;
     GPIOPin i2c_sda;

@@ -17,6 +17,8 @@ public:
     void Init();
     uint32_t ReadAll();
     GPIO_TypeDef* get_gpiox();
+
+    bool operator==(const GPIOBus& other) const;
     
 private:
     Id bus_id_;

@@ -148,3 +148,7 @@ void GPIOPin::set_alternative_function(Af af) {
 GPIOBus& GPIOPin::get_bus() {
     return bus_;
 }
+
+uint32_t GPIOPin::get_pin_number() {
+    return pin_number_;
+}

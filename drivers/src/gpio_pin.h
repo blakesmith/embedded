@@ -56,6 +56,7 @@ public:
     void set_speed(Speed speed);
     void set_alternative_function(Af af);
     GPIOBus& get_bus();
+    uint32_t get_pin_number();
 
 private:
     uint32_t pin_number_;

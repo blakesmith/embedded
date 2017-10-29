@@ -1,6 +1,8 @@
 #ifndef PEC11_RENC_H_
 #define PEC11_RENC_H_
 
+#include "gpio_pin.h"
+
 enum RotationAction {
     ENC_ACTION_NONE = 0,
     ENC_ACTION_ROTATE_CLOCKWISE = 1,
@@ -16,7 +18,9 @@ enum ButtonAction {
 class Pec11RotaryEncoder {
 
 public:
-    Pec11RotaryEncoder();
+    Pec11RotaryEncoder(GPIOPin& clockwise_pin,
+                       GPIOPin& counter_clockwise_pin,
+                       GPIOPin& button_pin);
     ~Pec11RotaryEncoder() = default;
     void Init();
     void ResetCount();
@@ -27,6 +31,10 @@ public:
 private:
     RotationAction rotation_action(uint32_t pin_state);
     ButtonAction button_action(uint32_t pin_state);
+
+    GPIOPin& clockwise_pin_;
+    GPIOPin& counter_clockwise_pin_;
+    GPIOPin& button_pin_;
 
     uint8_t rotation_state_;
     uint8_t button_state_;

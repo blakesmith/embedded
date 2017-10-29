@@ -5,6 +5,10 @@ GPIOBus::GPIOBus(Id id)
     gpiox_ = lookup_gpio_typedef(id);
 }
 
+bool GPIOBus::operator==(const GPIOBus& other) const {
+    return bus_id_ == other.bus_id_;
+}
+
 void GPIOBus::Init() {
     RCC_AHB1PeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
 }
