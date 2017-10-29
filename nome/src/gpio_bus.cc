@@ -1,7 +1,5 @@
 #include "gpio_bus.h"
 
-#include "stm32f4xx_gpio.h"
-
 GPIOBus::GPIOBus(BusId id)
     : bus_id_(id) {
     gpiox_ = lookup_gpio_typedef(id);
@@ -31,4 +29,11 @@ uint32_t GPIOBus::lookup_clock_for(BusId id) {
 
 void GPIOBus::Init() {
     RCC_AHB1PeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
+}
+
+void GPIOBus::EnablePin(GPIOPin& pin) {
+    GPIO_InitTypeDef gpio_init;
+
+    pin.PopulateInit(&gpio_init);
+    GPIO_Init(gpiox_, &gpio_init);
 }

@@ -1,6 +1,8 @@
 #ifndef GPIO_BUS_H_
 #define GPIO_BUS_H_
 
+#include "gpio_pin.h"
+
 class GPIOBus {
 public:
     enum class BusId {
@@ -15,6 +17,7 @@ public:
     ~GPIOBus() = default;
     
     void Init();
+    void EnablePin(GPIOPin& pin);
     
 private:
     BusId bus_id_;

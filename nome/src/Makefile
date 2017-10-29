@@ -27,7 +27,8 @@ else
 	CC_FILES += main_stm32.cc \
 	stm32f4xx_it.cc \
 	system_stm32f4xx.cc \
-	gpio_bus.cc
+	gpio_bus.cc \
+	gpio_pin.cc
 
 	AS_FILES = startup_stm32f411xe.s
 endif
