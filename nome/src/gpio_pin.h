@@ -7,37 +7,43 @@ class GPIOPin {
 public:
     enum class Mode {
         IN,
-        OUT
+        OUT,
+        NONE
     };
 
     enum class OType {
         PUSH_PULL,
-        OPEN_DRAIN
+        OPEN_DRAIN,
+        NONE
     };
 
     enum class PuPd {
         UP,
-        DOWN
+        DOWN,
+        NONE
     };
 
-    enum Speed {
+    enum class Speed {
         TWO_MHZ,
-        FIFTY_MHZ
+        FIFTY_MHZ,
+        NONE
     };
 
-    GPIOPin(uint16_t pin,
-            Mode mode,
-            OType otype,
-            PuPd pupd,
-            Speed speed);
+    GPIOPin(uint16_t pin);
     
     ~GPIOPin() = default;
 
     void PopulateInit(GPIO_InitTypeDef* gpio_init);
-    void SetGpio(GPIO_TypeDef* gpiox);
-
+    
     void Set(bool on);
     void Toggle();
+
+    void set_gpio(GPIO_TypeDef* gpiox);
+
+    void set_mode(Mode mode);
+    void set_output(OType otype);
+    void set_pupd(PuPd pupd);
+    void set_speed(Speed speed);
 
 private:
     uint32_t pin_number_;
