@@ -17,7 +17,6 @@ public:
     ~GPIOBus() = default;
     
     void Init();
-    void EnablePin(GPIOPin& pin);
     
 private:
     BusId bus_id_;

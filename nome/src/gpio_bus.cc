@@ -31,11 +31,3 @@ void GPIOBus::Init() {
     RCC_AHB1PeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
 }
 
-void GPIOBus::EnablePin(GPIOPin& pin) {
-    GPIO_InitTypeDef gpio_init;
-
-    pin.PopulateInit(&gpio_init);
-    GPIO_Init(gpiox_, &gpio_init);
-
-    pin.set_gpio(gpiox_);
-}

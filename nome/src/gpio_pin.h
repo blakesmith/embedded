@@ -29,17 +29,16 @@ public:
         NONE
     };
 
-    GPIOPin(uint16_t pin);
+    GPIOPin(GPIO_TypeDef* gpiox,
+            uint16_t pin);
     
     ~GPIOPin() = default;
 
-    void PopulateInit(GPIO_InitTypeDef* gpio_init);
-    
     void Set(bool on);
     void Toggle();
-
-    void set_gpio(GPIO_TypeDef* gpiox);
-
+    
+    void Init();
+    
     void set_mode(Mode mode);
     void set_output(OType otype);
     void set_pupd(PuPd pupd);

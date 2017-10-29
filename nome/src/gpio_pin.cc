@@ -1,7 +1,9 @@
 #include "gpio_pin.h"
 
-GPIOPin::GPIOPin(uint16_t pin)
-    : mode_(Mode::NONE),
+GPIOPin::GPIOPin(GPIO_TypeDef* gpiox,
+                 uint16_t pin)
+    : gpiox_(gpiox),
+      mode_(Mode::NONE),
       otype_(OType::NONE),
       pupd_(PuPd::NONE),
       speed_(Speed::NONE) {
@@ -65,12 +67,18 @@ GPIOSpeed_TypeDef GPIOPin::lookup_speed_for(Speed speed) {
     return GPIO_Speed_50MHz;
 }
 
-void GPIOPin::PopulateInit(GPIO_InitTypeDef* gpio_init) {
-    gpio_init->GPIO_Pin = pin_number_;
-    gpio_init->GPIO_Mode = lookup_mode_for(mode_);
-    gpio_init->GPIO_OType = lookup_output_for(otype_);
-    gpio_init->GPIO_Speed = lookup_speed_for(speed_);
-    gpio_init->GPIO_PuPd = lookup_push_pull_for(pupd_);
+void GPIOPin::Init() {
+    GPIO_InitTypeDef gpio_init;
+
+    GPIO_StructInit(&gpio_init);
+
+    gpio_init.GPIO_Pin = pin_number_;
+    gpio_init.GPIO_Mode = lookup_mode_for(mode_);
+    gpio_init.GPIO_OType = lookup_output_for(otype_);
+    gpio_init.GPIO_Speed = lookup_speed_for(speed_);
+    gpio_init.GPIO_PuPd = lookup_push_pull_for(pupd_);
+
+    GPIO_Init(gpiox_, &gpio_init);
 }
 
 void GPIOPin::Set(bool on) {
@@ -80,10 +88,6 @@ void GPIOPin::Set(bool on) {
 
 void GPIOPin::Toggle() {
     gpiox_->ODR ^= pin_number_;
-}
-
-void GPIOPin::set_gpio(GPIO_TypeDef* gpiox) {
-    this->gpiox_ = gpiox;
 }
 
 void GPIOPin::set_mode(Mode mode) {
