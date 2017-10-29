@@ -1,6 +1,9 @@
 #ifndef I2C_BUS_H_
 #define I2C_BUS_H_
 
+#include <cstddef>
+
+#include "stm32f4xx_i2c.h"
 #include "gpio_pin.h"
 
 class I2CBus {
@@ -17,6 +20,19 @@ public:
 
     void Init();
 
+    void WriteTransmitStart(uint8_t device_address);
+    void WriteTransmitStop();
+
+    void WriteReceiveStart(uint8_t device_address);
+    void WriteReceiveStop();
+
+    void WriteRaw(uint8_t data);
+    
+    void WriteRaw(uint16_t* data,
+                  size_t size);
+
+    void WriteRaw(uint8_t* data,
+                  size_t size);
 private:
     Id id_;
     I2C_TypeDef* i2cx_;

@@ -1,5 +1,13 @@
 #include "i2c_bus.h"
 
+#define I2C_WAIT_FOR_EVENT(I, E) {            \
+        while (!I2C_CheckEvent(I, E));       \
+    }
+
+#define I2C_WAIT_FOR_FLAG(I, F) {        \
+        while (I2C_GetFlagStatus(I, F)); \
+    }
+
 I2CBus::I2CBus(Id id,
                GPIOPin& scl_pin,
                GPIOPin& sda_pin)
@@ -37,6 +45,53 @@ void I2CBus::Init() {
     
     I2C_Init(i2cx_, &i2c_init);
     I2C_Cmd(i2cx_, ENABLE);
+}
+
+void I2CBus::WriteTransmitStart(uint8_t device_address) {
+    I2C_AcknowledgeConfig(i2cx_, DISABLE);
+    I2C_WAIT_FOR_FLAG(i2cx_, I2C_FLAG_BUSY);
+    I2C_GenerateSTART(i2cx_, ENABLE);
+    I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_MODE_SELECT);
+    I2C_Send7bitAddress(i2cx_, device_address, I2C_Direction_Receiver);
+    I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED);
+}
+
+void I2CBus::WriteTransmitStop() {
+    I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_BYTE_TRANSMITTED);
+    I2C_GenerateSTOP(i2cx_, ENABLE);
+}
+
+void I2CBus::WriteReceiveStart(uint8_t device_address) {
+    I2C_AcknowledgeConfig(i2cx_, DISABLE);
+    I2C_WAIT_FOR_FLAG(i2cx_, I2C_FLAG_BUSY);
+    I2C_GenerateSTART(i2cx_, ENABLE);
+    I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_MODE_SELECT);
+    I2C_Send7bitAddress(i2cx_, device_address, I2C_Direction_Receiver);
+    I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED);
+}
+
+void I2CBus::WriteReceiveStop() {
+    I2C_GenerateSTOP(i2cx_, ENABLE);
+}
+
+void I2CBus::WriteRaw(uint16_t* data, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        I2C_SendData(i2cx_, data[i] & 0xFF);
+        I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+        I2C_SendData(i2cx_, data[i] >> 8);
+        I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+    }
+}
+
+void I2CBus::WriteRaw(uint8_t data) {
+    WriteRaw(&data, 1);
+}
+
+void I2CBus::WriteRaw(uint8_t* data, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        I2C_SendData(i2cx_, data[i]);
+        I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
+    }
 }
 
 uint32_t I2CBus::lookup_clock_for(Id id) {
