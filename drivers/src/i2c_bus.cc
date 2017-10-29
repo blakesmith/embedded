@@ -34,6 +34,9 @@ void I2CBus::Init() {
     sda_pin_.set_speed(GPIOPin::Speed::TWO_MHZ);
     sda_pin_.set_alternative_function(lookup_alternative_function_for(id_));
 
+    scl_pin_.Init();
+    sda_pin_.Init();
+
     I2C_StructInit(&i2c_init);
     I2C_DeInit(i2cx_);
     i2c_init.I2C_Mode = I2C_Mode_I2C;
@@ -52,7 +55,7 @@ void I2CBus::WriteTransmitStart(uint8_t device_address) {
     I2C_WAIT_FOR_FLAG(i2cx_, I2C_FLAG_BUSY);
     I2C_GenerateSTART(i2cx_, ENABLE);
     I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_MODE_SELECT);
-    I2C_Send7bitAddress(i2cx_, device_address, I2C_Direction_Receiver);
+    I2C_Send7bitAddress(i2cx_, device_address, I2C_Direction_Transmitter);
     I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED);
 }
 

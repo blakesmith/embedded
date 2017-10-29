@@ -6,6 +6,7 @@ CC_FILES=adsr_envelope.cc \
 
 EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/gpio_bus.o \
 	$(LOCAL_DRIVERS_SRCDIR)/gpio_pin.o \
+	$(LOCAL_DRIVERS_SRCDIR)/i2c_bus.o \
 	$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
 	$(LOCAL_DRIVERS_SRCDIR)/pec11_renc.o \
 	$(LOCAL_DRIVERS_SRCDIR)/status_led.o \

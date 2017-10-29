@@ -3,10 +3,13 @@
 
 #include <cstddef>
 
+#include "i2c_bus.h"
+
 class HT16K33Display {
 public:
-    HT16K33Display(uint8_t device_address);
-    HT16K33Display();
+    HT16K33Display(I2CBus& i2c_bus,
+                   uint8_t device_address);
+    HT16K33Display(I2CBus& i2c_bus);
 
     ~HT16K33Display() = default;
     
@@ -22,14 +25,10 @@ public:
     void WriteDisplay();
 
 private:
+    I2CBus& i2c_bus_;
     uint8_t device_address_;
     uint16_t display_buffer_[4];
 
-    void write_start();
-    void write_stop();
-    void write_raw(uint8_t* data, size_t size);
-    void write_raw(uint16_t* data, size_t size);
-    void write_raw(uint8_t data);
     void enable_oscillator();
 };
 

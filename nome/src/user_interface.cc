@@ -17,6 +17,7 @@ UserInterface::UserInterface(
     : status_led_(pinout.led_ok,
                   pinout.led_error,
                   pinout.led_activity),
+      display_(pinout.i2c_bus),
       settings_(settings),
       beat_monitor_(beat_monitor),
       knob_offset_(0),
