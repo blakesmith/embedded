@@ -36,6 +36,9 @@ public:
     void PopulateInit(GPIO_InitTypeDef* gpio_init);
     void SetGpio(GPIO_TypeDef* gpiox);
 
+    void Set(bool on);
+    void Toggle();
+
 private:
     uint32_t pin_number_;
     GPIO_TypeDef* gpiox_;

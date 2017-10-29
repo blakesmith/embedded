@@ -80,3 +80,12 @@ void GPIOPin::PopulateInit(GPIO_InitTypeDef* gpio_init) {
 void GPIOPin::SetGpio(GPIO_TypeDef* gpiox) {
     this->gpiox_ = gpiox;
 }
+
+void GPIOPin::Set(bool on) {
+    uint16_t toggle = on ? 0xFFFF : 0;
+    gpiox_->ODR = gpiox_->ODR | (pin_number_ & toggle);
+}
+
+void GPIOPin::Toggle() {
+    gpiox_->ODR ^= pin_number_;
+}
