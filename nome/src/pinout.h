@@ -6,6 +6,7 @@
 
 struct Pinout {
     GPIOBus gpioa;
+    GPIOBus gpiob;
     GPIOBus gpioc;
     GPIOBus gpiod;
 

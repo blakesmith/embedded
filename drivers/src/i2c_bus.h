@@ -33,6 +33,7 @@ public:
 
     void WriteRaw(uint8_t* data,
                   size_t size);
+    uint8_t ReceiveData();
 private:
     Id id_;
     I2C_TypeDef* i2cx_;

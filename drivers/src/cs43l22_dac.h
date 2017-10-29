@@ -3,6 +3,8 @@
 
 #include <cstddef>
 
+#include "i2c_bus.h"
+
 static constexpr uint8_t DEFAULT_DEVICE_ADDRESS = 0x25 << 2;
 
 static constexpr uint8_t CS_REG_ID = 0x01;
@@ -31,7 +33,7 @@ static constexpr size_t DAC_BUF_SIZE = DAC_FRAME_COUNT * 2;
 
 class CS43L22Dac {
 public:
-    CS43L22Dac() = default;
+    CS43L22Dac(I2CBus& i2c_bus);
     ~CS43L22Dac() = default;
 
     struct Frame {
@@ -56,7 +58,6 @@ public:
     
 private:
     void init_gpio();
-    void init_i2c();
     void init_i2s();
     void init_codec(uint8_t volume);
     void init_dma();
@@ -65,15 +66,7 @@ private:
     void write_register(uint8_t reg, uint8_t value);
     uint8_t read_register(uint8_t reg);
 
-    void write_transmit_start();
-    void write_transmit_stop();
-
-    void write_receive_start();
-    void write_receive_stop();
-    void write_raw(uint8_t* data, size_t size);
-    void write_raw(uint16_t* data, size_t size);
-    void write_raw(uint8_t data);
-
+    I2CBus& i2c_bus_;
     uint32_t sample_rate_;
     DacFillCallback fill_callback_;
 

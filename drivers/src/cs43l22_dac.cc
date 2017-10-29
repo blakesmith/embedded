@@ -6,8 +6,6 @@
 #include "stm32f4xx_spi.h"
 #include "misc.h"
 
-#include "i2c_common.h"
-
 #include <cstring>
 
 #define DELAY(t) {                 \
@@ -19,21 +17,6 @@
 CS43L22Dac *CS43L22Dac::global_dac_;
 
 static constexpr uint32_t DEFAULT_TIMEOUT = 0x1000 * 300;
-
-// I2C
-static I2C_TypeDef *I2Cx = I2C1;
-static GPIO_TypeDef *GPIOx_I2C = GPIOB;
-
-static constexpr uint32_t RCC_I2C_PERIPH = RCC_APB1Periph_I2C1;
-static constexpr uint32_t RCC_GPIO_I2C_PERIPH = RCC_AHB1Periph_GPIOB;
-
-static constexpr uint16_t GPIO_PS_I2C_SCL = GPIO_PinSource6;
-static constexpr uint16_t GPIO_PS_I2C_SDA = GPIO_PinSource9;
-
-static constexpr uint16_t GPIO_PIN_I2C_SCL = GPIO_Pin_6;
-static constexpr uint16_t GPIO_PIN_I2C_SDA = GPIO_Pin_9;
-
-static constexpr uint8_t GPIO_I2C_AFx = GPIO_AF_I2C1;
 
 // AUDIO Reset
 
@@ -64,6 +47,10 @@ static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
 static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
 static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 
+CS43L22Dac::CS43L22Dac(I2CBus& i2c_bus)
+    : i2c_bus_(i2c_bus)
+{}
+
 void CS43L22Dac::Init(uint8_t volume,
                       uint32_t sample_rate,
                       DacFillCallback fill_callback) {
@@ -77,7 +64,6 @@ void CS43L22Dac::Init(uint8_t volume,
 
     init_gpio();
     reset();
-    init_i2c();
     init_i2s();
     init_codec(volume);
     init_dma();
@@ -112,21 +98,6 @@ void CS43L22Dac::reset() {
 void CS43L22Dac::init_gpio() {
     GPIO_InitTypeDef GPIO_InitStructure;
 
-    // I2C
-    RCC_AHB1PeriphClockCmd(RCC_GPIO_I2C_PERIPH, ENABLE);
-
-    GPIO_StructInit(&GPIO_InitStructure);
-    
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2C_SCL | GPIO_PIN_I2C_SDA;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_Init(GPIOx_I2C, &GPIO_InitStructure);
-
-    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SCL, GPIO_I2C_AFx);
-    GPIO_PinAFConfig(GPIOx_I2C, GPIO_PS_I2C_SDA, GPIO_I2C_AFx);
-
     // I2S
     RCC_AHB1PeriphClockCmd(RCC_GPIO_I2S_PERIPH, ENABLE);
 
@@ -147,24 +118,6 @@ void CS43L22Dac::init_gpio() {
     GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_TX_AFx);
     GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_TX_AFx);
     GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_TX_AFx);
-}
-
-void CS43L22Dac::init_i2c() {
-    I2C_InitTypeDef I2C_InitStructure;
-
-    RCC_APB1PeriphClockCmd(RCC_I2C_PERIPH, ENABLE);
-
-    I2C_StructInit(&I2C_InitStructure);
-    I2C_DeInit(I2Cx);
-    I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
-    I2C_InitStructure.I2C_ClockSpeed = 100000;
-    I2C_InitStructure.I2C_OwnAddress1 = 0x36;
-    I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
-    I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
-    I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
-    
-    I2C_Init(I2Cx, &I2C_InitStructure);
-    I2C_Cmd(I2Cx, ENABLE);
 }
 
 void CS43L22Dac::init_i2s() {
@@ -313,69 +266,22 @@ void CS43L22Dac::FillTxBuffer() {
 }
 
 void CS43L22Dac::write_register(uint8_t reg, uint8_t value) {
-    write_transmit_start();
-    write_raw(reg);
-    write_raw(value);
-    write_transmit_stop();
+    i2c_bus_.WriteTransmitStart(DEFAULT_DEVICE_ADDRESS);
+    i2c_bus_.WriteRaw(reg);
+    i2c_bus_.WriteRaw(value);
+    i2c_bus_.WriteTransmitStop();
 }
 
 uint8_t CS43L22Dac::read_register(uint8_t reg) {
     uint8_t value;
-    
-    write_transmit_start();
-    write_raw(reg);
-    write_transmit_stop();
-    write_receive_start();
-    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_RECEIVED);
-    value = I2C_ReceiveData(I2Cx);
-    write_receive_stop();
+
+    i2c_bus_.WriteTransmitStart(DEFAULT_DEVICE_ADDRESS);
+    i2c_bus_.WriteRaw(reg);
+    i2c_bus_.WriteTransmitStop();
+    i2c_bus_.WriteReceiveStart(DEFAULT_DEVICE_ADDRESS);
+    value = i2c_bus_.ReceiveData();
+    i2c_bus_.WriteReceiveStop();
     return value;
-}
-
-void CS43L22Dac::write_transmit_start() {
-    I2C_WAIT_FOR_FLAG(I2Cx, I2C_FLAG_BUSY);
-    I2C_GenerateSTART(I2Cx, ENABLE);
-    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_MODE_SELECT);
-    I2C_Send7bitAddress(I2Cx, DEFAULT_DEVICE_ADDRESS, I2C_Direction_Transmitter);
-    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
-}
-
-void CS43L22Dac::write_receive_start() {
-    I2C_AcknowledgeConfig(I2Cx, DISABLE);
-    I2C_WAIT_FOR_FLAG(I2Cx, I2C_FLAG_BUSY);
-    I2C_GenerateSTART(I2Cx, ENABLE);
-    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_MODE_SELECT);
-    I2C_Send7bitAddress(I2Cx, DEFAULT_DEVICE_ADDRESS, I2C_Direction_Receiver);
-    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED);
-}
-
-void CS43L22Dac::write_transmit_stop() {
-    I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED);
-    I2C_GenerateSTOP(I2Cx, ENABLE);
-}
-
-void CS43L22Dac::write_receive_stop() {
-    I2C_GenerateSTOP(I2Cx, ENABLE);
-}
-
-void CS43L22Dac::write_raw(uint16_t* data, size_t size) {
-    for (size_t i = 0; i < size; i++) {
-        I2C_SendData(I2Cx, data[i] & 0xFF);
-        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
-        I2C_SendData(I2Cx, data[i] >> 8);
-        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
-    }
-}
-
-void CS43L22Dac::write_raw(uint8_t data) {
-    write_raw(&data, 1);
-}
-
-void CS43L22Dac::write_raw(uint8_t* data, size_t size) {
-    for (size_t i = 0; i < size; i++) {
-        I2C_SendData(I2Cx, data[i]);
-        I2C_WAIT_FOR_EVENT(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING);
-    }
 }
 
 extern "C" {

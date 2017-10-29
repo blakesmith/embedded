@@ -97,6 +97,11 @@ void I2CBus::WriteRaw(uint8_t* data, size_t size) {
     }
 }
 
+uint8_t I2CBus::ReceiveData() {
+    I2C_WAIT_FOR_EVENT(i2cx_, I2C_EVENT_MASTER_BYTE_RECEIVED);
+    return I2C_ReceiveData(i2cx_);
+}
+
 uint32_t I2CBus::lookup_clock_for(Id id) {
     switch (id) {
         case Id::ONE: return RCC_APB1Periph_I2C1;
