@@ -25,6 +25,11 @@ static constexpr uint16_t I2C_SCL = 6;
 static constexpr uint16_t I2C_SDA = 9;
 static constexpr I2CBus::Id I2C_ID = I2CBus::Id::ONE;
 
+// DAC
+
+#define DAC_RESET_BUS gpiod
+static constexpr uint16_t DAC_RESET = 4;
+
 // End configuration
 
 Pinout::Pinout()
@@ -40,7 +45,8 @@ Pinout::Pinout()
       encoder_button(ENCODER_BUS, ENCODER_BUTTON),
       i2c_scl(I2C_SCL_BUS, I2C_SCL),
       i2c_sda(I2C_SDA_BUS, I2C_SDA),
-      i2c_bus(I2C_ID, i2c_scl, i2c_sda)
+      i2c_bus(I2C_ID, i2c_scl, i2c_sda),
+      dac_reset(DAC_RESET_BUS, DAC_RESET)
 {}
 
 void Pinout::Init() {

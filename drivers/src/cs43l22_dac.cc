@@ -18,12 +18,6 @@ CS43L22Dac *CS43L22Dac::global_dac_;
 
 static constexpr uint32_t DEFAULT_TIMEOUT = 0x1000 * 300;
 
-// AUDIO Reset
-
-static GPIO_TypeDef *GPIOx_AUDIO_RESET = GPIOD;
-static constexpr uint32_t AUDIO_RESET_CLK = RCC_AHB1Periph_GPIOD;
-static constexpr uint16_t AUDIO_RESET_PIN = GPIO_Pin_4;
-
 // I2S
 static SPI_TypeDef *SPI_I2S = SPI3;
 static GPIO_TypeDef *GPIO1_I2S = GPIOA;
@@ -47,8 +41,10 @@ static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
 static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
 static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 
-CS43L22Dac::CS43L22Dac(I2CBus& i2c_bus)
-    : i2c_bus_(i2c_bus)
+CS43L22Dac::CS43L22Dac(I2CBus& i2c_bus,
+                       GPIOPin& reset_pin)
+    : i2c_bus_(i2c_bus),
+      reset_pin_(reset_pin)
 {}
 
 void CS43L22Dac::Init(uint8_t volume,
@@ -76,22 +72,15 @@ void CS43L22Dac::Start() {
 }
 
 void CS43L22Dac::reset() {
-    GPIO_InitTypeDef gpio_init;
+    reset_pin_.set_mode(GPIOPin::Mode::OUT);
+    reset_pin_.set_speed(GPIOPin::Speed::TWO_MHZ);
+    reset_pin_.set_output(GPIOPin::OType::PUSH_PULL);
+    reset_pin_.set_pupd(GPIOPin::PuPd::DOWN);
+    reset_pin_.Init();
 
-    RCC_AHB1PeriphClockCmd(AUDIO_RESET_CLK, ENABLE);
-
-    GPIO_StructInit(&gpio_init);
-
-    gpio_init.GPIO_Pin = AUDIO_RESET_PIN;
-    gpio_init.GPIO_Mode = GPIO_Mode_OUT;
-    gpio_init.GPIO_Speed = GPIO_Speed_2MHz;
-    gpio_init.GPIO_OType = GPIO_OType_PP;
-    gpio_init.GPIO_PuPd = GPIO_PuPd_DOWN;
-    GPIO_Init(GPIOx_AUDIO_RESET, &gpio_init);
-
-    GPIO_ResetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
+    reset_pin_.Set(true);
     DELAY(DEFAULT_TIMEOUT);
-    GPIO_SetBits(GPIOx_AUDIO_RESET, AUDIO_RESET_PIN);
+    reset_pin_.Set(false);
     DELAY(DEFAULT_TIMEOUT);
 }
 

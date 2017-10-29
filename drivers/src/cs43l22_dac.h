@@ -33,7 +33,8 @@ static constexpr size_t DAC_BUF_SIZE = DAC_FRAME_COUNT * 2;
 
 class CS43L22Dac {
 public:
-    CS43L22Dac(I2CBus& i2c_bus);
+    CS43L22Dac(I2CBus& i2c_bus,
+               GPIOPin& reset_pin);
     ~CS43L22Dac() = default;
 
     struct Frame {
@@ -67,6 +68,7 @@ private:
     uint8_t read_register(uint8_t reg);
 
     I2CBus& i2c_bus_;
+    GPIOPin& reset_pin_;
     uint32_t sample_rate_;
     DacFillCallback fill_callback_;
 

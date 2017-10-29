@@ -20,10 +20,13 @@ struct Pinout {
     GPIOPin encoder_counter_clockwise;
     GPIOPin encoder_button;
 
-    // I2C
+    // I2C, Display & DAC
     GPIOPin i2c_scl;
     GPIOPin i2c_sda;
     I2CBus i2c_bus;
+
+    // DAC
+    GPIOPin dac_reset;
 
     Pinout();
     void Init();
