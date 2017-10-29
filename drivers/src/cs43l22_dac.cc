@@ -20,20 +20,7 @@ static constexpr uint32_t DEFAULT_TIMEOUT = 0x1000 * 300;
 
 // I2S
 static SPI_TypeDef *SPI_I2S = SPI3;
-static GPIO_TypeDef *GPIO1_I2S = GPIOA;
-static GPIO_TypeDef *GPIO2_I2S = GPIOC;
-static constexpr uint32_t RCC_GPIO_I2S_PERIPH = RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC;
 static constexpr uint32_t RCC_SPI_I2S_CLOCK = RCC_APB1Periph_SPI3;
-
-static constexpr uint16_t GPIO_PS_I2S_MCK = GPIO_PinSource7;
-static constexpr uint16_t GPIO_PS_I2S_CK = GPIO_PinSource10;
-static constexpr uint16_t GPIO_PS_I2S_SD = GPIO_PinSource12;
-static constexpr uint16_t GPIO_PS_I2S_WS = GPIO_PinSource4;
-
-static constexpr uint16_t GPIO_PIN_I2S_MCK = GPIO_Pin_7;
-static constexpr uint16_t GPIO_PIN_I2S_CK = GPIO_Pin_10;
-static constexpr uint16_t GPIO_PIN_I2S_SD = GPIO_Pin_12;
-static constexpr uint16_t GPIO_PIN_I2S_WS = GPIO_Pin_4;
 
 static constexpr uint8_t GPIO_I2S_TX_AFx = GPIO_AF_SPI3;
 static constexpr uint32_t I2S_DMA_TX_CHANNEL = DMA_Channel_0;
@@ -42,9 +29,17 @@ static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
 static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 
 CS43L22Dac::CS43L22Dac(I2CBus& i2c_bus,
-                       GPIOPin& reset_pin)
+                       GPIOPin& reset_pin,
+                       GPIOPin& mck_pin,
+                       GPIOPin& ck_pin,
+                       GPIOPin& sd_pin,
+                       GPIOPin& ws_pin)
     : i2c_bus_(i2c_bus),
-      reset_pin_(reset_pin)
+      reset_pin_(reset_pin),
+      mck_pin_(mck_pin),
+      ck_pin_(ck_pin),
+      sd_pin_(sd_pin),
+      ws_pin_(ws_pin)
 {}
 
 void CS43L22Dac::Init(uint8_t volume,
@@ -85,28 +80,34 @@ void CS43L22Dac::reset() {
 }
 
 void CS43L22Dac::init_gpio() {
-    GPIO_InitTypeDef GPIO_InitStructure;
+    mck_pin_.set_mode(GPIOPin::Mode::AF);
+    mck_pin_.set_alternative_function(GPIOPin::Af::SPI_3);
+    mck_pin_.set_speed(GPIOPin::Speed::FIFTY_MHZ);
+    mck_pin_.set_output(GPIOPin::OType::PUSH_PULL);
+    mck_pin_.set_pupd(GPIOPin::PuPd::NONE);
 
-    // I2S
-    RCC_AHB1PeriphClockCmd(RCC_GPIO_I2S_PERIPH, ENABLE);
+    ck_pin_.set_mode(GPIOPin::Mode::AF);
+    ck_pin_.set_alternative_function(GPIOPin::Af::SPI_3);
+    ck_pin_.set_speed(GPIOPin::Speed::FIFTY_MHZ);
+    ck_pin_.set_output(GPIOPin::OType::PUSH_PULL);
+    ck_pin_.set_pupd(GPIOPin::PuPd::NONE);
 
-    GPIO_StructInit(&GPIO_InitStructure);
+    sd_pin_.set_mode(GPIOPin::Mode::AF);
+    sd_pin_.set_alternative_function(GPIOPin::Af::SPI_3);
+    sd_pin_.set_speed(GPIOPin::Speed::FIFTY_MHZ);
+    sd_pin_.set_output(GPIOPin::OType::PUSH_PULL);
+    sd_pin_.set_pupd(GPIOPin::PuPd::NONE);
 
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_MCK | GPIO_PIN_I2S_CK \
-        | GPIO_PIN_I2S_SD;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_Init(GPIO2_I2S, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_I2S_WS;
-    GPIO_Init(GPIO1_I2S, &GPIO_InitStructure);
-
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_MCK, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_CK, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO2_I2S, GPIO_PS_I2S_SD, GPIO_I2S_TX_AFx);
-    GPIO_PinAFConfig(GPIO1_I2S, GPIO_PS_I2S_WS, GPIO_I2S_TX_AFx);
+    ws_pin_.set_mode(GPIOPin::Mode::AF);
+    ws_pin_.set_alternative_function(GPIOPin::Af::SPI_3);
+    ws_pin_.set_speed(GPIOPin::Speed::FIFTY_MHZ);
+    ws_pin_.set_output(GPIOPin::OType::PUSH_PULL);
+    ws_pin_.set_pupd(GPIOPin::PuPd::NONE);
+    
+    mck_pin_.Init();
+    ck_pin_.Init();
+    sd_pin_.Init();
+    ws_pin_.Init();
 }
 
 void CS43L22Dac::init_i2s() {

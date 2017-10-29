@@ -27,6 +27,11 @@ struct Pinout {
 
     // DAC
     GPIOPin dac_reset;
+    
+    GPIOPin dac_i2s_mck;
+    GPIOPin dac_i2s_ck;
+    GPIOPin dac_i2s_sd;
+    GPIOPin dac_i2s_ws;
 
     Pinout();
     void Init();

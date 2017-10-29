@@ -14,10 +14,13 @@ public:
         NONE
     };
 
-    enum class Af {
+    enum Af {
         I2C_1,
         I2C_2,
         I2C_3,
+        SPI_1,
+        SPI_2,
+        SPI_3,
         NONE
     };
 
