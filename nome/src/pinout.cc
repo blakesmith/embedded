@@ -3,19 +3,19 @@
 // Begin configuration
 
 // StatusLed
+#define STATUS_LED_BUS gpiod
+
 static constexpr uint16_t STATUS_OK_LED = 15;
 static constexpr uint16_t STATUS_ERROR_LED = 14;
 static constexpr uint16_t STATUS_ACTIVITY_LED = 13;
 
-#define STATUS_LED_BUS gpiod
-
 // I2C
+#define I2C_SCL_BUS gpioa
+#define I2C_SDA_BUS gpioc
+
 static constexpr uint16_t I2C_SCL = 8;
 static constexpr uint16_t I2C_SDA = 9;
 static constexpr I2CBus::Id I2C_ID = I2CBus::Id::THREE;
-
-#define I2C_SCL_BUS gpioa
-#define I2C_SDA_BUS gpioc
 
 // End configuration
 
