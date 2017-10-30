@@ -29,16 +29,10 @@ static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
 
 CS43L22Dac::CS43L22Dac(I2CBus& i2c_bus,
                        GPIOPin& reset_pin,
-                       GPIOPin& mck_pin,
-                       GPIOPin& ck_pin,
-                       GPIOPin& sd_pin,
-                       GPIOPin& ws_pin)
+                       I2STransmitter& i2s_transmitter)
     : i2c_bus_(i2c_bus),
       reset_pin_(reset_pin),
-      mck_pin_(mck_pin),
-      ck_pin_(ck_pin),
-      sd_pin_(sd_pin),
-      ws_pin_(ws_pin)
+      i2s_transmitter_(i2s_transmitter)
 {}
 
 void CS43L22Dac::Init(uint8_t volume,
@@ -79,34 +73,34 @@ void CS43L22Dac::reset() {
 }
 
 void CS43L22Dac::init_gpio() {
-    mck_pin_.set_mode(GPIOPin::Mode::AF);
-    mck_pin_.set_alternative_function(GPIOPin::Af::SPI_3);
-    mck_pin_.set_speed(GPIOPin::Speed::FIFTY_MHZ);
-    mck_pin_.set_output(GPIOPin::OType::PUSH_PULL);
-    mck_pin_.set_pupd(GPIOPin::PuPd::NONE);
+    i2s_transmitter_.mck_pin.set_mode(GPIOPin::Mode::AF);
+    i2s_transmitter_.mck_pin.set_alternative_function(GPIOPin::Af::SPI_3);
+    i2s_transmitter_.mck_pin.set_speed(GPIOPin::Speed::FIFTY_MHZ);
+    i2s_transmitter_.mck_pin.set_output(GPIOPin::OType::PUSH_PULL);
+    i2s_transmitter_.mck_pin.set_pupd(GPIOPin::PuPd::NONE);
 
-    ck_pin_.set_mode(GPIOPin::Mode::AF);
-    ck_pin_.set_alternative_function(GPIOPin::Af::SPI_3);
-    ck_pin_.set_speed(GPIOPin::Speed::FIFTY_MHZ);
-    ck_pin_.set_output(GPIOPin::OType::PUSH_PULL);
-    ck_pin_.set_pupd(GPIOPin::PuPd::NONE);
+    i2s_transmitter_.ck_pin.set_mode(GPIOPin::Mode::AF);
+    i2s_transmitter_.ck_pin.set_alternative_function(GPIOPin::Af::SPI_3);
+    i2s_transmitter_.ck_pin.set_speed(GPIOPin::Speed::FIFTY_MHZ);
+    i2s_transmitter_.ck_pin.set_output(GPIOPin::OType::PUSH_PULL);
+    i2s_transmitter_.ck_pin.set_pupd(GPIOPin::PuPd::NONE);
 
-    sd_pin_.set_mode(GPIOPin::Mode::AF);
-    sd_pin_.set_alternative_function(GPIOPin::Af::SPI_3);
-    sd_pin_.set_speed(GPIOPin::Speed::FIFTY_MHZ);
-    sd_pin_.set_output(GPIOPin::OType::PUSH_PULL);
-    sd_pin_.set_pupd(GPIOPin::PuPd::NONE);
+    i2s_transmitter_.sd_pin.set_mode(GPIOPin::Mode::AF);
+    i2s_transmitter_.sd_pin.set_alternative_function(GPIOPin::Af::SPI_3);
+    i2s_transmitter_.sd_pin.set_speed(GPIOPin::Speed::FIFTY_MHZ);
+    i2s_transmitter_.sd_pin.set_output(GPIOPin::OType::PUSH_PULL);
+    i2s_transmitter_.sd_pin.set_pupd(GPIOPin::PuPd::NONE);
 
-    ws_pin_.set_mode(GPIOPin::Mode::AF);
-    ws_pin_.set_alternative_function(GPIOPin::Af::SPI_3);
-    ws_pin_.set_speed(GPIOPin::Speed::FIFTY_MHZ);
-    ws_pin_.set_output(GPIOPin::OType::PUSH_PULL);
-    ws_pin_.set_pupd(GPIOPin::PuPd::NONE);
+    i2s_transmitter_.ws_pin.set_mode(GPIOPin::Mode::AF);
+    i2s_transmitter_.ws_pin.set_alternative_function(GPIOPin::Af::SPI_3);
+    i2s_transmitter_.ws_pin.set_speed(GPIOPin::Speed::FIFTY_MHZ);
+    i2s_transmitter_.ws_pin.set_output(GPIOPin::OType::PUSH_PULL);
+    i2s_transmitter_.ws_pin.set_pupd(GPIOPin::PuPd::NONE);
     
-    mck_pin_.Init();
-    ck_pin_.Init();
-    sd_pin_.Init();
-    ws_pin_.Init();
+    i2s_transmitter_.mck_pin.Init();
+    i2s_transmitter_.ck_pin.Init();
+    i2s_transmitter_.sd_pin.Init();
+    i2s_transmitter_.ws_pin.Init();
 }
 
 void CS43L22Dac::init_i2s() {

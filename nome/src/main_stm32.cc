@@ -11,10 +11,7 @@ using namespace nome;
 Pinout pinout;
 CS43L22Dac dac(pinout.i2c_bus,
                pinout.dac_reset,
-               pinout.dac_i2s_mck,
-               pinout.dac_i2s_ck,
-               pinout.dac_i2s_sd,
-               pinout.dac_i2s_ws);
+               pinout.i2s_transmitter);
 Settings settings;
 Beat beat(settings.GetSampleRate(),
           settings.GetControlRate(),

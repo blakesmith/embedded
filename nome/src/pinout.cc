@@ -39,6 +39,10 @@ static constexpr uint16_t DAC_I2S_CK = 10;
 static constexpr uint16_t DAC_I2S_SD = 12;
 static constexpr uint16_t DAC_I2S_WS = 4;
 
+static constexpr uint8_t DAC_SPI = 3;
+static constexpr uint8_t DAC_DMA = 1;
+static constexpr uint32_t DAC_DMA_CHANNEL = 0;
+static constexpr uint8_t DAC_DMA_STREAM = 7;
 // End configuration
 
 Pinout::Pinout()
@@ -59,7 +63,15 @@ Pinout::Pinout()
       dac_i2s_mck(DAC_I2S_MCK_BUS, DAC_I2S_MCK),
       dac_i2s_ck(DAC_I2S_CK_BUS, DAC_I2S_CK),
       dac_i2s_sd(DAC_I2S_SD_BUS, DAC_I2S_SD),
-      dac_i2s_ws(DAC_I2S_WS_BUS, DAC_I2S_WS)
+      dac_i2s_ws(DAC_I2S_WS_BUS, DAC_I2S_WS),
+      i2s_transmitter(dac_i2s_mck,
+                      dac_i2s_ck,
+                      dac_i2s_sd,
+                      dac_i2s_ws,
+                      DAC_SPI,
+                      DAC_DMA,
+                      DAC_DMA_CHANNEL,
+                      DAC_DMA_STREAM)
 {}
 
 void Pinout::Init() {

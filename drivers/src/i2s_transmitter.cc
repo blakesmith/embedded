@@ -48,6 +48,36 @@ DMA_Stream_TypeDef* I2STransmitter::get_dma_stream() {
     }
 }
 
+IRQn_Type I2STransmitter::get_irq() {
+    switch (dma) {
+        case 1:
+            switch (dma_stream) {
+                case 0: return DMA1_Stream0_IRQn;
+                case 1: return DMA1_Stream1_IRQn;
+                case 2: return DMA1_Stream2_IRQn;
+                case 3: return DMA1_Stream3_IRQn;
+                case 4: return DMA1_Stream4_IRQn;
+                case 5: return DMA1_Stream5_IRQn;
+                case 6: return DMA1_Stream6_IRQn;
+                case 7: return DMA1_Stream7_IRQn;
+                default: return DMA1_Stream0_IRQn;
+            }
+        case 2:
+            switch (dma_stream) {
+                case 0: return DMA2_Stream0_IRQn;
+                case 1: return DMA2_Stream1_IRQn;
+                case 2: return DMA2_Stream2_IRQn;
+                case 3: return DMA2_Stream3_IRQn;
+                case 4: return DMA2_Stream4_IRQn;
+                case 5: return DMA2_Stream5_IRQn;
+                case 6: return DMA2_Stream6_IRQn;
+                case 7: return DMA2_Stream7_IRQn;
+                default: return DMA2_Stream0_IRQn;
+            }
+        default: return DMA1_Stream0_IRQn;
+    }
+}
+
 uint32_t I2STransmitter::get_dma_channel() {
     switch (dma_channel) {
         case 0: return DMA_Channel_0;
@@ -61,3 +91,34 @@ uint32_t I2STransmitter::get_dma_channel() {
         default: return DMA_Channel_0;
     }
 }
+
+uint32_t I2STransmitter::get_dma_flags() {
+    switch (dma_stream) {
+        case 0: return DMA_FLAG_TCIF0;
+        case 1: return DMA_FLAG_TCIF1;
+        case 2: return DMA_FLAG_TCIF2;
+        case 3: return DMA_FLAG_TCIF3;
+        case 4: return DMA_FLAG_TCIF4;
+        case 5: return DMA_FLAG_TCIF5;
+        case 6: return DMA_FLAG_TCIF6;
+        case 7: return DMA_FLAG_TCIF7;
+        default: return 0;
+    }
+}
+
+uint32_t I2STransmitter::get_spi_clock() {
+    switch (spi) {
+        case 2: return RCC_APB1Periph_SPI2;
+        case 3: return RCC_APB1Periph_SPI3;
+        default: return 0;
+    }
+}
+
+SPI_TypeDef* I2STransmitter::get_spi() {
+    switch (spi) {
+        case 2: return SPI2;
+        case 3: return SPI3;
+        default: return nullptr;
+    }
+}
+

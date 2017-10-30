@@ -4,6 +4,7 @@
 #include <cstddef>
 
 #include "i2c_bus.h"
+#include "i2s_transmitter.h"
 
 static constexpr uint8_t DEFAULT_DEVICE_ADDRESS = 0x25 << 2;
 
@@ -35,10 +36,7 @@ class CS43L22Dac {
 public:
     CS43L22Dac(I2CBus& i2c_bus,
                GPIOPin& reset_pin,
-               GPIOPin& mck_pin,
-               GPIOPin& ck_pin,
-               GPIOPin& sd_pin,
-               GPIOPin& ws_pin);
+               I2STransmitter& i2s_transmitter);
     ~CS43L22Dac() = default;
 
     struct Frame {
@@ -73,10 +71,7 @@ private:
 
     I2CBus& i2c_bus_;
     GPIOPin& reset_pin_;
-    GPIOPin& mck_pin_;
-    GPIOPin& ck_pin_;
-    GPIOPin& sd_pin_;
-    GPIOPin& ws_pin_;
+    I2STransmitter& i2s_transmitter_;
     
     uint32_t sample_rate_;
     DacFillCallback fill_callback_;

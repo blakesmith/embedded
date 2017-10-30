@@ -3,6 +3,7 @@
 
 #include "gpio_pin.h"
 #include "i2c_bus.h"
+#include "i2s_transmitter.h"
 
 struct Pinout {
     GPIOBus gpioa;
@@ -32,6 +33,8 @@ struct Pinout {
     GPIOPin dac_i2s_ck;
     GPIOPin dac_i2s_sd;
     GPIOPin dac_i2s_ws;
+
+    I2STransmitter i2s_transmitter;
 
     Pinout();
     void Init();
