@@ -22,7 +22,6 @@ static constexpr uint32_t DEFAULT_TIMEOUT = 0x1000 * 300;
 static SPI_TypeDef *SPI_I2S = SPI3;
 static constexpr uint32_t RCC_SPI_I2S_CLOCK = RCC_APB1Periph_SPI3;
 
-static constexpr uint8_t GPIO_I2S_TX_AFx = GPIO_AF_SPI3;
 static constexpr uint32_t I2S_DMA_TX_CHANNEL = DMA_Channel_0;
 static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
 static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
