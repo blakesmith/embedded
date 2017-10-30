@@ -48,11 +48,60 @@ static constexpr uint8_t DAC_SPI = 3;
 static constexpr uint32_t DAC_DMA_CHANNEL = 0;
 #define DAC_DMA_STREAM 7
 
+#endif
+
+#ifdef TARGET_PROTOTYPE
+
+// StatusLed
+#define STATUS_LED_BUS gpioa
+
+static constexpr uint16_t STATUS_OK_LED = 10;
+static constexpr uint16_t STATUS_ERROR_LED = 9;
+static constexpr uint16_t STATUS_ACTIVITY_LED = 8;
+
+// Pec11 rotary encoder
+
+#define ENCODER_BUS gpioa
+
+static constexpr uint16_t ENCODER_CLOCKWISE = 1;
+static constexpr uint16_t ENCODER_COUNTER_CLOCKWISE = 2;
+static constexpr uint16_t ENCODER_BUTTON = 3;
+
+// I2C
+#define I2C_SCL_BUS gpiob
+#define I2C_SDA_BUS gpiob
+
+static constexpr uint16_t I2C_SCL = 6;
+static constexpr uint16_t I2C_SDA = 9;
+static constexpr I2CBus::Id I2C_ID = I2CBus::Id::ONE;
+
+// DAC
+
+#define DAC_RESET_BUS gpioa
+#define DAC_I2S_MCK_BUS gpiob
+#define DAC_I2S_CK_BUS gpiob
+#define DAC_I2S_SD_BUS gpiob
+#define DAC_I2S_WS_BUS gpioa
+
+static constexpr uint16_t DAC_RESET = 5;
+static constexpr uint16_t DAC_I2S_MCK = 10;
+static constexpr uint16_t DAC_I2S_CK = 12;
+static constexpr uint16_t DAC_I2S_SD = 5;
+static constexpr uint16_t DAC_I2S_WS = 4;
+
+static constexpr uint8_t DAC_SPI = 3;
+// Use define, for preprocessor conditionals below
+#define DAC_DMA 1
+
+static constexpr uint32_t DAC_DMA_CHANNEL = 0;
+#define DAC_DMA_STREAM 7
+
+#endif
+
 /**
  * Don't forget to add a different IRQHandler in the DAC driver
  * if you add a different pinout!
  */
-#endif
 
 // End configuration
 
@@ -88,7 +137,10 @@ Pinout::Pinout()
 void Pinout::Init() {
     gpioa.Init();
     gpiob.Init();
+    #ifdef TARGET_BREADBOARD
     gpioc.Init();
     gpiod.Init();
+    #endif
+    
     i2c_bus.Init();
 }
