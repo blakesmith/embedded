@@ -52,6 +52,12 @@ public:
 
     void FillTxBuffer();
 
+    // Exposed just for the IRQ
+    DMA_Stream_TypeDef* GetTxStream();
+    // Exposed just for the IRQ
+    uint32_t GetTxFlags();
+    
+
     void Start();
     void SetVolume(uint8_t volume);
     

@@ -18,15 +18,6 @@ CS43L22Dac *CS43L22Dac::global_dac_;
 
 static constexpr uint32_t DEFAULT_TIMEOUT = 0x1000 * 300;
 
-// I2S
-static SPI_TypeDef *SPI_I2S = SPI3;
-static constexpr uint32_t RCC_SPI_I2S_CLOCK = RCC_APB1Periph_SPI3;
-
-static constexpr uint32_t I2S_DMA_TX_CHANNEL = DMA_Channel_0;
-static DMA_Stream_TypeDef *I2S_DMA_TX_STREAM = DMA1_Stream7;
-static constexpr uint32_t I2S_DMA_TX_TC_FLAG = DMA_FLAG_TCIF7;
-static IRQn_Type I2S_TX_DMA_IRQ = DMA1_Stream7_IRQn;
-
 CS43L22Dac::CS43L22Dac(I2CBus& i2c_bus,
                        GPIOPin& reset_pin,
                        I2STransmitter& i2s_transmitter)
@@ -55,8 +46,8 @@ void CS43L22Dac::Init(uint8_t volume,
 
 void CS43L22Dac::Start() {
     FillTxBuffer();
-    I2S_Cmd(SPI_I2S, ENABLE);
-    DMA_Cmd(I2S_DMA_TX_STREAM, ENABLE);
+    I2S_Cmd(i2s_transmitter_.get_spi(), ENABLE);
+    DMA_Cmd(i2s_transmitter_.get_dma_stream(), ENABLE);
 }
 
 void CS43L22Dac::reset() {
@@ -111,9 +102,9 @@ void CS43L22Dac::init_i2s() {
 
     while (RCC_GetFlagStatus(RCC_FLAG_PLLI2SRDY) == RESET);
 
-    RCC_APB1PeriphClockCmd(RCC_SPI_I2S_CLOCK, ENABLE);
+    RCC_APB1PeriphClockCmd(i2s_transmitter_.get_spi_clock(), ENABLE);
     
-    SPI_I2S_DeInit(SPI_I2S);
+    SPI_I2S_DeInit(i2s_transmitter_.get_spi());
     i2s_init.I2S_AudioFreq = sample_rate_;
     i2s_init.I2S_Standard = I2S_Standard_Phillips;
     i2s_init.I2S_DataFormat = I2S_DataFormat_16b;
@@ -121,7 +112,7 @@ void CS43L22Dac::init_i2s() {
     i2s_init.I2S_Mode = I2S_Mode_MasterTx;
     i2s_init.I2S_MCLKOutput = I2S_MCLKOutput_Enable;
 
-    I2S_Init(SPI_I2S, &i2s_init);
+    I2S_Init(i2s_transmitter_.get_spi(), &i2s_init);
 }
 
 void CS43L22Dac::init_codec(uint8_t volume) {
@@ -187,12 +178,12 @@ void CS43L22Dac::init_dma() {
     
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 
-    DMA_Cmd(I2S_DMA_TX_STREAM, DISABLE);
-    DMA_DeInit(I2S_DMA_TX_STREAM);
+    DMA_Cmd(i2s_transmitter_.get_dma_stream(), DISABLE);
+    DMA_DeInit(i2s_transmitter_.get_dma_stream());
 
     DMA_StructInit(&dma_init);
-    dma_init.DMA_Channel = I2S_DMA_TX_CHANNEL;
-    dma_init.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI_I2S->DR));
+    dma_init.DMA_Channel = i2s_transmitter_.get_dma_channel();
+    dma_init.DMA_PeripheralBaseAddr = (uint32_t)(&(i2s_transmitter_.get_spi()->DR));
     dma_init.DMA_Memory0BaseAddr = (uint32_t)tx_dma_buf0_;
     dma_init.DMA_DIR = DMA_DIR_MemoryToPeripheral;
     dma_init.DMA_BufferSize = DAC_BUF_SIZE;
@@ -206,19 +197,19 @@ void CS43L22Dac::init_dma() {
     dma_init.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
     dma_init.DMA_MemoryBurst = DMA_MemoryBurst_Single;
     dma_init.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-    DMA_Init(I2S_DMA_TX_STREAM, &dma_init);
+    DMA_Init(i2s_transmitter_.get_dma_stream(), &dma_init);
 
-    DMA_DoubleBufferModeConfig(I2S_DMA_TX_STREAM, (uint32_t)tx_dma_buf1_, DMA_Memory_1);
-    DMA_DoubleBufferModeCmd(I2S_DMA_TX_STREAM, ENABLE);
-    DMA_ITConfig(I2S_DMA_TX_STREAM, DMA_IT_TC | DMA_IT_TE, ENABLE);
+    DMA_DoubleBufferModeConfig(i2s_transmitter_.get_dma_stream(), (uint32_t)tx_dma_buf1_, DMA_Memory_1);
+    DMA_DoubleBufferModeCmd(i2s_transmitter_.get_dma_stream(), ENABLE);
+    DMA_ITConfig(i2s_transmitter_.get_dma_stream(), DMA_IT_TC | DMA_IT_TE, ENABLE);
 
-    nvic_init.NVIC_IRQChannel = I2S_TX_DMA_IRQ;
+    nvic_init.NVIC_IRQChannel = i2s_transmitter_.get_irq();
     nvic_init.NVIC_IRQChannelPreemptionPriority = 0;
     nvic_init.NVIC_IRQChannelSubPriority = 1;
     nvic_init.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&nvic_init);
 
-    SPI_I2S_DMACmd(SPI_I2S, SPI_I2S_DMAReq_Tx, ENABLE);
+    SPI_I2S_DMACmd(i2s_transmitter_.get_spi(), SPI_I2S_DMAReq_Tx, ENABLE);
 }
 
 // Adjust and set the volume, 0 - 255.
@@ -267,10 +258,21 @@ uint8_t CS43L22Dac::read_register(uint8_t reg) {
     return value;
 }
 
+DMA_Stream_TypeDef* CS43L22Dac::GetTxStream() {
+    return i2s_transmitter_.get_dma_stream();
+}
+
+uint32_t CS43L22Dac::GetTxFlags() {
+    return i2s_transmitter_.get_dma_flags();
+}
+
 extern "C" {
 void DMA1_Stream7_IRQHandler(void) {
-    if (DMA_GetFlagStatus(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG) != RESET) {
-        DMA_ClearFlag(I2S_DMA_TX_STREAM, I2S_DMA_TX_TC_FLAG);
+    DMA_Stream_TypeDef* stream = CS43L22Dac::GetGlobalInstance()->GetTxStream();
+    uint32_t flags = CS43L22Dac::GetGlobalInstance()->GetTxFlags();
+    
+    if (DMA_GetFlagStatus(stream, flags) != RESET) {
+        DMA_ClearFlag(stream, flags);
         
         CS43L22Dac::GetGlobalInstance()->FillTxBuffer();
     }
