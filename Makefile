@@ -44,6 +44,13 @@ export LDFLAGS= \
 	-larm_cortexM4lf_math \
 	-Wl,--gc-sections
 
+ifeq ($(TARGET),prototype)
+	CFLAGS += -DTARGET_PROTOTYPE -DSTM32F413_423xx
+else
+	CFLAGS += -DTARGET_BREADBOARD -DSTM32F411xE
+endif
+
+
 all: project
 
 project: drivers
