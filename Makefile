@@ -36,7 +36,6 @@ export CFLAGS= \
 export LDFLAGS= \
 	$(ARCHFLAGS) \
 	-specs=nosys.specs \
-	-T$(STM32_ROOT)/STM32F411RETx_FLASH.ld \
 	-L$(FW_CMSIS_DIR)/Lib/GCC \
 	-larm_cortexM4l_math \
 	-larm_cortexM4lf_math \
@@ -44,9 +43,12 @@ export LDFLAGS= \
 
 ifeq ($(TARGET),prototype)
 	CFLAGS += -DTARGET_PROTOTYPE -DSTM32F413_423xx
+	LDFLAGS += -DSTM32F413_423xx \
+		-T$(STM32_ROOT)/STM32F413ZHTx_FLASH.ld
 else
 	CFLAGS += -DTARGET_BREADBOARD -DSTM32F411xE
-	LDFLAGS += -DSTM32F411xE
+	LDFLAGS += -DSTM32F411xE\
+		-T$(STM32_ROOT)/STM32F411RETx_FLASH.ld
 endif
 
 
