@@ -1,50 +1,5 @@
 #include "pinout.h"
 
-// Begin configuration
-
-// StatusLed
-#define STATUS_LED_BUS gpiod
-
-static constexpr uint16_t STATUS_OK_LED = 15;
-static constexpr uint16_t STATUS_ERROR_LED = 14;
-static constexpr uint16_t STATUS_ACTIVITY_LED = 13;
-
-// Pec11 rotary encoder
-
-#define ENCODER_BUS gpiod
-
-static constexpr uint16_t ENCODER_CLOCKWISE = 2;
-static constexpr uint16_t ENCODER_COUNTER_CLOCKWISE = 3;
-static constexpr uint16_t ENCODER_BUTTON = 6;
-
-// I2C
-#define I2C_SCL_BUS gpiob
-#define I2C_SDA_BUS gpiob
-
-static constexpr uint16_t I2C_SCL = 6;
-static constexpr uint16_t I2C_SDA = 9;
-static constexpr I2CBus::Id I2C_ID = I2CBus::Id::ONE;
-
-// DAC
-
-#define DAC_RESET_BUS gpiod
-#define DAC_I2S_MCK_BUS gpioc
-#define DAC_I2S_CK_BUS gpioc
-#define DAC_I2S_SD_BUS gpioc
-#define DAC_I2S_WS_BUS gpioa
-
-static constexpr uint16_t DAC_RESET = 4;
-static constexpr uint16_t DAC_I2S_MCK = 7;
-static constexpr uint16_t DAC_I2S_CK = 10;
-static constexpr uint16_t DAC_I2S_SD = 12;
-static constexpr uint16_t DAC_I2S_WS = 4;
-
-static constexpr uint8_t DAC_SPI = 3;
-static constexpr uint8_t DAC_DMA = 1;
-static constexpr uint32_t DAC_DMA_CHANNEL = 0;
-static constexpr uint8_t DAC_DMA_STREAM = 7;
-// End configuration
-
 Pinout::Pinout()
     : gpioa(GPIOBus::Id::A),
       gpiob(GPIOBus::Id::B),

@@ -267,7 +267,7 @@ uint32_t CS43L22Dac::GetTxFlags() {
 }
 
 extern "C" {
-void DMA1_Stream7_IRQHandler(void) {
+void DAC_IRQ_HANDLER(void) {
     DMA_Stream_TypeDef* stream = CS43L22Dac::GetGlobalInstance()->GetTxStream();
     uint32_t flags = CS43L22Dac::GetGlobalInstance()->GetTxFlags();
     
