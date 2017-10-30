@@ -30,13 +30,11 @@ export CFLAGS= \
 	-I$(STM32_ROOT)/CMSIS/Include \
 	-I$(FW_CORE_DIR)/Include \
 	-I$(FW_STDDRIVER_DIR)/inc \
-	-DSTM32F411xE \
 	-Os \
 	-c
 
 export LDFLAGS= \
 	$(ARCHFLAGS) \
-	-DSTM32F411xE \
 	-specs=nosys.specs \
 	-T$(STM32_ROOT)/STM32F411RETx_FLASH.ld \
 	-L$(FW_CMSIS_DIR)/Lib/GCC \
@@ -48,6 +46,7 @@ ifeq ($(TARGET),prototype)
 	CFLAGS += -DTARGET_PROTOTYPE -DSTM32F413_423xx
 else
 	CFLAGS += -DTARGET_BREADBOARD -DSTM32F411xE
+	LDFLAGS += -DSTM32F411xE
 endif
 
 

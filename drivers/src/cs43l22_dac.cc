@@ -97,7 +97,13 @@ void CS43L22Dac::init_gpio() {
 void CS43L22Dac::init_i2s() {
     I2S_InitTypeDef i2s_init;
 
+    #ifdef TARGET_BREADBOARD
     RCC_I2SCLKConfig(RCC_I2S2CLKSource_PLLI2S);
+    #endif
+    #ifdef TARGET_PROTOTYPE
+    RCC_I2SCLKConfig(RCC_I2SBus_APB1, RCC_I2SCLKSource_PLLI2S);
+    #endif
+
     RCC_PLLI2SCmd(ENABLE);
 
     while (RCC_GetFlagStatus(RCC_FLAG_PLLI2SRDY) == RESET);
