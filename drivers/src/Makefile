@@ -3,6 +3,7 @@ CC_FILES = gpio_bus.cc \
 	i2c_bus.cc \
 	i2s_transmitter.cc \
 	cs43l22_dac.cc \
+	display_7seg.cc \
 	ht16K33_display.cc \
 	pec11_renc.cc \
 	status_led.cc
