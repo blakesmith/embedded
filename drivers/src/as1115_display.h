@@ -13,6 +13,10 @@ public:
     virtual void Init();
     virtual void SetBlinkRate(uint8_t rate);
     virtual void SetBrightness(uint8_t brightness);
+
+private:
+    void set_scan_limit(uint8_t limit);
+    void disable_code_b_decode();
 };
 
 #endif
