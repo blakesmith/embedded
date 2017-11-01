@@ -23,8 +23,8 @@ void AS1115Display::Init() {
 
     SetBrightness(15);
 
-    // Use the hex decoder, instead of code-b. Set raw segments.
-    disable_code_b_decode();
+    // Use the hex decoder, instead of code-b. Set raw segments. Everything else default
+    set_features();
 
     Clear();
     WriteDisplay();
@@ -40,7 +40,7 @@ void AS1115Display::set_scan_limit(uint8_t limit) {
     i2c_bus_.WriteTransmitStop();
 }
 
-void AS1115Display::disable_code_b_decode() {
+void AS1115Display::set_features() {
     i2c_bus_.WriteTransmitStart(device_address_);
     i2c_bus_.WriteRaw(AS1115_CMD_FEATURE);
     i2c_bus_.WriteRaw(0b100);

@@ -16,7 +16,7 @@ public:
 
 private:
     void set_scan_limit(uint8_t limit);
-    void disable_code_b_decode();
+    void set_features();
 };
 
 #endif
