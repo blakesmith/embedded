@@ -30,12 +30,6 @@ void HT16K33Display::Init() {
     WriteDisplay();
 }
 
-void HT16K33Display::enable_oscillator() {
-    i2c_bus_.WriteTransmitStart(device_address_);
-    i2c_bus_.WriteRaw(0x21);
-    i2c_bus_.WriteTransmitStop();
-}
-
 void HT16K33Display::SetBrightness(uint8_t brightness) {
     if (brightness > 15) {
         brightness = 15;
@@ -51,6 +45,12 @@ void HT16K33Display::SetBlinkRate(uint8_t rate) {
     }
     i2c_bus_.WriteTransmitStart(device_address_);
     i2c_bus_.WriteRaw(HT16K33_BLINK_CMD | HT16K33_BLINK_ON | (rate << 1));
+    i2c_bus_.WriteTransmitStop();
+}
+
+void HT16K33Display::enable_oscillator() {
+    i2c_bus_.WriteTransmitStart(device_address_);
+    i2c_bus_.WriteRaw(0x21);
     i2c_bus_.WriteTransmitStop();
 }
 
