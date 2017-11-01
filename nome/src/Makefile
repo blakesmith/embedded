@@ -8,7 +8,7 @@ EXTRA_OBJECTS=$(LOCAL_DRIVERS_SRCDIR)/gpio_bus.o \
 	$(LOCAL_DRIVERS_SRCDIR)/gpio_pin.o \
 	$(LOCAL_DRIVERS_SRCDIR)/i2c_bus.o \
 	$(LOCAL_DRIVERS_SRCDIR)/i2s_transmitter.o \
-	$(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o \
+	$(LOCAL_DRIVERS_SRCDIR)/display_7seg.o \
 	$(LOCAL_DRIVERS_SRCDIR)/pec11_renc.o \
 	$(LOCAL_DRIVERS_SRCDIR)/status_led.o \
 	$(LOCAL_DRIVERS_SRCDIR)/cs43l22_dac.o \
@@ -34,6 +34,12 @@ else
 	pinout.cc
 
 	AS_FILES = startup_stm32f411xe.s
+endif
+
+ifeq ($(TARGET),prototype)
+	EXTRA_OBJECTS += $(LOCAL_DRIVERS_SRCDIR)/as1115_display.o
+else
+	EXTRA_OBJECTS += $(LOCAL_DRIVERS_SRCDIR)/ht16K33_display.o
 endif
 
 OBJECTS=$(CC_FILES:.cc=.o) $(AS_FILES:.s=.o)

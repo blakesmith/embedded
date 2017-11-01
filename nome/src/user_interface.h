@@ -5,7 +5,13 @@
 #include "pinout.h"
 
 #include "pec11_renc.h"
+
+#ifdef TARGET_BREADBOARD
 #include "ht16K33_display.h"
+#else
+#include "as1115_display.h"
+#endif
+
 #include "status_led.h"
 #include "settings.h"
 
@@ -55,7 +61,11 @@ public:
 private:
     StatusLed status_led_;
     Pec11RotaryEncoder knob_;
+#ifdef TARGET_BREADBOARD
     HT16K33Display display_;
+#else
+    AS1115Display display_;
+#endif
 
     Settings& settings_;
     const BeatMonitor& beat_monitor_;
