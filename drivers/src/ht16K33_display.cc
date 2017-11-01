@@ -23,7 +23,7 @@ HT16K33Display::HT16K33Display(I2CBus& i2c_bus)
 
 void HT16K33Display::Init() {
     enable_oscillator();
-    SetBlinkRate(HT16K33_BLINK_OFF);
+    set_blink_rate(HT16K33_BLINK_OFF);
     SetBrightness(15);
 
     Clear();
@@ -39,7 +39,7 @@ void HT16K33Display::SetBrightness(uint8_t brightness) {
     i2c_bus_.WriteTransmitStop();
 }
 
-void HT16K33Display::SetBlinkRate(uint8_t rate) {
+void HT16K33Display::set_blink_rate(uint8_t rate) {
     if (rate > 3) {
         rate = 0;
     }

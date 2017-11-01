@@ -55,7 +55,3 @@ void AS1115Display::SetBrightness(uint8_t brightness) {
     i2c_bus_.WriteRaw(brightness);
     i2c_bus_.WriteTransmitStop();
 }
-
-void AS1115Display::SetBlinkRate(uint8_t rate) {
-    // Do nothing
-}

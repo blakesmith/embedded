@@ -11,7 +11,6 @@ public:
     ~AS1115Display() = default;
 
     virtual void Init();
-    virtual void SetBlinkRate(uint8_t rate);
     virtual void SetBrightness(uint8_t brightness);
 
 private:

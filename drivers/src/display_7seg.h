@@ -14,7 +14,6 @@ public:
     ~Display7Seg() = default;
     
     virtual void Init() = 0;
-    virtual void SetBlinkRate(uint8_t rate) = 0;
     virtual void SetBrightness(uint8_t brightness) = 0;
 
     void Clear();
