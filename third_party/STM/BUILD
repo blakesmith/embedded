@@ -1,6 +1,18 @@
 licenses(["unencumbered"])
 
 cc_library(
+    name = "stm_cmsis",
+    hdrs = glob(["CMSIS/Include/*.h"]),
+    visibility = ["//visibility:public"]
+)
+
+cc_library(
+    name = "stm_cmsis_device",
+    hdrs = glob(["CMSIS/Device/ST/STM32F4xx/Include/*.h"]),
+    visibility = ["//visibility:public"]
+)
+
+cc_library(
     name = "stm_std_periph",
     srcs = glob(["STM32F4xx_StdPeriph_Driver/src/*.c"]),
     hdrs = glob(["STM32F4xx_StdPeriph_Driver/inc/*.h"]),
@@ -13,7 +25,8 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//third_party/STM/CMSIS:stm_cmsis",
-        "//third_party/STM/CMSIS/Device/ST/STM32F4xx:stm_cmsis_device"
+        ":stm_cmsis",
+        ":stm_cmsis_device"
     ]
 )
+

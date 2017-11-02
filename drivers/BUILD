@@ -10,8 +10,8 @@ cc_library(
         "-DSTM32F411xE"
     ],
     deps = [
-        "//third_party/STM/CMSIS:stm_cmsis",
-        "//third_party/STM/CMSIS/Device/ST/STM32F4xx:stm_cmsis_device",
+        "//third_party/STM:stm_cmsis",
+        "//third_party/STM:stm_cmsis_device",
         "//third_party/STM:stm_std_periph"
     ],
     visibility = ["//visibility:public"]

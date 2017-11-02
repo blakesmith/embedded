@@ -32,7 +32,7 @@ cc_binary(
     ],
     linkopts = ["-Tnome/src/STM32F411RETx_FLASH.ld"],
     deps = [
-        "//third_party/STM/CMSIS:stm_cmsis",
+        "//third_party/STM:stm_cmsis",
         "//drivers:stm_drivers",
         "src/STM32F411RETx_FLASH.ld",
     ],
