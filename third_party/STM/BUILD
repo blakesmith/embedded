@@ -13,7 +13,7 @@ cc_library(
 )
 
 cc_library(
-    name = "stm_std_periph",
+    name = "stm_std_periph_breadboard",
     srcs = glob(["STM32F4xx_StdPeriph_Driver/src/*.c"]),
     hdrs = glob(["STM32F4xx_StdPeriph_Driver/inc/*.h"]),
     copts = [
@@ -22,6 +22,24 @@ cc_library(
         "-Ithird_party/STM/STM32F4xx_StdPeriph_Driver/inc",
         "-include third_party/STM/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_conf.h",
         "-DSTM32F411xE"
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":stm_cmsis",
+        ":stm_cmsis_device"
+    ]
+)
+
+cc_library(
+    name = "stm_std_periph_prototype",
+    srcs = glob(["STM32F4xx_StdPeriph_Driver/src/*.c"]),
+    hdrs = glob(["STM32F4xx_StdPeriph_Driver/inc/*.h"]),
+    copts = [
+        "-Ithird_party/STM/CMSIS/Include",
+        "-Ithird_party/STM/CMSIS/Device/ST/STM32F4xx/Include",
+        "-Ithird_party/STM/STM32F4xx_StdPeriph_Driver/inc",
+        "-include third_party/STM/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_conf.h",
+        "-DSTM32F413_423xx"
     ],
     visibility = ["//visibility:public"],
     deps = [
