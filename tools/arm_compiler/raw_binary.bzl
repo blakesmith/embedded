@@ -27,19 +27,9 @@ raw_binary = rule(
 )
 
 def _hex_impl(ctx):
-    # src = ctx.attr.src.files.to_list()[0]
-    # objcopy_files = ctx.attr._objcopy.files.to_list()
-    # ctx.action(
-    #     command = "{objcopy} -Oihex {input} {output}".format(
-    #         objcopy = ctx.fragments.cpp.objcopy_executable,
-    #         input = src.path,
-    #         output = ctx.outputs.hex.path),
-    #     outputs = [ctx.outputs.hex],
-    #     inputs = [src] + objcopy_files
-    # )
     output = ctx.outputs.hex
     input = ctx.file.src
-    objcopy = ctx.fragments.cpp.objcopy_executable
+    objcopy = "external/com_arm_developer_toolchain_gcc_6_2/bin/arm-none-eabi-objcopy"
 
     ctx.action(
         inputs=[input] + ctx.files._objcopy,
