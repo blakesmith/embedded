@@ -58,6 +58,8 @@ toolchain {
   compiler_flag: "-mfpu=fpv4-sp-d16"
   compiler_flag: "-fdata-sections"
   compiler_flag: "-ffunction-sections"
+  compiler_flag: "-fno-exceptions"
+  compiler_flag: "-fno-rtti"
 
   cxx_flag: "-I"
   cxx_flag: "external/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/include/c++/6.3.1/arm-none-eabi"
@@ -75,8 +77,8 @@ toolchain {
   linker_flag: "-mthumb"
   linker_flag: "-mfloat-abi=hard" 
   linker_flag: "-mfpu=fpv4-sp-d16"
-  linker_flag: "-specs=nano.specs"
-  #linker_flag: "-specs=nosys.specs"
+  #linker_flag: "-specs=nano.specs"
+  linker_flag: "-specs=nosys.specs"
 
   #linker_flag: "-Lexternal/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/lib/hard/"
   #linker_flag: "-Lexternal/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/lib/thumb/"

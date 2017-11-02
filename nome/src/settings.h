@@ -2,6 +2,7 @@
 #define NOME_SETTINGS_H_
 
 #include <cstddef>
+#include <cstdint>
 
 namespace nome {
 

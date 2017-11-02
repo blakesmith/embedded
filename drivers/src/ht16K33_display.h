@@ -10,8 +10,8 @@ public:
     HT16K33Display(I2CBus& i2c_bus);
     ~HT16K33Display() = default;
 
-    virtual void Init();
-    virtual void SetBrightness(uint8_t brightness);
+    void Init();
+    void SetBrightness(uint8_t brightness);
 
 private:
     void enable_oscillator();

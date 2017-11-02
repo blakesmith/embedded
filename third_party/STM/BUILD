@@ -8,6 +8,7 @@ cc_library(
         "-Ithird_party/STM/CMSIS/Include",
         "-Ithird_party/STM/CMSIS/Device/ST/STM32F4xx/Include",
         "-Ithird_party/STM/STM32F4xx_StdPeriph_Driver/inc",
+        "-include third_party/STM/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_conf.h",
         "-DSTM32F411xE"
     ],
     visibility = ["//visibility:public"],

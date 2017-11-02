@@ -10,8 +10,8 @@ public:
     AS1115Display(I2CBus& i2c_bus);
     ~AS1115Display() = default;
 
-    virtual void Init();
-    virtual void SetBrightness(uint8_t brightness);
+    void Init();
+    void SetBrightness(uint8_t brightness);
 
 private:
     void set_scan_limit(uint8_t limit);

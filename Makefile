@@ -81,3 +81,6 @@ bazel-periph:
 
 bazel-drivers:
 	bazel build -s --crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu=armeabi-v7a //drivers:stm_drivers
+
+bazel-nome:
+	bazel build -s --crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu=armeabi-v7a //nome:nome
