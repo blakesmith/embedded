@@ -1,5 +1,7 @@
 #include "gpio_bus.h"
 
+#include "stm32f4xx_rcc.h"
+
 GPIOBus::GPIOBus(Id id)
     : bus_id_(id) {
     gpiox_ = lookup_gpio_typedef(id);

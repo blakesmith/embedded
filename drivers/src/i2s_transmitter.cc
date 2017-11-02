@@ -1,5 +1,7 @@
 #include "i2s_transmitter.h"
 
+#include "stm32f4xx_rcc.h"
+
 I2STransmitter::I2STransmitter(GPIOPin& i2s_mck_pin,
                                GPIOPin& i2s_ck_pin,
                                GPIOPin& i2s_sd_pin,

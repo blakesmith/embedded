@@ -1,6 +1,8 @@
 #ifndef GPIO_BUS_H_
 #define GPIO_BUS_H_
 
+#include "stm32f4xx_gpio.h"
+
 class GPIOBus {
 public:
     enum class Id {

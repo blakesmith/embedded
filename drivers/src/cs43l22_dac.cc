@@ -273,10 +273,9 @@ uint32_t CS43L22Dac::GetTxFlags() {
 }
 
 extern "C" {
-#ifdef TARGET_BREADBOARD
-void DMA1_Stream7_IRQHandler(void)
-#endif
 #ifdef TARGET_PROTOTYPE
+void DMA1_Stream7_IRQHandler(void)
+#else TARGET_BREADBOARD
 void DMA1_Stream7_IRQHandler(void)
 #endif
 {

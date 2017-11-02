@@ -1,5 +1,7 @@
 #include "i2c_bus.h"
 
+#include "stm32f4xx_rcc.h"
+
 #define I2C_WAIT_FOR_EVENT(I, E) {            \
         while (!I2C_CheckEvent(I, E));       \
     }

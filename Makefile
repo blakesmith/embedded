@@ -76,5 +76,8 @@ clean_all:
 	$(MAKE) -C $(ROOT_DIR)/nome/src clean
 
 
-bazel:
+bazel-periph:
 	bazel build -s --crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu=armeabi-v7a //third_party/STM:stm_std_periph
+
+bazel-drivers:
+	bazel build -s --crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu=armeabi-v7a //drivers:stm_drivers
