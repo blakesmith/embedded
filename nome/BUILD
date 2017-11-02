@@ -1,5 +1,5 @@
 cc_binary(
-    name = "nome_bin",
+    name = "nome_breadboard_bin",
     srcs = [
         "src/startup_stm32f411xe.s",
         "src/stm32f4xx_it.h",
@@ -42,6 +42,6 @@ cc_binary(
 load("//tools/arm_compiler:raw_binary.bzl", "hex_binary")
 
 hex_binary(
-    name = "nome",
-    src = ":nome_bin"
+    name = "nome_breadboard",
+    src = ":nome_breadboard_bin"
 )
