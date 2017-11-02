@@ -1,0 +1,6 @@
+#!/bin/bash --norc
+
+PATH="external/com_arm_developer_toolchain_gcc_6_2/lib/gcc/arm-none-eabi/6.3.1:$PATH" \
+    exec \
+    external/com_arm_developer_toolchain_gcc_6_2/bin/arm-none-eabi-gcc \
+    "$@"

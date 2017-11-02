@@ -1,0 +1,5 @@
+#!/bin/bash --norc
+
+exec -a arm-none-eabi-as \
+    external/com_arm_developer_toolchain_gcc_6_2/bin/arm-none-eabi-as \
+    "$@"
