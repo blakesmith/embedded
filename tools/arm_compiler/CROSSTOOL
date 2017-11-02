@@ -59,7 +59,6 @@ toolchain {
   compiler_flag: "-fdata-sections"
   compiler_flag: "-ffunction-sections"
   compiler_flag: "-fno-exceptions"
-  compiler_flag: "-fno-rtti"
 
   cxx_flag: "-I"
   cxx_flag: "external/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/include/c++/6.3.1/arm-none-eabi"

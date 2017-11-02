@@ -20,14 +20,24 @@ raw_binary = rule(
     implementation=_bin_impl,
     fragments=["cpp"],
     attrs={
-        "src": attr.label(mandatory=True, allow_files=True, single_file=True),
+        "src": attr.label(mandatory=True, allow_single_file=True),
         "_objcopy": attr.label(default=Label("//tools/arm_compiler/arm_none_gcc:objcopy"), allow_files=True)
     },
     outputs={"out": "%{name}.bin"},
 )
 
 def _hex_impl(ctx):
-    output = ctx.outputs.out
+    # src = ctx.attr.src.files.to_list()[0]
+    # objcopy_files = ctx.attr._objcopy.files.to_list()
+    # ctx.action(
+    #     command = "{objcopy} -Oihex {input} {output}".format(
+    #         objcopy = ctx.fragments.cpp.objcopy_executable,
+    #         input = src.path,
+    #         output = ctx.outputs.hex.path),
+    #     outputs = [ctx.outputs.hex],
+    #     inputs = [src] + objcopy_files
+    # )
+    output = ctx.outputs.hex
     input = ctx.file.src
     objcopy = ctx.fragments.cpp.objcopy_executable
 
@@ -47,8 +57,15 @@ hex_binary = rule(
     implementation=_hex_impl,
     fragments=["cpp"],
     attrs={
-        "src": attr.label(mandatory=True, allow_files=True, single_file=True),
-        "_objcopy": attr.label(default=Label("//tools/arm_compiler/arm_none_gcc:objcopy"), allow_files=True)
+        "src": attr.label(
+            mandatory=True,
+            allow_files=True,
+            single_file=True
+        ),
+        "_objcopy": attr.label(
+            default=Label("//tools/arm_compiler/arm_none_gcc:objcopy"),
+            allow_files=True
+        )
     },
-    outputs={"out": "%{name}.hex"},
+    outputs={"hex": "%{name}.hex"},
 )

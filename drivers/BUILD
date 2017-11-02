@@ -3,6 +3,7 @@ cc_library(
     srcs = glob(["src/*.cc"]),
     hdrs = glob(["src/*.h"]),
     copts = [
+        "-fno-rtti",
         "-Ithird_party/STM/CMSIS/Include",
         "-Ithird_party/STM/CMSIS/Device/ST/STM32F4xx/Include",
         "-Ithird_party/STM/STM32F4xx_StdPeriph_Driver/inc",
