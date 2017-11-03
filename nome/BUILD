@@ -33,7 +33,7 @@ cc_binary(
     linkopts = ["-Tnome/linker_scripts/STM32F411RETx_FLASH.ld"],
     deps = [
         "//third_party/STM:stm_cmsis",
-        "//drivers:stm_drivers_breadboard",
+        "//stm32_drivers:stm32_drivers_breadboard",
         "linker_scripts/STM32F411RETx_FLASH.ld",
     ],
     linkstatic = 1
@@ -49,7 +49,7 @@ cc_binary(
     linkopts = ["-Tnome/linker_scripts/STM32F413CGUx_FLASH.ld"],
     deps = [
         "//third_party/STM:stm_cmsis",
-        "//drivers:stm_drivers_prototype",
+        "//stm32_drivers:stm32_drivers_prototype",
         "linker_scripts/STM32F413CGUx_FLASH.ld"
     ],
     linkstatic = 1

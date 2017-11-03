@@ -1,7 +1,7 @@
 #include <stm32f4xx.h>
 #include <cassert>
 
-#include "drivers/pec11_renc.h"
+#include "stm32_drivers/pec11_renc.h"
 
 /**
  * Computed from the quadrature output table. Algorithm is:

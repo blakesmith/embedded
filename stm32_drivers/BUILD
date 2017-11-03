@@ -1,5 +1,5 @@
 cc_library(
-    name = "stm_drivers_breadboard",
+    name = "stm32_drivers_breadboard",
     srcs = glob(["*.cc"]),
     hdrs = glob(["*.h"]),
     copts = [
@@ -15,9 +15,9 @@ cc_library(
 )
 
 cc_library(
-    name = "stm_drivers_prototype",
-    srcs = glob(["src/*.cc"]),
-    hdrs = glob(["inc/*.h"]),
+    name = "stm32_drivers_prototype",
+    srcs = glob(["*.cc"]),
+    hdrs = glob(["*.h"]),
     copts = [
         "-fno-rtti",
         "-DSTM32F413_423xx"
