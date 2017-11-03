@@ -4,15 +4,15 @@
 #include "beat.h"
 #include "pinout.h"
 
-#include "pec11_renc.h"
+#include "drivers/inc/pec11_renc.h"
 
 #ifdef TARGET_BREADBOARD
-#include "ht16K33_display.h"
+#include "drivers/inc/ht16K33_display.h"
 #else
-#include "as1115_display.h"
+#include "drivers/inc/as1115_display.h"
 #endif
 
-#include "status_led.h"
+#include "drivers/inc/status_led.h"
 #include "settings.h"
 
 namespace nome {

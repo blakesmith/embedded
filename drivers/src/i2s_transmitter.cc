@@ -1,4 +1,4 @@
-#include "i2s_transmitter.h"
+#include "drivers/inc/i2s_transmitter.h"
 
 #include "stm32f4xx_rcc.h"
 

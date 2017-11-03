@@ -1,6 +1,6 @@
 #include <cstddef>
 
-#include "cs43l22_dac.h"
+#include "drivers/inc/cs43l22_dac.h"
 
 #include "beat.h"
 #include "settings.h"

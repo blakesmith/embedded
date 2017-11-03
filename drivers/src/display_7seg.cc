@@ -1,4 +1,4 @@
-#include "display_7seg.h"
+#include "drivers/inc/display_7seg.h"
 
 static const uint8_t NUMBER_TABLE[] = {
     0x3F, // 0

@@ -1,4 +1,4 @@
-#include "i2c_bus.h"
+#include "drivers/inc/i2c_bus.h"
 
 #include "stm32f4xx_rcc.h"
 

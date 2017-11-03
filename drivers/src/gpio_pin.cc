@@ -1,4 +1,4 @@
-#include "gpio_pin.h"
+#include "drivers/inc/gpio_pin.h"
 
 GPIOPin::GPIOPin(GPIOBus& bus,
                  uint16_t pin)

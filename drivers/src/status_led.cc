@@ -1,4 +1,4 @@
-#include "status_led.h"
+#include "drivers/inc/status_led.h"
 
 StatusLed::StatusLed(GPIOPin& led_ok,
                      GPIOPin& led_error,
