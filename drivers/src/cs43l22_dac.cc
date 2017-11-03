@@ -1,4 +1,4 @@
-#include "drivers/inc/cs43l22_dac.h"
+#include "drivers/cs43l22_dac.h"
 
 #include "stm32f4xx_dma.h"
 #include "stm32f4xx_gpio.h"

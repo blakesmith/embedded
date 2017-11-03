@@ -1,7 +1,7 @@
 cc_library(
     name = "stm_drivers_breadboard",
     srcs = glob(["src/*.cc"]),
-    hdrs = glob(["inc/*.h"]),
+    hdrs = glob(["*.h"]),
     copts = [
         "-fno-rtti",
         "-DSTM32F411xE"
