@@ -1,6 +1,6 @@
 cc_library(
     name = "stm_drivers_breadboard",
-    srcs = glob(["src/*.cc"]),
+    srcs = glob(["*.cc"]),
     hdrs = glob(["*.h"]),
     copts = [
         "-fno-rtti",
