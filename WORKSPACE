@@ -4,4 +4,4 @@ workspace (
 
 load("@stm32//tools:rules.bzl", "arm_none_repository")
 
-arm_none_repository("mac")
+arm_none_repository()
