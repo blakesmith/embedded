@@ -20,11 +20,6 @@ COMMON_SOURCES = [
 
 COMMON_COPTS = [
     "-fno-rtti",
-    "-Ithird_party/STM/STM32F4xx_StdPeriph_Driver/inc",
-    "-Ithird_party/STM/CMSIS/Include",
-    "-Ithird_party/STM/CMSIS/Device/ST/STM32F4xx/Include",
-    "-Idrivers/src",
-    "-Inome/src",
     "-specs=nosys.specs",
 ]
 

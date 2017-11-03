@@ -6,6 +6,9 @@ nome_flash:
 clean:
 	bazel clean
 
+drivers:
+	bazel build --crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu=armeabi-v7a //drivers:stm_drivers_breadboard
+
 nome_breadboard:
 	bazel build --crosstool_top=@stm32//tools/arm_compiler:toolchain --cpu=armeabi-v7a //nome:nome_breadboard
 

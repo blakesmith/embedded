@@ -1,12 +1,10 @@
 cc_library(
     name = "stm_drivers_breadboard",
     srcs = glob(["src/*.cc"]),
-    hdrs = glob(["src/*.h"]),
+    hdrs = glob(["inc/*.h"]),
+    strip_include_prefix = "inc/",
     copts = [
         "-fno-rtti",
-        "-Ithird_party/STM/CMSIS/Include",
-        "-Ithird_party/STM/CMSIS/Device/ST/STM32F4xx/Include",
-        "-Ithird_party/STM/STM32F4xx_StdPeriph_Driver/inc",
         "-DSTM32F411xE"
     ],
     deps = [
@@ -20,12 +18,10 @@ cc_library(
 cc_library(
     name = "stm_drivers_prototype",
     srcs = glob(["src/*.cc"]),
-    hdrs = glob(["src/*.h"]),
+    hdrs = glob(["inc/*.h"]),
+    strip_include_prefix = "inc/",
     copts = [
         "-fno-rtti",
-        "-Ithird_party/STM/CMSIS/Include",
-        "-Ithird_party/STM/CMSIS/Device/ST/STM32F4xx/Include",
-        "-Ithird_party/STM/STM32F4xx_StdPeriph_Driver/inc",
         "-DSTM32F413_423xx"
     ],
     deps = [
