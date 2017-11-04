@@ -3,8 +3,29 @@ enclosure_width = 92;
 enclosure_length = 92;
 enclosure_lip_width = 3;
 
+encoder_height = 21.5;
+
+usb_width = 5.25;
+usb_length = 7.50;
+usb_height = 2.80;
+
 union() {
-    enclosure_piece(true);
+        bottom_enclosure_piece();
+}
+
+module bottom_enclosure_piece() {
+    module usb_cutout() {
+        translate([enclosure_length / 2, 5, 0])
+            cube([usb_width,
+                  usb_length,
+                  usb_height],
+                 center=true);
+    }
+    
+    difference() {
+        enclosure_piece(true);
+        usb_cutout();
+    }
 }
 
 module enclosure_piece(center) {
