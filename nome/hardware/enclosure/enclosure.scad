@@ -28,8 +28,8 @@ display_height = 7.28;
 encoder_width = 13.82;
 encoder_length = 13;
 encoder_base_height = 6.75;
-encoder_knob_height = 15.591;
-encoder_knob_diameter = 6.0;
+encoder_shaft_height = 15.591;
+encoder_shaft_diameter = 6.0;
 
 battery_width = 34.2;
 battery_length = 62.2;
@@ -37,11 +37,6 @@ battery_height = 5;
 
 pcb_offset = bottom_of_enclosure + battery_height;
 top_of_pcb = pcb_offset + (pcb_height / 2);
-
-battery_height_offset = bottom_of_enclosure + (battery_height / 2);
-headphone_height_offset = top_of_pcb + (headphone_height / 2);
-usb_height_offset = top_of_pcb + (usb_height / 2);
-display_height_offset = top_of_pcb + (display_height / 2);
 
 union() {
     %bottom_enclosure_piece();
@@ -52,6 +47,8 @@ union() {
 }
 
 module battery() {
+    battery_height_offset = bottom_of_enclosure + (battery_height / 2);
+
     translate([0, 0, battery_height_offset]) {
         color("aqua")
         cube([battery_width,
@@ -72,6 +69,8 @@ module pcb() {
 }
 
 module display() {
+    display_height_offset = top_of_pcb + (display_height / 2);
+
     translate([0, 0, display_height_offset]) {
         color("green")
             rotate(90)
@@ -85,28 +84,37 @@ module display() {
 module encoder() {
     encoder_base_height_offset = top_of_pcb + (encoder_base_height / 2);
     top_of_encoder_base = encoder_base_height_offset + (encoder_base_height / 2);
-    encoder_knob_height_offset = top_of_encoder_base + (encoder_knob_height / 2);
+    encoder_shaft_height_offset = top_of_encoder_base + (encoder_shaft_height / 2);
     encoder_y_offset = (display_width / 2) + (7.1 * 2);
-    
-    translate([0, encoder_y_offset, encoder_base_height_offset]) {
-        color("red")
-            rotate(90)
-            cube([encoder_width,
-                  encoder_length,
-                  encoder_base_height],
-                 center=true);
+
+    module encoder_base() {
+        translate([0, encoder_y_offset, encoder_base_height_offset]) {
+            color("red")
+                rotate(90)
+                cube([encoder_width,
+                      encoder_length,
+                      encoder_base_height],
+                     center=true);
+        }
     }
 
-    translate([0, encoder_y_offset, encoder_knob_height_offset]) {
-        color("blue")
-            cylinder(h=encoder_knob_height,
-                     d=encoder_knob_diameter,
-                     center=true);
+    module encoder_shaft() {
+        translate([0, encoder_y_offset, encoder_shaft_height_offset]) {
+            color("blue")
+                cylinder(h=encoder_shaft_height,
+                         d=encoder_shaft_diameter,
+                         center=true);
+        }
     }
+
+    encoder_base();
+    encoder_shaft();
 }
 
 module bottom_enclosure_piece() {
     module usb_cutout() {
+        usb_height_offset = top_of_pcb + (usb_height / 2);
+
         translate([enclosure_length / 2,
                    usb_width_offset,
                    usb_height_offset])
@@ -117,6 +125,8 @@ module bottom_enclosure_piece() {
     }
 
     module headphone_cutout() {
+        headphone_height_offset = top_of_pcb + (headphone_height / 2);
+
         translate([enclosure_length / 2 - headphone_length,
                    headphone_width_offset,
                    headphone_height_offset])
