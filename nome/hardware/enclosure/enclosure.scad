@@ -14,12 +14,10 @@ bottom_of_enclosure = ((enclosure_height / 2) - enclosure_lip_width) / -2;
 usb_width = 5.5;
 usb_length = 7.9;
 usb_height = 2.80;
-usb_width_offset = 11.68;
 
 headphone_width = 13.50;
 headphone_length = 5.60;
 headphone_height = 4.60;
-headphone_width_offset = -4.57;
 
 display_width = 13.3;
 display_length = 41.76;
@@ -31,6 +29,10 @@ encoder_base_height = 6.75;
 encoder_shaft_height = 15.591;
 encoder_shaft_diameter = 6.0;
 
+switch_width = 9.0;
+switch_length = 12.7;
+switch_height = 3.5;
+
 battery_width = 34.2;
 battery_length = 62.2;
 battery_height = 5;
@@ -40,10 +42,16 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     %bottom_enclosure_piece();
-    pcb();
-    battery();
-    display();
-    encoder();
+    peripherals();
+}
+
+module peripherals() {
+    union() {
+        pcb();
+        battery();
+        display();
+        encoder();
+    }
 }
 
 module battery() {
@@ -113,6 +121,7 @@ module encoder() {
 
 module bottom_enclosure_piece() {
     module usb_cutout() {
+        usb_width_offset = 11.68;
         usb_height_offset = top_of_pcb + (usb_height / 2);
 
         translate([enclosure_length / 2,
@@ -126,6 +135,7 @@ module bottom_enclosure_piece() {
 
     module headphone_cutout() {
         headphone_height_offset = top_of_pcb + (headphone_height / 2);
+        headphone_width_offset = -4.57;
 
         translate([enclosure_length / 2 - headphone_length,
                    headphone_width_offset,
@@ -135,11 +145,25 @@ module bottom_enclosure_piece() {
                   headphone_height],
                  center=true);
     }
-    
+
+    module switch_cutout() {
+        switch_height_offset = top_of_pcb + (switch_height / 2);
+        switch_width_offset = 0;
+
+        translate([-(enclosure_length / 2),
+                   switch_width_offset,
+                   switch_height_offset])
+            cube([switch_width,
+                  switch_length,
+                  switch_height],
+                 center=true);
+    }
+
     difference() {
         enclosure_piece(true);
         headphone_cutout();
         usb_cutout();
+        switch_cutout();
     }
 }
 
