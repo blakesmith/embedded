@@ -50,11 +50,11 @@ union() {
 
 module peripherals() {
     union() {
-        *pcb();
-        *battery();
+        pcb();
+        battery();
         speaker();
-        *display();
-        *encoder();
+        display();
+        encoder();
     }
 
     module pcb() {
