@@ -14,8 +14,9 @@ module bottom_enclosure_piece() {
         usb_width = 5.5;
         usb_length = 7.9;
         usb_height = 2.80;
+        usb_offset = 11.68;
 
-        translate([enclosure_length / 2, 5, 0])
+        translate([enclosure_length / 2, usb_offset, 0])
             cube([usb_width,
                   usb_length,
                   usb_height],
@@ -26,8 +27,9 @@ module bottom_enclosure_piece() {
         headphone_width = 13.50;
         headphone_length = 5.60;
         headphone_height = 4.60;
+        headphone_offset = -4.57;
 
-        translate([enclosure_length / 2 - headphone_length, -5, 0])
+        translate([enclosure_length / 2 - headphone_length, headphone_offset, 0])
             cube([headphone_width,
                   headphone_length,
                   headphone_height],
@@ -36,8 +38,8 @@ module bottom_enclosure_piece() {
     
     difference() {
         enclosure_piece(true);
-        usb_cutout();
         headphone_cutout();
+        usb_cutout();
     }
 }
 
