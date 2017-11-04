@@ -28,9 +28,11 @@ battery_length = 62.2;
 battery_height = 5;
 
 pcb_offset = bottom_of_enclosure + battery_height;
+top_of_pcb = pcb_offset + (pcb_height / 2);
+
 battery_offset = bottom_of_enclosure + (battery_height / 2);
-headphone_height_offset = pcb_offset + (headphone_height / 2) + (pcb_height / 2);
-usb_height_offset = pcb_offset + (usb_height / 2) + (pcb_height / 2);
+headphone_height_offset = top_of_pcb + (headphone_height / 2);
+usb_height_offset = top_of_pcb + (usb_height / 2);
 
 union() {
     %bottom_enclosure_piece();
