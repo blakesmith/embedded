@@ -45,26 +45,16 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     %bottom_enclosure_piece();
+    pcb();
     peripherals();
 }
 
 module peripherals() {
     union() {
-        pcb();
         battery();
         speaker();
         display();
         encoder();
-    }
-
-    module pcb() {
-        translate([0, 0, pcb_offset]) {
-            color("purple")
-                octagon(pcb_width,
-                        pcb_length,
-                        pcb_height,
-                        center=true);
-        }
     }
 
     module battery() {
@@ -131,6 +121,16 @@ module peripherals() {
 
         encoder_base();
         encoder_shaft();
+    }
+}
+
+module pcb() {
+    translate([0, 0, pcb_offset]) {
+        color("purple")
+            octagon(pcb_width,
+                    pcb_length,
+                    pcb_height,
+                    center=true);
     }
 }
 
