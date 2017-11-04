@@ -45,16 +45,16 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     %bottom_enclosure_piece();
-   peripherals();
+    peripherals();
 }
 
 module peripherals() {
     union() {
-        pcb();
-        battery();
+        *pcb();
+        *battery();
         speaker();
-        display();
-        encoder();
+        *display();
+        *encoder();
     }
 
     module pcb() {
@@ -177,16 +177,31 @@ module bottom_enclosure_piece() {
     module speaker_weave_cutout() {
         speaker_hole_diameter = 2.0;
         speaker_hole_height = enclosure_lip_width * 2;
-        cylinder(h=speaker_hole_height,
-                 d=speaker_hole_diameter);
+        speaker_hole_padding = 1.0;
+
+        hole_distance = speaker_hole_diameter + (speaker_hole_padding * 2);
+        hole_count = speaker_diameter / hole_distance;
+
+        start_x_offset = -(speaker_diameter / 2);
+        start_y_offset = -(speaker_diameter / 2);
+
+        for (x = [0:hole_count]) {
+            for (y = [0:hole_count]) {
+                translate([start_x_offset + (x * hole_distance),
+                           start_y_offset + (y * hole_distance),
+                           bottom_of_enclosure - (speaker_hole_height / 2)])
+                    cylinder(h=speaker_hole_height,
+                             d=speaker_hole_diameter);
+            }
+        }
     }
 
-    speaker_weave_cutout();
     difference() {
         enclosure_piece(true);
         headphone_cutout();
         usb_cutout();
         switch_cutout();
+        speaker_weave_cutout();
     }
 }
 

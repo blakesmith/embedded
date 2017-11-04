@@ -13,3 +13,7 @@
 ** DONE Double check power rail track widths
 ** DONE Add mounting holes
 ** DONE Add logo / rev
+** TODO Speaker holder weave
+** TODO Battery holder? Something to releave battery pressure?
+** TODO Top enclosure
+** TODO Add screw posts
