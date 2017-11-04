@@ -5,26 +5,39 @@ enclosure_lip_width = 3;
 
 encoder_height = 21.5;
 
-usb_width = 5.25;
-usb_length = 7.50;
-usb_height = 2.80;
-
 union() {
         bottom_enclosure_piece();
 }
 
 module bottom_enclosure_piece() {
     module usb_cutout() {
+        usb_width = 5.5;
+        usb_length = 7.9;
+        usb_height = 2.80;
+
         translate([enclosure_length / 2, 5, 0])
             cube([usb_width,
                   usb_length,
                   usb_height],
                  center=true);
     }
+
+    module headphone_cutout() {
+        headphone_width = 13.50;
+        headphone_length = 5.60;
+        headphone_height = 4.60;
+
+        translate([enclosure_length / 2 - headphone_length, -5, 0])
+            cube([headphone_width,
+                  headphone_length,
+                  headphone_height],
+                 center=true);
+    }
     
     difference() {
         enclosure_piece(true);
         usb_cutout();
+        headphone_cutout();
     }
 }
 
