@@ -48,7 +48,7 @@ pcb_offset = bottom_of_enclosure + battery_height + speaker_height + mount_post_
 top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
-    %bottom_enclosure_piece();
+    bottom_enclosure_piece();
     pcb();
     peripherals();
 }
@@ -247,14 +247,20 @@ module bottom_enclosure_piece() {
         mount_post(lower_left_x, lower_left_y);
     }
 
-    difference() {
-        enclosure_piece(true);
-        headphone_cutout();
-        usb_cutout();
-        switch_cutout();
-        speaker_weave_cutout();
+    module outer_shell() {
+        difference() {
+            enclosure_piece(true);
+            headphone_cutout();
+            usb_cutout();
+            switch_cutout();
+            speaker_weave_cutout();
+        }
     }
-    mount_posts();
+
+    union() {
+        %outer_shell();
+        mount_posts();
+    }
 }
 
 module enclosure_piece(center) {
