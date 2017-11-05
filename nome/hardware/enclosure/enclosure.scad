@@ -1,3 +1,5 @@
+include <screw_holes.scad>
+
 pcb_length = 91.44;
 pcb_width = 91.44;
 pcb_height = 1.6;
@@ -9,7 +11,8 @@ enclosure_lip_width = 3;
 enclosure_width = pcb_width + enclosure_lip_width + pcb_tolerance_gap;
 enclosure_length = pcb_length + enclosure_lip_width + pcb_tolerance_gap;
 
-bottom_of_enclosure = ((enclosure_height / 2) - enclosure_lip_width) / -2;
+inside_bottom_of_enclosure = ((enclosure_height / 2) - enclosure_lip_width) / -2;
+outside_bottom_of_enclosure = (enclosure_height / 2) / -2;
 
 usb_width = 5.5;
 usb_length = 7.9;
@@ -44,12 +47,12 @@ mount_post_diameter = 4;
 mount_post_radius = mount_post_diameter / 2;
 mount_post_tolerance_gap = 2;
 
-pcb_offset = bottom_of_enclosure + battery_height + speaker_height + mount_post_tolerance_gap;
+pcb_offset = inside_bottom_of_enclosure + battery_height + speaker_height + mount_post_tolerance_gap;
 top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     bottom_enclosure_piece();
-    pcb();
+    *pcb();
     peripherals();
 }
 
@@ -62,7 +65,7 @@ module peripherals() {
     }
 
     module battery() {
-        top_of_speaker = bottom_of_enclosure + speaker_height;
+        top_of_speaker = inside_bottom_of_enclosure + speaker_height;
         battery_height_offset = top_of_speaker + (battery_height / 2);
         
         translate([0, 0, battery_height_offset]) {
@@ -75,7 +78,7 @@ module peripherals() {
     }
 
     module speaker() {
-        speaker_height_offset = bottom_of_enclosure + (speaker_height / 2);
+        speaker_height_offset = inside_bottom_of_enclosure + (speaker_height / 2);
             
         translate([0, 0, speaker_height_offset]) {
             cylinder(h=speaker_height,
@@ -193,7 +196,7 @@ module bottom_enclosure_piece() {
             for (y = [0:hole_count]) {
                 translate([start_x_offset + (x * hole_distance),
                            start_y_offset + (y * hole_distance),
-                           bottom_of_enclosure - (speaker_hole_height / 2)])
+                           inside_bottom_of_enclosure - (speaker_hole_height / 2)])
                     cylinder(h=speaker_hole_height,
                              d=speaker_hole_diameter);
             }
@@ -201,8 +204,8 @@ module bottom_enclosure_piece() {
     }
 
     module mount_post(x, y) {
-        height = speaker_height + battery_height + mount_post_tolerance_gap;
-        z = bottom_of_enclosure + (height / 2);
+        height = speaker_height + battery_height + (enclosure_lip_width / 2) + mount_post_tolerance_gap;
+        z = outside_bottom_of_enclosure + (height / 2);
         translate([x, y, z])
             cylinder(h=height, d=mount_post_diameter, center=true);
     }
@@ -258,7 +261,7 @@ module bottom_enclosure_piece() {
     }
 
     union() {
-        %outer_shell();
+        outer_shell();
         mount_posts();
     }
 }
