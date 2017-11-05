@@ -52,7 +52,7 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     bottom_enclosure_piece();
-    %pcb();
+    *pcb();
     peripherals();
 }
 
@@ -60,8 +60,8 @@ module peripherals() {
     union() {
         battery();
         speaker();
-        display();
-        encoder();
+        *display();
+        *encoder();
     }
 
     module battery() {
@@ -216,11 +216,11 @@ module bottom_enclosure_piece() {
         height = speaker_height + battery_height + (enclosure_lip_width / 2) + mount_post_tolerance_gap;
         z = outside_bottom_of_enclosure + (height / 2);
         difference() {
-            translate([x, y, z])
+            %translate([x, y, z])
                 cylinder(h=height, d=mount_post_diameter, center=true, $fn=32);
             translate([x, y, 5]) {
                 rotate(a=[180, 0, 0]) {
-                    screw_hole(DIN965, M3, 5, 0.5);
+                    screw_hole(DIN965, M3, 10, 7);
                 }
             }
         }
@@ -277,7 +277,7 @@ module bottom_enclosure_piece() {
     }
 
     union() {
-        outer_shell();
+        *outer_shell();
         mount_posts();
     }
 }

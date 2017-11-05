@@ -17,3 +17,4 @@
 ** DONE Add screw posts
 ** TODO Battery holder? Something to releave battery pressure?
 ** TODO Top enclosure
+** TODO Rounde octagons
