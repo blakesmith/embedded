@@ -52,7 +52,7 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     bottom_enclosure_piece();
-    *pcb();
+    %pcb();
     peripherals();
 }
 
@@ -133,11 +133,10 @@ module peripherals() {
 
 module pcb() {
     translate([0, 0, pcb_offset]) {
-        color("purple")
-            octagon(pcb_width,
-                    pcb_length,
-                    pcb_height,
-                    center=true);
+        octagon(pcb_width,
+                pcb_length,
+                pcb_height,
+                center=true);
     }
 }
 
@@ -182,24 +181,34 @@ module bottom_enclosure_piece() {
     }
 
     module speaker_weave_cutout() {
-        speaker_hole_diameter = 2.0;
         speaker_hole_height = enclosure_lip_width * 2;
-        speaker_hole_padding = 1.0;
-
-        hole_distance = speaker_hole_diameter + (speaker_hole_padding * 2);
-        hole_count = speaker_diameter / hole_distance;
-
         start_x_offset = -(speaker_diameter / 2);
         start_y_offset = -(speaker_diameter / 2);
+        start_z_offset = inside_bottom_of_enclosure - (speaker_hole_height / 2);
 
-        for (x = [0:hole_count]) {
-            for (y = [0:hole_count]) {
-                translate([start_x_offset + (x * hole_distance),
-                           start_y_offset + (y * hole_distance),
-                           inside_bottom_of_enclosure - (speaker_hole_height / 2)])
-                    cylinder(h=speaker_hole_height,
-                             d=speaker_hole_diameter);
+        module holes() {
+            speaker_hole_diameter = 2.0;
+            speaker_hole_padding = 1.0;
+
+            hole_distance = speaker_hole_diameter + (speaker_hole_padding * 2);
+            hole_count = speaker_diameter / hole_distance;
+
+            for (x = [0:hole_count]) {
+                for (y = [0:hole_count]) {
+                    translate([start_x_offset + (x * hole_distance),
+                               start_y_offset + (y * hole_distance),
+                               start_z_offset])
+                        cylinder(h=speaker_hole_height,
+                                 d=speaker_hole_diameter);
+                }
             }
+        }
+        
+        intersection() {
+            holes();
+            translate([0, 0, start_z_offset])
+                cylinder(h=speaker_hole_height,
+                         d=speaker_diameter);
         }
     }
 

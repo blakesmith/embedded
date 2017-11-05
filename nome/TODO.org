@@ -14,6 +14,6 @@
 ** DONE Add mounting holes
 ** DONE Add logo / rev
 ** DONE Speaker holder weave
-** TODO Add screw posts
+** DONE Add screw posts
 ** TODO Battery holder? Something to releave battery pressure?
 ** TODO Top enclosure
