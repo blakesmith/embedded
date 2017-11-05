@@ -40,21 +40,24 @@ battery_height = 5;
 speaker_diameter = 57.5;
 speaker_height = 8.7;
 
+mount_post_diameter = 4;
+mount_post_radius = mount_post_diameter / 2;
+
 pcb_offset = bottom_of_enclosure + battery_height + speaker_height;
 top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
-    %bottom_enclosure_piece();
+    bottom_enclosure_piece();
     pcb();
     peripherals();
 }
 
 module peripherals() {
     union() {
-        battery();
-        speaker();
-        display();
-        encoder();
+        *battery();
+        *speaker();
+        *display();
+        *encoder();
     }
 
     module battery() {
@@ -196,13 +199,60 @@ module bottom_enclosure_piece() {
         }
     }
 
-    difference() {
+    module mount_post(x, y) {
+        height = speaker_height + battery_height;
+        translate([x, y, 0])
+            cylinder(h=height, d=mount_post_diameter, center=true);
+    }
+
+    module mount_posts() {
+        // Upper left post
+        middle_left_corner_x = (pcb_width / 2);
+        middle_left_corner_y = (middle_left_corner_x / 2) - mount_post_radius;
+
+        upper_left_x_offset = 7.62;
+        upper_left_x = middle_left_corner_x - upper_left_x_offset;
+        upper_left_y = middle_left_corner_y;
+        mount_post(upper_left_x, -upper_left_y);
+
+        // Upper right post
+        middle_right_corner_x = -(pcb_width / 2);
+        middle_right_corner_y = (middle_right_corner_x / 2) + mount_post_radius;
+
+        upper_right_x_offset = 7.62;
+        upper_right_x = middle_right_corner_x + upper_right_x_offset;
+        upper_right_y = middle_right_corner_y;
+        mount_post(upper_right_x, upper_right_y);
+
+        // Lower right post
+        lower_right_corner_x = -(pcb_width / 2);
+        lower_right_corner_y = -((middle_right_corner_x / 2) + mount_post_radius);
+
+        lower_right_x_offset = 5.58;
+        lower_right_y_offset = -5.58;
+        lower_right_x = lower_right_corner_x + lower_right_x_offset;
+        lower_right_y = lower_right_corner_y + lower_right_y_offset;
+        mount_post(lower_right_x, lower_right_y);
+
+        // Lower left post
+        lower_left_corner_x = (pcb_width / 2);
+        lower_left_corner_y = (lower_left_corner_x / 2) - mount_post_radius;
+
+        lower_left_x_offset = -15.24;
+        lower_left_y_offset = 5.08;
+        lower_left_x = lower_left_corner_x + lower_left_x_offset;
+        lower_left_y = lower_left_corner_y + lower_left_y_offset;
+        mount_post(lower_left_x, lower_left_y);
+    }
+
+    *difference() {
         enclosure_piece(true);
         headphone_cutout();
         usb_cutout();
         switch_cutout();
         speaker_weave_cutout();
     }
+    mount_posts();
 }
 
 module enclosure_piece(center) {
