@@ -43,7 +43,7 @@ battery_height = 5;
 speaker_diameter = 57.5;
 speaker_height = 8.7;
 
-mount_post_diameter = 4;
+mount_post_diameter = 6;
 mount_post_radius = mount_post_diameter / 2;
 mount_post_tolerance_gap = 2;
 
@@ -206,8 +206,15 @@ module bottom_enclosure_piece() {
     module mount_post(x, y) {
         height = speaker_height + battery_height + (enclosure_lip_width / 2) + mount_post_tolerance_gap;
         z = outside_bottom_of_enclosure + (height / 2);
-        translate([x, y, z])
-            cylinder(h=height, d=mount_post_diameter, center=true);
+        difference() {
+            translate([x, y, z])
+                cylinder(h=height, d=mount_post_diameter, center=true, $fn=32);
+            translate([x, y, 5]) {
+                rotate(a=[180, 0, 0]) {
+                    screw_hole(DIN965, M3, 5, 0.5);
+                }
+            }
+        }
     }
 
     module mount_posts() {
