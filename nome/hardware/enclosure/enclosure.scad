@@ -57,8 +57,8 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     bottom_enclosure_piece();
-    *pcb();
-    *peripherals();
+    pcb();
+    peripherals();
 }
 
 module peripherals() {
@@ -263,7 +263,7 @@ module bottom_enclosure_piece() {
     }
 
     module outer_shell() {
-        *difference() {
+        difference() {
             enclosure_piece(true);
             headphone_cutout();
             usb_cutout();
@@ -322,13 +322,13 @@ module bottom_enclosure_piece() {
                         enclosure_lip_width,
                         center=true);
            speaker_weave_cutout();
-           lid_screw_holes();
+           *lid_screw_holes();
         }
     }
 
     union() {
-        outer_shell();
-        *mount_posts();
+        %outer_shell();
+        mount_posts();
         bottom_lid();
     }
 }
