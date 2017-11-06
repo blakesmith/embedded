@@ -26,14 +26,14 @@ headphone_height = 4.60;
 display_width = 13.3;
 display_length = 41.76;
 display_height = 7.28;
-display_tolerance = 1;
+display_tolerance = 1.5;
 
 encoder_width = 13.82;
 encoder_length = 13;
 encoder_base_height = 6.75;
 encoder_shaft_height = 15.591;
 encoder_shaft_diameter = 6.0;
-encoder_cutout_tolerance = 1;
+encoder_cutout_tolerance = 1.5;
 
 switch_width = 9.0;
 switch_length = 12.7;
@@ -59,8 +59,8 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     outer_enclosure_piece();
-    *pcb();
-    *peripherals();
+    pcb();
+    peripherals();
     bottom_lid();
 }
 
