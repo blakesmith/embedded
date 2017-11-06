@@ -48,6 +48,10 @@ mount_post_diameter = 6;
 mount_post_radius = mount_post_diameter / 2;
 mount_post_tolerance_gap = 2;
 
+lid_screw_width = 8;
+lid_screw_length = 8;
+lid_screw_height = 12;
+
 pcb_offset = inside_bottom_of_enclosure + battery_height + speaker_height + mount_post_tolerance_gap;
 top_of_pcb = pcb_offset + (pcb_height / 2);
 
@@ -235,6 +239,29 @@ module bottom_enclosure_piece() {
         mount_post(lower_left_x, lower_left_y);
     }
 
+    module lid_screw_post(x, y) {
+        z = outside_bottom_of_enclosure + (lid_screw_height / 2);
+
+        difference() {
+            translate([x, y, z])
+                cube([lid_screw_width,
+                      lid_screw_length,
+                      lid_screw_height], center=true);
+            translate([x, y, z - lid_screw_height / 2])
+                screw_hole(DIN965, M3, 10, 7);
+        }
+    }
+
+    module lid_screws() {
+        left_x_offset = (enclosure_width / 2) - (lid_screw_width / 2) - (enclosure_lip_width / 2);
+        left_y_offset = 0;
+        lid_screw_post(left_x_offset, left_y_offset);
+
+        right_x_offset = -((enclosure_width / 2) - (lid_screw_width / 2) - (enclosure_lip_width / 2));
+        right_y_offset = 0;
+        lid_screw_post(right_x_offset, right_y_offset);
+    }
+
     module outer_shell() {
         difference() {
             enclosure_piece(true);
@@ -242,6 +269,7 @@ module bottom_enclosure_piece() {
             usb_cutout();
             switch_cutout();
         }
+        lid_screws();
     }
 
     module bottom_lid() {
@@ -288,9 +316,9 @@ module bottom_enclosure_piece() {
     }
 
     union() {
-        *outer_shell();
+        outer_shell();
         *mount_posts();
-        #bottom_lid();
+        *bottom_lid();
     }
 }
 
