@@ -392,7 +392,7 @@ module enclosure_piece(center) {
 }
 
 module rounded_octagon(width, length, height, center=false) {
-    diameter = 6;
+    diameter = width / 15;
 
     module hull_post(hpx, hpy) {
         translate([hpx,
