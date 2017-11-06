@@ -53,7 +53,7 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     bottom_enclosure_piece();
-    *pcb();
+    #pcb();
     *peripherals();
 }
 
@@ -214,7 +214,7 @@ module bottom_enclosure_piece() {
     }
 
     module mount_post(x, y) {
-        height = outside_top_of_enclosure - pcb_offset;
+        height = outside_top_of_enclosure - pcb_offset - (pcb_height / 2);
         z = outside_top_of_enclosure - (height / 2);
         difference() {
             translate([x, y, z])
@@ -289,7 +289,7 @@ module enclosure_piece(center) {
                 enclosure_length,
                 enclosure_height / 2,
                 center=center);
-        translate([0, 0, enclosure_lip_width]) {
+        translate([0, 0, -enclosure_lip_width]) {
             octagon(enclosure_width - enclosure_lip_width,
                     enclosure_length - enclosure_lip_width,
                     (enclosure_height / 2) + enclosure_lip_width,
