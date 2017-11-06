@@ -16,5 +16,6 @@
 ** DONE Speaker holder weave
 ** DONE Add screw posts
 ** DONE Top enclosure
+** DONE Rounded octagons
+
 ** TODO Battery holder? Something to releave battery pressure?
-** TODO Rounde octagons

@@ -59,10 +59,10 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     nome_logo();
-    outer_enclosure_piece();
-    *pcb();
-    *peripherals();
-    *bottom_lid();
+    %outer_enclosure_piece();
+    pcb();
+    peripherals();
+    bottom_lid();
 }
 
 module nome_logo() {
@@ -123,10 +123,10 @@ module bottom_lid() {
 
     difference() {
         translate([0, 0, inside_bottom_of_enclosure])
-            octagon(enclosure_width - enclosure_lip_width,
-                    enclosure_length - enclosure_lip_width,
-                    enclosure_lip_width,
-                    center=true);
+            rounded_octagon(enclosure_width - enclosure_lip_width,
+                            enclosure_length - enclosure_lip_width,
+                            enclosure_lip_width,
+                            center=true);
         speaker_weave_cutout();
         *lid_screw_holes();
     }
@@ -378,16 +378,62 @@ module outer_enclosure_piece() {
 
 module enclosure_piece(center) {
     difference() {
-        octagon(enclosure_width,
+        rounded_octagon(enclosure_width,
                 enclosure_length,
                 enclosure_height / 2,
                 center=center);
         translate([0, 0, -enclosure_lip_width]) {
-            octagon(enclosure_width - enclosure_lip_width,
+            rounded_octagon(enclosure_width - enclosure_lip_width,
                     enclosure_length - enclosure_lip_width,
                     (enclosure_height / 2) + enclosure_lip_width,
                     center=center);
         }
+    }
+}
+
+module rounded_octagon(width, length, height, center=false) {
+    diameter = 6;
+
+    module hull_post(hpx, hpy) {
+        translate([hpx,
+                   hpy,
+                   -(height/2)])
+            cylinder(d=6,
+                     h=height);
+    }
+
+    module hull_posts() {
+        hull_post((width / 2) - (diameter / 2),
+                  (length / 4) - (diameter / 2));
+        hull_post(-((width / 2) - (diameter / 2)),
+                  (length / 4) - (diameter / 2));
+        hull_post((width / 4) - (diameter / 2),
+                  (length / 2) - (diameter / 2));
+        hull_post(-((width / 4) - (diameter / 2)),
+                  (length / 2) - (diameter / 2));
+
+        hull_post((width / 2) - (diameter / 2),
+                  -((length / 4) - (diameter / 2)));
+        hull_post(-((width / 2) - (diameter / 2)),
+                  -((length / 4) - (diameter / 2)));
+        hull_post((width / 4) - (diameter / 2),
+                  -((length / 2) - (diameter / 2)));
+        hull_post(-((width / 4) - (diameter / 2)),
+                  -((length / 2) - (diameter / 2)));
+    }
+
+    hull() {
+        intersection() {
+            cube([width,
+                  length,
+                  height], center=center);
+            rotate([0, 0, 45]) {
+                cube([width,
+                      length,
+                      height+1], center=center);
+            }
+        }
+        hull_posts();
     }
 }
 
