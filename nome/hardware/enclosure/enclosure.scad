@@ -58,10 +58,24 @@ pcb_offset = inside_bottom_of_enclosure + battery_height + speaker_height + moun
 top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
+    nome_logo();
     outer_enclosure_piece();
-    pcb();
-    peripherals();
-    bottom_lid();
+    *pcb();
+    *peripherals();
+    *bottom_lid();
+}
+
+module nome_logo() {
+    height = enclosure_lip_width / 2;
+    x = 0;
+    y = enclosure_width / 2.5;
+    z = enclosure_height / 4;
+    translate([x, y, z])
+        linear_extrude(height) {
+        text("nome",
+             halign="center",
+             valign="center");
+    }
 }
 
 module bottom_lid() {
@@ -357,7 +371,7 @@ module outer_enclosure_piece() {
     }
 
     union() {
-        %outer_shell();
+        outer_shell();
         mount_posts();
     }
 }
