@@ -66,7 +66,7 @@ union() {
 }
 
 module nome_logo() {
-    height = enclosure_lip_width / 2;
+    height = enclosure_lip_width / 4;
     x = 0;
     y = enclosure_width / 2.5;
     z = enclosure_height / 4;
