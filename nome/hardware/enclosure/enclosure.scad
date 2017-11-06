@@ -240,7 +240,7 @@ module bottom_enclosure_piece() {
     }
 
     module lid_screw_post(x, y) {
-        z = outside_bottom_of_enclosure + (lid_screw_height / 2);
+        z = outside_bottom_of_enclosure + (lid_screw_height / 2) + enclosure_lip_width;
 
         difference() {
             translate([x, y, z])
@@ -263,7 +263,7 @@ module bottom_enclosure_piece() {
     }
 
     module outer_shell() {
-        difference() {
+        *difference() {
             enclosure_piece(true);
             headphone_cutout();
             usb_cutout();
@@ -318,7 +318,7 @@ module bottom_enclosure_piece() {
     union() {
         outer_shell();
         *mount_posts();
-        *bottom_lid();
+        %bottom_lid();
     }
 }
 
