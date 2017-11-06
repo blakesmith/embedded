@@ -398,27 +398,27 @@ module rounded_octagon(width, length, height, center=false) {
         translate([hpx,
                    hpy,
                    -(height/2)])
-            cylinder(d=6,
+            cylinder(d=diameter,
                      h=height);
     }
 
     module hull_posts() {
-        hull_post((width / 2) - (diameter / 2),
+        hull_post((width / 2) - (diameter / 4),
                   (length / 4) - (diameter / 2));
-        hull_post(-((width / 2) - (diameter / 2)),
+        hull_post(-((width / 2) - (diameter / 4)),
                   (length / 4) - (diameter / 2));
-        hull_post((width / 4) - (diameter / 2),
+        hull_post((width / 4) - (diameter / 4),
                   (length / 2) - (diameter / 2));
-        hull_post(-((width / 4) - (diameter / 2)),
+        hull_post(-((width / 4) - (diameter / 4)),
                   (length / 2) - (diameter / 2));
 
-        hull_post((width / 2) - (diameter / 2),
+        hull_post((width / 2) - (diameter / 4),
                   -((length / 4) - (diameter / 2)));
-        hull_post(-((width / 2) - (diameter / 2)),
+        hull_post(-((width / 2) - (diameter / 4)),
                   -((length / 4) - (diameter / 2)));
-        hull_post((width / 4) - (diameter / 2),
+        hull_post((width / 4) - (diameter / 4),
                   -((length / 2) - (diameter / 2)));
-        hull_post(-((width / 4) - (diameter / 2)),
+        hull_post(-((width / 4) - (diameter / 4)),
                   -((length / 2) - (diameter / 2)));
     }
 
