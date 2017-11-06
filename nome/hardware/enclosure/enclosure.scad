@@ -305,20 +305,31 @@ module bottom_enclosure_piece() {
             }
         }
 
+        module lid_screw_holes() {
+            left_x_offset = (enclosure_width / 2) - (lid_screw_width / 2) - (enclosure_lip_width / 2);
+            translate([left_x_offset, 0, inside_bottom_of_enclosure - 2])
+                screw_hole(DIN965, M3, 10, 7);
+
+            right_x_offset = -((enclosure_width / 2) - (lid_screw_width / 2) - (enclosure_lip_width / 2));
+            translate([right_x_offset, 0, inside_bottom_of_enclosure - 2])
+                screw_hole(DIN965, M3, 10, 7);
+        }
+
         difference() {
-            translate([0, 0, inside_bottom_of_enclosure])
+           translate([0, 0, inside_bottom_of_enclosure])
                 octagon(enclosure_width - enclosure_lip_width,
                         enclosure_length - enclosure_lip_width,
                         enclosure_lip_width,
                         center=true);
-            speaker_weave_cutout();
+           speaker_weave_cutout();
+           lid_screw_holes();
         }
     }
 
     union() {
         outer_shell();
         *mount_posts();
-        %bottom_lid();
+        bottom_lid();
     }
 }
 
