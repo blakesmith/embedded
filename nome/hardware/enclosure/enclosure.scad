@@ -13,6 +13,7 @@ enclosure_length = pcb_length + enclosure_lip_width + pcb_tolerance_gap;
 
 inside_bottom_of_enclosure = ((enclosure_height / 2) - enclosure_lip_width) / -2;
 outside_bottom_of_enclosure = (enclosure_height / 2) / -2;
+outside_top_of_enclosure = (enclosure_height / 2) / 2;
 
 usb_width = 5.5;
 usb_length = 7.9;
@@ -53,15 +54,15 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 union() {
     bottom_enclosure_piece();
     *pcb();
-    peripherals();
+    *peripherals();
 }
 
 module peripherals() {
     union() {
         battery();
         speaker();
-        *display();
-        *encoder();
+        display();
+        encoder();
     }
 
     module battery() {
@@ -213,13 +214,13 @@ module bottom_enclosure_piece() {
     }
 
     module mount_post(x, y) {
-        height = speaker_height + battery_height + (enclosure_lip_width / 2) + mount_post_tolerance_gap;
-        z = outside_bottom_of_enclosure + (height / 2);
+        height = outside_top_of_enclosure - pcb_offset;
+        z = outside_top_of_enclosure - (height / 2);
         difference() {
-            %translate([x, y, z])
+            translate([x, y, z])
                 cylinder(h=height, d=mount_post_diameter, center=true, $fn=32);
-            translate([x, y, 5]) {
-                rotate(a=[180, 0, 0]) {
+            translate([x, y, 4.5]) {
+                rotate(a=[0, 0, 0]) {
                     screw_hole(DIN965, M3, 10, 7);
                 }
             }
@@ -277,7 +278,7 @@ module bottom_enclosure_piece() {
     }
 
     union() {
-        *outer_shell();
+        outer_shell();
         mount_posts();
     }
 }
