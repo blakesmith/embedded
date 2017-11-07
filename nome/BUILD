@@ -55,14 +55,14 @@ hex_binary(
 
 config_setting(
     name = "target_breadboard",
-    values = {
-        "define": "TARGET=breadboard"
+    define_values = {
+        "TARGET": "breadboard"
     }
 )
 
 config_setting(
     name = "target_prototype",
-    values = {
-        "define": "TARGET=prototype"
+    define_values = {
+        "TARGET": "prototype"
     }
 )
