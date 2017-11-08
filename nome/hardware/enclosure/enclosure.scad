@@ -62,11 +62,11 @@ pcb_offset = inside_bottom_of_enclosure + battery_height + speaker_height + moun
 top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
-    nome_logo();
+    *nome_logo();
     outer_enclosure_piece();
     *pcb();
     *peripherals();
-    bottom_lid();
+    *bottom_lid();
 }
 
 module nome_logo() {
@@ -300,7 +300,7 @@ module outer_enclosure_piece() {
         headphone_height_offset = top_of_pcb + (headphone_height / 2);
         headphone_width_offset = -4.57;
 
-        translate([enclosure_length / 2 - headphone_length,
+        translate([enclosure_length / 2,
                    headphone_width_offset,
                    headphone_height_offset])
             cube([headphone_width,
