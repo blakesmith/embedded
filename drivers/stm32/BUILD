@@ -1,3 +1,30 @@
+config_setting(
+    name = "target_breadboard",
+    define_values = {
+        "TARGET": "breadboard"
+    }
+)
+
+config_setting(
+    name = "target_prototype",
+    define_values = {
+        "TARGET": "prototype"
+    }
+)
+
+COMMON_COPTS = select({
+    ":target_breadboard": [
+        "-fno-rtti",
+        "-DSTM32F411xE",
+        "-DTARGET_BREADBOARD"
+    ],
+    ":target_prototype": [
+        "-fno-rtti",
+        "-DSTM32F413_423xx",
+        "-DTARGET_PROTOTYPE"
+    ]
+})
+
 cc_library(
     name = "gpio_common",
     srcs = [
@@ -8,16 +35,7 @@ cc_library(
         "gpio_pin.h",
         "gpio_bus.h",
     ],
-    copts = select({
-        ":target_breadboard": [
-            "-fno-rtti",
-            "-DSTM32F411xE"
-        ],
-        ":target_prototype": [
-            "-fno-rtti",
-            "-DSTM32F413_423xx"
-        ]
-    }),
+    copts = COMMON_COPTS,
     deps = [
         "//third_party/STM:stm_cmsis",
         "//third_party/STM:stm_cmsis_device",
@@ -34,16 +52,7 @@ cc_library(
     hdrs = [
         "i2s_transmitter.h",
     ],
-    copts = select({
-        ":target_breadboard": [
-            "-fno-rtti",
-            "-DSTM32F411xE"
-        ],
-        ":target_prototype": [
-            "-fno-rtti",
-            "-DSTM32F413_423xx"
-        ]
-    }),
+    copts = COMMON_COPTS,
     deps = [
         "//third_party/STM:stm_cmsis",
         "//third_party/STM:stm_cmsis_device",
@@ -61,16 +70,7 @@ cc_library(
     hdrs = [
         "i2c_bus.h",
     ],
-    copts = select({
-        ":target_breadboard": [
-            "-fno-rtti",
-            "-DSTM32F411xE"
-        ],
-        ":target_prototype": [
-            "-fno-rtti",
-            "-DSTM32F413_423xx"
-        ]
-    }),
+    copts = COMMON_COPTS,
     deps = [
         "//third_party/STM:stm_cmsis",
         "//third_party/STM:stm_cmsis_device",
@@ -88,18 +88,7 @@ cc_library(
     hdrs = [
         "cs43l22_dac.h"
     ],
-    copts = select({
-        ":target_breadboard": [
-            "-fno-rtti",
-            "-DSTM32F411xE",
-            "-DTARGET_BREADBOARD"
-        ],
-        ":target_prototype": [
-            "-fno-rtti",
-            "-DSTM32F413_423xx",
-            "-DTARGET_PROTOTYPE"
-        ]
-    }),
+    copts = COMMON_COPTS,
     deps = [
         ":i2c_common",
         ":i2s_common"
@@ -117,16 +106,7 @@ cc_library(
         "as1115_display.h",
         "display_7seg.h"
     ],
-    copts = select({
-        ":target_breadboard": [
-            "-fno-rtti",
-            "-DSTM32F411xE"
-        ],
-        ":target_prototype": [
-            "-fno-rtti",
-            "-DSTM32F413_423xx"
-        ]
-    }),
+    copts = COMMON_COPTS,
     deps = [
         ":i2c_common"
     ],
@@ -143,16 +123,7 @@ cc_library(
         "ht16K33_display.h",
         "display_7seg.h"
     ],
-    copts = select({
-        ":target_breadboard": [
-            "-fno-rtti",
-            "-DSTM32F411xE"
-        ],
-        ":target_prototype": [
-            "-fno-rtti",
-            "-DSTM32F413_423xx"
-        ]
-    }),
+    copts = COMMON_COPTS,
     deps = [
         ":i2c_common"
     ],
@@ -167,16 +138,7 @@ cc_library(
     hdrs = [
         "pec11_renc.h"
     ],
-    copts = select({
-        ":target_breadboard": [
-            "-fno-rtti",
-            "-DSTM32F411xE"
-        ],
-        ":target_prototype": [
-            "-fno-rtti",
-            "-DSTM32F413_423xx"
-        ]
-    }),
+    copts = COMMON_COPTS,
     deps = [
         ":gpio_common"
     ],
@@ -191,32 +153,10 @@ cc_library(
     hdrs = [
         "status_led.h"
     ],
-    copts = select({
-        ":target_breadboard": [
-            "-fno-rtti",
-            "-DSTM32F411xE"
-        ],
-        ":target_prototype": [
-            "-fno-rtti",
-            "-DSTM32F413_423xx"
-        ]
-    }),
+    copts = COMMON_COPTS,
     deps = [
         ":gpio_common"
     ],
     visibility = ["//visibility:public"]
 )
 
-config_setting(
-    name = "target_breadboard",
-    define_values = {
-        "TARGET": "breadboard"
-    }
-)
-
-config_setting(
-    name = "target_prototype",
-    define_values = {
-        "TARGET": "prototype"
-    }
-)
