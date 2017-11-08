@@ -54,14 +54,18 @@ lid_screw_width = 8;
 lid_screw_length = 8;
 lid_screw_height = 12;
 
+speaker_holder_width = 5;
+speaker_holder_length = speaker_diameter / 10;
+speaker_holder_height = 3;
+
 pcb_offset = inside_bottom_of_enclosure + battery_height + speaker_height + mount_post_tolerance_gap;
 top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
-    nome_logo();
-    %outer_enclosure_piece();
-    pcb();
-    peripherals();
+    *nome_logo();
+    *outer_enclosure_piece();
+    *pcb();
+    *peripherals();
     bottom_lid();
 }
 
@@ -121,6 +125,42 @@ module bottom_lid() {
             screw_hole(DIN965, M3, 10, 7);
     }
 
+    module speaker_holder() {
+        x = 0;
+        y = 0;
+        z = 0;
+        difference() {
+            cube([speaker_holder_width,
+                  speaker_holder_length,
+                  speaker_holder_height],
+                 center=true);
+            translate([x - (speaker_holder_width / 2),
+                      y,
+                      z - (speaker_holder_height / 2)])
+                cube([speaker_holder_width,
+                      speaker_holder_length + (speaker_holder_length / 10),
+                      speaker_holder_height],
+                     center=true);
+        }
+    }
+
+    module speaker_holders() {
+        left_x_offset = (speaker_diameter / 2);
+        left_z_offset = inside_bottom_of_enclosure + speaker_holder_height;
+        translate([left_x_offset,
+                   0,
+                   left_z_offset])
+            speaker_holder();
+
+        right_x_offset = -(speaker_diameter / 2);
+        right_z_offset = inside_bottom_of_enclosure + speaker_holder_height;
+        translate([right_x_offset,
+                   0,
+                   right_z_offset])
+            rotate([0, 0, 180])
+            speaker_holder();
+    }
+
     difference() {
         translate([0, 0, inside_bottom_of_enclosure])
             rounded_octagon(enclosure_width - enclosure_lip_width,
@@ -130,6 +170,7 @@ module bottom_lid() {
         speaker_weave_cutout();
         *lid_screw_holes();
     }
+    speaker_holders();
 }
 
 module peripherals() {
