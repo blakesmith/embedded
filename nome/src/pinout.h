@@ -1,9 +1,9 @@
 #ifndef PINOUT_H_
 #define PINOUT_H_
 
-#include "stm32_drivers/gpio_pin.h"
-#include "stm32_drivers/i2c_bus.h"
-#include "stm32_drivers/i2s_transmitter.h"
+#include "drivers/stm32/gpio_pin.h"
+#include "drivers/stm32/i2c_bus.h"
+#include "drivers/stm32/i2s_transmitter.h"
 
 struct Pinout {
     GPIOBus gpioa;

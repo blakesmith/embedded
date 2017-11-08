@@ -1,4 +1,4 @@
-#include "stm32_drivers/as1115_display.h"
+#include "drivers/stm32/as1115_display.h"
 
 static constexpr uint8_t FIRST_DIGIT_REGISTER = 0x01;
 

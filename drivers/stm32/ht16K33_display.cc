@@ -1,4 +1,4 @@
-#include "stm32_drivers/ht16K33_display.h"
+#include "drivers/stm32/ht16K33_display.h"
 
 static constexpr uint8_t FIRST_DIGIT_REGISTER = 0x0;
 

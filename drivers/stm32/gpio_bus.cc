@@ -1,4 +1,4 @@
-#include "stm32_drivers/gpio_bus.h"
+#include "drivers/stm32/gpio_bus.h"
 
 #include "stm32f4xx_rcc.h"
 

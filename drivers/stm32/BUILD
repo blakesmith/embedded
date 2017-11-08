@@ -1,5 +1,5 @@
 cc_library(
-    name = "stm32_drivers",
+    name = "stm32",
     srcs = glob(["*.cc"]),
     hdrs = glob(["*.h"]),
     copts = select({

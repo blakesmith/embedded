@@ -38,7 +38,7 @@ cc_binary(
     }),
     deps = [
         "//third_party/STM:stm_cmsis",
-        "//stm32_drivers:stm32_drivers"
+        "//drivers/stm32:stm32"
     ] + select({
         ":target_breadboard": ["linker_scripts/STM32F411RETx_FLASH.ld"],
         ":target_prototype": ["linker_scripts/STM32F413CGUx_FLASH.ld"]
