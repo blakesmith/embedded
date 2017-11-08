@@ -18,4 +18,8 @@
 ** DONE Top enclosure
 ** DONE Rounded octagons
 
-** TODO Battery holder? Something to releave battery pressure?
+** TODO Name the company!
+** TODO Pick up enclosure
+** TODO Rename code repository to company name
+** TODO Explore other metronome sounds
+** TODO Build PCB
