@@ -37,7 +37,6 @@ cc_binary(
         ":target_prototype": ["-Tnome/linker_scripts/STM32F413CGUx_FLASH.ld"]
     }),
     deps = [
-        "//third_party/STM:stm_cmsis",
         "//drivers/stm32:protocol_common",
         "//drivers/stm32:as1115_display",
         "//drivers/stm32:cs43l22_dac",
