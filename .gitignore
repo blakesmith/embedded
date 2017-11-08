@@ -2,3 +2,4 @@
 *.hex
 *.elf
 bazel-*
+*.stl
