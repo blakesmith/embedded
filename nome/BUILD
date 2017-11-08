@@ -40,14 +40,18 @@ cc_binary(
         "//drivers/stm32:gpio_common",
         "//drivers/stm32:i2c_common",
         "//drivers/stm32:i2s_common",
-        "//drivers/stm32:as1115_display",
         "//drivers/stm32:cs43l22_dac",
-        "//drivers/stm32:ht16K33_display",
         "//drivers/stm32:pec11_encoder",
         "//drivers/stm32:status_led"
     ] + select({
-        ":target_breadboard": ["linker_scripts/STM32F411RETx_FLASH.ld"],
-        ":target_prototype": ["linker_scripts/STM32F413CGUx_FLASH.ld"]
+        ":target_breadboard": [
+            "linker_scripts/STM32F411RETx_FLASH.ld",
+            "//drivers/stm32:ht16K33_display"
+        ],
+        ":target_prototype": [
+            "linker_scripts/STM32F413CGUx_FLASH.ld",
+            "//drivers/stm32:as1115_display"
+        ]
     }),
     linkstatic = 1
 )
