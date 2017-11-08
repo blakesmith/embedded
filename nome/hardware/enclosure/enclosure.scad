@@ -62,8 +62,8 @@ pcb_offset = inside_bottom_of_enclosure + battery_height + speaker_height + moun
 top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
-    *nome_logo();
-    *outer_enclosure_piece();
+    nome_logo();
+    outer_enclosure_piece();
     *pcb();
     *peripherals();
     bottom_lid();
@@ -116,11 +116,11 @@ module bottom_lid() {
     }
 
     module lid_screw_holes() {
-        left_x_offset = (enclosure_width / 2) - (lid_screw_width / 2) - (enclosure_lip_width / 2);
+        left_x_offset = (enclosure_width / 2) - (lid_screw_width / 2);
         translate([left_x_offset, 0, inside_bottom_of_enclosure - 2])
             screw_hole(DIN965, M3, 10, 7);
 
-        right_x_offset = -((enclosure_width / 2) - (lid_screw_width / 2) - (enclosure_lip_width / 2));
+        right_x_offset = -((enclosure_width / 2) - (lid_screw_width / 2));
         translate([right_x_offset, 0, inside_bottom_of_enclosure - 2])
             screw_hole(DIN965, M3, 10, 7);
     }
@@ -168,7 +168,7 @@ module bottom_lid() {
                             enclosure_lip_width,
                             center=true);
         speaker_weave_cutout();
-        *lid_screw_holes();
+        %lid_screw_holes();
     }
     speaker_holders();
 }
@@ -390,11 +390,11 @@ module outer_enclosure_piece() {
     }
 
     module lid_screws() {
-        left_x_offset = (enclosure_width / 2) - (lid_screw_width / 2) - (enclosure_lip_width / 2);
+        left_x_offset = (enclosure_width / 2) - (lid_screw_width / 2);
         left_y_offset = 0;
         lid_screw_post(left_x_offset, left_y_offset);
 
-        right_x_offset = -((enclosure_width / 2) - (lid_screw_width / 2) - (enclosure_lip_width / 2));
+        right_x_offset = -((enclosure_width / 2) - (lid_screw_width / 2));
         right_y_offset = 0;
         lid_screw_post(right_x_offset, right_y_offset);
     }
