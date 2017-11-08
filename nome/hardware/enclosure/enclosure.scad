@@ -63,10 +63,10 @@ top_of_pcb = pcb_offset + (pcb_height / 2);
 
 union() {
     *nome_logo();
-    outer_enclosure_piece();
+    *outer_enclosure_piece();
     *pcb();
     *peripherals();
-    *bottom_lid();
+    bottom_lid();
 }
 
 module nome_logo() {
@@ -168,7 +168,7 @@ module bottom_lid() {
                             enclosure_lip_width,
                             center=true);
         speaker_weave_cutout();
-        %lid_screw_holes();
+        lid_screw_holes();
     }
     speaker_holders();
 }
