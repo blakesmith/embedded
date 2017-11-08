@@ -1,16 +1,12 @@
 cc_library(
-    name = "protocol_common",
+    name = "gpio_common",
     srcs = [
         "gpio_pin.cc",
         "gpio_bus.cc",
-        "i2c_bus.cc",
-        "i2s_transmitter.cc"
     ],
     hdrs = [
         "gpio_pin.h",
         "gpio_bus.h",
-        "i2c_bus.h",
-        "i2s_transmitter.h"
     ],
     copts = select({
         ":target_breadboard": [
@@ -26,6 +22,60 @@ cc_library(
         "//third_party/STM:stm_cmsis",
         "//third_party/STM:stm_cmsis_device",
         "//third_party/STM:stm_std_periph",
+    ],
+    visibility = ["//visibility:public"]
+)
+
+cc_library(
+    name = "i2s_common",
+    srcs = [
+        "i2s_transmitter.cc",
+    ],
+    hdrs = [
+        "i2s_transmitter.h",
+    ],
+    copts = select({
+        ":target_breadboard": [
+            "-fno-rtti",
+            "-DSTM32F411xE"
+        ],
+        ":target_prototype": [
+            "-fno-rtti",
+            "-DSTM32F413_423xx"
+        ]
+    }),
+    deps = [
+        "//third_party/STM:stm_cmsis",
+        "//third_party/STM:stm_cmsis_device",
+        "//third_party/STM:stm_std_periph",
+        ":gpio_common"
+    ],
+    visibility = ["//visibility:public"]
+)
+
+cc_library(
+    name = "i2c_common",
+    srcs = [
+        "i2c_bus.cc",
+    ],
+    hdrs = [
+        "i2c_bus.h",
+    ],
+    copts = select({
+        ":target_breadboard": [
+            "-fno-rtti",
+            "-DSTM32F411xE"
+        ],
+        ":target_prototype": [
+            "-fno-rtti",
+            "-DSTM32F413_423xx"
+        ]
+    }),
+    deps = [
+        "//third_party/STM:stm_cmsis",
+        "//third_party/STM:stm_cmsis_device",
+        "//third_party/STM:stm_std_periph",
+        ":gpio_common"
     ],
     visibility = ["//visibility:public"]
 )
@@ -51,7 +101,8 @@ cc_library(
         ]
     }),
     deps = [
-        ":protocol_common"
+        ":i2c_common",
+        ":i2s_common"
     ],
     visibility = ["//visibility:public"]
 )
@@ -77,7 +128,7 @@ cc_library(
         ]
     }),
     deps = [
-        ":protocol_common"
+        ":i2c_common"
     ],
     visibility = ["//visibility:public"]
 )
@@ -103,7 +154,7 @@ cc_library(
         ]
     }),
     deps = [
-        ":protocol_common"
+        ":i2c_common"
     ],
     visibility = ["//visibility:public"]
 )
@@ -127,7 +178,7 @@ cc_library(
         ]
     }),
     deps = [
-        ":protocol_common"
+        ":gpio_common"
     ],
     visibility = ["//visibility:public"]
 )
@@ -151,7 +202,7 @@ cc_library(
         ]
     }),
     deps = [
-        ":protocol_common"
+        ":gpio_common"
     ],
     visibility = ["//visibility:public"]
 )
