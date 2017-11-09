@@ -13,7 +13,7 @@ enum class OscShape {
 
 class Osc {
 public:
-    Osc(const OscShape shape,
+    Osc(OscShape shape,
         const uint32_t sample_rate,
         const uint16_t freq_hz,
         const uint8_t amplitude);
@@ -24,9 +24,10 @@ public:
     int16_t Value();
 
     void set_freq(uint16_t freq_hz);
+    void set_shape(OscShape shape);
 
 private:
-    const OscShape shape_;
+    OscShape shape_;
     const uint32_t sample_rate_;
     uint16_t freq_hz_;
     uint8_t amplitude_;

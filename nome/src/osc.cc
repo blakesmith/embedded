@@ -107,7 +107,7 @@ static const int16_t sin_wavetable[] = {
   -32512,
 };
 
-Osc::Osc(const OscShape shape,
+Osc::Osc(OscShape shape,
          const uint32_t sample_rate,
          const uint16_t freq_hz,
          const uint8_t amplitude)
@@ -133,6 +133,14 @@ int16_t Osc::Value() {
 void Osc::set_freq(uint16_t freq_hz) {
     freq_hz_ = freq_hz;
     phase_ = 0;
+    compute_phase_increment();
+    value_ = compute_next_value();
+}
+
+void Osc::set_shape(OscShape shape) {
+    shape_ = shape;
+    phase_ = 0;
+    assign_lookup_table();
     compute_phase_increment();
     value_ = compute_next_value();
 }
