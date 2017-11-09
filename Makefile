@@ -21,8 +21,7 @@ nome_prototype:
 	//nome:nome
 
 
-
 nome_linux:
-	bazel build \
+	bazel run \
 	--define TARGET=linux \
 	//nome:nome_linux
