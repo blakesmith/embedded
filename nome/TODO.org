@@ -17,9 +17,8 @@
 ** DONE Add screw posts
 ** DONE Top enclosure
 ** DONE Rounded octagons
-
+** TODO Explore other metronome sounds
 ** TODO Name the company!
 ** TODO Pick up enclosure
 ** TODO Rename code repository to company name
-** TODO Explore other metronome sounds
 ** TODO Build PCB
