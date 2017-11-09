@@ -2,9 +2,7 @@
 
 #include "audio_output.h"
 
-#ifdef __LINUX__
 #include "alsa_output.h"
-#endif
 
 #include "beat.h"
 
@@ -21,11 +19,7 @@ int main(int argc, char** argv) {
     int rc;
     int16_t sample_buffer[FRAMES_PER_PERIOD*CHANNEL_COUNT];
     Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
-    #ifdef __LINUX__
     AlsaOutput sound_out(SAMPLE_RATE);
-    #else
-    NullAudioOutput sound_out;
-    #endif
 
     rc = sound_out.Start();
     if (rc < 0) {

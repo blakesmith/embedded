@@ -1,4 +1,25 @@
 cc_binary(
+    name = "nome_linux",
+    srcs = [
+        "src/adsr_envelope.h",
+        "src/adsr_envelope.cc",
+        "src/audio_output.h",
+        "src/alsa_output.h",
+        "src/alsa_output.cc",
+        "src/beat.h",
+        "src/beat.cc",
+        "src/settings.h",
+        "src/settings.cc",
+        "src/osc.h",
+        "src/osc.cc",
+        "src/main_linux.cc"
+    ],
+    linkopts = [
+        "-lasound"
+    ]
+)
+
+cc_binary(
     name = "nome_bin",
     srcs = [
         "src/startup_stm32f411xe.s",
@@ -60,7 +81,7 @@ load("//tools/arm_compiler:raw_binary.bzl", "hex_binary")
 
 hex_binary(
     name = "nome",
-    src = ":nome_bin"
+    src = ":nome_stm32"
 )
 
 config_setting(
@@ -76,3 +97,4 @@ config_setting(
         "TARGET": "prototype"
     }
 )
+
