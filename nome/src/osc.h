@@ -2,11 +2,13 @@
 #define NOME_OSC_H_
 
 #include <cstdint>
+#include <cstddef>
 
 namespace nome {
 
-enum OscShape {
-    OSC_SHAPE_SIN
+enum class OscShape {
+    SIN,
+    SQUARE
 };
 
 class Osc {
@@ -33,7 +35,11 @@ private:
     uint32_t phase_;
     uint32_t phase_increment_;
 
+    size_t table_size_;
+    const int16_t *table_;
+
     void compute_phase_increment();
+    void assign_lookup_table();
     int16_t compute_next_value();
 };
 

@@ -1,8 +1,43 @@
 #include "osc.h"
 
-#include <cstddef>
-
 namespace nome {
+
+static const int16_t square_wavetable[] = {
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    -32768, -32768, -32768, -32768,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767,
+    32767, 32767, 32767, 32767
+};
 
 static const int16_t sin_wavetable[] = {
   -32512, -32502, -32473, -32423,
@@ -72,8 +107,6 @@ static const int16_t sin_wavetable[] = {
   -32512,
 };
 
-static const size_t sin_wavetable_size = sizeof(sin_wavetable) / sizeof(int16_t);
-
 Osc::Osc(const OscShape shape,
          const uint32_t sample_rate,
          const uint16_t freq_hz,
@@ -83,6 +116,7 @@ Osc::Osc(const OscShape shape,
       freq_hz_(freq_hz),
       amplitude_(amplitude),
       phase_(0) {
+    assign_lookup_table();
     compute_phase_increment();
     compute_next_value();
 }
@@ -104,17 +138,34 @@ void Osc::set_freq(uint16_t freq_hz) {
 }
 
 void Osc::compute_phase_increment() {
-    phase_increment_ = sin_wavetable_size * ((freq_hz_ << 16) / sample_rate_);
+    phase_increment_ = table_size_ * ((freq_hz_ << 16) / sample_rate_);
 }
 
 int16_t Osc::compute_next_value() {
-    uint32_t index = ((phase_ * phase_increment_) >> 16) % sin_wavetable_size;
+    uint32_t index = ((phase_ * phase_increment_) >> 16) % table_size_;
     if (index == 0) {
         // Reset the phase to avoid overflows
         phase_ = 0;
     }
 
-    return sin_wavetable[index];
+    return table_[index];
+}
+
+void Osc::assign_lookup_table() {
+    switch (shape_) {
+        case OscShape::SIN:
+            table_ = sin_wavetable;
+            table_size_ = sizeof(sin_wavetable) / sizeof(int16_t);
+            break;
+        case OscShape::SQUARE:
+            table_ = square_wavetable;
+            table_size_ = sizeof(square_wavetable) / sizeof(int16_t);
+            break;
+        default:
+            table_ = sin_wavetable;
+            table_size_ = sizeof(sin_wavetable) / sizeof(int16_t);
+            break;
+    }
 }
 
 }
