@@ -23,7 +23,7 @@
 ** TODO Rename code repository to company name
 ** TODO Build PCB
 ** TODO Fix PCB issues
-*** TODO Widen display holes
+*** DONE Widen display holes
 *** TODO Wrong size stereo jack
 *** TODO Encoder holder fins: Maybe wider?
 *** TODO JTAG pin header - really close to STM32
