@@ -162,7 +162,7 @@ void Osc::generate_square_table() {
 }
 
 void Osc::generate_triangle_table() {
-    const int16_t step = INT16_MAX / table_size_;
+    const int16_t step = UINT16_MAX / table_size_;
     const int16_t start = INT16_MIN;
     
     int16_t sample = start;
