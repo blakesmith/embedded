@@ -1,5 +1,7 @@
 #include "osc.h"
 
+#include <cstdint>
+
 namespace nome {
 
 int16_t osc_wavetable[256];
@@ -151,17 +153,17 @@ void Osc::generate_square_table() {
     int16_t sample;
     for (size_t i = 0; i < table_size_; i++) {
         if (i < (table_size_ / 2)) {
-            sample = -32768;
+            sample = INT16_MIN;
         } else {
-            sample = 32767;
+            sample = INT16_MAX;
         }
         table_[i] = sample;
     }
 }
 
 void Osc::generate_triangle_table() {
-    const int16_t step = 32767 / table_size_;
-    const int16_t start = -32768;
+    const int16_t step = INT16_MAX / table_size_;
+    const int16_t start = INT16_MIN;
     
     int16_t sample = start;
     for (size_t i = 0; i < table_size_; i++) {
