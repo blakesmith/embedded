@@ -135,6 +135,11 @@ void Osc::assign_lookup_table() {
             table_size_ = sizeof(osc_wavetable) / sizeof(int16_t);
             generate_square_table();
             break;
+        case OscShape::TRIANGLE:
+            table_ = osc_wavetable;
+            table_size_ = sizeof(osc_wavetable) / sizeof(int16_t);
+            generate_triangle_table();
+            break;
         default:
             table_ = (int16_t *)sin_wavetable;
             table_size_ = sizeof(sin_wavetable) / sizeof(int16_t);
@@ -151,6 +156,21 @@ void Osc::generate_square_table() {
             sample = 32767;
         }
         table_[i] = sample;
+    }
+}
+
+void Osc::generate_triangle_table() {
+    const int16_t step = 32767 / table_size_;
+    const int16_t start = -32768;
+    
+    int16_t sample = start;
+    for (size_t i = 0; i < table_size_; i++) {
+        table_[i] = sample;
+        if (i < (table_size_ / 2)) {
+            sample += step;
+        } else {
+            sample -= step;
+        }
     }
 }
 

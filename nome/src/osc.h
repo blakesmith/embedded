@@ -8,6 +8,7 @@ namespace nome {
 
 enum class OscShape {
     SIN,
+    TRIANGLE,
     SQUARE
 };
 
@@ -41,6 +42,7 @@ private:
 
     void compute_phase_increment();
     void generate_square_table();
+    void generate_triangle_table();
     void assign_lookup_table();
     int16_t compute_next_value();
 };
