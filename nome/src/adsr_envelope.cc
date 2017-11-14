@@ -88,6 +88,10 @@ void AdsrEnvelope::Tick() {
     value_ = compute_next_value(current_segment_position, last_segment_position);
 }
 
+int16_t AdsrEnvelope::Apply(int16_t in_val) {
+    return (static_cast<int32_t>(in_val) * value_) >> 8;
+}
+
 void AdsrEnvelope::Reset() {
     phase_ = 0;
     segment_ = ENVELOPE_SEGMENT_ATTACK;

@@ -27,6 +27,7 @@ public:
 
     void Tick();
     uint8_t Value();
+    int16_t Apply(int16_t value);
     void Reset();
 
 private:

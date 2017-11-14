@@ -40,7 +40,7 @@ void Beat::SetDownbeat(uint8_t downbeat) {
 void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
     for (size_t i = 0; i < frames; i++) {
         for (size_t j = 0; j < channel_count; j++) {
-            int16_t sample = (static_cast<int32_t>(osc_.Value()) * envelope_.Value()) >> 8;
+            int16_t sample = envelope_.Apply(osc_.Value());
             buffer[i*channel_count+j] = sample;
         }
 
