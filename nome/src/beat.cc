@@ -17,7 +17,7 @@ Beat::Beat(const uint32_t sample_rate,
       samples_per_control_(sample_rate_ / control_rate_),
       total_beats_(0),
       phase_(0),
-      osc_(OscShape::SQUARE, sample_rate, DOWNBEAT_FREQ, 50),
+      osc_(OscShape::TRIANGLE, sample_rate, DOWNBEAT_FREQ, 50),
       envelope_(control_rate, 255, 1, 20, 0, 225, 0),
       monitor_(&total_beats_) {
     SetDownbeat(downbeat_);
