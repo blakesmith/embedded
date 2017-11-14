@@ -20,7 +20,7 @@ cc_binary(
 )
 
 cc_binary(
-    name = "nome_bin",
+    name = "nome_stm32",
     srcs = [
         "src/startup_stm32f411xe.s",
         "src/stm32f4xx_it.h",
