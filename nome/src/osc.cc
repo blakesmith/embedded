@@ -2,42 +2,7 @@
 
 namespace nome {
 
-static const int16_t square_wavetable[] = {
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    -32768, -32768, -32768, -32768,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767,
-    32767, 32767, 32767, 32767
-};
+int16_t osc_wavetable[256];
 
 static const int16_t sin_wavetable[] = {
   -32512, -32502, -32473, -32423,
@@ -162,17 +127,30 @@ int16_t Osc::compute_next_value() {
 void Osc::assign_lookup_table() {
     switch (shape_) {
         case OscShape::SIN:
-            table_ = sin_wavetable;
+            table_ = (int16_t *)sin_wavetable;
             table_size_ = sizeof(sin_wavetable) / sizeof(int16_t);
             break;
         case OscShape::SQUARE:
-            table_ = square_wavetable;
-            table_size_ = sizeof(square_wavetable) / sizeof(int16_t);
+            table_ = osc_wavetable;
+            table_size_ = sizeof(osc_wavetable) / sizeof(int16_t);
+            generate_square_table();
             break;
         default:
-            table_ = sin_wavetable;
+            table_ = (int16_t *)sin_wavetable;
             table_size_ = sizeof(sin_wavetable) / sizeof(int16_t);
             break;
+    }
+}
+
+void Osc::generate_square_table() {
+    int16_t sample;
+    for (size_t i = 0; i < table_size_; i++) {
+        if (i < (table_size_ / 2)) {
+            sample = -32768;
+        } else {
+            sample = 32767;
+        }
+        table_[i] = sample;
     }
 }
 

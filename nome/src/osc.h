@@ -37,9 +37,10 @@ private:
     uint32_t phase_increment_;
 
     size_t table_size_;
-    const int16_t *table_;
+    int16_t *table_;
 
     void compute_phase_increment();
+    void generate_square_table();
     void assign_lookup_table();
     int16_t compute_next_value();
 };
