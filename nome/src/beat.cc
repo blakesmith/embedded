@@ -72,14 +72,11 @@ void Beat::trigger_beat() {
     envelope_.Reset();
     total_beats_++;
     if (downbeat_ != 0) {
-        uint16_t freq;
         if (total_beats_ % downbeat_ == 0) {
-            freq = DOWNBEAT_FREQ;
+            osc_set_freq(DOWNBEAT_FREQ);
         } else if (total_beats_ % downbeat_ == 1) {
-            freq = UPBEAT_FREQ;
+            osc_set_freq(UPBEAT_FREQ);
         }
-
-        osc_set_freq(freq);
     }
 }
 
