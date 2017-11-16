@@ -1,5 +1,7 @@
 #include "beat.h"
 
+#include <cstdint>
+
 namespace nome {
 
 static const uint16_t DOWNBEAT_FREQ = 1320;
@@ -17,10 +19,16 @@ Beat::Beat(const uint32_t sample_rate,
       samples_per_control_(sample_rate_ / control_rate_),
       total_beats_(0),
       phase_(0),
-      osc_(OscShape::TRIANGLE, sample_rate, DOWNBEAT_FREQ, 50),
+      osc_({
+              {OscShape::TRIANGLE, sample_rate, DOWNBEAT_FREQ, 50},
+              {OscShape::SIN, sample_rate, DOWNBEAT_FREQ, 50}
+          }),
       envelope_(control_rate, 255, 1, 20, 0, 225, 0),
+      mixer_(osc_, BEAT_N_OSC),
       monitor_(&total_beats_) {
     SetDownbeat(downbeat_);
+    uint8_t levels[BEAT_N_OSC] = {UINT8_MAX / 2, UINT8_MAX / 2};
+    mixer_.SetLevels(levels, BEAT_N_OSC);
 }
 
 void Beat::SetBPM(uint16_t bpm) {
@@ -31,20 +39,23 @@ void Beat::SetBPM(uint16_t bpm) {
 void Beat::SetDownbeat(uint8_t downbeat) {
     downbeat_ = downbeat;
     if (downbeat_ == 0) {
-        osc_.set_freq(UPBEAT_FREQ);
+        osc_set_freq(UPBEAT_FREQ);
     } else {
-        osc_.set_freq(DOWNBEAT_FREQ);
+        osc_set_freq(DOWNBEAT_FREQ);
     }
 }
 
 void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
     for (size_t i = 0; i < frames; i++) {
         for (size_t j = 0; j < channel_count; j++) {
-            int16_t sample = envelope_.Apply(osc_.Value());
+            int16_t sample = envelope_.Apply(mixer_.Value());
             buffer[i*channel_count+j] = sample;
         }
 
-        osc_.Tick();
+        for (size_t j = 0; j < BEAT_N_OSC; j++) {
+            osc_[j].Tick();
+        }
+        
         phase_++;
 
         if (phase_ % samples_per_beat_ == 0) {
@@ -61,11 +72,20 @@ void Beat::trigger_beat() {
     envelope_.Reset();
     total_beats_++;
     if (downbeat_ != 0) {
+        uint16_t freq;
         if (total_beats_ % downbeat_ == 0) {
-            osc_.set_freq(DOWNBEAT_FREQ);
+            freq = DOWNBEAT_FREQ;
         } else if (total_beats_ % downbeat_ == 1) {
-            osc_.set_freq(UPBEAT_FREQ);
+            freq = UPBEAT_FREQ;
         }
+
+        osc_set_freq(freq);
+    }
+}
+
+void Beat::osc_set_freq(uint16_t freq) {
+    for (size_t i = 0; i < BEAT_N_OSC; i++) {
+        osc_[i].set_freq(freq);
     }
 }
 

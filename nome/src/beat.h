@@ -3,10 +3,13 @@
 
 #include "osc.h"
 #include "adsr_envelope.h"
+#include "mixer.h"
 
 #include <cstddef>
 
 namespace nome {
+
+static constexpr size_t BEAT_N_OSC = 2;
 
 class BeatMonitor {
 public:
@@ -45,12 +48,14 @@ private:
     uint32_t total_beats_;
     uint32_t phase_;
 
-    Osc osc_;
+    Osc osc_[BEAT_N_OSC];
     AdsrEnvelope envelope_;
+    Mixer<BEAT_N_OSC> mixer_;
 
     BeatMonitor monitor_;
 
     void trigger_beat();
+    void osc_set_freq(uint16_t freq);
 };
 
 }
