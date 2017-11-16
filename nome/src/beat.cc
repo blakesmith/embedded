@@ -27,7 +27,7 @@ Beat::Beat(const uint32_t sample_rate,
       mixer_(osc_, BEAT_N_OSC),
       monitor_(&total_beats_) {
     SetDownbeat(downbeat_);
-    uint8_t levels[BEAT_N_OSC] = {UINT8_MAX / 2, UINT8_MAX / 2};
+    uint8_t levels[BEAT_N_OSC] = {200, 55};
     mixer_.SetLevels(levels, BEAT_N_OSC);
 }
 
@@ -82,7 +82,8 @@ void Beat::trigger_beat() {
 
 void Beat::osc_set_freq(uint16_t freq) {
     for (size_t i = 0; i < BEAT_N_OSC; i++) {
-        osc_[i].set_freq(freq);
+        const size_t octave_step = i + 1;
+        osc_[i].set_freq(freq / octave_step);
     }
 }
 
