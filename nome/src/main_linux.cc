@@ -1,7 +1,5 @@
 #include <cstdio>
 
-#include "audio_output.h"
-
 #include "alsa_output.h"
 
 #include "beat.h"

@@ -5,11 +5,9 @@
 #include <cstdint>
 #include <cstddef>
 
-#include "audio_output.h"
-
 namespace nome {
 
-class AlsaOutput : public AudioOutput {
+class AlsaOutput {
 public:
     AlsaOutput(uint32_t sample_rate);
     ~AlsaOutput() = default;

@@ -3,7 +3,6 @@ cc_binary(
     srcs = [
         "src/adsr_envelope.h",
         "src/adsr_envelope.cc",
-        "src/audio_output.h",
         "src/alsa_output.h",
         "src/alsa_output.cc",
         "src/beat.h",
