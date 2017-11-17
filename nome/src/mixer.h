@@ -4,20 +4,12 @@
 #include <assert.h>
 #include <string.h>
 
-#include "osc.h"
-
 namespace nome {
 
 template <size_t MIXER_SIZE>
 class Mixer {
 public:
-    Mixer(Osc* oscs, size_t size) {
-        assert(size == MIXER_SIZE);
-
-        for (size_t i = 0; i < size; i++) {
-            oscs_[i] = &oscs[i];
-        }
-    }
+    Mixer() = default;
     
     void SetLevels(uint8_t* levels, size_t size) {
         assert(size == MIXER_SIZE);
@@ -29,15 +21,21 @@ public:
         int16_t value = 0;
 
         for (size_t i = 0; i < MIXER_SIZE; i++) {
-            value += (static_cast<int32_t>(oscs_[i]->Value()) * levels_[i]) >> 8;
+            value += (static_cast<int32_t>(input_buffer_[i]) * levels_[i]) >> 8;
         }
 
         return value;
     }
 
+    void set_input(int16_t value, size_t pos) {
+        assert(pos < MIXER_SIZE);
+
+        input_buffer_[pos] = value;
+    }
+
 private:
-    Osc* oscs_[MIXER_SIZE];
     uint8_t levels_[MIXER_SIZE];
+    int16_t input_buffer_[MIXER_SIZE];
 };
 
 }

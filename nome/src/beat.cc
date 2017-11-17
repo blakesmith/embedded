@@ -24,7 +24,6 @@ Beat::Beat(const uint32_t sample_rate,
               {OscShape::SIN, sample_rate, DOWNBEAT_FREQ}
           }),
       envelope_(control_rate, 255, 1, 20, 0, 225, 0),
-      mixer_(osc_, BEAT_N_OSC),
       monitor_(&total_beats_) {
     SetDownbeat(downbeat_);
     uint8_t levels[BEAT_N_OSC] = {200, 55};
@@ -47,13 +46,14 @@ void Beat::SetDownbeat(uint8_t downbeat) {
 
 void Beat::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
     for (size_t i = 0; i < frames; i++) {
-        for (size_t j = 0; j < channel_count; j++) {
-            int16_t sample = envelope_.Apply(mixer_.Value());
-            buffer[i*channel_count+j] = sample;
-        }
-
         for (size_t j = 0; j < BEAT_N_OSC; j++) {
+            mixer_.set_input(envelope_.Apply(osc_[j].Value()), j);
             osc_[j].Tick();
+        }
+        int16_t sample = mixer_.Value();
+
+        for (size_t j = 0; j < channel_count; j++) {
+            buffer[i*channel_count+j] = sample;
         }
         
         phase_++;
