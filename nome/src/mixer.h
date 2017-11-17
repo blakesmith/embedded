@@ -11,12 +11,6 @@ class Mixer {
 public:
     Mixer() = default;
     
-    void SetLevels(uint8_t* levels, size_t size) {
-        assert(size == MIXER_SIZE);
-        
-        memcpy(levels_, levels, size * sizeof(uint8_t));
-    }
-    
     int16_t Value() {
         int16_t value = 0;
 
@@ -25,6 +19,12 @@ public:
         }
 
         return value;
+    }
+
+    void set_levels(uint8_t* levels, size_t size) {
+        assert(size == MIXER_SIZE);
+
+        memcpy(levels_, levels, size * sizeof(uint8_t));
     }
 
     void set_input(int16_t value, size_t pos) {

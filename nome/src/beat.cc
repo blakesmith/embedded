@@ -27,7 +27,7 @@ Beat::Beat(const uint32_t sample_rate,
       monitor_(&total_beats_) {
     SetDownbeat(downbeat_);
     uint8_t levels[BEAT_N_OSC] = {200, 55};
-    mixer_.SetLevels(levels, BEAT_N_OSC);
+    mixer_.set_levels(levels, BEAT_N_OSC);
 }
 
 void Beat::SetBPM(uint16_t bpm) {
