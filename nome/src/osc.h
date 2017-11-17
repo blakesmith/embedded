@@ -16,8 +16,7 @@ class Osc {
 public:
     Osc(OscShape shape,
         const uint32_t sample_rate,
-        const uint16_t freq_hz,
-        const uint8_t amplitude);
+        const uint16_t freq_hz);
 
     ~Osc() = default;
 
@@ -31,7 +30,6 @@ private:
     OscShape shape_;
     const uint32_t sample_rate_;
     uint16_t freq_hz_;
-    uint8_t amplitude_;
 
     int16_t value_;
     uint32_t phase_;

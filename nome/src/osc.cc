@@ -76,12 +76,10 @@ static const int16_t sin_wavetable[] = {
 
 Osc::Osc(OscShape shape,
          const uint32_t sample_rate,
-         const uint16_t freq_hz,
-         const uint8_t amplitude)
+         const uint16_t freq_hz)
     : shape_(shape),
       sample_rate_(sample_rate),
       freq_hz_(freq_hz),
-      amplitude_(amplitude),
       phase_(0) {
     assign_lookup_table();
     compute_phase_increment();

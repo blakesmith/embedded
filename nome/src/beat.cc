@@ -20,8 +20,8 @@ Beat::Beat(const uint32_t sample_rate,
       total_beats_(0),
       phase_(0),
       osc_({
-              {OscShape::TRIANGLE, sample_rate, DOWNBEAT_FREQ, 50},
-              {OscShape::SIN, sample_rate, DOWNBEAT_FREQ, 50}
+              {OscShape::TRIANGLE, sample_rate, DOWNBEAT_FREQ},
+              {OscShape::SIN, sample_rate, DOWNBEAT_FREQ}
           }),
       envelope_(control_rate, 255, 1, 20, 0, 225, 0),
       mixer_(osc_, BEAT_N_OSC),
