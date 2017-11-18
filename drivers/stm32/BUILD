@@ -12,6 +12,12 @@ config_setting(
     }
 )
 
+STM_DRIVERS = [
+    "//third_party/STM/stm32f4:stm_cmsis",
+    "//third_party/STM/stm32f4:stm_cmsis_device",
+    "//third_party/STM/stm32f4:stm_std_periph",
+]
+
 COMMON_COPTS = select({
     ":target_breadboard": [
         "-fno-rtti",
@@ -36,11 +42,7 @@ cc_library(
         "gpio_bus.h",
     ],
     copts = COMMON_COPTS,
-    deps = [
-        "//third_party/STM:stm_cmsis",
-        "//third_party/STM:stm_cmsis_device",
-        "//third_party/STM:stm_std_periph",
-    ],
+    deps = STM_DRIVERS,
     visibility = ["//visibility:public"]
 )
 
@@ -53,10 +55,7 @@ cc_library(
         "i2s_transmitter.h",
     ],
     copts = COMMON_COPTS,
-    deps = [
-        "//third_party/STM:stm_cmsis",
-        "//third_party/STM:stm_cmsis_device",
-        "//third_party/STM:stm_std_periph",
+    deps = STM_DRIVERS + [
         ":gpio_common"
     ],
     visibility = ["//visibility:public"]
@@ -71,10 +70,7 @@ cc_library(
         "i2c_bus.h",
     ],
     copts = COMMON_COPTS,
-    deps = [
-        "//third_party/STM:stm_cmsis",
-        "//third_party/STM:stm_cmsis_device",
-        "//third_party/STM:stm_std_periph",
+    deps = STM_DRIVERS + [
         ":gpio_common"
     ],
     visibility = ["//visibility:public"]
