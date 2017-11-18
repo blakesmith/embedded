@@ -28,5 +28,5 @@ nome_linux:
 l1_drivers:
 	bazel build \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
-	--cpu=armeabi-v7a-m0 \
+	--cpu=armeabi-v7a-m3 \
 	//third_party/STM/stm32l1:stm_std_periph

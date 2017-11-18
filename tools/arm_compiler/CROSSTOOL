@@ -8,8 +8,8 @@ default_toolchain {
 }
 
 default_toolchain {
-  cpu: "armeabi-v7a-m0"
-  toolchain_identifier: "clang_linux_arm_m0"
+  cpu: "armeabi-v7a-m3"
+  toolchain_identifier: "clang_linux_arm_m3"
 }
 
 default_toolchain {
@@ -176,7 +176,7 @@ toolchain {
   target_libc: "glibc_2.19"
   target_cpu: "armeabi-v7a"
   target_system_name: "arm_a15"
-  toolchain_identifier: "clang_linux_arm_m0"
+  toolchain_identifier: "clang_linux_arm_m3"
 
   tool_path { name: "ar" path: "arm_none_gcc/arm-none-eabi-ar" }
   tool_path { name: "compat-ld" path: "arm_none_gcc/arm-none-eabi-ld" }
@@ -194,7 +194,7 @@ toolchain {
   tool_path { name: "objdump" path: "arm_none_gcc/arm-none-eabi-objdump" }
   tool_path { name: "strip" path: "arm_none_gcc/arm-none-eabi-strip" }
 
-  compiler_flag: "-mcpu=cortex-m0"
+  compiler_flag: "-mcpu=cortex-m3"
   compiler_flag: "-mthumb" 
   compiler_flag: "-fdata-sections"
   compiler_flag: "-ffunction-sections"
