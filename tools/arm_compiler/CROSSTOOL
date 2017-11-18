@@ -1,10 +1,15 @@
 major_version: "local"
 minor_version: ""
-default_target_cpu: "armeabi-v7a"
+default_target_cpu: "armeabi-v7a-m4"
 
 default_toolchain {
-  cpu: "armeabi-v7a"
-  toolchain_identifier: "clang_linux_arm"
+  cpu: "armeabi-v7a-m4"
+  toolchain_identifier: "clang_linux_arm_m4"
+}
+
+default_toolchain {
+  cpu: "armeabi-v7a-m0"
+  toolchain_identifier: "clang_linux_arm_m0"
 }
 
 default_toolchain {
@@ -34,7 +39,7 @@ toolchain {
   target_libc: "glibc_2.19"
   target_cpu: "armeabi-v7a"
   target_system_name: "arm_a15"
-  toolchain_identifier: "clang_linux_arm"
+  toolchain_identifier: "clang_linux_arm_m4"
 
   tool_path { name: "ar" path: "arm_none_gcc/arm-none-eabi-ar" }
   tool_path { name: "compat-ld" path: "arm_none_gcc/arm-none-eabi-ld" }
@@ -56,6 +61,141 @@ toolchain {
   compiler_flag: "-mthumb" 
   compiler_flag: "-mfloat-abi=hard"
   compiler_flag: "-mfpu=fpv4-sp-d16"
+  compiler_flag: "-fdata-sections"
+  compiler_flag: "-ffunction-sections"
+  compiler_flag: "-fno-exceptions"
+
+  cxx_flag: "-I"
+  cxx_flag: "external/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/include/c++/6.3.1/arm-none-eabi"
+  cxx_flag: "-I"
+  cxx_flag: "external/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/include/c++/6.3.1"
+  cxx_flag: "-I"
+  cxx_flag: "external/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/libc/usr/include"
+  cxx_flag: "-std=c++11"
+
+  cxx_builtin_include_directory: "%package(@com_arm_developer_toolchain_gcc_6_2//include)%"
+  cxx_builtin_include_directory: "%package(@com_arm_developer_toolchain_gcc_6_2//arm-none-eabi/include)%"
+  cxx_builtin_include_directory: "%package(@com_arm_developer_toolchain_gcc_6_2//lib/gcc/arm-none-eabi/6.3.1/include)%"
+
+  linker_flag: "-mcpu=cortex-m4"
+  linker_flag: "-mthumb"
+  linker_flag: "-mfloat-abi=hard" 
+  linker_flag: "-mfpu=fpv4-sp-d16"
+  #linker_flag: "-specs=nano.specs"
+  linker_flag: "-specs=nosys.specs"
+
+  #linker_flag: "-Lexternal/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/lib/hard/"
+  #linker_flag: "-Lexternal/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/lib/thumb/"
+  #linker_flag: "-Lexternal/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/lib/"
+  #linker_flag: "-Lexternal/com_arm_developer_toolchain_gcc_6_2/lib/gcc/arm-none-eabi/6.3.1/"
+  #linker_flag: "-Bexternal/com_arm_developer_toolchain_gcc_6_2/arm-none-eabi/bin"
+
+  # Anticipated future default.
+  # This makes GCC and Clang do what we want when called through symlinks.
+  unfiltered_cxx_flag: "-no-canonical-prefixes"
+  linker_flag: "-no-canonical-prefixes"
+
+  # Make C++ compilation deterministic. Use linkstamping instead of these
+  # compiler symbols.
+  unfiltered_cxx_flag: "-Wno-builtin-macro-redefined"
+  unfiltered_cxx_flag: "-D__DATE__=\"redacted\""
+  unfiltered_cxx_flag: "-D__TIMESTAMP__=\"redacted\""
+  unfiltered_cxx_flag: "-D__TIME__=\"redacted\""
+
+  # Security hardening on by default.
+  # Conservative choice; -D_FORTIFY_SOURCE=2 may be unsafe in some cases.
+  # We need to undef it before redefining it as some distributions now have
+  # it enabled by default.
+  #compiler_flag: "-fno-stack-protector"
+
+  # Enable coloring even if there's no attached terminal. Bazel removes the
+  # escape sequences if --nocolor is specified.
+  #compiler_flag: "-fdiagnostics-color=always"
+
+  # All warnings are enabled. Maybe enable -Werror as well?
+  compiler_flag: "-Wall"
+  # Enable a few more warnings that aren't part of -Wall.
+  compiler_flag: "-Wunused-but-set-parameter"
+  # But disable some that are problematic.
+  compiler_flag: "-Wno-free-nonheap-object" # has false positives
+
+  # Keep stack frames for debugging, even in opt mode.
+  #compiler_flag: "-fno-omit-frame-pointer"
+
+  #compiler_flag: "-D__weak=\"__attribute__((weak))\"" 
+  compiler_flag: "-D__packed=\"__attribute__((__packed__))\""
+
+  # Stamp the binary with a unique identifier.
+  linker_flag: "-Wl,--gc-sections"
+
+  compiler_flag: "-Og"
+
+  compilation_mode_flags {
+    mode: DBG
+    # Enable debug symbols.
+    compiler_flag: "-g"
+    compiler_flag: "-gdwarf-2"
+  }
+  compilation_mode_flags {
+    mode: OPT
+    # No debug symbols.
+    # Maybe we should enable https://gcc.gnu.org/wiki/DebugFission for opt or
+    # even generally? However, that can't happen here, as it requires special
+    # handling in Bazel.
+    compiler_flag: "-g0"
+
+    # Conservative choice for -O
+    # -O3 can increase binary size and even slow down the resulting binaries.
+    # Profile first and / or use FDO if you need better performance than this.
+    #compiler_flag: "-Os"
+
+    # Disable assertions
+    compiler_flag: "-DNDEBUG"
+    compiler_flag: "-fmessage-length=0"
+    # Removal of unused code and data at link time (can this increase binary size in some cases?).
+    compiler_flag: "-ffunction-sections"
+    compiler_flag: "-fdata-sections"
+    linker_flag: "-Wl,--gc-sections"
+  }
+}
+
+toolchain {
+  abi_version: "gcc"
+  abi_libc_version: "glibc_2.19"
+  builtin_sysroot: ""
+  compiler: "gcc"
+  host_system_name: "armeabi-v7a"
+  needsPic: false
+  supports_gold_linker: false
+  supports_incremental_linker: false
+  supports_fission: false
+  supports_interface_shared_objects: false
+  supports_normalizing_ar: true
+  supports_start_end_lib: false
+  supports_thin_archives: true
+  target_libc: "glibc_2.19"
+  target_cpu: "armeabi-v7a"
+  target_system_name: "arm_a15"
+  toolchain_identifier: "clang_linux_arm_m0"
+
+  tool_path { name: "ar" path: "arm_none_gcc/arm-none-eabi-ar" }
+  tool_path { name: "compat-ld" path: "arm_none_gcc/arm-none-eabi-ld" }
+  tool_path { name: "cpp" path: "arm_none_gcc/arm-none-eabi-gcc" }
+  tool_path { name: "dwp" path: "arm_none_gcc/arm-none-eabi-dwp" }
+  tool_path { name: "gcc" path: "arm_none_gcc/arm-none-eabi-gcc" }
+  tool_path { name: "gcov" path: "arm-frc-none-eabi/arm-frc-none-eabi-gcov-4.9" }
+  # C(++) compiles invoke the compiler (as that is the one knowing where
+  # to find libraries), but we provide LD so other rules can invoke the linker.
+  tool_path { name: "ld" path: "arm_none_gcc/arm-none-eabi-ld" }
+  tool_path { name: "nm" path: "arm_none_gcc/arm-none-eabi-nm" }
+  tool_path { name: "objcopy" path: "arm_none_gcc/arm-none-eabi-objcopy" }
+  objcopy_embed_flag: "-I"
+  objcopy_embed_flag: "binary"
+  tool_path { name: "objdump" path: "arm_none_gcc/arm-none-eabi-objdump" }
+  tool_path { name: "strip" path: "arm_none_gcc/arm-none-eabi-strip" }
+
+  compiler_flag: "-mcpu=cortex-m0"
+  compiler_flag: "-mthumb" 
   compiler_flag: "-fdata-sections"
   compiler_flag: "-ffunction-sections"
   compiler_flag: "-fno-exceptions"
