@@ -1,6 +1,6 @@
 #include "drivers/stm32/rtc.h"
 
-stm32::RTC rtc;
+stm32::RTClock rtc;
 
 void Init() {
     rtc.Init();

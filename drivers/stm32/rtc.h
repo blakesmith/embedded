@@ -3,10 +3,10 @@
 
 namespace stm32 {
 
-class RTC {
+class RTClock {
 public:
-    RTC() = default;
-    ~RTC() = default;
+    RTClock() = default;
+    ~RTClock() = default;
     
     void Init();
 };
