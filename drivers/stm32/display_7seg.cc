@@ -13,6 +13,8 @@ static const uint8_t NUMBER_TABLE[] = {
     0x6F, // 9
 };
 
+static constexpr uint8_t MAX_DIGITS = 8;
+
 static uint16_t u16pow(uint8_t base, uint8_t exp) {
     uint16_t p = base;
     for (uint8_t i = 0; i < exp-1; i++) {
@@ -27,12 +29,9 @@ Display7Seg::Display7Seg(I2CBus& i2c_bus,
                          uint8_t first_digit_register)
     : i2c_bus_(i2c_bus),
       device_address_(device_address),
-      n_digits_(n_digits),
-      first_digit_register_(first_digit_register) {
-    if (n_digits_ > 8) {
-        n_digits_ = 8;
-    }
-}
+      n_digits_(n_digits > MAX_DIGITS ? MAX_DIGITS : n_digits),
+      first_digit_register_(first_digit_register)
+{}
 
 // Set a single number 1 - 9, in the display. Value number positions are 0, 1, 3, 4. Position 2 is the colon.
 void Display7Seg::SetNumber(uint8_t pos, uint8_t number, bool dot) {

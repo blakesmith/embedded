@@ -27,9 +27,9 @@ public:
 
 protected:
     I2CBus& i2c_bus_;
-    uint8_t device_address_;
-    uint8_t n_digits_;
-    uint8_t first_digit_register_;
+    const uint8_t device_address_;
+    const uint8_t n_digits_;
+    const uint8_t first_digit_register_;
     
     uint16_t display_buffer_[4];
 };
