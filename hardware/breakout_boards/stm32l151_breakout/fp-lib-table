@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name fci)(type KiCad)(uri /home/blake/projects/stm32/hardware/footprints/fci.pretty)(options "")(descr ""))
+)

@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name custom_ic)(type Legacy)(uri /home/blake/projects/stm32/hardware/components/custom_ic.lib)(options "")(descr ""))
+  (lib (name stm32l151_breakout-rescue)(type Legacy)(uri ${KIPRJMOD}/stm32l151_breakout-rescue.lib)(options "")(descr ""))
+)
