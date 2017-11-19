@@ -1,5 +1,8 @@
 #+TITLE: Bill of Materials
 
-| Name          | Link                                                                                            | Quantity |   |   |
-|---------------+-------------------------------------------------------------------------------------------------+----------+---+---|
-| STM32L151C8T6 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32L151C8T6/497-11190-ND/2640836 | 1        |   |   |
+| Name                                    | KiCad BOM | Quantity | Part Number      |      |                                                                                                 |
+|-----------------------------------------+-----------+----------+------------------+------+-------------------------------------------------------------------------------------------------|
+| STM32L151C8T6                           |           |        1 | 497-11190-ND     | 4.75 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32L151C8T6/497-11190-ND/2640836 |
+| LTP-3784G LED 7-segment 4-Digit display |           |        2 | 160-1547-5-ND    | 3.96 | https://www.digikey.com/product-detail/en/lite-on-inc/LTC-4727JS/160-1547-5-ND/408220           |
+| AS1115-BSST LED Driver                  |           |        1 | AS1115-BSSTCT-ND | 5.00 | https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597              |
+
