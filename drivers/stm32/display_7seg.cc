@@ -21,19 +21,22 @@ static uint16_t u16pow(uint8_t base, uint8_t exp) {
     return p;
 }
 
-static constexpr uint8_t N_POSITIONS = 5;
-static const uint16_t MAX_DISPLAY_NUMBER = u16pow(10, N_POSITIONS) - 1;
-
 Display7Seg::Display7Seg(I2CBus& i2c_bus,
                          uint8_t device_address,
+                         uint8_t n_digits,
                          uint8_t first_digit_register)
     : i2c_bus_(i2c_bus),
       device_address_(device_address),
-      first_digit_register_(first_digit_register) { }
+      n_digits_(n_digits),
+      first_digit_register_(first_digit_register) {
+    if (n_digits_ > 8) {
+        n_digits_ = 8;
+    }
+}
 
 // Set a single number 1 - 9, in the display. Value number positions are 0, 1, 3, 4. Position 2 is the colon.
 void Display7Seg::SetNumber(uint8_t pos, uint8_t number, bool dot) {
-    if (pos > N_POSITIONS || pos == 2) {
+    if (pos > n_digits_ || pos == 2) {
         pos = 0;
     }
     if (number > 9) {
@@ -47,21 +50,22 @@ void Display7Seg::SetNumber(uint8_t pos, uint8_t number, bool dot) {
 // number specified is greater than MAX_DISPLAY_NUMBER, set it to
 // MAX_DISPLAY_NUMBER.
 void Display7Seg::SetNumber(uint16_t number) {
-    if (number > MAX_DISPLAY_NUMBER) {
-        number = MAX_DISPLAY_NUMBER;
+    const uint16_t max_display_number = u16pow(10, n_digits_) - 1;
+    if (number > max_display_number) {
+        number = max_display_number;
     }
-    uint16_t scale = u16pow(10, N_POSITIONS-2);
+    uint16_t scale = u16pow(10, n_digits_-2);
     uint8_t last_value = 0;
     uint16_t remaining = number;
 
     // Special case 0, because of display padding
     if (number == 0) {
-        SetNumber(N_POSITIONS-1, 0, false);
+        SetNumber(n_digits_-1, 0, false);
         return;
     }
 
     bool non_zero_written = false;
-    for (size_t i = 0; i < N_POSITIONS; i++) {
+    for (size_t i = 0; i < n_digits_; i++) {
         if (i == 2) {
             // Skip colon position
             continue;
@@ -78,7 +82,7 @@ void Display7Seg::SetNumber(uint16_t number) {
 }
 
 void Display7Seg::SetChar(uint8_t pos, char ch) {
-    if (pos > N_POSITIONS || pos == 2) {
+    if (pos > n_digits_ || pos == 2) {
         pos = 0;
     }
     switch (ch) {
@@ -110,7 +114,7 @@ void Display7Seg::SetChar(uint8_t pos, char ch) {
 // Segment 0 is the middle LED, other segments move clockwise around the digit, starting at the top-most led (Top led = 1)
 // LED (Think: The middle bar on an 8). See a picture here: https://www.adafruit.com/product/880 ... Segment 0 = A.
 void Display7Seg::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
-    if (pos > N_POSITIONS || pos == 2) {
+    if (pos > n_digits_ || pos == 2) {
         pos = 0;
     }
     if (segment > 6) {
@@ -129,7 +133,7 @@ void Display7Seg::ToggleColon(bool on) {
 }
 
 void Display7Seg::Clear() {
-    for (size_t i = 0; i < N_POSITIONS; i++) {
+    for (size_t i = 0; i < n_digits_; i++) {
         display_buffer_[i] = 0;
     }
 }
@@ -137,7 +141,7 @@ void Display7Seg::Clear() {
 void Display7Seg::WriteDisplay() {
     i2c_bus_.WriteTransmitStart(device_address_);
     i2c_bus_.WriteRaw(first_digit_register_);
-    i2c_bus_.WriteRaw(display_buffer_, N_POSITIONS);
+    i2c_bus_.WriteRaw(display_buffer_, n_digits_);
     i2c_bus_.WriteTransmitStop();
 }
 

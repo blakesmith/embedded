@@ -12,12 +12,14 @@ static constexpr uint8_t HT16K33_BLINK_ON = 1;
 static constexpr uint8_t HT16K33_CMD_BRIGHTNESS = 0xE0;
 
 HT16K33Display::HT16K33Display(I2CBus& i2c_bus,
+                               uint8_t n_digits,
                                uint8_t device_address)
-    : Display7Seg(i2c_bus, device_address, FIRST_DIGIT_REGISTER)
+    : Display7Seg(i2c_bus, n_digits, device_address, FIRST_DIGIT_REGISTER)
 {}
 
-HT16K33Display::HT16K33Display(I2CBus& i2c_bus)
-    : Display7Seg(i2c_bus, DEFAULT_DEVICE_ADDRESS, FIRST_DIGIT_REGISTER)
+HT16K33Display::HT16K33Display(I2CBus& i2c_bus,
+                               uint8_t n_digits)
+    : Display7Seg(i2c_bus, n_digits, DEFAULT_DEVICE_ADDRESS, FIRST_DIGIT_REGISTER)
 {}
 
 

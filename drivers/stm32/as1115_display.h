@@ -6,8 +6,10 @@
 class AS1115Display : public Display7Seg {
 public:
     AS1115Display(I2CBus& i2c_bus,
+                  uint8_t n_digits,
                   uint8_t device_address);
-    AS1115Display(I2CBus& i2c_bus);
+    AS1115Display(I2CBus& i2c_bus,
+                  uint8_t n_digits);
     ~AS1115Display() = default;
 
     void Init();

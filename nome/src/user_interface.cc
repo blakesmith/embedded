@@ -8,6 +8,7 @@ static const UserInterface::ScreenState ALL_SCREENS[] = {
     UserInterface::ScreenState::SCREEN_STATE_VOLUME
 };
 
+static constexpr uint8_t N_DIGITS = 5;
 static const size_t ALL_SCREENS_SIZE = sizeof(ALL_SCREENS) / sizeof(UserInterface::ScreenState);
 
 UserInterface::UserInterface(
@@ -20,7 +21,7 @@ UserInterface::UserInterface(
       knob_(pinout.encoder_clockwise,
             pinout.encoder_counter_clockwise,
             pinout.encoder_button),
-      display_(pinout.i2c_bus),
+      display_(pinout.i2c_bus, N_DIGITS),
       settings_(settings),
       beat_monitor_(beat_monitor),
       knob_offset_(0),

@@ -8,6 +8,7 @@
 class Display7Seg {
 public:
     Display7Seg(I2CBus& i2c_bus,
+                uint8_t n_digits,
                 uint8_t device_address,
                 uint8_t first_digit_register);
 
@@ -27,6 +28,7 @@ public:
 protected:
     I2CBus& i2c_bus_;
     uint8_t device_address_;
+    uint8_t n_digits_;
     uint8_t first_digit_register_;
     
     uint16_t display_buffer_[4];
