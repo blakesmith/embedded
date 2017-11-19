@@ -30,4 +30,4 @@ clock_stm32:
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
 	--cpu=armeabi-v7a-m3 \
 	--define TARGET=stm32l1 \
-	//clock:clock_stm32
+	//clock:clock

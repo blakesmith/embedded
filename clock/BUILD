@@ -20,3 +20,10 @@ cc_binary(
     ],
     linkstatic = 1
 )
+
+load("//tools/arm_compiler:raw_binary.bzl", "hex_binary")
+
+hex_binary(
+    name = "clock",
+    src = ":clock_stm32"
+)
