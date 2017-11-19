@@ -1,0 +1,5 @@
+#+TITLE: Bill of Materials
+
+| Name          | Link                                                                                            | Quantity |   |   |
+|---------------+-------------------------------------------------------------------------------------------------+----------+---+---|
+| STM32L151C8T6 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32L151C8T6/497-11190-ND/2640836 | 1        |   |   |

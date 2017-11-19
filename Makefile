@@ -25,8 +25,9 @@ nome_linux:
 	--define TARGET=linux \
 	//nome:nome_linux
 
-l1_drivers:
+clock_stm32:
 	bazel build \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
 	--cpu=armeabi-v7a-m3 \
-	//third_party/STM/stm32l1:stm_std_periph
+	--define TARGET=stm32l1 \
+	//clock:clock_stm32

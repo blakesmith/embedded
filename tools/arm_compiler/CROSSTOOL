@@ -212,7 +212,7 @@ toolchain {
   cxx_builtin_include_directory: "%package(@com_arm_developer_toolchain_gcc_6_2//arm-none-eabi/include)%"
   cxx_builtin_include_directory: "%package(@com_arm_developer_toolchain_gcc_6_2//lib/gcc/arm-none-eabi/6.3.1/include)%"
 
-  linker_flag: "-mcpu=cortex-m4"
+  linker_flag: "-mcpu=cortex-m3"
   linker_flag: "-mthumb"
   linker_flag: "-mfloat-abi=hard" 
   linker_flag: "-mfpu=fpv4-sp-d16"

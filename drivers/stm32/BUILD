@@ -12,11 +12,30 @@ config_setting(
     }
 )
 
-STM_DRIVERS = [
-    "//third_party/STM/stm32f4:stm_cmsis",
-    "//third_party/STM/stm32f4:stm_cmsis_device",
-    "//third_party/STM/stm32f4:stm_std_periph",
-]
+config_setting(
+    name = "target_stm32l1",
+    define_values = {
+        "TARGET": "stm32l1"
+    }
+)
+
+STM_DRIVERS = select({
+    ":target_breadboard": [
+        "//third_party/STM/stm32f4:stm_cmsis",
+        "//third_party/STM/stm32f4:stm_cmsis_device",
+        "//third_party/STM/stm32f4:stm_std_periph",
+    ],
+    ":target_prototype": [
+        "//third_party/STM/stm32f4:stm_cmsis",
+        "//third_party/STM/stm32f4:stm_cmsis_device",
+        "//third_party/STM/stm32f4:stm_std_periph",
+    ],
+    ":target_stm32l1": [
+        "//third_party/STM/stm32l1:stm_cmsis",
+        "//third_party/STM/stm32l1:stm_cmsis_device",
+        "//third_party/STM/stm32l1:stm_std_periph",
+    ]
+})
 
 COMMON_COPTS = select({
     ":target_breadboard": [
@@ -28,6 +47,10 @@ COMMON_COPTS = select({
         "-fno-rtti",
         "-DSTM32F413_423xx",
         "-DTARGET_PROTOTYPE"
+    ],
+    ":target_stm32l1": [
+        "-fno-rtti",
+        "-DSTM32L1XX_MD"
     ]
 })
 
@@ -156,3 +179,15 @@ cc_library(
     visibility = ["//visibility:public"]
 )
 
+cc_library(
+    name = "rtc",
+    srcs = [
+        "rtc.cc"
+    ],
+    hdrs = [
+        "rtc.h"
+    ],
+    copts = COMMON_COPTS,
+    deps = STM_DRIVERS,
+    visibility = ["//visibility:public"]
+)
