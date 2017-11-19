@@ -21,4 +21,24 @@ void RTClock::Init() {
     RTC_Init(&rcc_init);
 }
 
+void RTClock::GetTime(Time* time) {
+    RTC_TimeTypeDef get_time;
+
+    RTC_GetTime(RTC_Format_BIN, &get_time);
+    time->hour = get_time.RTC_Hours;
+    time->minute = get_time.RTC_Minutes;
+    time->second = get_time.RTC_Seconds;
+    time->am_pm = get_time.RTC_H12 == RTC_H12_AM ? AM_PM::AM : AM_PM::PM;
+}
+
+void RTClock::SetTime(Time* time) {
+    RTC_TimeTypeDef set_time;
+
+    set_time.RTC_Hours = time->hour;
+    set_time.RTC_Minutes = time->minute;
+    set_time.RTC_Seconds = time->second;
+    set_time.RTC_H12 = time->am_pm == AM_PM::AM ? RTC_H12_AM : RTC_H12_PM;
+    RTC_SetTime(RTC_Format_BIN, &set_time);
+}
+
 }
