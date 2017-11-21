@@ -105,10 +105,6 @@ $EndComp
 NoConn ~ 4750 2950
 NoConn ~ 4750 3050
 NoConn ~ 4750 3150
-Text Label 2950 2750 0    60   ~ 0
-7SEG_SDA
-Text Label 2950 2850 0    60   ~ 0
-7SEG_SCL
 Text Notes 10900 7650 0    60   ~ 12
 Status LED
 $Comp
@@ -209,4 +205,58 @@ Wire Wire Line
 Connection ~ 2750 4250
 Text Notes 14650 13150 0    60   ~ 0
 A
+Connection ~ 2850 2750
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5A14990E
+P 2850 1850
+F 0 "#PWR?" H 2850 1700 50  0001 C CNN
+F 1 "+3V3" H 2865 2023 50  0000 C CNN
+F 2 "" H 2850 1850 50  0001 C CNN
+F 3 "" H 2850 1850 50  0001 C CNN
+	1    2850 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5A14993F
+P 3050 1850
+F 0 "#PWR?" H 3050 1700 50  0001 C CNN
+F 1 "+3V3" H 3065 2023 50  0000 C CNN
+F 2 "" H 3050 1850 50  0001 C CNN
+F 3 "" H 3050 1850 50  0001 C CNN
+	1    3050 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L device:R R2
+U 1 1 5A14998C
+P 2850 2100
+F 0 "R2" H 2920 2146 50  0000 L CNN
+F 1 "10K" H 2920 2055 50  0000 L CNN
+F 2 "" V 2780 2100 50  0001 C CNN
+F 3 "" H 2850 2100 50  0001 C CNN
+	1    2850 2100
+	1    0    0    -1  
+$EndComp
+$Comp
+L device:R R3
+U 1 1 5A149A1D
+P 3050 2100
+F 0 "R3" H 3120 2146 50  0000 L CNN
+F 1 "10K" H 3120 2055 50  0000 L CNN
+F 2 "" V 2980 2100 50  0001 C CNN
+F 3 "" H 3050 2100 50  0001 C CNN
+	1    3050 2100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2850 1850 2850 1950
+Wire Wire Line
+	2850 2250 2850 2750
+Wire Wire Line
+	3050 1850 3050 1950
+Wire Wire Line
+	3050 2250 3050 2850
+Connection ~ 3050 2850
 $EndSCHEMATC
