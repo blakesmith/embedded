@@ -1,0 +1,12 @@
+#+TITLE: Bill of Materials
+
+| Name                                    | KiCad BOM | Quantity | Part Number      |      |                                                                                               |
+|-----------------------------------------+-----------+----------+------------------+------+-----------------------------------------------------------------------------------------------|
+| AS1115-BSST LED Driver                  |           |        1 | AS1115-BSSTCT-ND | 5.00 | https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597            |
+| LTP-3784G LED 7-segment 4-Digit display |           |        1 | 160-1547-5-ND    | 3.96 | https://www.digikey.com/product-detail/en/lite-on-inc/LTC-4727JS/160-1547-5-ND/408220         |
+| 10k ohm 0805 resistor                   |           |        3 | 311-10KARCT-ND   | 0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805JR-0710KL/311-10KARCT-ND/731188         |
+| 0.1uF 0805 cap                          |           |        1 | 478-1395-1-ND    | 0.10 | https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427 |
+| Harwin 4-pin pin-header                 |           |        1 | 952-2265-ND      | 0.19 | https://www.digikey.com/product-detail/en/harwin-inc/M20-9990445/952-2265-ND/3728229          |
+
+
+
