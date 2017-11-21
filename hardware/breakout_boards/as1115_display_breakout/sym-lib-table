@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name nome)(type Legacy)(uri /home/blake/projects/stm32/nome/hardware/nome.lib)(options "")(descr ""))
+  (lib (name open-project)(type Legacy)(uri /home/blake/projects/stm32/nome/hardware/open-project.lib)(options "")(descr ""))
+)
