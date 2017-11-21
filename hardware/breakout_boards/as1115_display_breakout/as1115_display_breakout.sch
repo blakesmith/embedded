@@ -43,8 +43,6 @@ F 3 "" H 4300 4650 50  0001 C CNN
 	1    4300 4650
 	1    0    0    -1  
 $EndComp
-Text Label 4300 4600 0    60   ~ 0
-GND
 $Comp
 L device:R R1
 U 1 1 59EC64B4
@@ -107,8 +105,6 @@ $EndComp
 NoConn ~ 4750 2950
 NoConn ~ 4750 3050
 NoConn ~ 4750 3150
-Text Label 2200 2350 0    60   ~ 0
-3.3V
 Text Label 2950 2750 0    60   ~ 0
 7SEG_SDA
 Text Label 2950 2850 0    60   ~ 0

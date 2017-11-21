@@ -1,5 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:nome-cache
+LIBS:as1115_display_breakout-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -69,7 +69,7 @@ U 1 1 59EC78C2
 P 7900 3600
 F 0 "U2" H 6950 4050 50  0000 C CNN
 F 1 "LTC-4727JS" H 8670 4050 50  0000 C CNN
-F 2 "nome:LTC-4727" H 7900 3000 50  0001 C CNN
+F 2 "custom_display:LTC-4727" H 7900 3000 50  0001 C CNN
 F 3 "https://media.digikey.com/pdf/Data%20Sheets/Lite-On%20PDFs/LTC-4727JS.pdf" H 7520 3630 50  0001 C CNN
 F 4 "160-1547-5-ND" H 7900 3600 60  0001 C CNN "S1PN"
 F 5 "https://www.digikey.com/product-detail/en/lite-on-inc/LTC-4727JS/160-1547-5-ND/408220" H 7900 3600 60  0001 C CNN "S1PL"
