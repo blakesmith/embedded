@@ -1,0 +1,39 @@
+#+TITLE: Hardware Part Inventory
+
+| Name                              | Part #                | Bin | Quantity |
+|-----------------------------------+-----------------------+-----+----------|
+| Yageo 0805 R24.9                  | RC0805FR-0724R9L      | H1  |       10 |
+| Yageo 0805 R40.2                  | RC0805FR-0740R2L      | H2  |       20 |
+| Yageo 0805 R51.1                  | RC0805FR-0751R1L      | H3  |       10 |
+| Yageo 0805 R470                   | RC0805JR-07470RL      | H4  |       10 |
+| Yageo 0805 R1K                    | RC0805JR-071KL        | H5  |        4 |
+| Yageo 0805 R4.7K                  | RC0805FR-074K7L       | H6  |       10 |
+| Yageo 0805 R10K                   | RC0805JR-0710KL       | H7  |       17 |
+| Yageo 0805 R470K                  | RC0805JR-07470KL      | H8  |        6 |
+| AVX 0805 C0.022UF                 | 08051C223KAT2A        | F1  |       10 |
+| AVX 0805 C150PF                   | 08055A151JAT2A        | F2  |       10 |
+| AVX 0805 C0.1UF                   | 08055C104JAT2A        | F3  |       44 |
+| AVX 0805 C1UF                     | GRM21BR71C105KA01L    | F4  |       27 |
+| AVX 0805 C4.7UF                   | 0805ZD475KAT2A        | F5  |       20 |
+| AVX 0805 C10UF                    | 0805ZD106KAT2A        | F6  |       19 |
+| LITE-ON 0805 RED LED              | LTST-C171KRKT         | D1  |       13 |
+| LITE-ON 0805 GREEN LED            | LTST-C171GKT          | D2  |       10 |
+| LITE-ON 0805 BLUE LED             | LTST-C171TBKT         | D3  |       16 |
+| LITE-ON 0805 ORANGE LED           | LTST-C171AKT          | D4  |       10 |
+| Adafruit 7seg HT16K33 Backpack    | P877                  | D5  |        1 |
+| LITE-ON 7-seg 0.4" Yellow CC      | LTC-4727JS            | D5  |        1 |
+| Adafruit 8ohm 0.5W speaker        | P1890C                | C1  |        1 |
+| 8ohm 500MW speaker                | PSR-57N08A01-AQ       | C1  |        1 |
+| Silver 4-pin header               | M20-9990445           | C2  |        1 |
+| Conn Header 10pos (2x05), 2mm     | 302-S101              | C2  |        1 |
+| USB Micro B Connector             | 10118192-0001LF       | C3  |        1 |
+| JST Conn Header 2pos 2mm, (Power) | B2B-PH-SM4-TB(LF)(SN) | C2  |        1 |
+| 2.5MM stereo jack                 | SJ-2524-SMT-TR        | C4  |        1 |
+| PEC11 Rotary Encoder              | PC11R-4215K-S0024     | C5  |        2 |
+| STM32F413CGU6 MCU                 | STM32F413CGU6         | B1  |        1 |
+| LI-ION 4.2V Charge Controller     | MCP73831T-2ACI/OT     | B2  |        1 |
+| Linear Regulator 1.8V SOT223      | LD1117S18TR           | B2  |        1 |
+| Linear Regulator 3.3V SOT223      | LD1117S33TR           | B2  |        1 |
+| CS43L22-CNZ Audio DAC             | CS43L22-CNZ           | B3  |        1 |
+| 555 1MHZ Timer                    | ICM7555CBAZ-T         | B3  |        1 |
+| SPDT Switch                       | JS102011SAQN          | C6  |        1 |
