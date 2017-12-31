@@ -31,7 +31,7 @@ U 1 1 5A11F240
 P 8250 1500
 F 0 "J3" H 7810 1546 50  0000 R CNN
 F 1 "Conn_ARM_JTAG_SWD_10" H 7810 1455 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch2.54mm" H 8300 950 50  0001 L TNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch1.27mm" H 8300 950 50  0001 L TNN
 F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex_debug_connectors.pdf" V 7900 250 50  0001 C CNN
 	1    8250 1500
 	1    0    0    -1  
@@ -278,7 +278,7 @@ Wire Wire Line
 Wire Wire Line
 	5950 3950 6950 3950
 Wire Wire Line
-	8150 2100 8150 2250
+	8150 2100 8150 2200
 Wire Wire Line
 	8250 2200 8150 2200
 Connection ~ 8150 2200
@@ -293,9 +293,9 @@ Wire Wire Line
 Wire Wire Line
 	1000 6950 1000 7200
 Wire Wire Line
-	3800 6600 3800 6350
+	3800 6600 3800 6500
 Wire Wire Line
-	3800 6900 3800 7050
+	3800 6900 3800 7000
 Wire Wire Line
 	3800 6500 3650 6500
 Connection ~ 3800 6500
@@ -303,9 +303,9 @@ Wire Wire Line
 	3800 7000 3650 7000
 Connection ~ 3800 7000
 Wire Wire Line
-	4500 6600 4500 6350
+	4500 6600 4500 6500
 Wire Wire Line
-	4500 6900 4500 7050
+	4500 6900 4500 7000
 Wire Wire Line
 	4500 6500 4350 6500
 Connection ~ 4500 6500
@@ -313,9 +313,9 @@ Wire Wire Line
 	4500 7000 4350 7000
 Connection ~ 4500 7000
 Wire Wire Line
-	5250 6600 5250 6350
+	5250 6600 5250 6500
 Wire Wire Line
-	5250 6900 5250 7050
+	5250 6900 5250 7000
 Wire Wire Line
 	5250 6500 5100 6500
 Connection ~ 5250 6500
@@ -323,14 +323,14 @@ Wire Wire Line
 	5250 7000 5100 7000
 Connection ~ 5250 7000
 Wire Wire Line
-	6000 6600 6000 6350
+	6000 6600 6000 6500
 Wire Wire Line
-	6000 6900 6000 7050
+	6000 6900 6000 7000
 Wire Wire Line
-	5850 6500 6500 6500
+	5850 6500 6000 6500
 Connection ~ 6000 6500
 Wire Wire Line
-	5850 7000 6500 7000
+	5850 7000 6000 7000
 Connection ~ 6000 7000
 Wire Wire Line
 	5200 2600 5200 2000
@@ -353,9 +353,9 @@ Wire Wire Line
 Wire Wire Line
 	6500 6900 6500 7000
 Wire Wire Line
-	1300 6350 1900 6350
+	1300 6350 1800 6350
 Wire Wire Line
-	2500 6350 6000 6350
+	2500 6350 2550 6350
 Wire Wire Line
 	2800 6350 2800 5950
 Connection ~ 2800 6350
@@ -593,7 +593,7 @@ $EndComp
 Text Label 3100 6500 2    60   ~ 0
 VLCD
 Wire Wire Line
-	3250 6600 3250 6350
+	3250 6600 3250 6500
 Wire Wire Line
 	3250 6900 3250 7050
 Wire Wire Line
@@ -648,7 +648,7 @@ L device:R R1
 U 1 1 5A33DA6A
 P 2650 7050
 F 0 "R1" H 2720 7096 50  0000 L CNN
-F 1 "40" H 2720 7005 50  0000 L CNN
+F 1 "300" H 2720 7005 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 2580 7050 50  0001 C CNN
 F 3 "" H 2650 7050 50  0001 C CNN
 	1    2650 7050
@@ -663,4 +663,36 @@ Wire Wire Line
 Wire Wire Line
 	2550 4850 2550 6350
 Connection ~ 2550 6350
+Wire Wire Line
+	8150 2200 8150 2250
+Wire Wire Line
+	3800 6500 3800 6350
+Wire Wire Line
+	3800 7000 3800 7050
+Wire Wire Line
+	4500 6500 4500 6350
+Wire Wire Line
+	4500 7000 4500 7050
+Wire Wire Line
+	5250 6500 5250 6350
+Wire Wire Line
+	5250 7000 5250 7050
+Wire Wire Line
+	6000 6500 6000 6350
+Wire Wire Line
+	6000 6500 6500 6500
+Wire Wire Line
+	6000 7000 6000 7050
+Wire Wire Line
+	6000 7000 6500 7000
+Wire Wire Line
+	2800 6350 6000 6350
+Wire Wire Line
+	1800 6350 1900 6350
+Wire Wire Line
+	3250 6500 3250 6350
+Wire Wire Line
+	2650 6350 2800 6350
+Wire Wire Line
+	2550 6350 2650 6350
 $EndSCHEMATC
