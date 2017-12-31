@@ -3,13 +3,13 @@
 | Name                         | KiCad BOM | Quantity | Part Number            |      |                                                                                                             |
 |------------------------------+-----------+----------+------------------------+------+-------------------------------------------------------------------------------------------------------------|
 | STM32L152C8T6                |           |        1 | 497-11196-ND           | 5.03 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32L152C8T6/497-11196-ND/2640842             |
-| 10-pin header JTAG/SWD       |           |        1 | ED1543-ND              | 0.28 | https://www.digikey.com/product-detail/en/on-shore-technology-inc/302-S101/ED1543-ND/2178422                |
+| 10-pin header JTAG/SWD       |           |        1 | 609-3712-ND            | 0.64 | https://www.digikey.com/product-detail/en/amphenol-fci/20021111-00010T4LF/609-3712-ND/2209072               |
 | FCI Micro USB Connector      |           |        1 | 609-4613-1-ND          | 0.46 | https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378                |
 | LM1117 3.3V linear regulator |           |        1 | LM1117MP-3.3/NOPBCT-ND | 1.14 | https://www.digikey.com/product-detail/en/texas-instruments/LM1117MP-3.3-NOPB/LM1117MP-3.3-NOPBCT-ND/308024 |
 | 2x24 pin header              |           |        2 | 609-3222-ND            | 0.75 | https://www.digikey.com/product-detail/en/amphenol-fci/67996-424HLF/609-3222-ND/1878571                     |
 | 0.1uF 0805 cap               |           |        5 | 478-1395-1-ND          | 0.10 | https://www.digikey.com/product-detail/en/avx-corporation/08055C104KAT2A/478-1395-1-ND/564427               |
 | 10uf 0805 cap                |           |        1 | 478-5167-1-ND          | 0.16 | https://www.digikey.com/product-detail/en/avx-corporation/0805ZD106KAT2A/478-5167-1-ND/1913257              |
-| 40 ohm 0805 resistor         |           |        1 | 311-40.2CRCT-ND        | 0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-0740R2L/311-40.2CRCT-ND/730887                     |
+| 51.1 ohm 0805 resistor       |           |        1 | 311-51.1CRTR-ND        | 0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805FR-0751R1L/311-51.1CRCT-ND/730961                     |
 | LTST-C171TBKT LED 0805 Red   |           |        1 | 160-1427-1-ND          | 0.31 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800                    |
 
 
