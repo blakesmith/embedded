@@ -1394,7 +1394,7 @@
   (gr_text "Blake Smith\n" (at 57.15 63.5) (layer F.SilkS)
     (effects (font (size 0.75 0.75) (thickness 0.1875)))
   )
-  (gr_text "STM32L151C Breakout Board Rev. A" (at 41.91 63.5) (layer F.SilkS)
+  (gr_text "STM32L151C Breakout Board Rev. B" (at 41.91 63.5) (layer F.SilkS)
     (effects (font (size 0.75 0.75) (thickness 0.1875)))
   )
 
