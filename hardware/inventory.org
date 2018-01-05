@@ -26,14 +26,17 @@
 | 8ohm 500MW speaker                | PSR-57N08A01-AQ       | C1  |        1 |
 | Silver 4-pin header               | M20-9990445           | C2  |        1 |
 | Conn Header 10pos (2x05), 2mm     | 302-S101              | C2  |        1 |
-| USB Micro B Connector             | 10118192-0001LF       | C3  |        1 |
+| Conn Header 10pos (2x05), 1.27mm  | 20021111-00010T4LF    | C2  |        3 |
+| Conn Header 24pos (2x12)          | 67996-424HLF          | C2  |        6 |
+| USB Micro B Connector             | 10118192-0001LF       | C3  |        3 |
 | JST Conn Header 2pos 2mm, (Power) | B2B-PH-SM4-TB(LF)(SN) | C2  |        1 |
 | 2.5MM stereo jack                 | SJ-2524-SMT-TR        | C4  |        1 |
 | PEC11 Rotary Encoder              | PC11R-4215K-S0024     | C5  |        2 |
 | STM32F413CGU6 MCU                 | STM32F413CGU6         | B1  |        1 |
+| STM32L152C8T6 MCU                 | STM32L152C8T6         | B1  |        3 |
 | LI-ION 4.2V Charge Controller     | MCP73831T-2ACI/OT     | B2  |        1 |
 | Linear Regulator 1.8V SOT223      | LD1117S18TR           | B2  |        1 |
-| Linear Regulator 3.3V SOT223      | LD1117S33TR           | B2  |        1 |
+| Linear Regulator 3.3V SOT223      | LD1117S33TR           | B2  |        3 |
 | CS43L22-CNZ Audio DAC             | CS43L22-CNZ           | B3  |        1 |
 | 555 1MHZ Timer                    | ICM7555CBAZ-T         | B3  |        1 |
 | SPDT Switch                       | JS102011SAQN          | C6  |        1 |
