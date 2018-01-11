@@ -18,8 +18,14 @@ void Init() {
     display.Init();
 }
 
+void display_test() {
+    display.SetNumber(1234);
+    display.WriteDisplay();
+}
+
 int main() {
     Init();
+    display_test();
     
     while (true) {
     }
