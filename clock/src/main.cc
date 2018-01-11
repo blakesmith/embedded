@@ -5,9 +5,9 @@
 
 stm32::RTClock rtc;
 
-GPIOBus gpio(GPIOBus::Id::A);
+GPIOBus gpio(GPIOBus::Id::B);
 GPIOPin scl_pin(gpio, 6);
-GPIOPin sda_pin(gpio, 9);
+GPIOPin sda_pin(gpio, 7);
 I2CBus i2c(I2CBus::Id::ONE, scl_pin, sda_pin);
 HT16K33Display display(i2c, 5);
 
