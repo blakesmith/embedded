@@ -1,6 +1,12 @@
 #include "drivers/stm32/gpio_bus.h"
 
+#ifdef STM32F411xE
 #include "stm32f4xx_rcc.h"
+#endif
+
+#ifdef STM32L1XX_MD
+#include "stm32l1xx_rcc.h"
+#endif
 
 GPIOBus::GPIOBus(Id id)
     : bus_id_(id) {
@@ -12,7 +18,12 @@ bool GPIOBus::operator==(const GPIOBus& other) const {
 }
 
 void GPIOBus::Init() {
+#ifdef STM32F411xE
     RCC_AHB1PeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
+#endif
+#ifdef STM32L1XX_MD
+    RCC_AHBPeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
+#endif
 }
 
 uint32_t GPIOBus::ReadAll() {
@@ -36,11 +47,20 @@ GPIO_TypeDef* GPIOBus::lookup_gpio_typedef(Id id) {
 
 uint32_t GPIOBus::lookup_clock_for(Id id) {
     switch (id) {
+#ifdef STM32F411xE
         case Id::A: return RCC_AHB1Periph_GPIOA;
         case Id::B: return RCC_AHB1Periph_GPIOB;
         case Id::C: return RCC_AHB1Periph_GPIOC;
         case Id::D: return RCC_AHB1Periph_GPIOD;
         case Id::E: return RCC_AHB1Periph_GPIOE;
+#endif
+#ifdef STM32L1XX_MD
+        case Id::A: return RCC_AHBPeriph_GPIOA;
+        case Id::B: return RCC_AHBPeriph_GPIOB;
+        case Id::C: return RCC_AHBPeriph_GPIOC;
+        case Id::D: return RCC_AHBPeriph_GPIOD;
+        case Id::E: return RCC_AHBPeriph_GPIOE;
+#endif
         default: return 0;
     }
 }

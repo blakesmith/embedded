@@ -3,7 +3,14 @@
 
 #include <cstddef>
 
+#ifdef STM32F411xE
 #include "stm32f4xx_i2c.h"
+#endif
+
+#ifdef STM32L1XX_MD
+#include "stm32l1xx_i2c.h"
+#endif
+
 #include "gpio_pin.h"
 
 class I2CBus {

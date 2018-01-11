@@ -58,7 +58,9 @@ uint8_t GPIOPin::lookup_alternative_function_for(Af af) {
     switch (af) {
         case Af::I2C_1: return GPIO_AF_I2C1;
         case Af::I2C_2: return GPIO_AF_I2C2;
+#ifdef STM32F411xE
         case Af::I2C_3: return GPIO_AF_I2C3;
+#endif
         case Af::SPI_1: return GPIO_AF_SPI1;
         case Af::SPI_2: return GPIO_AF_SPI2;
         case Af::SPI_3: return GPIO_AF_SPI3;
@@ -94,8 +96,10 @@ GPIOPuPd_TypeDef GPIOPin::lookup_push_pull_for(PuPd pupd) {
 GPIOSpeed_TypeDef GPIOPin::lookup_speed_for(Speed speed) {
     switch (speed) {
         case Speed::TWO_MHZ: return GPIO_Speed_2MHz;
+#ifdef STM32F411xE
         case Speed::FIFTY_MHZ: return GPIO_Speed_50MHz;
-        default: return GPIO_Speed_50MHz;
+#endif
+        default: return GPIO_Speed_2MHz;
     }
 }
 

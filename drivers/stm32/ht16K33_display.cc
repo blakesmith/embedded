@@ -55,4 +55,3 @@ void HT16K33Display::enable_oscillator() {
     i2c_bus_.WriteRaw(0x21);
     i2c_bus_.WriteTransmitStop();
 }
-

@@ -1,7 +1,13 @@
 #ifndef GPIO_BUS_H_
 #define GPIO_BUS_H_
 
+#ifdef STM32F411xE
 #include "stm32f4xx_gpio.h"
+#endif
+
+#ifdef STM32L1XX_MD
+#include "stm32l1xx_gpio.h"
+#endif
 
 class GPIOBus {
 public:

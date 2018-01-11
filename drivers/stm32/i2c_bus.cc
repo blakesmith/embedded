@@ -1,6 +1,13 @@
 #include "drivers/stm32/i2c_bus.h"
 
+#ifdef STM32F411xE
 #include "stm32f4xx_rcc.h"
+#endif
+
+#ifdef STM32L1XX_MD
+#include "stm32l1xx_rcc.h"
+#endif
+
 
 #define I2C_WAIT_FOR_EVENT(I, E) {            \
         while (!I2C_CheckEvent(I, E));       \
@@ -108,7 +115,9 @@ uint32_t I2CBus::lookup_clock_for(Id id) {
     switch (id) {
         case Id::ONE: return RCC_APB1Periph_I2C1;
         case Id::TWO: return RCC_APB1Periph_I2C2;
+#ifdef STM32F411xE
         case Id::THREE: return RCC_APB1Periph_I2C3;
+#endif
         default: return 0;
     }
 }
@@ -117,7 +126,9 @@ GPIOPin::Af I2CBus::lookup_alternative_function_for(Id id) {
     switch (id) {
         case Id::ONE: return GPIOPin::Af::I2C_1;
         case Id::TWO: return GPIOPin::Af::I2C_2;
+#ifdef STM32F411xE
         case Id::THREE: return GPIOPin::Af::I2C_3;
+#endif
         default: return GPIOPin::Af::NONE;
     }
 }
@@ -126,7 +137,9 @@ I2C_TypeDef* I2CBus::lookup_i2cx_for(Id id) {
     switch (id) {
         case Id::ONE: return I2C1;
         case Id::TWO: return I2C2;
+#ifdef STM32F411xE
         case Id::THREE: return I2C3;
+#endif
         default: return nullptr;
     }
 }
