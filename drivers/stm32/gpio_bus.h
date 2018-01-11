@@ -1,13 +1,15 @@
 #ifndef GPIO_BUS_H_
 #define GPIO_BUS_H_
 
-#ifdef STM32F411xE
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
 #include "stm32f4xx_gpio.h"
 #endif
 
 #ifdef STM32L1XX_MD
 #include "stm32l1xx_gpio.h"
 #endif
+
+#include <cstdint>
 
 class GPIOBus {
 public:

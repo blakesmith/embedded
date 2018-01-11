@@ -1,6 +1,6 @@
 #include "drivers/stm32/gpio_bus.h"
 
-#ifdef STM32F411xE
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
 #include "stm32f4xx_rcc.h"
 #endif
 

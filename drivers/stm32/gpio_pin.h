@@ -1,7 +1,7 @@
 #ifndef GPIO_PIN_H_
 #define GPIO_PIN_H_
 
-#ifdef STM32F411xE
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
 #include "stm32f4xx_gpio.h"
 #endif
 

@@ -3,7 +3,7 @@
 
 #include <cstddef>
 
-#ifdef STM32F411xE
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
 #include "stm32f4xx_i2c.h"
 #endif
 
