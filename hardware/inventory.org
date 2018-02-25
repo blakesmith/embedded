@@ -40,5 +40,5 @@
 | CS43L22-CNZ Audio DAC             | CS43L22-CNZ           | B3  |        1 |
 | 555 1MHZ Timer                    | ICM7555CBAZ-T         | B3  |        1 |
 | SPDT Switch                       | JS102011SAQN          | C6  |        1 |
-| AS1115-BSST IC DVR 64LED 7SEG     | AS1115-BSSTCT-ND      | B1  |        4 |
+| AS1115-BSST IC DVR 64LED 7SEG     | AS1115-BSSTCT-ND      | B3  |        4 |
 
