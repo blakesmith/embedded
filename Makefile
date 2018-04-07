@@ -6,6 +6,13 @@ nome_flash:
 clean:
 	bazel clean
 
+display_test:
+	bazel build \
+	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
+	--cpu=armeabi-v7a-m4 \
+	--define TARGET=breadboard \
+	//test_project:test
+
 nome_breadboard:
 	bazel build \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \

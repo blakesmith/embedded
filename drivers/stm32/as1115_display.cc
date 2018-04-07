@@ -23,13 +23,13 @@ void AS1115Display::Init() {
     // Set scan limit, 4 digits
     set_scan_limit(0x04);
 
-    SetBrightness(15);
+    // SetBrightness(15);
 
-    // Use the hex decoder, instead of code-b. Set raw segments. Everything else default
-    set_features();
+    // // Use the hex decoder, instead of code-b. Set raw segments. Everything else default
+    // set_features();
 
-    Clear();
-    WriteDisplay();
+    // Clear();
+    // WriteDisplay();
 }
 
 void AS1115Display::set_scan_limit(uint8_t limit) {
