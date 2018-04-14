@@ -2,7 +2,7 @@
 
 OPENOCD=openocd
 OPENOCD_CONFIG=/usr/share/openocd/scripts/board/stm32f4discovery.cfg
-HEX=bazel-out/clang_linux_arm-fastbuild/bin/nome/nome_breadboard.hex
+HEX=bazel-bin/nome/nome.hex
 
 $OPENOCD -f $OPENOCD_CONFIG \
          -c "init" \

@@ -11,12 +11,12 @@ static constexpr uint8_t AS1115_CMD_FEATURE = 0x0E;
 AS1115Display::AS1115Display(I2CBus& i2c_bus,
                              uint8_t n_digits,
                              uint8_t device_address)
-    : Display7Seg(i2c_bus, n_digits, device_address, FIRST_DIGIT_REGISTER)
+    : Display7Seg(i2c_bus, device_address, n_digits, FIRST_DIGIT_REGISTER)
 {}
 
 AS1115Display::AS1115Display(I2CBus& i2c_bus,
                              uint8_t n_digits)
-    : Display7Seg(i2c_bus, n_digits, DEFAULT_DEVICE_ADDRESS, FIRST_DIGIT_REGISTER)
+    : Display7Seg(i2c_bus, DEFAULT_DEVICE_ADDRESS, n_digits, FIRST_DIGIT_REGISTER)
 {}
 
 void AS1115Display::Init() {

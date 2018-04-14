@@ -12,6 +12,7 @@ GPIOBus gpiod(GPIOBus::Id::D);
 
 GPIOPin scl_pin(gpiob, 6);
 GPIOPin sda_pin(gpiob, 9);
+
 GPIOPin ok_led(gpiod, 15);
 GPIOPin error_led(gpiod, 14);
 GPIOPin activity_led(gpiod, 13);
@@ -45,9 +46,12 @@ void UpdateDisplay() {
 int main() {
     Init();
 
-//    UpdateDisplay();
     status_led.SetOk(true);
-    while (true);
+    while (true) {
+        for (int i = 0; i < 1280000; i++);
+        UpdateDisplay();
+        count++;
+    }
 }
 
 extern "C" {
