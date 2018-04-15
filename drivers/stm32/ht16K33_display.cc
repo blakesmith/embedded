@@ -11,15 +11,36 @@ static constexpr uint8_t HT16K33_BLINK_ON = 1;
 
 static constexpr uint8_t HT16K33_CMD_BRIGHTNESS = 0xE0;
 
+static const uint8_t SYMBOL_TABLE[] = {
+    0x3F, // 0
+    0x06, // 1
+    0x5B, // 2
+    0x4F, // 3
+    0x66, // 4
+    0x6D, // 5
+    0x7D, // 6
+    0x07, // 7
+    0x7F, // 8
+    0x6F, // 9
+    0x02, // :
+    0x00, // am/pm - this display doesn't have it
+    0x7C, // b
+    0x5E, // d
+    0x73, // P
+    0x1C, // v
+    0x3F, // O
+    0x38, // L
+};
+
 HT16K33Display::HT16K33Display(I2CBus& i2c_bus,
                                uint8_t n_digits,
                                uint8_t device_address)
-    : Display7Seg(i2c_bus, device_address, n_digits, FIRST_DIGIT_REGISTER)
+    : Display7Seg(i2c_bus, device_address, n_digits, FIRST_DIGIT_REGISTER, SYMBOL_TABLE)
 {}
 
 HT16K33Display::HT16K33Display(I2CBus& i2c_bus,
                                uint8_t n_digits)
-    : Display7Seg(i2c_bus, DEFAULT_DEVICE_ADDRESS, n_digits, FIRST_DIGIT_REGISTER)
+    : Display7Seg(i2c_bus, DEFAULT_DEVICE_ADDRESS, n_digits, FIRST_DIGIT_REGISTER, SYMBOL_TABLE)
 {}
 
 

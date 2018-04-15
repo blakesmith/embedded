@@ -10,7 +10,8 @@ public:
     Display7Seg(I2CBus& i2c_bus,
                 uint8_t n_digits,
                 uint8_t device_address,
-                uint8_t first_digit_register);
+                uint8_t first_digit_register,
+                const uint8_t* symbol_table);
 
     ~Display7Seg() = default;
     
@@ -30,6 +31,7 @@ protected:
     const uint8_t device_address_;
     const uint8_t n_digits_;
     const uint8_t first_digit_register_;
+    const uint8_t* symbol_table_;
     
     uint16_t display_buffer_[4];
 };
