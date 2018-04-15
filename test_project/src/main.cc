@@ -94,6 +94,9 @@ static void CharTest(Display7Seg* display) {
 static void DotTest(Display7Seg* display) {
     display->Clear();
     display->ToggleColon(count % 2 == 0);
+    for (int i = 0; i < 5; i++) {
+        display->SetSegment(i, 0, false, count % 2 == 0);
+    }
     display->WriteDisplay();
 }
 
