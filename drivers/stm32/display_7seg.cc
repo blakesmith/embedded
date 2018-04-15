@@ -2,6 +2,27 @@
 
 static constexpr uint8_t MAX_DIGITS = 8;
 
+static const uint8_t SYMBOL_TABLE[] = {
+    0x3F, // 0
+    0x06, // 1
+    0x5B, // 2
+    0x4F, // 3
+    0x66, // 4
+    0x6D, // 5
+    0x7D, // 6
+    0x07, // 7
+    0x7F, // 8
+    0x6F, // 9
+    0x02, // :
+    0x00, // am/pm
+    0x7C, // b
+    0x5E, // d
+    0x73, // P
+    0x1C, // v
+    0x3F, // O
+    0x38, // L
+};
+
 static uint16_t u16pow(uint8_t base, uint8_t exp) {
     uint16_t p = base;
     for (uint8_t i = 0; i < exp-1; i++) {
@@ -15,15 +36,13 @@ Display7Seg::Display7Seg(I2CBus& i2c_bus,
                          uint8_t n_digits,
                          uint8_t first_digit_register,
                          const WriteMode write_mode,
-                         const SegmentEndianness segment_endianness,
-                         const uint8_t* symbol_table)
+                         const SegmentEndianness segment_endianness)
     : i2c_bus_(i2c_bus),
       device_address_(device_address),
       n_digits_(n_digits > MAX_DIGITS ? MAX_DIGITS : n_digits),
       first_digit_register_(first_digit_register),
       write_mode_(write_mode),
-      segment_endianness_(segment_endianness),
-      symbol_table_(symbol_table)
+      segment_endianness_(segment_endianness)
 {}
 
 // Set a single number 1 - 9, in the display. Value number positions are 0, 1, 3, 4. Position 2 is the colon.
@@ -34,7 +53,11 @@ void Display7Seg::SetNumber(uint8_t pos, uint8_t number, bool dot) {
     if (number > 9) {
         number = 0;
     }
-    uint8_t value = symbol_table_[number] | (dot << 7);
+    uint32_t value = SYMBOL_TABLE[number];
+    if (segment_endianness_ == SegmentEndianness::BIG) {
+        value = __RBIT(value) >> 25;
+    }
+    value |= (dot << 7);
     display_buffer_[pos] = value;
 }
 
@@ -79,22 +102,22 @@ void Display7Seg::SetChar(uint8_t pos, char ch) {
     }
     switch (ch) {
         case 'b':
-            display_buffer_[pos] = symbol_table_[12];
+            display_buffer_[pos] = SYMBOL_TABLE[12];
             break;
         case 'd':
-            display_buffer_[pos] = symbol_table_[13];
+            display_buffer_[pos] = SYMBOL_TABLE[13];
             break;
         case 'P':
-            display_buffer_[pos] = symbol_table_[14];
+            display_buffer_[pos] = SYMBOL_TABLE[14];
             break;
         case 'v':
-            display_buffer_[pos] = symbol_table_[15];
+            display_buffer_[pos] = SYMBOL_TABLE[15];
             break;
         case 'O':
-            display_buffer_[pos] = symbol_table_[16];
+            display_buffer_[pos] = SYMBOL_TABLE[16];
             break;
         case 'L':
-            display_buffer_[pos] = symbol_table_[17];
+            display_buffer_[pos] = SYMBOL_TABLE[17];
             break;
         default:
             break;
@@ -122,7 +145,7 @@ void Display7Seg::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
 
 void Display7Seg::ToggleColon(bool on) {
     if (on) {
-        display_buffer_[2] = symbol_table_[10];
+        display_buffer_[2] = SYMBOL_TABLE[10];
     } else {
         display_buffer_[2] = 0;
     }

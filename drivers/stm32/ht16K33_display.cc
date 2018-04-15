@@ -40,8 +40,7 @@ HT16K33Display::HT16K33Display(I2CBus& i2c_bus,
                   n_digits,
                   FIRST_DIGIT_REGISTER,
                   Display7Seg::WriteMode::ONE_SHOT,
-                  Display7Seg::SegmentEndianness::LITTLE,
-                  SYMBOL_TABLE)
+                  Display7Seg::SegmentEndianness::LITTLE)
 {}
 
 HT16K33Display::HT16K33Display(I2CBus& i2c_bus,
@@ -51,8 +50,7 @@ HT16K33Display::HT16K33Display(I2CBus& i2c_bus,
                   n_digits,
                   FIRST_DIGIT_REGISTER,
                   Display7Seg::WriteMode::ONE_SHOT,
-                  Display7Seg::SegmentEndianness::LITTLE,
-                  SYMBOL_TABLE)
+                  Display7Seg::SegmentEndianness::LITTLE)
 {}
 
 

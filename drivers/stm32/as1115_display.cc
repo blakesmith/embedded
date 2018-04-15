@@ -10,27 +10,6 @@ static constexpr uint8_t AS1115_CMD_SCAN_LIMIT = 0x0B;
 static constexpr uint8_t AS1115_CMD_SHUTDOWN = 0x0C;
 static constexpr uint8_t AS1115_CMD_FEATURE = 0x0E;
 
-static const uint8_t SYMBOL_TABLE[] = {
-    0x7E, // 0
-    0x30, // 1
-    0x6D, // 2
-    0x79, // 3
-    0x33, // 4
-    0x5B, // 5
-    0x5F, // 6
-    0x70, // 7
-    0x7F, // 8
-    0x7B, // 9
-    0x60, // :
-    0x00, // am/pm
-    0x7C, // b
-    0x5E, // d
-    0x73, // P
-    0x1C, // v
-    0x3F, // O
-    0x38, // L
-};
-
 AS1115Display::AS1115Display(I2CBus& i2c_bus,
                              uint8_t n_digits,
                              uint8_t device_address)
@@ -39,8 +18,7 @@ AS1115Display::AS1115Display(I2CBus& i2c_bus,
                   n_digits,
                   FIRST_DIGIT_REGISTER,
                   Display7Seg::WriteMode::SEPARATE,
-                  Display7Seg::SegmentEndianness::BIG,
-                  SYMBOL_TABLE)
+                  Display7Seg::SegmentEndianness::BIG)
 {}
 
 AS1115Display::AS1115Display(I2CBus& i2c_bus,
@@ -50,8 +28,7 @@ AS1115Display::AS1115Display(I2CBus& i2c_bus,
                   n_digits,
                   FIRST_DIGIT_REGISTER,
                   Display7Seg::WriteMode::SEPARATE,
-                  Display7Seg::SegmentEndianness::BIG,
-                  SYMBOL_TABLE)
+                  Display7Seg::SegmentEndianness::BIG)
 {}
 
 void AS1115Display::Init() {

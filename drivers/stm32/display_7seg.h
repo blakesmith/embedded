@@ -22,8 +22,7 @@ public:
                 uint8_t device_address,
                 uint8_t first_digit_register,
                 const WriteMode write_mode,
-                const SegmentEndianness segment_endianess,
-                const uint8_t* symbol_table);
+                const SegmentEndianness segment_endianess);
 
     ~Display7Seg() = default;
     

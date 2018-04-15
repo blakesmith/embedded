@@ -60,8 +60,8 @@ static void SegmentTest(Display7Seg* display) {
 
 static void UpdateDisplay() {
     for (unsigned int i = 0; i < display_count; i++) {
-//        CountTest(displays[i]);
-        SegmentTest(displays[i]);
+        CountTest(displays[i]);
+//        SegmentTest(displays[i]);
     }
 }
 
