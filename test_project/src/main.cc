@@ -91,11 +91,18 @@ static void CharTest(Display7Seg* display) {
     display->WriteDisplay();
 }
 
+static void DotTest(Display7Seg* display) {
+    display->Clear();
+    display->ToggleColon(count % 2 == 0);
+    display->WriteDisplay();
+}
+
 static void UpdateDisplay() {
     for (unsigned int i = 0; i < display_count; i++) {
 //        CountTest(displays[i]);
 //        SegmentTest(displays[i]);
 //        CharTest(displays[i]);
+        DotTest(displays[i]);
     }
 }
 

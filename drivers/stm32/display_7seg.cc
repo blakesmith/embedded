@@ -13,7 +13,7 @@ static const uint8_t SYMBOL_TABLE[] = {
     0x07, // 7
     0x7F, // 8
     0x6F, // 9
-    0x02, // :
+    0x03, // :
     0x00, // am/pm
     0x7C, // b
     0x5E, // d
@@ -153,6 +153,8 @@ void Display7Seg::ToggleColon(bool on) {
     } else {
         display_buffer_[2] = 0;
     }
+
+    SWAP_ENDIANNESS(display_buffer_[2]);
 }
 
 void Display7Seg::Clear() {
