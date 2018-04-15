@@ -14,11 +14,13 @@ Display7Seg::Display7Seg(I2CBus& i2c_bus,
                          uint8_t device_address,
                          uint8_t n_digits,
                          uint8_t first_digit_register,
+                         const WriteMode write_mode,
                          const uint8_t* symbol_table)
     : i2c_bus_(i2c_bus),
       device_address_(device_address),
       n_digits_(n_digits > MAX_DIGITS ? MAX_DIGITS : n_digits),
       first_digit_register_(first_digit_register),
+      write_mode_(write_mode),
       symbol_table_(symbol_table)
 {}
 
@@ -127,11 +129,18 @@ void Display7Seg::Clear() {
 }
 
 void Display7Seg::WriteDisplay() {
-    for (int i = 0; i < n_digits_; i++) {
+    if (write_mode_ == WriteMode::ONE_SHOT) {
         i2c_bus_.WriteTransmitStart(device_address_);
-        i2c_bus_.WriteRaw(first_digit_register_ + i);
-        i2c_bus_.WriteRaw(display_buffer_[i]);
+        i2c_bus_.WriteRaw(first_digit_register_);
+        i2c_bus_.WriteRaw(display_buffer_, n_digits_);
         i2c_bus_.WriteTransmitStop();
+    } else if (write_mode_ == WriteMode::SEPARATE) {
+        for (int i = 0; i < n_digits_; i++) {
+            i2c_bus_.WriteTransmitStart(device_address_);
+            i2c_bus_.WriteRaw(first_digit_register_ + i);
+            i2c_bus_.WriteRaw(display_buffer_[i]);
+            i2c_bus_.WriteTransmitStop();
+        }
     }
 }
 

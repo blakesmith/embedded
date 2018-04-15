@@ -3,7 +3,7 @@
 
 #include "drivers/stm32/gpio_bus.h"
 #include "drivers/stm32/i2c_bus.h"
-//#include "drivers/stm32/ht16K33_display.h"
+#include "drivers/stm32/ht16K33_display.h"
 #include "drivers/stm32/as1115_display.h"
 #include "drivers/stm32/status_led.h"
 

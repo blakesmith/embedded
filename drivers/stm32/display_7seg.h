@@ -7,10 +7,16 @@
 
 class Display7Seg {
 public:
+    enum WriteMode {
+        ONE_SHOT,
+        SEPARATE
+    };
+
     Display7Seg(I2CBus& i2c_bus,
                 uint8_t n_digits,
                 uint8_t device_address,
                 uint8_t first_digit_register,
+                const WriteMode write_mode,
                 const uint8_t* symbol_table);
 
     ~Display7Seg() = default;
@@ -31,6 +37,7 @@ protected:
     const uint8_t device_address_;
     const uint8_t n_digits_;
     const uint8_t first_digit_register_;
+    const WriteMode write_mode_;
     const uint8_t* symbol_table_;
     
     uint16_t display_buffer_[4];
