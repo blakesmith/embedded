@@ -23,6 +23,12 @@ static const uint8_t SYMBOL_TABLE[] = {
     0x38, // L
 };
 
+#define SWAP_ENDIANNESS(v) { \
+        if (segment_endianness_ == SegmentEndianness::BIG) { \
+            v = __RBIT((v)) >> 25;                           \
+        } \
+    }
+
 static uint16_t u16pow(uint8_t base, uint8_t exp) {
     uint16_t p = base;
     for (uint8_t i = 0; i < exp-1; i++) {
@@ -54,9 +60,7 @@ void Display7Seg::SetNumber(uint8_t pos, uint8_t number, bool dot) {
         number = 0;
     }
     uint32_t value = SYMBOL_TABLE[number];
-    if (segment_endianness_ == SegmentEndianness::BIG) {
-        value = __RBIT(value) >> 25;
-    }
+    SWAP_ENDIANNESS(value);
     value |= (dot << 7);
     display_buffer_[pos] = value;
 }
@@ -122,6 +126,8 @@ void Display7Seg::SetChar(uint8_t pos, char ch) {
         default:
             break;
     }
+
+    SWAP_ENDIANNESS(display_buffer_[pos]);
 }
 
 
@@ -136,9 +142,7 @@ void Display7Seg::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
         segment = 0;
     }
     uint32_t value = (on << segment);
-    if (segment_endianness_ == SegmentEndianness::BIG) {
-        value = __RBIT(value) >> 25;
-    }
+    SWAP_ENDIANNESS(value);
     value |= (dot << 7);
     display_buffer_[pos] |= (uint8_t)value;
 }

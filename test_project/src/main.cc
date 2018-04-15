@@ -58,10 +58,44 @@ static void SegmentTest(Display7Seg* display) {
     display->WriteDisplay();
 }
 
+static void CharTest(Display7Seg* display) {
+    display->Clear();
+    uint32_t val = count % 6;
+    char ch = 0;
+    switch (val) {
+        case 0:
+            ch = 'b';
+            break;
+        case 1:
+            ch = 'd';
+            break;
+        case 2:
+            ch = 'P';
+            break;
+        case 3:
+            ch = 'v';
+            break;
+        case 4:
+            ch = 'O';
+            break;
+        case 5:
+            ch = 'L';
+            break;
+        default:
+            break;
+    }
+
+    for (int i = 0; i < 5; i++) {
+        display->SetChar(i, ch);
+    }
+    display->WriteDisplay();
+}
+
 static void UpdateDisplay() {
     for (unsigned int i = 0; i < display_count; i++) {
-        CountTest(displays[i]);
+//        CountTest(displays[i]);
 //        SegmentTest(displays[i]);
+//        CharTest(displays[i]);
     }
 }
 

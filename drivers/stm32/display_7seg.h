@@ -8,10 +8,12 @@
 class Display7Seg {
 public:
     enum WriteMode {
-        ONE_SHOT,
-        SEPARATE
+        ONE_SHOT, // Write all the display data in one i2c transmission
+        SEPARATE  // Break up each display digit into its own i2c transmission
     };
 
+    // Some displays flip the bits of each digit segment. Match the endianness, so we can
+    // set the correct segments, and flip numbers from the symbol table.
     enum SegmentEndianness {
         BIG,
         LITTLE
@@ -44,7 +46,6 @@ protected:
     const uint8_t first_digit_register_;
     const WriteMode write_mode_;
     const SegmentEndianness segment_endianness_;
-    const uint8_t* symbol_table_;
     
     uint16_t display_buffer_[4];
 };
