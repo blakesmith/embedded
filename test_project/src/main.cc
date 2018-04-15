@@ -37,7 +37,7 @@ void Init() {
 void UpdateDisplay() {
     display.Clear();
     display.ToggleColon(true);
-    display.SetNumber(count);
+    display.SetNumber(count % 10000);
     display.WriteDisplay();
 }
 
