@@ -3,8 +3,8 @@
 
 #include "drivers/stm32/gpio_bus.h"
 #include "drivers/stm32/i2c_bus.h"
-#include "drivers/stm32/ht16K33_display.h"
-//#include "drivers/stm32/as1115_display.h"
+//#include "drivers/stm32/ht16K33_display.h"
+#include "drivers/stm32/as1115_display.h"
 #include "drivers/stm32/status_led.h"
 
 GPIOBus gpiob(GPIOBus::Id::B);
@@ -18,8 +18,8 @@ GPIOPin error_led(gpiod, 14);
 GPIOPin activity_led(gpiod, 13);
 
 I2CBus i2c(I2CBus::Id::ONE, scl_pin, sda_pin);
-HT16K33Display display(i2c, 5);
-//AS1115Display display(i2c, 5);
+//HT16K33Display display(i2c, 5);
+AS1115Display display(i2c, 5);
 
 StatusLed status_led(ok_led, error_led, activity_led);
 
@@ -36,10 +36,8 @@ void Init() {
 
 void UpdateDisplay() {
     display.Clear();
-    for (size_t i = 0; i < 5; i++) {
-        uint8_t segment = count % 7;
-        display.SetSegment(i, segment, true, true);
-    }
+    display.ToggleColon(true);
+//    display.SetNumber(count);
     display.WriteDisplay();
 }
 
@@ -48,8 +46,8 @@ int main() {
 
     status_led.SetOk(true);
     while (true) {
-        for (int i = 0; i < 1280000; i++);
         UpdateDisplay();
+        for (int i = 0; i < 128000; i++);
         count++;
     }
 }

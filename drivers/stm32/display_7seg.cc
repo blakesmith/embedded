@@ -1,16 +1,29 @@
 #include "drivers/stm32/display_7seg.h"
 
+// static const uint8_t NUMBER_TABLE[] = {
+//     0x3F, // 0
+//     0x06, // 1
+//     0x5B, // 2
+//     0x4F, // 3
+//     0x66, // 4
+//     0x6D, // 5
+//     0x7D, // 6
+//     0x07, // 7
+//     0x7F, // 8
+//     0x6F, // 9
+// };
+
 static const uint8_t NUMBER_TABLE[] = {
-    0x3F, // 0
-    0x06, // 1
-    0x5B, // 2
-    0x4F, // 3
-    0x66, // 4
-    0x6D, // 5
-    0x7D, // 6
-    0x07, // 7
+    0x7E, // 0
+    0x30, // 1
+    0x6D, // 2
+    0x79, // 3
+    0x33, // 4
+    0x5B, // 5
+    0x5F, // 6
+    0x70, // 7
     0x7F, // 8
-    0x6F, // 9
+    0x7B, // 9
 };
 
 static constexpr uint8_t MAX_DIGITS = 8;
@@ -125,7 +138,7 @@ void Display7Seg::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
 
 void Display7Seg::ToggleColon(bool on) {
     if (on) {
-        display_buffer_[2] = 0x2;
+        display_buffer_[2] = 96;
     } else {
         display_buffer_[2] = 0;
     }
@@ -138,9 +151,11 @@ void Display7Seg::Clear() {
 }
 
 void Display7Seg::WriteDisplay() {
-    i2c_bus_.WriteTransmitStart(device_address_);
-    i2c_bus_.WriteRaw(first_digit_register_);
-    i2c_bus_.WriteRaw(display_buffer_, n_digits_);
-    i2c_bus_.WriteTransmitStop();
+    for (int i = 0; i < n_digits_; i++) {
+        i2c_bus_.WriteTransmitStart(device_address_);
+        i2c_bus_.WriteRaw(first_digit_register_ + i);
+        i2c_bus_.WriteRaw(display_buffer_[i]);
+        i2c_bus_.WriteTransmitStop();
+    }
 }
 

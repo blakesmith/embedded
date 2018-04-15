@@ -14,8 +14,11 @@ public:
 
     void Init();
     void SetBrightness(uint8_t brightness);
+    void SimpleWrite(uint8_t digit);
 
 private:
+    void wakeup();
+    void disable_decode();
     void set_scan_limit(uint8_t limit);
     void set_features();
 };
