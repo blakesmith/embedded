@@ -17,28 +17,43 @@ GPIOPin ok_led(gpiod, 15);
 GPIOPin error_led(gpiod, 14);
 GPIOPin activity_led(gpiod, 13);
 
-I2CBus i2c(I2CBus::Id::ONE, scl_pin, sda_pin);
-//HT16K33Display display(i2c, 5);
-AS1115Display display(i2c, 5);
-
 StatusLed status_led(ok_led, error_led, activity_led);
+
+I2CBus i2c(I2CBus::Id::ONE, scl_pin, sda_pin);
+AS1115Display display_as1115(i2c, 5);
+HT16K33Display display_ht16k(i2c, 5);
+
+Display7Seg* displays[] = {
+    &display_ht16k,
+    &display_as1115
+};
+
+static size_t display_count = sizeof(displays) / sizeof(Display7Seg*);
 
 volatile uint32_t count = 0;
 
-void Init() {
+static void Init() {
     gpiob.Init();
     gpiod.Init();
 
     status_led.Init();
     i2c.Init();
-    display.Init();
+    for (unsigned int i = 0; i < display_count; i++) {
+        displays[i]->Init();
+    }
 }
 
-void UpdateDisplay() {
-    display.Clear();
-    display.ToggleColon(true);
-    display.SetNumber(count % 10000);
-    display.WriteDisplay();
+static void CountTest(Display7Seg* display) {
+    display->Clear();
+    display->ToggleColon(true);
+    display->SetNumber(count % 10000);
+    display->WriteDisplay();
+}
+
+static void UpdateDisplay() {
+    for (unsigned int i = 0; i < display_count; i++) {
+        CountTest(displays[i]);
+    }
 }
 
 int main() {
