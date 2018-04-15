@@ -50,9 +50,18 @@ static void CountTest(Display7Seg* display) {
     display->WriteDisplay();
 }
 
+static void SegmentTest(Display7Seg* display) {
+    display->Clear();
+    for (int i = 0; i < 5; i++) {
+        display->SetSegment(i, count % 7, true, true);
+    }
+    display->WriteDisplay();
+}
+
 static void UpdateDisplay() {
     for (unsigned int i = 0; i < display_count; i++) {
-        CountTest(displays[i]);
+//        CountTest(displays[i]);
+        SegmentTest(displays[i]);
     }
 }
 
@@ -62,7 +71,7 @@ int main() {
     status_led.SetOk(true);
     while (true) {
         UpdateDisplay();
-        for (int i = 0; i < 128000; i++);
+        for (int i = 0; i < 1280000; i++);
         count++;
     }
 }

@@ -15,12 +15,14 @@ Display7Seg::Display7Seg(I2CBus& i2c_bus,
                          uint8_t n_digits,
                          uint8_t first_digit_register,
                          const WriteMode write_mode,
+                         const SegmentEndianness segment_endianness,
                          const uint8_t* symbol_table)
     : i2c_bus_(i2c_bus),
       device_address_(device_address),
       n_digits_(n_digits > MAX_DIGITS ? MAX_DIGITS : n_digits),
       first_digit_register_(first_digit_register),
       write_mode_(write_mode),
+      segment_endianness_(segment_endianness),
       symbol_table_(symbol_table)
 {}
 
@@ -110,8 +112,12 @@ void Display7Seg::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
     if (segment > 6) {
         segment = 0;
     }
-    uint8_t value = (on << segment) | (dot << 7);
-    display_buffer_[pos] |= value;
+    uint32_t value = (on << segment);
+    if (segment_endianness_ == SegmentEndianness::BIG) {
+        value = __RBIT(value) >> 25;
+    }
+    value |= (dot << 7);
+    display_buffer_[pos] |= (uint8_t)value;
 }
 
 void Display7Seg::ToggleColon(bool on) {
