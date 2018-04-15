@@ -14,7 +14,7 @@ static const uint8_t SYMBOL_TABLE[] = {
     0x7F, // 8
     0x6F, // 9
     0x03, // :
-    0x00, // am/pm
+    0x04, // am/pm
     0x7C, // b
     0x5E, // d
     0x73, // P
@@ -148,10 +148,24 @@ void Display7Seg::SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot) {
 }
 
 void Display7Seg::ToggleColon(bool on) {
+    SWAP_ENDIANNESS(display_buffer_[2]);
+
     if (on) {
-        display_buffer_[2] = SYMBOL_TABLE[10];
+        display_buffer_[2] |= SYMBOL_TABLE[10];
     } else {
-        display_buffer_[2] = 0;
+        display_buffer_[2] ^= 0;
+    }
+
+    SWAP_ENDIANNESS(display_buffer_[2]);
+}
+
+void Display7Seg::ToggleAmPm(bool on) {
+    SWAP_ENDIANNESS(display_buffer_[2]);
+
+    if (on) {
+        display_buffer_[2] |= SYMBOL_TABLE[11];
+    } else {
+        display_buffer_[2] ^= 0;
     }
 
     SWAP_ENDIANNESS(display_buffer_[2]);

@@ -30,7 +30,7 @@ Display7Seg* displays[] = {
 
 static size_t display_count = sizeof(displays) / sizeof(Display7Seg*);
 
-volatile uint32_t count = 0;
+uint32_t count = 0;
 
 static void Init() {
     gpiob.Init();
@@ -45,7 +45,6 @@ static void Init() {
 
 static void CountTest(Display7Seg* display) {
     display->Clear();
-    display->ToggleColon(true);
     display->SetNumber(count % 10000);
     display->WriteDisplay();
 }
@@ -94,6 +93,7 @@ static void CharTest(Display7Seg* display) {
 static void DotTest(Display7Seg* display) {
     display->Clear();
     display->ToggleColon(count % 2 == 0);
+    display->ToggleAmPm(count % 2 == 0);
     for (int i = 0; i < 5; i++) {
         display->SetSegment(i, 0, false, count % 2 == 0);
     }
@@ -102,10 +102,16 @@ static void DotTest(Display7Seg* display) {
 
 static void UpdateDisplay() {
     for (unsigned int i = 0; i < display_count; i++) {
-//        CountTest(displays[i]);
-//        SegmentTest(displays[i]);
-//        CharTest(displays[i]);
-        DotTest(displays[i]);
+        uint32_t cycle = count % 40;
+        if (cycle >= 0 && cycle < 10) {
+            CountTest(displays[i]);
+        } else if (cycle >= 11 && cycle < 20) {
+            CharTest(displays[i]);
+        } else if (cycle >= 21 && cycle < 30) {
+            SegmentTest(displays[i]);
+        } else {
+            DotTest(displays[i]);
+        }
     }
 }
 

@@ -33,6 +33,7 @@ public:
 
     void Clear();
     void ToggleColon(bool on);
+    void ToggleAmPm(bool on);
     void SetNumber(uint8_t pos, uint8_t number, bool dot);
     void SetNumber(uint16_t number);
     void SetChar(uint8_t pos, char ch);
