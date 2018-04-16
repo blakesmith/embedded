@@ -1,4 +1,3 @@
-#include <stm32f4xx.h>
 #include <cstddef>
 
 #include "drivers/stm32/gpio_bus.h"
