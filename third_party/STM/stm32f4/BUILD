@@ -22,8 +22,8 @@ cc_library(
     copts = [
         "-include stm32f4xx_conf.h",
     ] + select({
-        ":target_breadboard": ["-DSTM32F411xE"],
-        ":target_prototype": ["-DSTM32F413_423xx"]
+        ":target_stm32f411": ["-DSTM32F411xE"],
+        ":target_stm32f413": ["-DSTM32F413_423xx"]
     }),
     visibility = ["//visibility:public"],
     deps = [
@@ -45,3 +45,18 @@ config_setting(
         "TARGET": "prototype"
     }
 )
+
+config_setting(
+    name = "target_stm32f411",
+    define_values = {
+        "TARGET": "stm32f411"
+    }
+)
+
+config_setting(
+    name = "target_stm32f413",
+    define_values = {
+        "TARGET": "stm32f413"
+    }
+)
+

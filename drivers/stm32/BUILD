@@ -13,6 +13,20 @@ config_setting(
 )
 
 config_setting(
+    name = "target_stm32f411",
+    define_values = {
+        "TARGET": "stm32f411"
+    }
+)
+
+config_setting(
+    name = "target_stm32f413",
+    define_values = {
+        "TARGET": "stm32f413"
+    }
+)
+
+config_setting(
     name = "target_stm32l1",
     define_values = {
         "TARGET": "stm32l1"
@@ -26,6 +40,16 @@ STM_DRIVERS = select({
         "//third_party/STM/stm32f4:stm_std_periph",
     ],
     ":target_prototype": [
+        "//third_party/STM/stm32f4:stm_cmsis",
+        "//third_party/STM/stm32f4:stm_cmsis_device",
+        "//third_party/STM/stm32f4:stm_std_periph",
+    ],
+    ":target_stm32f411": [
+        "//third_party/STM/stm32f4:stm_cmsis",
+        "//third_party/STM/stm32f4:stm_cmsis_device",
+        "//third_party/STM/stm32f4:stm_std_periph",
+    ],
+    ":target_stm32f413": [
         "//third_party/STM/stm32f4:stm_cmsis",
         "//third_party/STM/stm32f4:stm_cmsis_device",
         "//third_party/STM/stm32f4:stm_std_periph",
@@ -47,6 +71,14 @@ COMMON_COPTS = select({
         "-fno-rtti",
         "-DSTM32F413_423xx",
         "-DTARGET_PROTOTYPE"
+    ],
+    ":target_stm32f411": [
+        "-fno-rtti",
+        "-DSTM32F411xE",
+    ],
+    ":target_stm32f413": [
+        "-fno-rtti",
+        "-DSTM32F413_423xx",
     ],
     ":target_stm32l1": [
         "-fno-rtti",

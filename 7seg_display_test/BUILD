@@ -11,7 +11,6 @@ cc_binary(
         "-fno-rtti",
         "-specs=nosys.specs",
         "-DSTM32F411xE",
-        "-DTARGET_BREADBOARD"
     ],
     linkopts = [
         "-T7seg_display_test/linker_scripts/STM32F411RETx_FLASH.ld"
