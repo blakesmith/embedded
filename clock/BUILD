@@ -1,9 +1,6 @@
 cc_binary(
     name = "clock_stm32",
     srcs = [
-        "src/startup_stm32l1xx_md.s",
-        "src/system_stm32l1xx.h",
-        "src/system_stm32l1xx.cc",
         "src/main.cc",
     ],
     copts = [
@@ -15,6 +12,7 @@ cc_binary(
         "-Tclock/linker_scripts/STM32L151C8_FLASH.ld"
     ],
     deps = [
+        "//third_party/STM/stm32l1:bin_common",
         "//drivers/stm32:gpio_common",
         "//drivers/stm32:i2c_common",
         "//drivers/stm32:rtc",

@@ -9,6 +9,26 @@ config_setting(
 )
 
 cc_library(
+    name = "bin_common",
+    srcs = [
+        "common/startup_stm32l1xx_md.s",
+        "common/system_stm32l1xx.cc"
+    ],
+    hdrs = [
+        "common/system_stm32l1xx.h"
+    ],
+    deps = [
+        "stm_cmsis",
+        "stm_cmsis_device"
+    ],
+    copts = [
+        "-DSTM32L1XX_MD"
+    ],
+    visibility = ["//visibility:public"]
+
+)
+
+cc_library(
     name = "stm_cmsis",
     hdrs = glob(["CMSIS/Include/*.h"]),
     strip_include_prefix = "CMSIS/Include/",
