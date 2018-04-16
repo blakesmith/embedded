@@ -11,7 +11,7 @@ display_test:
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
 	--cpu=armeabi-v7a-m4 \
 	--define TARGET=breadboard \
-	//test_project:test
+	//7seg_display_test:test
 
 nome_breadboard:
 	bazel build \

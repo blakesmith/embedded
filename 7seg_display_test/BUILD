@@ -14,7 +14,7 @@ cc_binary(
         "-DTARGET_BREADBOARD"
     ],
     linkopts = [
-        "-Ttest_project/linker_scripts/STM32F411RETx_FLASH.ld"
+        "-T7seg_display_test/linker_scripts/STM32F411RETx_FLASH.ld"
     ],
     deps = [
         "linker_scripts/STM32F411RETx_FLASH.ld",
