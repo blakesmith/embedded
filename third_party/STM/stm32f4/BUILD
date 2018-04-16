@@ -69,3 +69,9 @@ cc_library(
     ]
 )
 
+alias(
+    name = "linker_script",
+    actual = "STM32F411RETx_FLASH.ld",
+    visibility = ["//visibility:public"]
+)
+

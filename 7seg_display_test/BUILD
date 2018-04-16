@@ -9,11 +9,11 @@ cc_binary(
         "-DSTM32F411xE",
     ],
     linkopts = [
-        "-T7seg_display_test/linker_scripts/STM32F411RETx_FLASH.ld"
+        "-Tthird_party/STM/stm32f4/STM32F411RETx_FLASH.ld"
     ],
     deps = [
-        "linker_scripts/STM32F411RETx_FLASH.ld",
         "//third_party/STM/stm32f4:bin_common",
+        "//third_party/STM/stm32f4:linker_script",
         "//drivers/stm32:gpio_common",
         "//drivers/stm32:i2c_common",
         "//drivers/stm32:status_led",
@@ -29,18 +29,3 @@ hex_binary(
     name = "test",
     src = ":test_stm32"
 )
-
-config_setting(
-    name = "target_breadboard",
-    define_values = {
-        "TARGET": "breadboard"
-    }
-)
-
-config_setting(
-    name = "target_prototype",
-    define_values = {
-        "TARGET": "prototype"
-    }
-)
-
