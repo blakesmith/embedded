@@ -20,12 +20,26 @@ cc_binary(
         "//drivers/stm32:as1115_display",
         "//drivers/stm32:ht16K33_display"
     ],
-    linkstatic = 1
+    linkstatic = 1,
+    visibility = ["//visibility:public"]
 )
 
 load("//tools/arm_compiler:raw_binary.bzl", "hex_binary")
 
 hex_binary(
     name = "test",
-    src = ":test_stm32"
+    src = ":test_stm32",
+    visibility = [
+        "//visibility:public"
+    ]
+)
+
+filegroup(
+    name = "test_flash_artifact",
+    srcs = [
+        ":test"
+    ],
+    visibility = [
+        "//visibility:public"
+    ]
 )

@@ -13,6 +13,13 @@ display_test:
 	--define TARGET=stm32f411 \
 	//7seg_display_test:test
 
+display_test_flash:
+	bazel run \
+	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
+	--cpu=armeabi-v7a-m4 \
+	--define TARGET=stm32f411 \
+	//7seg_display_test/scripts:discovery_flash
+
 nome_breadboard:
 	bazel build \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
