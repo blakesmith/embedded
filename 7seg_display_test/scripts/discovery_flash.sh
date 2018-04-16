@@ -1,8 +1,8 @@
 #!/bin/sh
 
 OPENOCD=openocd
-OPENOCD_CONFIG=/usr/share/openocd/scripts/board/stm32f4discovery.cfg
-HEX=$1
+OPENOCD_CONFIG=$1
+HEX=$2
 
 $OPENOCD -f $OPENOCD_CONFIG \
          -c "init" \
