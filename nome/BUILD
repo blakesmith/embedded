@@ -52,10 +52,10 @@ cc_binary(
     }),
     linkopts = select({
         "//third_party/STM/stm32f4:target_stm32f411": [
-            "-Tnome/linker_scripts/STM32F411RETx_FLASH.ld"
+            "-Tthird_party/STM/stm32f4/STM32F411RETx_FLASH.ld"
         ],
         "//third_party/STM/stm32f4:target_stm32f413": [
-            "-Tnome/linker_scripts/STM32F413CGUx_FLASH.ld"
+            "-Tthird_party/STM/stm32f4/STM32F413CGUx_FLASH.ld"
         ]
     }),
     deps = [
@@ -68,11 +68,11 @@ cc_binary(
         "//drivers/stm32:status_led"
     ] + select({
         "//third_party/STM/stm32f4:target_stm32f411": [
-            "linker_scripts/STM32F411RETx_FLASH.ld",
+            "//third_party/STM/stm32f4:stm32f411_linker_script",
             "//drivers/stm32:ht16K33_display"
         ],
         "//third_party/STM/stm32f4:target_stm32f413": [
-            "linker_scripts/STM32F413CGUx_FLASH.ld",
+            "//third_party/STM/stm32f4:stm32f413_linker_script",
             "//drivers/stm32:as1115_display"
         ]
     }),

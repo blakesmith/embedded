@@ -70,8 +70,14 @@ cc_library(
 )
 
 alias(
-    name = "linker_script",
+    name = "stm32f411_linker_script",
     actual = "STM32F411RETx_FLASH.ld",
+    visibility = ["//visibility:public"]
+)
+
+alias(
+    name = "stm32f413_linker_script",
+    actual = "STM32F413CGUx_FLASH.ld",
     visibility = ["//visibility:public"]
 )
 

@@ -13,7 +13,7 @@ cc_binary(
     ],
     deps = [
         "//third_party/STM/stm32f4:bin_common",
-        "//third_party/STM/stm32f4:linker_script",
+        "//third_party/STM/stm32f4:stm32f411_linker_script",
         "//drivers/stm32:gpio_common",
         "//drivers/stm32:i2c_common",
         "//drivers/stm32:status_led",
