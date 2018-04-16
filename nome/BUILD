@@ -22,10 +22,6 @@ cc_binary(
 cc_binary(
     name = "nome_stm32",
     srcs = [
-        "src/startup_stm32f411xe.s",
-        "src/stm32f4xx_it.h",
-        "src/stm32f4xx_it.cc",
-        "src/system_stm32f4xx.cc",
         "src/adsr_envelope.h",
         "src/adsr_envelope.cc",
         "src/beat.h",
@@ -63,6 +59,7 @@ cc_binary(
         ]
     }),
     deps = [
+        "//third_party/STM/stm32f4:bin_common",
         "//drivers/stm32:gpio_common",
         "//drivers/stm32:i2c_common",
         "//drivers/stm32:i2s_common",

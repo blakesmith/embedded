@@ -17,6 +17,27 @@ config_setting(
 )
 
 cc_library(
+    name = "bin_common",
+    srcs = [
+        "common/startup_stm32f411xe.s",
+        "common/stm32f4xx_it.cc",
+        "common/system_stm32f4xx.cc"
+    ],
+    hdrs = [
+        "common/stm32f4xx_it.h"
+    ],
+    deps = [
+        ":stm_cmsis",
+        ":stm_cmsis_device",
+    ],
+    copts = select({
+        ":target_stm32f411": ["-DSTM32F411xE"],
+        ":target_stm32f413": ["-DSTM32F413_423xx"]
+    }),
+    visibility = ["//visibility:public"]
+)
+
+cc_library(
     name = "stm_cmsis",
     hdrs = glob(["CMSIS/Include/*.h"]),
     strip_include_prefix = "CMSIS/Include/",
@@ -46,19 +67,5 @@ cc_library(
         ":stm_cmsis",
         ":stm_cmsis_device"
     ]
-)
-
-config_setting(
-    name = "target_breadboard",
-    define_values = {
-        "TARGET": "breadboard"
-    }
-)
-
-config_setting(
-    name = "target_prototype",
-    define_values = {
-        "TARGET": "prototype"
-    }
 )
 
