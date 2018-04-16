@@ -1,60 +1,15 @@
-config_setting(
-    name = "target_breadboard",
-    define_values = {
-        "TARGET": "breadboard"
-    }
-)
-
-config_setting(
-    name = "target_prototype",
-    define_values = {
-        "TARGET": "prototype"
-    }
-)
-
-config_setting(
-    name = "target_stm32f411",
-    define_values = {
-        "TARGET": "stm32f411"
-    }
-)
-
-config_setting(
-    name = "target_stm32f413",
-    define_values = {
-        "TARGET": "stm32f413"
-    }
-)
-
-config_setting(
-    name = "target_stm32l1",
-    define_values = {
-        "TARGET": "stm32l1"
-    }
-)
-
 STM_DRIVERS = select({
-    ":target_breadboard": [
+    "//third_party/STM/stm32f4:target_stm32f411": [
         "//third_party/STM/stm32f4:stm_cmsis",
         "//third_party/STM/stm32f4:stm_cmsis_device",
         "//third_party/STM/stm32f4:stm_std_periph",
     ],
-    ":target_prototype": [
+    "//third_party/STM/stm32f4:target_stm32f413": [
         "//third_party/STM/stm32f4:stm_cmsis",
         "//third_party/STM/stm32f4:stm_cmsis_device",
         "//third_party/STM/stm32f4:stm_std_periph",
     ],
-    ":target_stm32f411": [
-        "//third_party/STM/stm32f4:stm_cmsis",
-        "//third_party/STM/stm32f4:stm_cmsis_device",
-        "//third_party/STM/stm32f4:stm_std_periph",
-    ],
-    ":target_stm32f413": [
-        "//third_party/STM/stm32f4:stm_cmsis",
-        "//third_party/STM/stm32f4:stm_cmsis_device",
-        "//third_party/STM/stm32f4:stm_std_periph",
-    ],
-    ":target_stm32l1": [
+    "//third_party/STM/stm32l1:target_stm32l1": [
         "//third_party/STM/stm32l1:stm_cmsis",
         "//third_party/STM/stm32l1:stm_cmsis_device",
         "//third_party/STM/stm32l1:stm_std_periph",
@@ -62,25 +17,15 @@ STM_DRIVERS = select({
 })
 
 COMMON_COPTS = select({
-    ":target_breadboard": [
-        "-fno-rtti",
-        "-DSTM32F411xE",
-        "-DTARGET_BREADBOARD"
-    ],
-    ":target_prototype": [
-        "-fno-rtti",
-        "-DSTM32F413_423xx",
-        "-DTARGET_PROTOTYPE"
-    ],
-    ":target_stm32f411": [
+    "//third_party/STM/stm32f4:target_stm32f411": [
         "-fno-rtti",
         "-DSTM32F411xE",
     ],
-    ":target_stm32f413": [
+    "//third_party/STM/stm32f4:target_stm32f413": [
         "-fno-rtti",
         "-DSTM32F413_423xx",
     ],
-    ":target_stm32l1": [
+    "//third_party/STM/stm32l1:target_stm32l1": [
         "-fno-rtti",
         "-DSTM32L1XX_MD"
     ]

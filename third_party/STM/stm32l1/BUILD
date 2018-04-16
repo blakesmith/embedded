@@ -1,5 +1,13 @@
 licenses(["unencumbered"])
 
+config_setting(
+    name = "target_stm32l1",
+    define_values = {
+        "TARGET": "stm32l1"
+    },
+    visibility = ["//visibility:public"]
+)
+
 cc_library(
     name = "stm_cmsis",
     hdrs = glob(["CMSIS/Include/*.h"]),

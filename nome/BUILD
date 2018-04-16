@@ -45,18 +45,22 @@ cc_binary(
         "-fno-rtti",
         "-specs=nosys.specs"
     ] + select({
-        ":target_stm32f411": [
+        "//third_party/STM/stm32f4:target_stm32f411": [
             "-DSTM32F411xE",
             "-DTARGET_BREADBOARD"
         ],
-        ":target_stm32f413": [
+        "//third_party/STM/stm32f4:target_stm32f413": [
             "-DSTM32F413_423xx",
             "-DTARGET_PROTOTYPE"
         ]
     }),
     linkopts = select({
-        ":target_stm32f411": ["-Tnome/linker_scripts/STM32F411RETx_FLASH.ld"],
-        ":target_stm32f413": ["-Tnome/linker_scripts/STM32F413CGUx_FLASH.ld"]
+        "//third_party/STM/stm32f4:target_stm32f411": [
+            "-Tnome/linker_scripts/STM32F411RETx_FLASH.ld"
+        ],
+        "//third_party/STM/stm32f4:target_stm32f413": [
+            "-Tnome/linker_scripts/STM32F413CGUx_FLASH.ld"
+        ]
     }),
     deps = [
         "//drivers/stm32:gpio_common",
@@ -66,11 +70,11 @@ cc_binary(
         "//drivers/stm32:pec11_encoder",
         "//drivers/stm32:status_led"
     ] + select({
-        ":target_stm32f411": [
+        "//third_party/STM/stm32f4:target_stm32f411": [
             "linker_scripts/STM32F411RETx_FLASH.ld",
             "//drivers/stm32:ht16K33_display"
         ],
-        ":target_stm32f413": [
+        "//third_party/STM/stm32f4:target_stm32f413": [
             "linker_scripts/STM32F413CGUx_FLASH.ld",
             "//drivers/stm32:as1115_display"
         ]
@@ -85,16 +89,3 @@ hex_binary(
     src = ":nome_stm32"
 )
 
-config_setting(
-    name = "target_stm32f411",
-    define_values = {
-        "TARGET": "stm32f411"
-    }
-)
-
-config_setting(
-    name = "target_stm32f413",
-    define_values = {
-        "TARGET": "stm32f413"
-    }
-)

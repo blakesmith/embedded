@@ -1,5 +1,21 @@
 licenses(["unencumbered"])
 
+config_setting(
+    name = "target_stm32f411",
+    define_values = {
+        "TARGET": "stm32f411"
+    },
+    visibility = ["//visibility:public"]
+)
+
+config_setting(
+    name = "target_stm32f413",
+    define_values = {
+        "TARGET": "stm32f413"
+    },
+    visibility = ["//visibility:public"]
+)
+
 cc_library(
     name = "stm_cmsis",
     hdrs = glob(["CMSIS/Include/*.h"]),
@@ -43,20 +59,6 @@ config_setting(
     name = "target_prototype",
     define_values = {
         "TARGET": "prototype"
-    }
-)
-
-config_setting(
-    name = "target_stm32f411",
-    define_values = {
-        "TARGET": "stm32f411"
-    }
-)
-
-config_setting(
-    name = "target_stm32f413",
-    define_values = {
-        "TARGET": "stm32f413"
     }
 )
 
