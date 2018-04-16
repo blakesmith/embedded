@@ -58,3 +58,8 @@ cc_library(
     ]
 )
 
+alias(
+    name = "stm32l151_linker_script",
+    actual = "STM32L151C8_FLASH.ld",
+    visibility = ["//visibility:public"]
+)

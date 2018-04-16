@@ -9,15 +9,15 @@ cc_binary(
         "-DSTM32L1XX_MD"
     ],
     linkopts = [
-        "-Tclock/linker_scripts/STM32L151C8_FLASH.ld"
+        "-Tthird_party/STM/stm32l1/STM32L151C8_FLASH.ld"
     ],
     deps = [
         "//third_party/STM/stm32l1:bin_common",
+        "//third_party/STM/stm32l1:stm32l151_linker_script",
         "//drivers/stm32:gpio_common",
         "//drivers/stm32:i2c_common",
         "//drivers/stm32:rtc",
         "//drivers/stm32:ht16K33_display",
-        "linker_scripts/STM32L151C8_FLASH.ld"
     ],
     linkstatic = 1
 )
