@@ -52,7 +52,7 @@ Display7Seg::Display7Seg(I2CBus& i2c_bus,
 {}
 
 // Set a single number 1 - 9, in the display. Value number positions are 0, 1, 3, 4. Position 2 is the colon.
-void Display7Seg::SetNumber(uint8_t pos, uint8_t number, bool dot) {
+void Display7Seg::SetDigit(uint8_t pos, uint8_t number, bool dot) {
     if (pos > n_digits_ || pos == 2) {
         pos = 0;
     }
@@ -65,39 +65,48 @@ void Display7Seg::SetNumber(uint8_t pos, uint8_t number, bool dot) {
     display_buffer_[pos] = value;
 }
 
-// Set a whole number, no greater than MAX_DISPLAY_NUMBER. If the
-// number specified is greater than MAX_DISPLAY_NUMBER, set it to
-// MAX_DISPLAY_NUMBER.
-void Display7Seg::SetNumber(uint16_t number) {
-    const uint16_t max_display_number = u16pow(10, n_digits_) - 1;
+void Display7Seg::SetNumber(uint8_t starting_pos, uint16_t number, bool always_write_zeros) {
+    const uint8_t position_count = n_digits_ - starting_pos;
+    // Since the colon is position two, we have to account for it in our digit count
+    const uint8_t colon_offset =  starting_pos < 2 ? 1 : 0;
+    const uint8_t digit_count = position_count - colon_offset;
+    const uint16_t max_display_number = u16pow(10, digit_count) - 1;
     if (number > max_display_number) {
         number = max_display_number;
     }
-    uint16_t scale = u16pow(10, n_digits_-2);
+    uint16_t scale = u16pow(10, digit_count - 1);
     uint8_t last_value = 0;
     uint16_t remaining = number;
-
-    // Special case 0, because of display padding
-    if (number == 0) {
-        SetNumber(n_digits_-1, 0, false);
-        return;
-    }
-
-    bool non_zero_written = false;
-    for (size_t i = 0; i < n_digits_; i++) {
-        if (i == 2) {
+    bool non_zero_written = always_write_zeros;
+    size_t current_position;
+    for (size_t i = 0; i < position_count; i++) {
+        current_position = i + starting_pos;
+        if (current_position == 2) {
             // Skip colon position
             continue;
         }
         last_value = remaining / scale;
         if (last_value != 0 || non_zero_written) {
-            SetNumber(i, last_value, false);
+            SetDigit(current_position, last_value, false);
             non_zero_written = true;
         }
 
         remaining = remaining - (last_value * scale);
         scale /= 10;
     }
+}
+
+// Set a whole number, no greater than MAX_DISPLAY_NUMBER. If the
+// number specified is greater than MAX_DISPLAY_NUMBER, set it to
+// MAX_DISPLAY_NUMBER.
+void Display7Seg::SetNumber(uint16_t number) {
+    // Special case 0, because of display padding
+    if (number == 0) {
+        SetDigit(n_digits_ - 1, 0, false);
+        return;
+    }
+
+    SetNumber(0, number, false);
 }
 
 void Display7Seg::SetChar(uint8_t pos, char ch) {

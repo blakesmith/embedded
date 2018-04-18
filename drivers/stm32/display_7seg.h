@@ -34,8 +34,22 @@ public:
     void Clear();
     void ToggleColon(bool on);
     void ToggleAmPm(bool on);
-    void SetNumber(uint8_t pos, uint8_t number, bool dot);
+    // Set a single digit number, for example, in digit position 0, set the number '8', and turn the dot on.
+    void SetDigit(uint8_t pos, uint8_t number, bool dot);
+
+    // Set a whole number, filling the whole display
     void SetNumber(uint16_t number);
+
+    // Set a whole number, potentially spanning multiple digits, starting at a particular digit position.
+    // Useful for clocks that have hours and minutes separated. For example, to display the time '12:34', do:
+    //
+    // SetNumber(0, 12, false);
+    // SetNumber(3, 34, true);
+    //
+    // We set 'always_write_zeros' to 'true', because cases like '12:00' should always write out zeros instead of
+    // ommiting them until a following zero occurs with a normal counting number. (EG - we don't want to write out 0010 for the number 10
+    // on a counting number).
+    void SetNumber(uint8_t starting_pos, uint16_t number, bool always_write_zeros);
     void SetChar(uint8_t pos, char ch);
     void SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot);
     void WriteDisplay();
