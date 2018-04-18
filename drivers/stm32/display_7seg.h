@@ -46,9 +46,10 @@ public:
     // SetNumber(0, 12, false);
     // SetNumber(3, 34, true);
     //
-    // We set 'always_write_zeros' to 'true', because cases like '12:00' should always write out zeros instead of
-    // ommiting them until a following zero occurs with a normal counting number. (EG - we don't want to write out 0010 for the number 10
-    // on a counting number).
+    // always_write_zeros controls leading zero display. For example, writing the numeber 10 with 5 digits:
+    //
+    // always_write_zeros (true):  0010
+    // always_write_zeros (false):   10
     void SetNumber(uint8_t starting_pos, uint16_t number, bool always_write_zeros);
     void SetChar(uint8_t pos, char ch);
     void SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot);
@@ -57,7 +58,7 @@ public:
 protected:
     I2CBus& i2c_bus_;
     const uint8_t device_address_;
-    const uint8_t n_digits_;
+    const uint8_t n_positions_;
     const uint8_t first_digit_register_;
     const WriteMode write_mode_;
     const SegmentEndianness segment_endianness_;
