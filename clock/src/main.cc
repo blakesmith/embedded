@@ -20,6 +20,8 @@ GPIOPin activity_led(gpiod, 13);
 
 StatusLed status_led(ok_led, error_led, activity_led);
 
+uint32_t count = 0;
+
 static void set_time() {
     stm32::RTClock::Time time;
 
@@ -45,12 +47,14 @@ static void update_time() {
     stm32::RTClock::Time time;
 
     rtc.GetTime(&time);
-    display.SetNumber(0, time.hour, false);
+    display.Clear();
+    display.ToggleColon(count % 2 == 0);
+    display.SetNumber(0, time.hour, true);
     display.SetNumber(3, time.minute, true);
     display.WriteDisplay();
 }
 
-static void delay() {
+static inline void delay() {
     for (int i = 0; i < 1280000; i++);
 }
 
@@ -61,6 +65,7 @@ int main() {
     while (true) {
         update_time();
         delay();
+        count++;
     }
 }
 
