@@ -40,10 +40,7 @@ static void Init() {
     i2c.Init();
     display.Init();
 
-    set_time();
-    // if (!set_time()) {
-    //     status_led.SetError(true);
-    // }
+    status_led.SetError(!set_time());
 }
 
 static void update_time() {

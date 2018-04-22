@@ -40,6 +40,7 @@ bool RTClock::Init() {
     rcc_init.RTC_SynchPrediv = 0xF9;
 
     bool success = RTC_Init(&rcc_init) == SUCCESS;
+    RTC_WriteProtectionCmd(ENABLE);
     return success;
 }
 
