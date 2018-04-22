@@ -49,8 +49,8 @@ static void update_time() {
     rtc.GetTime(&time);
     display.Clear();
     display.ToggleColon(count % 2 == 0);
-    display.SetNumber(0, time.hour, true);
-    display.SetNumber(3, time.minute, true);
+    display.SetNumber(0, time.hour, 2, false);
+    display.SetNumber(3, time.minute, 2, true);
     display.WriteDisplay();
 }
 
