@@ -18,16 +18,24 @@ namespace stm32 {
 bool RTClock::Init() {
     RTC_InitTypeDef rcc_init;
 
+#ifdef STM32L1XX_MD
+    RCC_RTCResetCmd(DISABLE);
+#endif
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
     RCC_BackupResetCmd(DISABLE);
+#endif
+
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
 
     RTC_WriteProtectionCmd(DISABLE);
+
 #ifdef STM32L1XX_MD
     PWR_RTCAccessCmd(ENABLE);
 #endif
 #if defined(STM32F411xE) || defined(STM32F413_423xx)
     PWR_BackupAccessCmd(ENABLE);
 #endif
+
     RCC_LSICmd(ENABLE);
     while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
     
