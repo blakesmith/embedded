@@ -1,8 +1,17 @@
 #include "rtc.h"
 
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
+#include "stm32f4xx_pwr.h"
+#include "stm32f4xx_rtc.h"
+#include "stm32f4xx_rcc.h"
+#endif
+
+#ifdef STM32L1XX_MD
 #include "stm32l1xx_pwr.h"
 #include "stm32l1xx_rcc.h"
 #include "stm32l1xx_rtc.h"
+#endif
+
 
 namespace stm32 {
 
@@ -10,7 +19,11 @@ void RTClock::Init() {
     RTC_InitTypeDef rcc_init;
     
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
+#ifdef STM32L1XX_MD
     PWR_RTCAccessCmd(ENABLE);
+#elsif defined(STM32F411xE) || defined(STM32F413_423xx)
+    PWR_BackupAccessCmd(ENABLE);
+#endif
     RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
     RCC_RTCCLKCmd(ENABLE);
 
