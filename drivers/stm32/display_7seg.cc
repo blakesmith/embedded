@@ -65,11 +65,8 @@ void Display7Seg::SetDigit(uint8_t pos, uint8_t number, bool dot) {
     display_buffer_[pos] = value;
 }
 
-void Display7Seg::SetNumber(uint8_t starting_pos, uint16_t number, bool always_write_zeros) {
+void Display7Seg::SetNumber(uint8_t starting_pos, uint16_t number, uint8_t digit_count, bool always_write_zeros) {
     const uint8_t position_count = n_positions_ - starting_pos;
-    // Since the colon is position two, we have to account for it in our digit count
-    const uint8_t colon_offset =  starting_pos < 2 ? 1 : 0;
-    const uint8_t digit_count = position_count - colon_offset;
     const uint16_t max_display_number = u16pow(10, digit_count) - 1;
     if (number > max_display_number) {
         number = max_display_number;
@@ -106,7 +103,7 @@ void Display7Seg::SetNumber(uint16_t number) {
         return;
     }
 
-    SetNumber(0, number, false);
+    SetNumber(0, number, n_positions_ - 1, false);
 }
 
 void Display7Seg::SetChar(uint8_t pos, char ch) {

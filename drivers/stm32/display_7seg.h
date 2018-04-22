@@ -50,7 +50,7 @@ public:
     //
     // always_write_zeros (true):  0010
     // always_write_zeros (false):   10
-    void SetNumber(uint8_t starting_pos, uint16_t number, bool always_write_zeros);
+    void SetNumber(uint8_t starting_pos, uint16_t number, uint8_t digit_count, bool always_write_zeros);
     void SetChar(uint8_t pos, char ch);
     void SetSegment(uint8_t pos, uint8_t segment, bool on, bool dot);
     void WriteDisplay();

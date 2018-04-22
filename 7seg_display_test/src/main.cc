@@ -56,6 +56,14 @@ static void SegmentTest(Display7Seg* display) {
     display->WriteDisplay();
 }
 
+static void ClockNumberTest(Display7Seg* display) {
+    display->Clear();
+    display->ToggleColon(true);
+    display->SetNumber(0, 12, 2, true);
+    display->SetNumber(3, 30, 2, true);
+    display->WriteDisplay();
+}
+
 static void CharTest(Display7Seg* display) {
     display->Clear();
     uint32_t val = count % 6;
@@ -101,13 +109,15 @@ static void DotTest(Display7Seg* display) {
 
 static void UpdateDisplay() {
     for (unsigned int i = 0; i < display_count; i++) {
-        uint32_t cycle = count % 40;
+        uint32_t cycle = count % 50;
         if (cycle >= 0 && cycle < 10) {
-            CountTest(displays[i]);
+            ClockNumberTest(displays[i]);
         } else if (cycle >= 11 && cycle < 20) {
-            CharTest(displays[i]);
+            CountTest(displays[i]);
         } else if (cycle >= 21 && cycle < 30) {
             SegmentTest(displays[i]);
+        } else if (cycle >= 31 && cycle < 40) {
+            CharTest(displays[i]);
         } else {
             DotTest(displays[i]);
         }
