@@ -22,25 +22,28 @@ StatusLed status_led(ok_led, error_led, activity_led);
 
 uint32_t count = 0;
 
-static void set_time() {
+static bool set_time() {
     stm32::RTClock::Time time;
 
     time.hour = 12;
-    time.minute = 0;
+    time.minute = 5;
     time.second = 0;
     time.am_pm = stm32::RTClock::AM_PM::AM;
-    rtc.SetTime(&time);
+    return rtc.SetTime(&time);
 }
 
 static void Init() {
-    rtc.Init();
     gpiob.Init();
     gpiod.Init();
     status_led.Init();
+    status_led.SetError(!rtc.Init());
     i2c.Init();
     display.Init();
 
     set_time();
+    // if (!set_time()) {
+    //     status_led.SetError(true);
+    // }
 }
 
 static void update_time() {

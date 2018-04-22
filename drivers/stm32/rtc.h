@@ -22,10 +22,10 @@ public:
     RTClock() = default;
     ~RTClock() = default;
 
-    void SetTime(Time* time);
+    bool SetTime(Time* time);
     void GetTime(Time* time);
     
-    void Init();
+    bool Init();
 };
 
 }
