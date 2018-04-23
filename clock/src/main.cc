@@ -65,7 +65,16 @@ static void update_time() {
     ui.Clear();
     ui.SetHour(time.hour);
     ui.SetMinute(time.minute);
-    ui.Update();
+    UI::Action action = ui.Update();
+    if (action.NeedsUpdate()) {
+        if (action.hour_diff > 0) {
+            time.hour = (time.hour + action.hour_diff) % 12;
+        }
+        if (action.minute_diff > 0) {
+            time.minute = (time.minute + action.minute_diff) % 60;
+        }
+        status_led.SetError(!rtc.SetTime(&time));
+    }
 }
 
 static inline void delay() {
