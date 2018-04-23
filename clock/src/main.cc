@@ -63,7 +63,6 @@ static void update_time() {
 
     rtc.GetTime(&time);
     ui.Clear();
-    ui.ToggleColon(true);
     ui.SetHour(time.hour);
     ui.SetMinute(time.minute);
     ui.Update();

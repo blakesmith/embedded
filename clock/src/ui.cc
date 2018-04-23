@@ -6,8 +6,10 @@ UI::UI(Display7Seg* display,
        Pec11RotaryEncoder* encoder)
     : display_(display),
       encoder_(encoder),
-      knob_offset_(6),
-      set_position_(0)
+      knob_offset_(0),
+      set_position_(3),
+      update_count_(0),
+      colon_toggle_(true)
 { }
 
 void UI::Clear() {
@@ -31,10 +33,15 @@ void UI::Update() {
     if (encoder_->GetButtonAction() == BUTTON_ACTION_DOWN) {
         set_position_ = (set_position_ + 1) % 4;
     }
-    if (set_position_ != 3) {
-        display_->SetSegment(set_position_ * 2, 0, false, true);
+    if (update_count_ == 0) {
+        if (set_position_ != 3) {
+            display_->SetSegment(set_position_ * 2, 0, false, true);
+        }
+        display_->ToggleColon(colon_toggle_);
+        colon_toggle_ = !colon_toggle_;
+        display_->WriteDisplay();
     }
-    display_->WriteDisplay();
+    update_count_ = (update_count_ + 1) % 9000;
 }
 
 }

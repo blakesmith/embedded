@@ -12,6 +12,8 @@ private:
     Pec11RotaryEncoder* encoder_;
     long knob_offset_;
     uint8_t set_position_;
+    uint32_t update_count_;
+    bool colon_toggle_;
     
 public:
     UI(Display7Seg* display,
