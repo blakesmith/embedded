@@ -4,7 +4,12 @@
 #include "drivers/stm32/as1115_display.h"
 #include "drivers/stm32/status_led.h"
 
-stm32::RTClock rtc;
+#include "ui.h"
+
+using namespace clock;
+using namespace stm32;
+
+RTClock rtc;
 
 GPIOBus gpiob(GPIOBus::Id::B);
 GPIOBus gpiod(GPIOBus::Id::D);
@@ -20,15 +25,17 @@ GPIOPin activity_led(gpiod, 13);
 
 StatusLed status_led(ok_led, error_led, activity_led);
 
+UI ui(&display);
+
 uint32_t count = 0;
 
 static bool set_time() {
-    stm32::RTClock::Time time;
+    RTClock::Time time;
 
     time.hour = 12;
-    time.minute = 5;
+    time.minute = 0;
     time.second = 0;
-    time.am_pm = stm32::RTClock::AM_PM::AM;
+    time.am_pm = RTClock::AM_PM::AM;
     return rtc.SetTime(&time);
 }
 
@@ -44,14 +51,14 @@ static void Init() {
 }
 
 static void update_time() {
-    stm32::RTClock::Time time;
+    RTClock::Time time;
 
     rtc.GetTime(&time);
-    display.Clear();
-    display.ToggleColon(count % 2 == 0);
-    display.SetNumber(0, time.hour, 2, false);
-    display.SetNumber(3, time.minute, 2, true);
-    display.WriteDisplay();
+    ui.Clear();
+    ui.ToggleColon(count % 2 == 0);
+    ui.SetHour(time.hour);
+    ui.SetMinute(time.minute);
+    ui.Update();
 }
 
 static inline void delay() {

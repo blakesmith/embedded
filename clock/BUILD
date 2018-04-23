@@ -2,6 +2,8 @@ cc_binary(
     name = "clock_stm32",
     srcs = [
         "src/main.cc",
+        "src/ui.h",
+        "src/ui.cc",
     ],
     copts = select({
         "//third_party/STM/stm32f4:target_stm32f411": [
