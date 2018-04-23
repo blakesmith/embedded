@@ -68,10 +68,16 @@ static void update_time() {
     UI::Action action = ui.Update();
     if (action.NeedsUpdate()) {
         if (action.hour_diff > 0) {
-            time.hour = (time.hour + action.hour_diff) % 12;
+            time.hour = time.hour + action.hour_diff;
+            if (time.hour > 12) {
+                time.hour = 1;
+            }
         }
         if (action.minute_diff > 0) {
-            time.minute = (time.minute + action.minute_diff) % 60;
+            time.minute = time.minute + action.minute_diff;
+            if (time.minute > 59) {
+                time.minute = 0;
+            }
         }
         status_led.SetError(!rtc.SetTime(&time));
     }
