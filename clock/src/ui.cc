@@ -28,32 +28,44 @@ void UI::SetMinute(uint8_t minute) {
     display_->SetNumber(3, minute, 2, true);
 }
 
+UI::Action UI::set_next_position() {
+    set_position_ = (set_position_ + 1) % 4;
+    return Action(0, 0);
+}
+
+UI::Action UI::set_change_time() {
+    update_count_ = 0;
+    int8_t diff = encoder_->GetCount() - knob_offset_;
+    knob_offset_ = encoder_->GetCount();
+    switch (set_position_) {
+        case 0:
+            return Action(diff, 0);
+        case 2:
+            return Action(0, diff);
+        default:
+            return Action(0, 0);
+    }
+}
+
+void UI::refresh_display() {
+    if (set_position_ != 3) {
+        display_->SetSegment(set_position_ * 2, 0, false, true);
+    }
+    display_->ToggleColon(colon_toggle_);
+    colon_toggle_ = !colon_toggle_;
+    display_->WriteDisplay();
+}
+
 UI::Action UI::Update() {
     encoder_->ReadState();
     if (encoder_->GetButtonAction() == BUTTON_ACTION_DOWN) {
-        set_position_ = (set_position_ + 1) % 4;
-        return Action(0, 0);
+        return set_next_position();
     }
     if (knob_offset_ != encoder_->GetCount()) {
-        update_count_ = 0;
-        int8_t diff = encoder_->GetCount() - knob_offset_;
-        knob_offset_ = encoder_->GetCount();
-        switch (set_position_) {
-            case 0:
-                return Action(diff, 0);
-            case 2:
-                return Action(0, diff);
-            default:
-                return Action(0, 0);
-        }
+        return set_change_time();
     }
     if (update_count_ == 0) {
-        if (set_position_ != 3) {
-            display_->SetSegment(set_position_ * 2, 0, false, true);
-        }
-        display_->ToggleColon(colon_toggle_);
-        colon_toggle_ = !colon_toggle_;
-        display_->WriteDisplay();
+        refresh_display();
     }
     update_count_ = (update_count_ + 1) % 9000;
     return Action(0, 0);

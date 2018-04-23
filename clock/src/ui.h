@@ -14,7 +14,7 @@ private:
     uint8_t set_position_;
     uint32_t update_count_;
     bool colon_toggle_;
-    
+
 public:
 
     struct Action {
@@ -39,6 +39,10 @@ public:
     void SetHour(uint8_t hour);
     void SetMinute(uint8_t minute);
     Action Update();
+private:
+    Action set_next_position();
+    Action set_change_time();
+    void refresh_display();
 };
 
 }
