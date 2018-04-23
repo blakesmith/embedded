@@ -2,8 +2,12 @@
 
 namespace clock {
 
-UI::UI(Display7Seg* display)
-    : display_(display)
+UI::UI(Display7Seg* display,
+       Pec11RotaryEncoder* encoder)
+    : display_(display),
+      encoder_(encoder),
+      knob_offset_(6),
+      set_position_(0)
 { }
 
 void UI::Clear() {
@@ -23,6 +27,13 @@ void UI::SetMinute(uint8_t minute) {
 }
 
 void UI::Update() {
+    encoder_->ReadState();
+    if (encoder_->GetButtonAction() == BUTTON_ACTION_DOWN) {
+        set_position_ = (set_position_ + 1) % 4;
+    }
+    if (set_position_ != 3) {
+        display_->SetSegment(set_position_ * 2, 0, false, true);
+    }
     display_->WriteDisplay();
 }
 

@@ -38,6 +38,7 @@ cc_binary(
         "//drivers/stm32:i2c_common",
         "//drivers/stm32:rtc",
         "//drivers/stm32:as1115_display",
+        "//drivers/stm32:pec11_encoder",
         "//drivers/stm32:status_led",
     ],
     linkstatic = 1

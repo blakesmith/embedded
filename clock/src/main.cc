@@ -3,6 +3,7 @@
 #include "drivers/stm32/rtc.h"
 #include "drivers/stm32/as1115_display.h"
 #include "drivers/stm32/status_led.h"
+#include "drivers/stm32/pec11_renc.h"
 
 #include "ui.h"
 
@@ -25,9 +26,15 @@ GPIOPin activity_led(gpiod, 13);
 
 StatusLed status_led(ok_led, error_led, activity_led);
 
-UI ui(&display);
+GPIOPin encoder_clockwise(gpiod, 2);
+GPIOPin encoder_counter_clockwise(gpiod, 3);
+GPIOPin encoder_button(gpiod, 6);
 
-uint32_t count = 0;
+Pec11RotaryEncoder encoder(encoder_clockwise,
+                           encoder_counter_clockwise,
+                           encoder_button);
+
+UI ui(&display, &encoder);
 
 static bool set_time() {
     RTClock::Time time;
@@ -46,6 +53,7 @@ static void Init() {
     status_led.SetError(!rtc.Init());
     i2c.Init();
     display.Init();
+    encoder.Init();
 
     status_led.SetError(!set_time());
 }
@@ -55,7 +63,7 @@ static void update_time() {
 
     rtc.GetTime(&time);
     ui.Clear();
-    ui.ToggleColon(count % 2 == 0);
+    ui.ToggleColon(true);
     ui.SetHour(time.hour);
     ui.SetMinute(time.minute);
     ui.Update();
@@ -71,8 +79,6 @@ int main() {
     status_led.SetOk(true);
     while (true) {
         update_time();
-        delay();
-        count++;
     }
 }
 
