@@ -43,7 +43,7 @@ bool RTClock::Init() {
     RCC_RTCCLKCmd(ENABLE);
 
     RTC_StructInit(&rcc_init);
-    rcc_init.RTC_HourFormat = RTC_HourFormat_24;
+    rcc_init.RTC_HourFormat = RTC_HourFormat_12;
     rcc_init.RTC_AsynchPrediv = 0x7F;
     rcc_init.RTC_SynchPrediv = 0xF9;
 

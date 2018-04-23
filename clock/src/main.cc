@@ -63,12 +63,17 @@ static void update_time() {
 
     rtc.GetTime(&time);
     ui.Clear();
-    ui.SetHour(time.hour);
+    ui.SetHour(time.hour, time.am_pm == RTClock::AM_PM::PM);
     ui.SetMinute(time.minute);
     UI::Action action = ui.Update();
     if (action.NeedsUpdate()) {
         if (action.hour_diff > 0) {
             time.hour = time.hour + action.hour_diff;
+            if (time.hour == 12) {
+                time.am_pm = time.am_pm == RTClock::AM_PM::AM ?
+                    RTClock::AM_PM::PM :
+                    RTClock::AM_PM::AM;
+            }
             if (time.hour > 12) {
                 time.hour = 1;
             }

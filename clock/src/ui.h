@@ -36,7 +36,7 @@ public:
 
     void Clear();
     void ToggleColon(bool on);
-    void SetHour(uint8_t hour);
+    void SetHour(uint8_t hour, bool pm);
     void SetMinute(uint8_t minute);
     Action Update();
 private:

@@ -20,8 +20,9 @@ void UI::ToggleColon(bool on) {
     display_->ToggleColon(on);
 }
 
-void UI::SetHour(uint8_t hour) {
+void UI::SetHour(uint8_t hour, bool pm) {
     display_->SetNumber(0, hour, 2, false);
+    display_->ToggleAmPm(pm);
 }
 
 void UI::SetMinute(uint8_t minute) {
