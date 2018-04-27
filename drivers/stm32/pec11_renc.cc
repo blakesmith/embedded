@@ -1,4 +1,3 @@
-#include <stm32f4xx.h>
 #include <cassert>
 
 #include "drivers/stm32/pec11_renc.h"

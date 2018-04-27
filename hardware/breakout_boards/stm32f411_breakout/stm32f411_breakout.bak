@@ -292,10 +292,10 @@ F 3 "~" H 2000 5200 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01_Female J23
+L Connector:Conn_01x01_Female PC13
 U 1 1 5ADCA479
 P 2000 5300
-F 0 "J23" H 1894 5167 50  0000 C CNN
+F 0 "PC13" H 1894 5167 50  0000 C CNN
 F 1 "Conn" H 1894 5166 50  0001 C CNN
 F 2 "connector:Conn_1pin_2.54mm" H 2000 5300 50  0001 C CNN
 F 3 "~" H 2000 5300 50  0001 C CNN

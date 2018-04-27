@@ -88,10 +88,6 @@ static void update_time() {
     }
 }
 
-static inline void delay() {
-    for (int i = 0; i < 1280000; i++);
-}
-
 int main() {
     Init();
 
