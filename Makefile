@@ -54,3 +54,11 @@ clock_stm32_flash:
 	//clock/scripts:discovery_flash
 
 
+clock_stm32_breakout:
+	bazel run \
+	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
+	--cpu=armeabi-v7a-m3 \
+	--define TARGET=stm32l1 \
+	//clock/scripts:breakout_flash
+
+
