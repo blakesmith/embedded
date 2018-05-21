@@ -11,11 +11,13 @@ config_setting(
 cc_library(
     name = "bin_common",
     srcs = [
-        "common/startup_stm32l1xx_md.s",
-        "common/system_stm32l1xx.cc"
+        "common/startup_stm32l151xc.s",
+        "common/system_stm32l1xx.c",
+        "common/stm32l1xx_it.c"
     ],
     hdrs = [
-        "common/system_stm32l1xx.h"
+        "common/system_stm32l1xx.h",
+        "common/stm32l1xx_it.h"
     ],
     deps = [
         "stm_cmsis",

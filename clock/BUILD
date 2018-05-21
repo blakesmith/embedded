@@ -15,6 +15,8 @@ cc_binary(
     }) + [
         "-fno-rtti",
         "-specs=nosys.specs",
+        "-Og",
+        "-g"
     ],
     linkopts = select({
         "//third_party/STM/stm32f4:target_stm32f411": [

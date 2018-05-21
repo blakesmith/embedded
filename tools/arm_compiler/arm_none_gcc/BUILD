@@ -15,6 +15,14 @@ filegroup(
 )
 
 filegroup(
+    name = "gdb",
+    srcs = [
+        "arm-none-eabi-gdb",
+        "@com_arm_developer_toolchain_gcc_6_2//:gdb",
+    ],
+)
+
+filegroup(
     name = "ar",
     srcs = [
         "arm-none-eabi-ar",

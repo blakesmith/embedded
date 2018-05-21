@@ -44,6 +44,7 @@ clock_stm32:
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
 	--cpu=armeabi-v7a-m3 \
 	--define TARGET=stm32l1 \
+	--strip=never \
 	//clock:clock
 
 clock_stm32_flash:
@@ -57,8 +58,11 @@ clock_stm32_flash:
 clock_stm32_breakout:
 	bazel run \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
+	--strip=never \
 	--cpu=armeabi-v7a-m3 \
 	--define TARGET=stm32l1 \
 	//clock/scripts:breakout_flash
 
-
+arm_gdb:
+	bazel run \
+	//tools/arm_compiler/arm_none_gcc:arm-none-eabi-gdb \

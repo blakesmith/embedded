@@ -214,8 +214,6 @@ toolchain {
 
   linker_flag: "-mcpu=cortex-m3"
   linker_flag: "-mthumb"
-  linker_flag: "-mfloat-abi=hard" 
-  linker_flag: "-mfpu=fpv4-sp-d16"
   #linker_flag: "-specs=nano.specs"
   linker_flag: "-specs=nosys.specs"
 

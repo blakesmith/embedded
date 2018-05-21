@@ -8,6 +8,13 @@ filegroup(
 )
 
 filegroup(
+  name = 'gdb',
+  srcs = [
+    'bin/arm-none-eabi-gdb',
+  ],
+)
+
+filegroup(
   name = 'ar',
   srcs = [
     'bin/arm-none-eabi-ar',

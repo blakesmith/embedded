@@ -12,23 +12,24 @@ using namespace stm32;
 
 RTClock rtc;
 
+GPIOBus gpioa(GPIOBus::Id::A);
 GPIOBus gpiob(GPIOBus::Id::B);
-GPIOBus gpiod(GPIOBus::Id::D);
+
 GPIOPin scl_pin(gpiob, 6);
 GPIOPin sda_pin(gpiob, 9);
 
 I2CBus i2c(I2CBus::Id::ONE, scl_pin, sda_pin);
 AS1115Display display(i2c, 5);
 
-GPIOPin ok_led(gpiod, 15);
-GPIOPin error_led(gpiod, 14);
-GPIOPin activity_led(gpiod, 13);
+GPIOPin ok_led(gpiob, 3);
+GPIOPin error_led(gpiob, 4);
+GPIOPin activity_led(gpiob, 5);
 
 StatusLed status_led(ok_led, error_led, activity_led);
 
-GPIOPin encoder_clockwise(gpiod, 2);
-GPIOPin encoder_counter_clockwise(gpiod, 3);
-GPIOPin encoder_button(gpiod, 6);
+GPIOPin encoder_clockwise(gpioa, 1);
+GPIOPin encoder_counter_clockwise(gpioa, 2);
+GPIOPin encoder_button(gpioa, 3);
 
 Pec11RotaryEncoder encoder(encoder_clockwise,
                            encoder_counter_clockwise,
@@ -47,15 +48,15 @@ static bool set_time() {
 }
 
 static void Init() {
+//    gpioa.Init();
     gpiob.Init();
-    gpiod.Init();
     status_led.Init();
-    status_led.SetError(!rtc.Init());
-    i2c.Init();
-    display.Init();
-    encoder.Init();
+    // status_led.SetError(!rtc.Init());
+    // i2c.Init();
+    // display.Init();
+    // encoder.Init();
 
-    status_led.SetError(!set_time());
+    // status_led.SetError(!set_time());
 }
 
 static void update_time() {
@@ -93,8 +94,10 @@ int main() {
 
     status_led.SetOk(true);
     while (true) {
-        update_time();
     }
+    // while (true) {
+    //     update_time();
+    // }
 }
 
 extern "C" {

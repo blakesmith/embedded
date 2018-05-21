@@ -6,10 +6,10 @@ HEX=$2
 
 $OPENOCD -f "/usr/share/openocd/scripts/interface/jlink.cfg" \
          -c "transport select swd" \
-         -c "reset_config srst_only" \
+         -c "reset_config none separate" \
          -f $OPENOCD_CONFIG \
          -c "init" \
          -c "reset halt" \
-         -c "flash write_image erase $HEX" \
-         -c "exit"
+         -c "flash write_image erase $HEX"
+
 
