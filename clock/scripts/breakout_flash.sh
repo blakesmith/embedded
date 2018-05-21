@@ -10,6 +10,8 @@ $OPENOCD -f "/usr/share/openocd/scripts/interface/jlink.cfg" \
          -f $OPENOCD_CONFIG \
          -c "init" \
          -c "reset halt" \
-         -c "flash write_image erase $HEX"
+         -c "flash write_image erase $HEX" \
+         -c "reset run" \
+         -c "exit"
 
 
