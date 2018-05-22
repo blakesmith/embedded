@@ -66,7 +66,7 @@ static void update_time() {
     ui.Clear();
     ui.SetHour(time.hour, time.am_pm == RTClock::AM_PM::PM);
     ui.SetMinute(time.minute);
-    UI::Action action = ui.Update();
+    UI::Action action = ui.Update(time);
     if (action.NeedsUpdate()) {
         if (action.hour_diff > 0) {
             time.hour = time.hour + action.hour_diff;

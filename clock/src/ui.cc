@@ -8,7 +8,9 @@ UI::UI(Display7Seg* display,
       encoder_(encoder),
       knob_offset_(0),
       set_position_(3),
+      display_needs_refresh_(true),
       update_count_(0),
+      ticks_per_colon_(4096), // Set something reasonably high for initialization
       colon_toggle_(true)
 { }
 
@@ -35,7 +37,7 @@ UI::Action UI::set_next_position() {
 }
 
 UI::Action UI::set_change_time() {
-    update_count_ = 0;
+    display_needs_refresh_ = true;
     int8_t diff = encoder_->GetCount() - knob_offset_;
     knob_offset_ = encoder_->GetCount();
     switch (set_position_) {
@@ -55,20 +57,39 @@ void UI::refresh_display() {
     display_->ToggleColon(colon_toggle_);
     colon_toggle_ = !colon_toggle_;
     display_->WriteDisplay();
+    display_needs_refresh_ = false;
 }
 
-UI::Action UI::Update() {
+bool UI::is_next_second(const uint8_t current_second) {
+    return last_second_ != current_second;
+}
+
+bool UI::is_halfway_through_second() {
+    return update_count_ == ticks_per_colon_;
+}
+
+bool UI::display_needs_refresh() {
+    return display_needs_refresh_;
+}
+
+UI::Action UI::Update(const stm32::RTClock::Time& time) {
+    if (is_next_second(time.second)) {
+        last_second_ = time.second;
+        ticks_per_colon_ = update_count_ / 2; // Half second per colon tick
+        update_count_ = 0;
+    }
     encoder_->ReadState();
     if (encoder_->GetButtonAction() == BUTTON_ACTION_DOWN) {
+        refresh_display();
         return set_next_position();
     }
     if (knob_offset_ != encoder_->GetCount()) {
         return set_change_time();
     }
-    if (update_count_ == 0) {
+    if (is_halfway_through_second() || display_needs_refresh()) {
         refresh_display();
     }
-    update_count_ = (update_count_ + 1) % 9000;
+    update_count_++;
     return Action(0, 0);
 }
 

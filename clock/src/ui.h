@@ -3,6 +3,7 @@
 
 #include "drivers/stm32/display_7seg.h"
 #include "drivers/stm32/pec11_renc.h"
+#include "drivers/stm32/rtc.h"
 
 namespace clock {
 
@@ -12,7 +13,13 @@ private:
     Pec11RotaryEncoder* encoder_;
     long knob_offset_;
     uint8_t set_position_;
+
+    bool display_needs_refresh_;
+    
     uint32_t update_count_;
+    uint32_t ticks_per_colon_;
+    uint8_t last_second_;
+
     bool colon_toggle_;
 
 public:
@@ -38,11 +45,14 @@ public:
     void ToggleColon(bool on);
     void SetHour(uint8_t hour, bool pm);
     void SetMinute(uint8_t minute);
-    Action Update();
+    Action Update(const stm32::RTClock::Time& time);
 private:
     Action set_next_position();
     Action set_change_time();
     void refresh_display();
+    bool is_next_second(const uint8_t current_second);
+    bool is_halfway_through_second();
+    bool display_needs_refresh();
 };
 
 }
