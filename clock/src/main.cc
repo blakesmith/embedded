@@ -48,15 +48,15 @@ static bool set_time() {
 }
 
 static void Init() {
-//    gpioa.Init();
+    gpioa.Init();
     gpiob.Init();
     status_led.Init();
-    // status_led.SetError(!rtc.Init());
-    // i2c.Init();
-    // display.Init();
-    // encoder.Init();
+    status_led.SetError(!rtc.Init());
+    i2c.Init();
+    display.Init();
+    encoder.Init();
 
-    // status_led.SetError(!set_time());
+    status_led.SetError(!set_time());
 }
 
 static void update_time() {
@@ -94,10 +94,8 @@ int main() {
 
     status_led.SetOk(true);
     while (true) {
+        update_time();
     }
-    // while (true) {
-    //     update_time();
-    // }
 }
 
 extern "C" {
