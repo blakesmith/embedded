@@ -243,7 +243,7 @@ U 1 1 5AE146A0
 P 8700 6750
 F 0 "U4" H 8700 8728 50  0000 C CNN
 F 1 "STM32L151C8TxA" H 8700 8637 50  0000 C CNN
-F 2 "Package_QFP:LQFP-48_7x7mm_P0.5mm" H 12200 8425 50  0001 R TNN
+F 2 "Housings_QFP:LQFP-48_7x7mm_Pitch0.5mm" H 12200 8425 50  0001 R TNN
 F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/CD00277537.pdf" H 8700 6750 50  0001 C CNN
 	1    8700 6750
 	1    0    0    -1  
@@ -334,8 +334,6 @@ Wire Wire Line
 Connection ~ 3000 1400
 Wire Wire Line
 	3000 1400 3850 1400
-Wire Wire Line
-	3500 1500 3650 1500
 $Comp
 L power:GND #PWR016
 U 1 1 5AE29D5B
@@ -837,7 +835,7 @@ U 1 1 5AF22D7B
 P 14700 4250
 F 0 "J3" H 14260 4296 50  0000 R CNN
 F 1 "Conn_ARM_JTAG_SWD_10" H 14260 4205 50  0000 R CNN
-F 2 "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD" H 14750 3700 50  0001 L TNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch1.27mm" H 14750 3700 50  0001 L TNN
 F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex_debug_connectors.pdf" V 14350 3000 50  0001 C CNN
 	1    14700 4250
 	1    0    0    -1  
@@ -924,4 +922,6 @@ Wire Wire Line
 NoConn ~ 15200 4350
 NoConn ~ 15200 4450
 NoConn ~ 15200 3950
+Wire Wire Line
+	3500 1500 3850 1500
 $EndSCHEMATC
