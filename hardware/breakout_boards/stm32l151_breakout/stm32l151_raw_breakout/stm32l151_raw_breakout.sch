@@ -26,7 +26,7 @@ F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/da
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J1
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J1
 U 1 1 5AC94755
 P 800 2250
 F 0 "J1" H 720 2025 50  0000 C CNN
@@ -39,7 +39,7 @@ $EndComp
 Wire Wire Line
 	1000 2250 1600 2250
 $Comp
-L Connector:Conn_01x01 J2
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J2
 U 1 1 5AC947D9
 P 800 2450
 F 0 "J2" H 720 2225 50  0000 C CNN
@@ -52,7 +52,7 @@ $EndComp
 Wire Wire Line
 	1000 2450 1600 2450
 $Comp
-L Connector:Conn_01x01 J3
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J3
 U 1 1 5AC94826
 P 800 2650
 F 0 "J3" H 720 2425 50  0000 C CNN
@@ -65,7 +65,7 @@ $EndComp
 Wire Wire Line
 	1000 2650 1600 2650
 $Comp
-L Connector:Conn_01x01 J4
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J4
 U 1 1 5AC94897
 P 800 2850
 F 0 "J4" H 720 2625 50  0000 C CNN
@@ -78,7 +78,7 @@ $EndComp
 Wire Wire Line
 	1000 2850 1600 2850
 $Comp
-L Connector:Conn_01x01 J5
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J5
 U 1 1 5AC948FB
 P 800 2950
 F 0 "J5" H 720 2725 50  0000 C CNN
@@ -91,7 +91,7 @@ $EndComp
 Wire Wire Line
 	1000 2950 1600 2950
 $Comp
-L Connector:Conn_01x01 J6
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J6
 U 1 1 5AC94975
 P 800 3150
 F 0 "J6" H 720 2925 50  0000 C CNN
@@ -104,7 +104,7 @@ $EndComp
 Wire Wire Line
 	1000 3150 1600 3150
 $Comp
-L Connector:Conn_01x01 J7
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J7
 U 1 1 5AC94A00
 P 800 3250
 F 0 "J7" H 720 3025 50  0000 C CNN
@@ -117,7 +117,7 @@ $EndComp
 Wire Wire Line
 	1000 3250 1600 3250
 $Comp
-L Connector:Conn_01x01 J8
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J8
 U 1 1 5AC94AB5
 P 800 3350
 F 0 "J8" H 720 3125 50  0000 C CNN
@@ -130,7 +130,7 @@ $EndComp
 Wire Wire Line
 	1000 3350 1600 3350
 $Comp
-L Connector:Conn_01x01 J9
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J9
 U 1 1 5AC94B7C
 P 800 3550
 F 0 "J9" H 720 3325 50  0000 C CNN
@@ -141,7 +141,7 @@ F 3 "~" H 800 3550 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J10
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J10
 U 1 1 5AC94BEA
 P 800 3650
 F 0 "J10" H 720 3425 50  0000 C CNN
@@ -152,7 +152,7 @@ F 3 "~" H 800 3650 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J11
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J11
 U 1 1 5AC94C59
 P 800 3750
 F 0 "J11" H 720 3525 50  0000 C CNN
@@ -163,7 +163,7 @@ F 3 "~" H 800 3750 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J12
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J12
 U 1 1 5AC94CC9
 P 800 3850
 F 0 "J12" H 720 3625 50  0000 C CNN
@@ -174,7 +174,7 @@ F 3 "~" H 800 3850 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J13
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J13
 U 1 1 5AC94D3C
 P 800 3950
 F 0 "J13" H 720 3725 50  0000 C CNN
@@ -185,7 +185,7 @@ F 3 "~" H 800 3950 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J14
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J14
 U 1 1 5AC94DB6
 P 800 4050
 F 0 "J14" H 720 3825 50  0000 C CNN
@@ -196,7 +196,7 @@ F 3 "~" H 800 4050 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J15
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J15
 U 1 1 5AC94E33
 P 800 4150
 F 0 "J15" H 720 3925 50  0000 C CNN
@@ -207,7 +207,7 @@ F 3 "~" H 800 4150 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J16
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J16
 U 1 1 5AC94EB7
 P 800 4250
 F 0 "J16" H 720 4025 50  0000 C CNN
@@ -218,7 +218,7 @@ F 3 "~" H 800 4250 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J17
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J17
 U 1 1 5AC94F40
 P 800 4350
 F 0 "J17" H 720 4125 50  0000 C CNN
@@ -229,7 +229,7 @@ F 3 "~" H 800 4350 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J18
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J18
 U 1 1 5AC94FCE
 P 800 4450
 F 0 "J18" H 720 4225 50  0000 C CNN
@@ -240,7 +240,7 @@ F 3 "~" H 800 4450 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J19
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J19
 U 1 1 5AC95097
 P 800 4550
 F 0 "J19" H 720 4325 50  0000 C CNN
@@ -251,7 +251,7 @@ F 3 "~" H 800 4550 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J20
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J20
 U 1 1 5AC951CD
 P 800 4650
 F 0 "J20" H 720 4425 50  0000 C CNN
@@ -262,7 +262,7 @@ F 3 "~" H 800 4650 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J21
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J21
 U 1 1 5AC9526A
 P 800 4750
 F 0 "J21" H 720 4525 50  0000 C CNN
@@ -273,7 +273,7 @@ F 3 "~" H 800 4750 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J22
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J22
 U 1 1 5AC95312
 P 800 4850
 F 0 "J22" H 720 4625 50  0000 C CNN
@@ -284,7 +284,7 @@ F 3 "~" H 800 4850 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J23
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J23
 U 1 1 5AC953B7
 P 800 4950
 F 0 "J23" H 720 4725 50  0000 C CNN
@@ -295,7 +295,7 @@ F 3 "~" H 800 4950 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J24
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J24
 U 1 1 5AC95461
 P 800 5050
 F 0 "J24" H 720 4825 50  0000 C CNN
@@ -306,7 +306,7 @@ F 3 "~" H 800 5050 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J25
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J25
 U 1 1 5AC956D2
 P 5500 1250
 F 0 "J25" V 5466 1162 50  0000 R CNN
@@ -317,7 +317,7 @@ F 3 "~" H 5500 1250 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J27
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J27
 U 1 1 5AC95805
 P 5600 1250
 F 0 "J27" V 5566 1162 50  0000 R CNN
@@ -328,7 +328,7 @@ F 3 "~" H 5600 1250 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J29
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J29
 U 1 1 5AC958E4
 P 5700 1250
 F 0 "J29" V 5666 1162 50  0000 R CNN
@@ -339,7 +339,7 @@ F 3 "~" H 5700 1250 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J31
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J31
 U 1 1 5AC959C7
 P 5800 1250
 F 0 "J31" V 5766 1162 50  0000 R CNN
@@ -350,7 +350,7 @@ F 3 "~" H 5800 1250 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J26
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J26
 U 1 1 5AC95D38
 P 5500 6000
 F 0 "J26" V 5373 6080 50  0000 L CNN
@@ -361,7 +361,7 @@ F 3 "~" H 5500 6000 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J28
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J28
 U 1 1 5AC95F01
 P 5600 6000
 F 0 "J28" V 5473 6080 50  0000 L CNN
@@ -372,7 +372,7 @@ F 3 "~" H 5600 6000 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J30
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J30
 U 1 1 5AC9603E
 P 5700 6000
 F 0 "J30" V 5573 6080 50  0000 L CNN
@@ -383,7 +383,7 @@ F 3 "~" H 5700 6000 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J32
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J32
 U 1 1 5AC96181
 P 5800 6000
 F 0 "J32" V 5673 6080 50  0000 L CNN
@@ -394,7 +394,7 @@ F 3 "~" H 5800 6000 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:Conn_01x01 J33
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J33
 U 1 1 5AC9643B
 P 10250 3550
 F 0 "J33" H 10330 3592 50  0000 L CNN
@@ -405,7 +405,7 @@ F 3 "~" H 10250 3550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J34
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J34
 U 1 1 5AC964CB
 P 10250 3650
 F 0 "J34" H 10330 3692 50  0000 L CNN
@@ -416,7 +416,7 @@ F 3 "~" H 10250 3650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J35
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J35
 U 1 1 5AC9655C
 P 10250 3750
 F 0 "J35" H 10330 3792 50  0000 L CNN
@@ -427,7 +427,7 @@ F 3 "~" H 10250 3750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J36
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J36
 U 1 1 5AC965F0
 P 10250 3850
 F 0 "J36" H 10330 3892 50  0000 L CNN
@@ -438,7 +438,7 @@ F 3 "~" H 10250 3850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J37
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J37
 U 1 1 5AC96687
 P 10250 3950
 F 0 "J37" H 10330 3992 50  0000 L CNN
@@ -449,7 +449,7 @@ F 3 "~" H 10250 3950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J38
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J38
 U 1 1 5AC9677B
 P 10250 4050
 F 0 "J38" H 10330 4092 50  0000 L CNN
@@ -460,7 +460,7 @@ F 3 "~" H 10250 4050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J39
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J39
 U 1 1 5AC96818
 P 10250 4150
 F 0 "J39" H 10330 4192 50  0000 L CNN
@@ -471,7 +471,7 @@ F 3 "~" H 10250 4150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J40
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J40
 U 1 1 5AC968B8
 P 10250 4250
 F 0 "J40" H 10330 4292 50  0000 L CNN
@@ -482,7 +482,7 @@ F 3 "~" H 10250 4250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J41
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J41
 U 1 1 5AC9695B
 P 10250 4350
 F 0 "J41" H 10330 4392 50  0000 L CNN
@@ -493,7 +493,7 @@ F 3 "~" H 10250 4350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J42
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J42
 U 1 1 5AC96A55
 P 10250 4450
 F 0 "J42" H 10330 4492 50  0000 L CNN
@@ -504,7 +504,7 @@ F 3 "~" H 10250 4450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J43
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J43
 U 1 1 5AC96AFE
 P 10250 4550
 F 0 "J43" H 10330 4592 50  0000 L CNN
@@ -515,7 +515,7 @@ F 3 "~" H 10250 4550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J44
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J44
 U 1 1 5AC96BAA
 P 10250 4650
 F 0 "J44" H 10330 4692 50  0000 L CNN
@@ -526,7 +526,7 @@ F 3 "~" H 10250 4650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J45
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J45
 U 1 1 5AC96C59
 P 10250 4750
 F 0 "J45" H 10330 4792 50  0000 L CNN
@@ -537,7 +537,7 @@ F 3 "~" H 10250 4750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J46
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J46
 U 1 1 5AC96D0B
 P 10250 4850
 F 0 "J46" H 10330 4892 50  0000 L CNN
@@ -548,7 +548,7 @@ F 3 "~" H 10250 4850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J47
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J47
 U 1 1 5AC96DC0
 P 10250 4950
 F 0 "J47" H 10330 4992 50  0000 L CNN
@@ -559,7 +559,7 @@ F 3 "~" H 10250 4950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x01 J48
+L stm32l151_raw_breakout-rescue:Conn_01x01-Connector J48
 U 1 1 5AC96F84
 P 10250 5050
 F 0 "J48" H 10330 5092 50  0000 L CNN

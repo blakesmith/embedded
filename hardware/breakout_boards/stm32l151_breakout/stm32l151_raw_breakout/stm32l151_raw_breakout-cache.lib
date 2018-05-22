@@ -1,34 +1,12 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# Connector:Conn_01x01
-#
-DEF Connector:Conn_01x01 J 0 40 Y N 1 F N
-F0 "J" 0 100 50 H V C CNN
-F1 "Connector:Conn_01x01" 0 -100 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Connector*:*_??x*mm*
- Connector*:*1x??x*mm*
- Pin?Header?Straight?1X*
- Pin?Header?Angled?1X*
- Socket?Strip?Straight?1X*
- Socket?Strip?Angled?1X*
-$ENDFPLIST
-DRAW
-S -50 5 0 -5 1 1 6 N
-S -50 50 50 -50 1 1 10 f
-X Pin_1 1 -200 0 150 R 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
 # MCU_ST_STM32:STM32L151CCTx
 #
 DEF MCU_ST_STM32:STM32L151CCTx U 0 40 Y Y 1 L N
 F0 "U" -4000 1725 50 H V L BNN
 F1 "MCU_ST_STM32:STM32L151CCTx" 4000 1725 50 H V R BNN
-F2 "Housings_QFP:LQFP-48_7x7mm_Pitch0.5mm" 4000 1675 50 H I R TNN
+F2 "Package_QFP:LQFP-48_7x7mm_P0.5mm" 4000 1675 50 H I R TNN
 F3 "" 0 0 50 H I C CNN
 DRAW
 S -4000 -1700 4000 1700 0 1 10 f
@@ -80,6 +58,28 @@ X PH1/RCC_OSC_OUT 6 -4100 700 100 R 50 50 1 1 I
 X NRST 7 -4100 1400 100 R 50 50 1 1 I
 X VSSA 8 100 -1800 100 U 50 50 1 1 W
 X VDDA 9 100 1800 100 D 50 50 1 1 W
+ENDDRAW
+ENDDEF
+#
+# stm32l151_raw_breakout-rescue:Conn_01x01-Connector
+#
+DEF stm32l151_raw_breakout-rescue:Conn_01x01-Connector J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "stm32l151_raw_breakout-rescue:Conn_01x01-Connector" 0 -100 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_??x*mm*
+ Connector*:*1x??x*mm*
+ Pin?Header?Straight?1X*
+ Pin?Header?Angled?1X*
+ Socket?Strip?Straight?1X*
+ Socket?Strip?Angled?1X*
+$ENDFPLIST
+DRAW
+S -50 5 0 -5 1 1 6 N
+S -50 50 50 -50 1 1 10 f
+X Pin_1 1 -200 0 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
