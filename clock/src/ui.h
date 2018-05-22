@@ -17,7 +17,7 @@ private:
     bool display_needs_refresh_;
     
     uint32_t update_count_;
-    uint32_t ticks_per_colon_;
+    uint32_t ticks_per_half_second_;
     uint8_t last_second_;
 
     bool colon_toggle_;

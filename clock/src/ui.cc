@@ -10,7 +10,7 @@ UI::UI(Display7Seg* display,
       set_position_(3),
       display_needs_refresh_(true),
       update_count_(0),
-      ticks_per_colon_(4096), // Set something reasonably high for initialization
+      ticks_per_half_second_(4096), // Set something reasonably high for initialization
       colon_toggle_(true)
 { }
 
@@ -65,7 +65,7 @@ bool UI::is_next_second(const uint8_t current_second) {
 }
 
 bool UI::is_halfway_through_second() {
-    return update_count_ == ticks_per_colon_;
+    return update_count_ == ticks_per_half_second_;
 }
 
 bool UI::display_needs_refresh() {
@@ -75,7 +75,7 @@ bool UI::display_needs_refresh() {
 UI::Action UI::Update(const stm32::RTClock::Time& time) {
     if (is_next_second(time.second)) {
         last_second_ = time.second;
-        ticks_per_colon_ = update_count_ / 2; // Half second per colon tick
+        ticks_per_half_second_ = update_count_ / 2; // Half second per colon tick
         update_count_ = 0;
     }
     encoder_->ReadState();
