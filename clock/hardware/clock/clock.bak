@@ -334,8 +334,6 @@ Wire Wire Line
 Connection ~ 3000 1400
 Wire Wire Line
 	3000 1400 3850 1400
-Wire Wire Line
-	3500 1500 3650 1500
 $Comp
 L power:GND #PWR016
 U 1 1 5AE29D5B
@@ -924,4 +922,6 @@ Wire Wire Line
 NoConn ~ 15200 4350
 NoConn ~ 15200 4450
 NoConn ~ 15200 3950
+Wire Wire Line
+	3500 1500 3850 1500
 $EndSCHEMATC

@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/blake/projects/stm32/clock/hardware/clock/clock.sch)
-    (date "Mon 21 May 2018 11:19:01 PM CDT")
+    (date "Wed 23 May 2018 09:22:48 PM CDT")
     (tool "Eeschema 5.0.0-rc2-dev-unknown-4202bb6~64~ubuntu16.04.1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -138,7 +138,7 @@
       (tstamp 5AE70B32))
     (comp (ref J1)
       (value USB_B_Micro)
-      (footprint Connectors:USB_Micro-B_10103594-0001LF)
+      (footprint custom_connectors:10118192-0001LF)
       (libsource (lib Connector) (part USB_B_Micro))
       (sheetpath (names /) (tstamps /))
       (tstamp 5AE9176E))
