@@ -3,3 +3,5 @@
 *.elf
 bazel-*
 *.stl
+*rescue.*
+*.kicad_pcb-bak
