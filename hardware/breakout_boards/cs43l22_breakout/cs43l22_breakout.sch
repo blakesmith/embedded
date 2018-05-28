@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:cs43l22_breakout-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -900,17 +901,6 @@ $EndComp
 Wire Wire Line
 	1450 1350 950  1350
 $Comp
-L power:+5V #PWR020
-U 1 1 5AECA54A
-P 950 1350
-F 0 "#PWR020" H 950 1200 50  0001 C CNN
-F 1 "+5V" V 965 1478 50  0000 L CNN
-F 2 "" H 950 1350 50  0001 C CNN
-F 3 "" H 950 1350 50  0001 C CNN
-	1    950  1350
-	0    -1   -1   0   
-$EndComp
-$Comp
 L power:+1V8 #PWR022
 U 1 1 5AECA755
 P 2650 1350
@@ -934,4 +924,49 @@ F 3 "" H 1750 1650 50  0001 C CNN
 	1    1750 1650
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:Conn_01x01_Male Vcc1
+U 1 1 5B0B0AAD
+P 750 1350
+F 0 "Vcc1" H 722 1280 50  0000 R CNN
+F 1 "+5V" H 722 1371 50  0000 R CNN
+F 2 "connector:Conn_1pin_2.54mm" H 750 1350 50  0001 C CNN
+F 3 "~" H 750 1350 50  0001 C CNN
+	1    750  1350
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male GND1
+U 1 1 5B0B0EFF
+P 750 1500
+F 0 "GND1" H 700 1450 50  0000 R CNN
+F 1 "GND" H 722 1521 50  0000 R CNN
+F 2 "connector:Conn_1pin_2.54mm" H 750 1500 50  0001 C CNN
+F 3 "~" H 750 1500 50  0001 C CNN
+	1    750  1500
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male GND2
+U 1 1 5B0B113B
+P 750 1650
+F 0 "GND2" H 722 1580 50  0000 R CNN
+F 1 "GND" H 722 1671 50  0000 R CNN
+F 2 "connector:Conn_1pin_2.54mm" H 750 1650 50  0001 C CNN
+F 3 "~" H 750 1650 50  0001 C CNN
+	1    750  1650
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	950  1500 1450 1500
+Wire Wire Line
+	1450 1650 1750 1650
+Connection ~ 1750 1650
+Wire Wire Line
+	950  1650 1450 1650
+Connection ~ 1450 1650
+Wire Wire Line
+	1450 1600 1450 1650
+Wire Wire Line
+	1450 1500 1450 1650
 $EndSCHEMATC
