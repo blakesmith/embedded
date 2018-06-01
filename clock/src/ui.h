@@ -4,6 +4,7 @@
 #include "drivers/stm32/display_7seg.h"
 #include "drivers/stm32/pec11_renc.h"
 #include "drivers/stm32/rtc.h"
+#include "drivers/stm32/status_led.h"
 
 namespace clock {
 
@@ -11,6 +12,7 @@ class UI {
 private:    
     Display7Seg* display_;
     Pec11RotaryEncoder* encoder_;
+    StatusLed* status_led_;
     long knob_offset_;
     uint8_t set_position_;
 
@@ -38,7 +40,8 @@ public:
     };
 
     UI(Display7Seg* display,
-       Pec11RotaryEncoder* encoder_);
+       Pec11RotaryEncoder* encoder,
+       StatusLed* status_led);
     ~UI() = default;
 
     void Clear();
@@ -50,6 +53,7 @@ private:
     Action set_next_position();
     Action set_change_time();
     void refresh_display();
+    void toggle_status_led();
     bool is_next_second(const uint8_t current_second);
     bool is_halfway_through_second();
     bool display_needs_refresh();

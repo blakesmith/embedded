@@ -35,7 +35,7 @@ Pec11RotaryEncoder encoder(encoder_clockwise,
                            encoder_counter_clockwise,
                            encoder_button);
 
-UI ui(&display, &encoder);
+UI ui(&display, &encoder, &status_led);
 
 static bool set_time() {
     RTClock::Time time;
