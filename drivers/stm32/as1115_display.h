@@ -20,7 +20,6 @@ private:
     void wakeup();
     void disable_decode();
     void set_scan_limit(uint8_t limit);
-    void set_features();
 };
 
 #endif
