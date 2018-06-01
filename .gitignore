@@ -4,4 +4,6 @@
 bazel-*
 *.stl
 *rescue.*
+*cache-*
+*.bak
 *.kicad_pcb-bak
