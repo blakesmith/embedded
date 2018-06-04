@@ -1,6 +1,8 @@
 cc_binary(
     name = "clock_stm32",
     srcs = [
+        "src/stm32l1xx_it.cc",
+        "src/stm32l1xx_it.h",
         "src/main.cc",
         "src/ui.h",
         "src/ui.cc",

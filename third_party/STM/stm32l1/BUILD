@@ -13,11 +13,9 @@ cc_library(
     srcs = [
         "common/startup_stm32l151xc.s",
         "common/system_stm32l1xx.c",
-        "common/stm32l1xx_it.c"
     ],
     hdrs = [
         "common/system_stm32l1xx.h",
-        "common/stm32l1xx_it.h"
     ],
     deps = [
         "stm_cmsis",
