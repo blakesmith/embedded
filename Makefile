@@ -63,6 +63,9 @@ clock_stm32_breakout:
 	--define TARGET=stm32l1 \
 	//clock/scripts:breakout_flash
 
-arm_gdb:
-	bazel run \
-	//tools/arm_compiler/arm_none_gcc:arm-none-eabi-gdb \
+stm32_usb:
+	bazel build \
+	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
+	--cpu=armeabi-v7a-m0 \
+	--define TARGET=stm32f0 \
+	//third_party/STM/stm32f0/usb:core
