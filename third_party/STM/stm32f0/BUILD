@@ -13,3 +13,9 @@ cc_library(
     strip_include_prefix = "CMSIS/Device/ST/STM32F0xx/Include/",
     visibility = ["//visibility:public"]
 )
+
+alias(
+    name = "stm32f042_linker_script",
+    actual = "STM32F042K6Tx_FLASH.ld",
+    visibility = ["//visibility:public"]
+)

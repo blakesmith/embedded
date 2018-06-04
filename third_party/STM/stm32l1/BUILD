@@ -27,7 +27,6 @@ cc_library(
         "-DSTM32L1XX_MD"
     ],
     visibility = ["//visibility:public"]
-
 )
 
 cc_library(
