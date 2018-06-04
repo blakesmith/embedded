@@ -69,3 +69,10 @@ keebee_stm32:
 	--cpu=armeabi-v7a-m0 \
 	--define TARGET=stm32f0 \
 	//keebee/src/hid:keyboard
+
+stm32f0_base:
+	bazel build \
+	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
+	--cpu=armeabi-v7a-m0 \
+	--define TARGET=stm32f0 \
+	//third_party/STM/stm32f0/cube:base
