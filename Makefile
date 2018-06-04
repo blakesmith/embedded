@@ -63,9 +63,9 @@ clock_stm32_breakout:
 	--define TARGET=stm32l1 \
 	//clock/scripts:breakout_flash
 
-usb_hid_keyboard:
+keebee_stm32:
 	bazel build \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
 	--cpu=armeabi-v7a-m0 \
 	--define TARGET=stm32f0 \
-	//third_party/STM/stm32f0/usb:hid_keyboard
+	//keebee/src/hid:keyboard
