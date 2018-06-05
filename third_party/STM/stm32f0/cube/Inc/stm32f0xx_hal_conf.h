@@ -190,6 +190,10 @@
  #include "stm32f0xx_hal_flash.h"
 #endif /* HAL_FLASH_MODULE_ENABLED */
 
+#ifdef HAL_PCD_MODULE_ENABLED
+ #include "stm32f0xx_hal_pcd.h"
+#endif /* HAL_PCD_MODULE_ENABLED */
+
 /* Exported macro ------------------------------------------------------------*/
 #ifdef  USE_FULL_ASSERT
 /**

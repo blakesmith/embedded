@@ -10,6 +10,8 @@ cc_library(
         "Inc/stm32f0xx_hal_flash_ex.h",
         "Inc/stm32f0xx_hal_gpio.h",
         "Inc/stm32f0xx_hal_gpio_ex.h",
+        "Inc/stm32f0xx_hal_pcd.h",
+        "Inc/stm32f0xx_hal_pcd_ex.h",
         "Inc/stm32f0xx_ll_gpio.h",
         "Inc/stm32f0xx_hal_rcc.h",
         "Inc/stm32f0xx_hal_rcc_ex.h",
@@ -18,6 +20,8 @@ cc_library(
     srcs = [
         "Src/stm32f0xx_hal_gpio.c",
         "Src/stm32f0xx_ll_gpio.c",
+        "Src/stm32f0xx_hal_pcd.c",
+        "Src/stm32f0xx_hal_pcd_ex.c",
         "Src/stm32f0xx_hal_rcc.c",
         "Src/stm32f0xx_ll_rcc.c",
     ],
