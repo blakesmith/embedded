@@ -70,7 +70,7 @@ bool UI::is_next_second(const uint8_t current_second) {
     return last_second_ != current_second;
 }
 
-bool UI::is_halfway_through_second() {
+bool UI::is_halfway_through_second(const stm32::RTClock::Time& time) {
     return update_count_ == ticks_per_half_second_;
 }
 
@@ -92,7 +92,7 @@ UI::Action UI::Update(const stm32::RTClock::Time& time) {
     if (knob_offset_ != encoder_->GetCount()) {
         return set_change_time();
     }
-    if (is_halfway_through_second() || display_needs_refresh()) {
+    if (is_halfway_through_second(time) || display_needs_refresh()) {
         refresh_display();
         toggle_status_led();
     }

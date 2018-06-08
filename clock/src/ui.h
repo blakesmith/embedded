@@ -55,7 +55,7 @@ private:
     void refresh_display();
     void toggle_status_led();
     bool is_next_second(const uint8_t current_second);
-    bool is_halfway_through_second();
+    bool is_halfway_through_second(const stm32::RTClock::Time& time);
     bool display_needs_refresh();
 };
 
