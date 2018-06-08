@@ -15,7 +15,7 @@
 
 namespace stm32 {
 
-bool RTClock::Init() {
+bool RTClock::Init(const ClockSource clock_source) {
     RTC_InitTypeDef rcc_init;
 
 #ifdef STM32L1XX_MD
@@ -38,20 +38,34 @@ bool RTClock::Init() {
 
     RCC_LSICmd(ENABLE);
     while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
-    
-    RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+
+    if (clock_source == ClockSource::LSE) {
+        RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
+    } else {
+        RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+    }
     RCC_RTCCLKCmd(ENABLE);
 
     RTC_StructInit(&rcc_init);
     rcc_init.RTC_HourFormat = RTC_HourFormat_12;
 
 #if defined(STM32F411xE) || defined(STM32F413_423xx)
-    rcc_init.RTC_AsynchPrediv = 0x7F;
-    rcc_init.RTC_SynchPrediv = 0xF9;
+    if (clock_source == ClockSource::LSE) {
+        rcc_init.RTC_AsyncPrediv = 0x7F;
+        rcc_init.RTC_SynchPrediv = 0xFF;
+    } else {
+        rcc_init.RTC_AsynchPrediv = 0x7F;
+        rcc_init.RTC_SynchPrediv = 0xF9;
+    }
 #endif
 #ifdef STM32L1XX_MD
-    rcc_init.RTC_AsynchPrediv = 0x7C;
-    rcc_init.RTC_SynchPrediv = 0x127;
+    if (clock_source == ClockSource::LSE) {
+        rcc_init.RTC_AsynchPrediv = 0x7F;
+        rcc_init.RTC_SynchPrediv = 0xFF;
+    } else {
+        rcc_init.RTC_AsynchPrediv = 0x7C;
+        rcc_init.RTC_SynchPrediv = 0x127;
+    }
 #endif
 
     bool success = RTC_Init(&rcc_init) == SUCCESS;

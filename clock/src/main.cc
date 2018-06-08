@@ -51,7 +51,7 @@ static void Init() {
     gpioa.Init();
     gpiob.Init();
     status_led.Init();
-    status_led.SetError(!rtc.Init());
+    status_led.SetError(!rtc.Init(RTClock::ClockSource::LSI));
     i2c.Init();
     display.Init();
     encoder.Init();

@@ -11,6 +11,11 @@ public:
         AM,
         PM
     };
+
+    enum ClockSource {
+        LSI, // Whatever internal oscillator the MCU wants
+        LSE, // 32.768 external crystal oscillator
+    };
     
     struct Time {
         uint8_t hour;
@@ -26,7 +31,7 @@ public:
     bool SetTime(Time* time);
     void GetTime(Time* time);
     
-    bool Init();
+    bool Init(const ClockSource clock_source);
 };
 
 }
