@@ -44,8 +44,15 @@ bool RTClock::Init() {
 
     RTC_StructInit(&rcc_init);
     rcc_init.RTC_HourFormat = RTC_HourFormat_12;
+
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
     rcc_init.RTC_AsynchPrediv = 0x7F;
     rcc_init.RTC_SynchPrediv = 0xF9;
+#endif
+#ifdef STM32L1XX_MD
+    rcc_init.RTC_AsynchPrediv = 0x7C;
+    rcc_init.RTC_SynchPrediv = 0x127;
+#endif
 
     bool success = RTC_Init(&rcc_init) == SUCCESS;
     RTC_WriteProtectionCmd(ENABLE);
@@ -56,6 +63,7 @@ void RTClock::GetTime(Time* time) {
     RTC_TimeTypeDef get_time;
 
     RTC_GetTime(RTC_Format_BIN, &get_time);
+    time->subsecond = RTC_GetSubSecond();
     time->hour = get_time.RTC_Hours;
     time->minute = get_time.RTC_Minutes;
     time->second = get_time.RTC_Seconds;
