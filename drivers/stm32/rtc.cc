@@ -73,6 +73,16 @@ void RTClock::GetTime(Time* time) {
     time->am_pm = get_time.RTC_H12 == RTC_H12_AM ? AM_PM::AM : AM_PM::PM;
 }
 
+bool RTClock::SetTime(Time* time) {
+    RTC_TimeTypeDef set_time;
+
+    set_time.RTC_Hours = time->hour;
+    set_time.RTC_Minutes = time->minute;
+    set_time.RTC_Seconds = time->second;
+    set_time.RTC_H12 = time->am_pm == AM_PM::AM ? RTC_H12_AM : RTC_H12_PM;
+    return RTC_SetTime(RTC_Format_BIN, &set_time) == SUCCESS;
+}
+
 uint32_t RTClock::GetSynchPrediv() const {
 #if defined(STM32F411xE) || defined(STM32F413_423xx)
     if (clock_source_ == ClockSource::LSE) {
@@ -105,16 +115,6 @@ uint32_t RTClock::GetAsynchPrediv() const {
         return 0x7C;
     }
 #endif
-}
-
-bool RTClock::SetTime(Time* time) {
-    RTC_TimeTypeDef set_time;
-
-    set_time.RTC_Hours = time->hour;
-    set_time.RTC_Minutes = time->minute;
-    set_time.RTC_Seconds = time->second;
-    set_time.RTC_H12 = time->am_pm == AM_PM::AM ? RTC_H12_AM : RTC_H12_PM;
-    return RTC_SetTime(RTC_Format_BIN, &set_time) == SUCCESS;
 }
 
 }
