@@ -1,6 +1,6 @@
 pcb_height = 58.420;
 pcb_length = 45.720;
-pcb_thickness = 1.6; // TODO: double check, add tolerance
+pcb_thickness = 1.6 + 0.2;
 
 stand_width = pcb_length + 4;
 stand_length = 30.0;
