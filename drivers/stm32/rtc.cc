@@ -15,7 +15,11 @@
 
 namespace stm32 {
 
-bool RTClock::Init(const ClockSource clock_source) {
+RTClock::RTClock(const ClockSource clock_source)
+    : clock_source_(clock_source)
+{ }
+
+bool RTClock::Init() {
     RTC_InitTypeDef rcc_init;
 
 #ifdef STM32L1XX_MD
@@ -36,37 +40,22 @@ bool RTClock::Init(const ClockSource clock_source) {
     PWR_BackupAccessCmd(ENABLE);
 #endif
 
-    RCC_LSICmd(ENABLE);
-    while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
-
-    if (clock_source == ClockSource::LSE) {
-        RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
-    } else {
+    if (clock_source_ == ClockSource::LSI) {
+        RCC_LSICmd(ENABLE);
+        while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
         RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+    } else {
+        RCC_LSEConfig(RCC_LSE_ON);
+        while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET);
+        RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
     }
-    RCC_RTCCLKCmd(ENABLE);
 
     RTC_StructInit(&rcc_init);
     rcc_init.RTC_HourFormat = RTC_HourFormat_12;
+    rcc_init.RTC_AsynchPrediv = GetAsynchPrediv();
+    rcc_init.RTC_SynchPrediv = GetSynchPrediv();
 
-#if defined(STM32F411xE) || defined(STM32F413_423xx)
-    if (clock_source == ClockSource::LSE) {
-        rcc_init.RTC_AsyncPrediv = 0x7F;
-        rcc_init.RTC_SynchPrediv = 0xFF;
-    } else {
-        rcc_init.RTC_AsynchPrediv = 0x7F;
-        rcc_init.RTC_SynchPrediv = 0xF9;
-    }
-#endif
-#ifdef STM32L1XX_MD
-    if (clock_source == ClockSource::LSE) {
-        rcc_init.RTC_AsynchPrediv = 0x7F;
-        rcc_init.RTC_SynchPrediv = 0xFF;
-    } else {
-        rcc_init.RTC_AsynchPrediv = 0x7C;
-        rcc_init.RTC_SynchPrediv = 0x127;
-    }
-#endif
+    RCC_RTCCLKCmd(ENABLE);
 
     bool success = RTC_Init(&rcc_init) == SUCCESS;
     RTC_WriteProtectionCmd(ENABLE);
@@ -82,6 +71,40 @@ void RTClock::GetTime(Time* time) {
     time->minute = get_time.RTC_Minutes;
     time->second = get_time.RTC_Seconds;
     time->am_pm = get_time.RTC_H12 == RTC_H12_AM ? AM_PM::AM : AM_PM::PM;
+}
+
+uint32_t RTClock::GetSynchPrediv() const {
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
+    if (clock_source_ == ClockSource::LSE) {
+        return 0xFF;
+    } else {
+        return 0xF9;
+    }
+#endif
+#ifdef STM32L1XX_MD
+    if (clock_source_ == ClockSource::LSE) {
+        return 0xFF;
+    } else {
+        return 0x127;
+    }
+#endif
+}
+
+uint32_t RTClock::GetAsynchPrediv() const {
+#if defined(STM32F411xE) || defined(STM32F413_423xx)
+    if (clock_source_ == ClockSource::LSE) {
+        return 0x7F;
+    } else {
+        return 0x7F;
+    }
+#endif
+#ifdef STM32L1XX_MD
+    if (clock_source_ == ClockSource::LSE) {
+        return 0x7F;
+    } else {
+        return 0x7C;
+    }
+#endif
 }
 
 bool RTClock::SetTime(Time* time) {

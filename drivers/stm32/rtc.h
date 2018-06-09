@@ -25,13 +25,19 @@ public:
         AM_PM am_pm;
     };
     
-    RTClock() = default;
+    RTClock(const ClockSource clock_source);
     ~RTClock() = default;
 
     bool SetTime(Time* time);
     void GetTime(Time* time);
+
+    uint32_t GetSynchPrediv() const;
+    uint32_t GetAsynchPrediv() const;
     
-    bool Init(const ClockSource clock_source);
+    bool Init();
+
+private:
+    const ClockSource clock_source_;
 };
 
 }

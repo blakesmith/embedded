@@ -10,7 +10,7 @@
 using namespace clock;
 using namespace stm32;
 
-RTClock rtc;
+RTClock rtc(RTClock::ClockSource::LSI);
 
 GPIOBus gpioa(GPIOBus::Id::A);
 GPIOBus gpiob(GPIOBus::Id::B);
@@ -51,7 +51,7 @@ static void Init() {
     gpioa.Init();
     gpiob.Init();
     status_led.Init();
-    status_led.SetError(!rtc.Init(RTClock::ClockSource::LSI));
+    status_led.SetError(!rtc.Init());
     i2c.Init();
     display.Init();
     encoder.Init();
