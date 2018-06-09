@@ -55,9 +55,9 @@ bool RTClock::Init() {
     rcc_init.RTC_AsynchPrediv = GetAsynchPrediv();
     rcc_init.RTC_SynchPrediv = GetSynchPrediv();
 
-    RCC_RTCCLKCmd(ENABLE);
-
     bool success = RTC_Init(&rcc_init) == SUCCESS;
+
+    RCC_RTCCLKCmd(ENABLE);
     RTC_WriteProtectionCmd(ENABLE);
     return success;
 }
