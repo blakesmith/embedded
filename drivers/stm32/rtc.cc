@@ -66,7 +66,7 @@ void RTClock::GetTime(Time* time) {
     RTC_TimeTypeDef get_time;
 
     RTC_GetTime(RTC_Format_BIN, &get_time);
-    time->subsecond = RTC_GetSubSecond();
+    time->subsecond = static_cast<uint8_t>((RTC_GetSubSecond() * 0xFF) / GetSynchPrediv());
     time->hour = get_time.RTC_Hours;
     time->minute = get_time.RTC_Minutes;
     time->second = get_time.RTC_Seconds;
