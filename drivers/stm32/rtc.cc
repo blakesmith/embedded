@@ -83,7 +83,7 @@ bool RTClock::SetTime(Time* time) {
     return RTC_SetTime(RTC_Format_BIN, &set_time) == SUCCESS;
 }
 
-uint32_t RTClock::GetSynchPrediv() const {
+uint32_t inline RTClock::GetSynchPrediv() const {
 #if defined(STM32F411xE) || defined(STM32F413_423xx)
     if (clock_source_ == ClockSource::LSE) {
         return 0xFF;
@@ -100,7 +100,7 @@ uint32_t RTClock::GetSynchPrediv() const {
 #endif
 }
 
-uint32_t RTClock::GetAsynchPrediv() const {
+uint32_t inline RTClock::GetAsynchPrediv() const {
 #if defined(STM32F411xE) || defined(STM32F413_423xx)
     if (clock_source_ == ClockSource::LSE) {
         return 0x7F;

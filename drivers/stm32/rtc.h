@@ -31,8 +31,8 @@ public:
     bool SetTime(Time* time);
     void GetTime(Time* time);
 
-    uint32_t GetSynchPrediv() const;
-    uint32_t GetAsynchPrediv() const;
+    uint32_t inline GetSynchPrediv() const;
+    uint32_t inline GetAsynchPrediv() const;
     
     bool Init();
 
