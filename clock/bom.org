@@ -1,19 +1,20 @@
 #+TITLE: Bill of Materials
 
-| Name                                    | KiCad BOM | Quantity | Part Number           |      |                                                                                                       |
-|-----------------------------------------+-----------+----------+-----------------------+------+-------------------------------------------------------------------------------------------------------|
-| STM32L151C8T6                           |           |        1 | 497-11190-ND          | 4.75 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32L151C8T6/497-11190-ND/2640836       |
-| LTP-3784G LED 7-segment 4-Digit display |           |        2 | 160-1547-5-ND         | 3.96 | https://www.digikey.com/product-detail/en/lite-on-inc/LTC-4727JS/160-1547-5-ND/408220                 |
-| AS1115-BSST LED Driver                  |           |        1 | AS1115-BSSTCT-ND      | 5.00 | https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597                    |
-| 10-pin header JTAG/SWD                  |           |        1 | 609-3695-1-ND         | 0.84 | https://www.digikey.com/product-detail/en/amphenol-fci/20021121-00010C4LF/609-3695-1-ND/2209147       |
-| FCI Micro USB Connector                 |           |        1 | 609-4613-1-ND         | 0.46 | https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378          |
-| LD1117 3.3V linear regulator            |           |        1 | 497-7308-1-ND         | 0.54 | https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S18TR/497-7308-1-ND/1883983        |
-| ECS 32.768KHZ 12.5PF 0805 Crystal       |           |        1 | XC1617CT-ND           | 0.54 | https://www.digikey.com/product-detail/en/ecs-inc/ECS-.327-12.5-34B-TR/XC1617CT-ND/1693786            |
-| PEC11R Rotary Encoder                   |           |        1 | PEC11R-4215F-S0024-ND | 1.68 | https://www.digikey.com/product-detail/en/bourns-inc/PEC11R-4215F-S0024/PEC11R-4215F-S0024-ND/4499665 |
-| 10pF SMD 0805 Cap                       |           |        2 | 478-3731-1-ND         | 0.23 | https://www.digikey.com/product-detail/en/avx-corporation/08051A100KAT2A/478-3731-1-ND/1116429        |
-| 0.1pF SMD 0805 Cap                      |           |        5 |                       |      |                                                                                                       |
-| 300ohm SMD 0805 Resistor                |           |        3 | 311-300ARCT-ND        | 0.19 | https://www.digikey.com/product-detail/en/yageo/RC0805JR-07300RL/311-300ARCT-ND/731254                |
-| 10k SMD 0805 Resistor                   |           |        4 |                       |      |                                                                                                       |
-| LED SMD 0805 Blue                       |           |        1 |                       |      |                                                                                                       |
-| LED SMD 0805 Red                        |           |        1 |                       |      |                                                                                                       |
-| LED SMD 0805 Green                      |           |        1 |                       |      |                                                                                                       |
+| Name                                    | KiCad BOM | Quantity | Part Number                    |      |                                                                                                       |
+|-----------------------------------------+-----------+----------+--------------------------------+------+-------------------------------------------------------------------------------------------------------|
+| STM32L151C8T6                           |           |        1 | 497-11190-ND                   | 4.75 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32L151C8T6/497-11190-ND/2640836       |
+| LTP-3784G LED 7-segment 4-Digit display |           |        2 | 160-1547-5-ND                  | 3.96 | https://www.digikey.com/product-detail/en/lite-on-inc/LTC-4727JS/160-1547-5-ND/408220                 |
+| AS1115-BSST LED Driver                  |           |        1 | AS1115-BSSTCT-ND               | 5.00 | https://www.digikey.com/product-detail/en/ams/AS1115-BSST/AS1115-BSSTCT-ND/2469597                    |
+| 10-pin header JTAG/SWD                  |           |        1 | 609-3695-1-ND                  | 0.84 | https://www.digikey.com/product-detail/en/amphenol-fci/20021121-00010C4LF/609-3695-1-ND/2209147       |
+| FCI Micro USB Connector                 |           |        1 | 609-4613-1-ND                  | 0.46 | https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378          |
+| LD1117 3.3V linear regulator            |           |        1 | 497-1242-1-ND or 497-1241-1-ND | 0.42 | https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S33TR/497-1242-1-ND/586242         |
+| ECS 32.768KHZ 12.5PF 0805 Crystal       |           |        1 | XC1617CT-ND                    | 0.54 | https://www.digikey.com/product-detail/en/ecs-inc/ECS-.327-12.5-34B-TR/XC1617CT-ND/1693786            |
+| PEC11R Rotary Encoder                   |           |        1 | PEC11R-4215F-S0024-ND          | 1.68 | https://www.digikey.com/product-detail/en/bourns-inc/PEC11R-4215F-S0024/PEC11R-4215F-S0024-ND/4499665 |
+| 10pF SMD 0805 Cap                       |           |        2 | 478-3731-1-ND                  | 0.23 | https://www.digikey.com/product-detail/en/avx-corporation/08051A100KAT2A/478-3731-1-ND/1116429        |
+| 0.1uF SMD 0805 Cap                      |           |        5 | 478-7962-1-ND                  | 0.30 | https://www.digikey.com/product-detail/en/avx-corporation/0805ZC104KAT2A/478-7962-1-ND/3881585        |
+| 300ohm SMD 0805 Resistor                |           |        3 | 311-300ARCT-ND                 | 0.19 | https://www.digikey.com/product-detail/en/yageo/RC0805JR-07300RL/311-300ARCT-ND/731254                |
+| 10k SMD 0805 Resistor                   |           |        4 | 311-10KARCT-ND                 | 0.10 | https://www.digikey.com/product-detail/en/yageo/RC0805JR-0710KL/311-10KARCT-ND/731188                 |
+| LED SMD 0805 Blue                       |           |        1 | 160-1645-1-ND                  | 0.50 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171TBKT/160-1645-1-ND/573585              |
+| LED SMD 0805 Red                        |           |        1 | 160-1427-1-ND                  | 0.31 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C171KRKT/160-1427-1-ND/386800              |
+| LED SMD 0805 Green                      |           |        1 | 160-1179-1-ND                  | 0.33 | https://www.digikey.com/product-detail/en/lite-on-inc/LTST-C170GKT/160-1179-1-ND/269251               |
+
