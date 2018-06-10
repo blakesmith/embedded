@@ -1546,7 +1546,7 @@
     )
   )
 
-  (gr_text "Rev. B" (at 102.87 73.66) (layer F.SilkS)
+  (gr_text "Rev. B" (at 104.775 71.12) (layer F.SilkS)
     (effects (font (size 0.5 0.5) (thickness 0.125)))
   )
   (gr_text "by Blake" (at 97.79 73.66) (layer F.SilkS)
