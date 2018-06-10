@@ -238,7 +238,7 @@ Wire Wire Line
 Wire Wire Line
 	2950 1800 3850 1800
 $Comp
-L MCU_ST_STM32:STM32L151C8TxA U4
+L clock-rescue:STM32L151C8TxA-MCU_ST_STM32 U4
 U 1 1 5AE146A0
 P 8700 6750
 F 0 "U4" H 8700 8728 50  0000 C CNN
@@ -602,8 +602,6 @@ F 3 "~" H 1150 7100 50  0001 C CNN
 	1    1000 7150
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1000 7550 1000 7650
 $Comp
 L power:GND #PWR01
 U 1 1 5AE94B86
@@ -617,13 +615,6 @@ F 3 "" H 1000 7800 50  0001 C CNN
 $EndComp
 NoConn ~ 1300 7150
 NoConn ~ 1300 7250
-Wire Wire Line
-	900  7550 900  7650
-Wire Wire Line
-	900  7650 1000 7650
-Connection ~ 1000 7650
-Wire Wire Line
-	1000 7650 1000 7800
 NoConn ~ 1300 7350
 $Comp
 L Regulator_Linear:LM1117-3.3 U1
@@ -835,31 +826,22 @@ U 1 1 5AF22D7B
 P 14700 4250
 F 0 "J3" H 14260 4296 50  0000 R CNN
 F 1 "Conn_ARM_JTAG_SWD_10" H 14260 4205 50  0000 R CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch1.27mm" H 14750 3700 50  0001 L TNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch1.27mm_SMD" H 14750 3700 50  0001 L TNN
 F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex_debug_connectors.pdf" V 14350 3000 50  0001 C CNN
 	1    14700 4250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	14600 4850 14600 5050
-Wire Wire Line
-	14600 5050 14650 5050
-Wire Wire Line
 	14700 5050 14700 4850
-Wire Wire Line
-	14650 5050 14650 5200
-Connection ~ 14650 5050
-Wire Wire Line
-	14650 5050 14700 5050
 $Comp
 L power:GND #PWR020
 U 1 1 5AF2E1E1
-P 14650 5200
-F 0 "#PWR020" H 14650 4950 50  0001 C CNN
-F 1 "GND" H 14655 5027 50  0000 C CNN
-F 2 "" H 14650 5200 50  0001 C CNN
-F 3 "" H 14650 5200 50  0001 C CNN
-	1    14650 5200
+P 14700 5050
+F 0 "#PWR020" H 14700 4800 50  0001 C CNN
+F 1 "GND" H 14705 4877 50  0000 C CNN
+F 2 "" H 14700 5050 50  0001 C CNN
+F 3 "" H 14700 5050 50  0001 C CNN
+	1    14700 5050
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -924,4 +906,8 @@ NoConn ~ 15200 4450
 NoConn ~ 15200 3950
 Wire Wire Line
 	3500 1500 3850 1500
+NoConn ~ 14600 4850
+Wire Wire Line
+	1000 7550 1000 7800
+NoConn ~ 900  7550
 $EndSCHEMATC
