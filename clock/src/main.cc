@@ -59,6 +59,34 @@ static void Init() {
     status_led.SetError(!set_time());
 }
 
+static void set_hour(RTClock::Time* time, int8_t hour_diff) {
+    int8_t hour_register = time->hour + hour_diff;
+    if (hour_register > 12) {
+        hour_register = 1;
+    } else if (hour_register < 1) {
+        hour_register = 12;
+    }
+
+    time->hour = hour_register;
+
+    if (hour_register == 12) {
+        time->am_pm = time->am_pm == RTClock::AM_PM::AM ?
+            RTClock::AM_PM::PM :
+            RTClock::AM_PM::AM;
+    }
+}
+
+static void set_minute(RTClock::Time* time, int8_t minute_diff) {
+    int8_t minute_register = time->minute + minute_diff;
+    if (minute_register > 59) {
+        minute_register = 0;
+    } else if (minute_register < 0) {
+        minute_register = 59;
+    }
+
+    time->minute = minute_register;
+}
+
 static void update_time() {
     RTClock::Time time;
 
@@ -68,23 +96,14 @@ static void update_time() {
     ui.SetMinute(time.minute);
     UI::Action action = ui.Update(time);
     if (action.NeedsUpdate()) {
-        if (action.hour_diff > 0) {
-            time.hour = time.hour + action.hour_diff;
-            if (time.hour == 12) {
-                time.am_pm = time.am_pm == RTClock::AM_PM::AM ?
-                    RTClock::AM_PM::PM :
-                    RTClock::AM_PM::AM;
-            }
-            if (time.hour > 12) {
-                time.hour = 1;
-            }
+        if (action.hour_diff != 0) {
+            set_hour(&time, action.hour_diff);
         }
-        if (action.minute_diff > 0) {
-            time.minute = time.minute + action.minute_diff;
-            if (time.minute > 59) {
-                time.minute = 0;
-            }
+        
+        if (action.minute_diff != 0) {
+            set_minute(&time, action.minute_diff);
         }
+
         status_led.SetError(!rtc.SetTime(&time));
     }
 }
