@@ -9,7 +9,7 @@ UI::UI(Display7Seg* display,
       encoder_(encoder),
       status_led_(status_led),
       knob_offset_(0),
-      set_position_(0),
+      set_position_(TimeSetPosition::NONE),
       display_needs_refresh_(true),
       update_count_(0),
       ticks_per_half_second_(4096), // Set something reasonably high for initialization
@@ -34,7 +34,7 @@ void UI::SetMinute(uint8_t minute) {
 }
 
 UI::Action UI::set_next_position() {
-    set_position_ = (set_position_ + 1) % 3;
+    set_position_ = static_cast<TimeSetPosition>((set_position_ + 1) % 3);
     return Action(0, 0);
 }
 
@@ -43,11 +43,11 @@ UI::Action UI::set_change_time() {
     int8_t diff = encoder_->GetCount() - knob_offset_;
     knob_offset_ = encoder_->GetCount();
     switch (set_position_) {
-        case 0:
+        case NONE:
             return Action(0, 0);
-        case 1:
+        case HOUR:
             return Action(diff, 0);
-        case 2:
+        case MINUTE:
             return Action(0, diff);
         default:
             return Action(0, 0);

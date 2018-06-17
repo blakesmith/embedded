@@ -9,12 +9,18 @@
 namespace clock {
 
 class UI {
-private:    
+private:
+    enum TimeSetPosition {
+        NONE = 0,
+        HOUR = 1,
+        MINUTE = 2,
+    };
+
     Display7Seg* display_;
     Pec11RotaryEncoder* encoder_;
     StatusLed* status_led_;
     long knob_offset_;
-    uint8_t set_position_;
+    TimeSetPosition set_position_;
 
     bool display_needs_refresh_;
     
