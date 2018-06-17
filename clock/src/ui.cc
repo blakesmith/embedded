@@ -9,7 +9,7 @@ UI::UI(Display7Seg* display,
       encoder_(encoder),
       status_led_(status_led),
       knob_offset_(0),
-      set_position_(3),
+      set_position_(0),
       display_needs_refresh_(true),
       update_count_(0),
       ticks_per_half_second_(4096), // Set something reasonably high for initialization
@@ -34,7 +34,7 @@ void UI::SetMinute(uint8_t minute) {
 }
 
 UI::Action UI::set_next_position() {
-    set_position_ = (set_position_ + 1) % 4;
+    set_position_ = (set_position_ + 1) % 3;
     return Action(0, 0);
 }
 
@@ -44,6 +44,8 @@ UI::Action UI::set_change_time() {
     knob_offset_ = encoder_->GetCount();
     switch (set_position_) {
         case 0:
+            return Action(0, 0);
+        case 1:
             return Action(diff, 0);
         case 2:
             return Action(0, diff);
@@ -53,7 +55,7 @@ UI::Action UI::set_change_time() {
 }
 
 void UI::refresh_display() {
-    if (set_position_ != 3) {
+    if (set_position_ != 0) {
         display_->SetSegment(set_position_ * 2, 0, false, true);
     }
     display_->ToggleColon(colon_toggle_);
