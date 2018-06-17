@@ -63,7 +63,7 @@ void UI::refresh_display() {
 }
 
 void UI::toggle_status_led() {
-    // TODO: Rip out once LED order is switched
+    status_led_->ToggleOk();
     status_led_->ToggleError();
 }
 

@@ -93,8 +93,6 @@ int main() {
     Init();
 
     status_led.SetOk(true);
-    // TODO: Rip out once LED order is switched
-    status_led.SetError(true);
     while (true) {
         update_time();
     }
