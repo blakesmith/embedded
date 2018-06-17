@@ -94,21 +94,6 @@ $EndComp
 NoConn ~ 4650 1900
 NoConn ~ 4650 2000
 NoConn ~ 4650 2100
-$Comp
-L Connector:Conn_01x04_Female J2
-U 1 1 59EEB3FD
-P 2350 1800
-F 0 "J2" H 2350 2000 50  0000 C CNN
-F 1 "7SEG_DEBUG" H 2350 1500 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 2350 1800 50  0001 C CNN
-F 3 "https://cdn.harwin.com/pdfs/Harwin_Product_Catalog_page_208.pdf" H 2350 1800 50  0001 C CNN
-F 4 "952-2265-ND" H 2350 1800 60  0001 C CNN "S1PN"
-F 5 "https://www.digikey.com/product-detail/en/harwin-inc/M20-9990445/952-2265-ND/3728229" H 2350 1800 60  0001 C CNN "S1PL"
-F 6 "Harwin Inc." H 2350 1800 60  0001 C CNN "MFN"
-F 7 "M20-9990445" H 2350 1800 60  0001 C CNN "MFP"
-	1    2350 1800
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
 	4650 1400 9950 1400
 Wire Wire Line
@@ -156,31 +141,17 @@ Wire Wire Line
 Wire Wire Line
 	4200 3000 4200 3200
 Wire Wire Line
-	2100 1400 2650 1400
-Wire Wire Line
 	2550 1700 2750 1700
 Wire Wire Line
 	4650 2400 6800 2400
 Wire Wire Line
 	2100 1200 2100 1400
-Wire Wire Line
-	2100 3200 2650 3200
 Connection ~ 4200 3200
 Connection ~ 2100 1400
 Wire Wire Line
 	2100 3200 2100 2450
 Wire Wire Line
 	2550 1800 2950 1800
-Wire Wire Line
-	2650 1400 2650 1600
-Wire Wire Line
-	2650 1600 2550 1600
-Connection ~ 2650 1400
-Wire Wire Line
-	2550 1900 2650 1900
-Wire Wire Line
-	2650 1900 2650 3200
-Connection ~ 2650 3200
 Text Notes 14650 13150 0    60   ~ 0
 A
 Connection ~ 2750 1700
@@ -232,8 +203,6 @@ Wire Wire Line
 Wire Wire Line
 	2100 1400 2100 1950
 Wire Wire Line
-	2650 3200 4200 3200
-Wire Wire Line
 	2750 1700 3850 1700
 Wire Wire Line
 	2950 1800 3850 1800
@@ -256,9 +225,9 @@ Text Label 4600 7250 0    50   ~ 0
 7SEG_SCL
 Text Label 4600 7550 0    50   ~ 0
 7SEG_SDA
-Text Label 2350 1700 2    50   ~ 0
+Text Label 2550 1700 2    50   ~ 0
 7SEG_SDA
-Text Label 2350 1800 2    50   ~ 0
+Text Label 2550 1800 2    50   ~ 0
 7SEG_SCL
 $Comp
 L power:+3V3 #PWR04
@@ -327,8 +296,6 @@ F 3 "" H 8650 9050 50  0001 C CNN
 	1    8650 9050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2650 1400 3000 1400
 Wire Wire Line
 	3000 1500 3000 1400
 Connection ~ 3000 1400
@@ -910,4 +877,8 @@ NoConn ~ 14600 4850
 Wire Wire Line
 	1000 7550 1000 7800
 NoConn ~ 900  7550
+Wire Wire Line
+	2100 3200 4200 3200
+Wire Wire Line
+	2100 1400 3000 1400
 $EndSCHEMATC
