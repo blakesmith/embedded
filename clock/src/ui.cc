@@ -83,6 +83,7 @@ UI::Action UI::Update(const stm32::RTClock::Time& time) {
         last_second_ = time.second;
         ticks_per_half_second_ = update_count_ / 2; // Half second per colon tick
         update_count_ = 0;
+        display_needs_refresh_ = true;
     }
     encoder_->ReadState();
     if (encoder_->GetButtonAction() == BUTTON_ACTION_DOWN) {
