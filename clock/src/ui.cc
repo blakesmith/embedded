@@ -63,7 +63,8 @@ void UI::refresh_display() {
 }
 
 void UI::toggle_status_led() {
-    status_led_->ToggleOk();
+    // TODO: Rip out once LED order is switched
+    status_led_->ToggleError();
 }
 
 bool UI::is_next_second(const uint8_t current_second) {
