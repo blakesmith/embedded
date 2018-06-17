@@ -10,7 +10,7 @@
 using namespace clock;
 using namespace stm32;
 
-RTClock rtc(RTClock::ClockSource::LSI);
+RTClock rtc(RTClock::ClockSource::LSE);
 
 GPIOBus gpioa(GPIOBus::Id::A);
 GPIOBus gpiob(GPIOBus::Id::B);
@@ -21,9 +21,9 @@ GPIOPin sda_pin(gpiob, 9);
 I2CBus i2c(I2CBus::Id::ONE, scl_pin, sda_pin);
 AS1115Display display(i2c, 5);
 
-GPIOPin ok_led(gpiob, 3);
-GPIOPin error_led(gpiob, 4);
-GPIOPin activity_led(gpiob, 5);
+GPIOPin ok_led(gpioa, 5);
+GPIOPin error_led(gpioa, 6);
+GPIOPin activity_led(gpioa, 7);
 
 StatusLed status_led(ok_led, error_led, activity_led);
 

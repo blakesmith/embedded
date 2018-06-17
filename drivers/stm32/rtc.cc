@@ -59,6 +59,7 @@ bool RTClock::Init() {
 
     RCC_RTCCLKCmd(ENABLE);
     RTC_WriteProtectionCmd(ENABLE);
+    RTC_WaitForSynchro();
     return success;
 }
 
