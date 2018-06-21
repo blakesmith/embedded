@@ -1,16 +1,25 @@
-top_plate_height = 1.6;
-top_plate_width = 101.60;
-top_plate_length = 294.64;
-
 cherry_switch_length = 15.6;
 cherry_switch_width = 15.6;
 cherry_switch_housing_height = 6.6;
 cherry_switch_housing_height = 5.0;
 cherry_switch_switch_height = 3.6;
 
+total_cutout_count = 14;
+row_count = 5;
+
 switch_cutout_width = 14.0;
 switch_cutout_length = 14.0;
-switch_cutout_pitch = switch_cutout_width + 5.5;
+switch_cutout_padding = 5.5;
+switch_cutout_pitch = switch_cutout_width + switch_cutout_padding;
+
+top_plate_padding_top_bottom = 3.0;
+top_plate_padding_left_right = 3.0;
+top_plate_height = 1.6;
+top_plate_width = (row_count * switch_cutout_pitch) + (top_plate_padding_top_bottom * 2);
+top_plate_length = (total_cutout_count * switch_cutout_pitch) + (top_plate_padding_left_right * 2);
+
+spacebar_length = switch_cutout_width * 7;
+spacebar_width = switch_cutout_width;
 
 plate_height_spacing = 5.0 + 0.3;
 
@@ -40,13 +49,10 @@ module top_plate() {
     }
 }
 
-module uniform_row_switch_cutout(start_y_offset) {
-    cutout_count = 14;
-
-    start_x_offset = -(top_plate_length / 2) + 3.0;
+module uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count) {
     start_z_offset = -2.0;
 
-    for (x = [0:cutout_count]) {
+    for (x = [0:cutout_count - 1]) {
         translate([start_x_offset + (x * switch_cutout_pitch),
                    start_y_offset,
                    start_z_offset])
@@ -57,28 +63,38 @@ module uniform_row_switch_cutout(start_y_offset) {
 }
 
 module row_1_switch_cutout() {
-    start_y_offset = (top_plate_width / 2) - switch_cutout_width - 3.0;
-    uniform_row_switch_cutout(start_y_offset);
+    start_x_offset = -(top_plate_length / 2) + top_plate_padding_left_right + (switch_cutout_padding / 2);
+    start_y_offset = (top_plate_width / 2) - switch_cutout_pitch + top_plate_padding_top_bottom - (switch_cutout_padding / 2);
+    cutout_count = 14;
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
 }
 
 module row_2_switch_cutout() {
-    start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 2);
-    uniform_row_switch_cutout(start_y_offset);
+    start_x_offset = -(top_plate_length / 2) + top_plate_padding_left_right + (switch_cutout_padding / 2);
+    start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 2) + top_plate_padding_top_bottom - (switch_cutout_padding / 2);
+    cutout_count = 14;
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
 }
 
 module row_3_switch_cutout() {
-    start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 3);
-    uniform_row_switch_cutout(start_y_offset);
+    start_x_offset = -(top_plate_length / 2) + top_plate_padding_left_right + (switch_cutout_padding / 2);
+    start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 3) + top_plate_padding_top_bottom - (switch_cutout_padding / 2);
+    cutout_count = 14;
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
 }
 
 module row_4_switch_cutout() {
-    start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 4);
-    uniform_row_switch_cutout(start_y_offset);
+    start_x_offset = -(top_plate_length / 2) + top_plate_padding_left_right + (switch_cutout_padding / 2);
+    start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 4) + top_plate_padding_top_bottom - (switch_cutout_padding / 2);
+    cutout_count = 14;
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
 }
 
 module row_5_switch_cutout() {
-    start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 5);
-    uniform_row_switch_cutout(start_y_offset);
+    start_x_offset = -(top_plate_length / 2) + top_plate_padding_left_right + (switch_cutout_padding / 2);
+    start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 5) + top_plate_padding_top_bottom - (switch_cutout_padding / 2);
+    cutout_count = 14;
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
 }
 
 module cherry_mx_cutout(x, y, z) {
