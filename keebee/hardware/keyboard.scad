@@ -53,12 +53,9 @@ module uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count) {
     start_z_offset = -2.0;
 
     for (x = [0:cutout_count - 1]) {
-        translate([start_x_offset + (x * switch_cutout_pitch),
-                   start_y_offset,
-                   start_z_offset])
-            cube([switch_cutout_length,
-                  switch_cutout_width,
-                  10.0]);
+        cherry_mx_cutout(start_x_offset + (x * switch_cutout_pitch),
+                         start_y_offset,
+                         start_z_offset);
     }
 }
 
@@ -98,6 +95,10 @@ module row_5_switch_cutout() {
 }
 
 module cherry_mx_cutout(x, y, z) {
+    translate([x, y, z])
+        cube([switch_cutout_length,
+              switch_cutout_width,
+              10.0]);
 }
 
 module cherry_mx_switch(x, y, z) {
