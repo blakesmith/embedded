@@ -1,3 +1,5 @@
+$fn = 10;
+
 cherry_switch_length = 15.6;
 cherry_switch_width = 15.6;
 cherry_switch_housing_height = 6.6;
@@ -48,13 +50,11 @@ module top_plate() {
     }
 }
 
-module uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count) {
-    start_z_offset = -2.0;
-
+module uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count, key_size) {
     for (x = [0:cutout_count - 1]) {
         cherry_mx_cutout(start_x_offset + (x * switch_cutout_pitch),
                          start_y_offset,
-                         start_z_offset);
+                         key_size);
     }
 }
 
@@ -62,55 +62,53 @@ module row_1_switch_cutout() {
     start_x_offset = -(top_plate_length / 2) + (switch_cutout_pitch / 2) + (top_plate_padding_left_right / 2);
     start_y_offset = (top_plate_width / 2) - switch_cutout_pitch + (switch_cutout_pitch / 2) - (top_plate_padding_top_bottom / 2);
     cutout_count = 14;
-    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count, key_size=1);
 }
 
 module row_2_switch_cutout() {
     start_x_offset = -(top_plate_length / 2) + (switch_cutout_pitch / 2) + (top_plate_padding_left_right / 2);
     start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 2) + (switch_cutout_pitch / 2) - (top_plate_padding_top_bottom / 2);
     cutout_count = 14;
-    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count, key_size=1);
 }
 
 module row_3_switch_cutout() {
     start_x_offset = -(top_plate_length / 2) + (switch_cutout_pitch / 2) + (top_plate_padding_left_right / 2);
     start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 3) + (switch_cutout_pitch / 2) - (top_plate_padding_top_bottom / 2);
     cutout_count = 14;
-    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count, key_size=1);
 }
 
 module row_4_switch_cutout() {
     start_x_offset = -(top_plate_length / 2) + (switch_cutout_pitch / 2) + (top_plate_padding_left_right / 2);
     start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 4) + (switch_cutout_pitch / 2) - (top_plate_padding_top_bottom / 2);
     cutout_count = 14;
-    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count, key_size=1);
 }
 
 module row_5_switch_cutout() {
     start_x_offset = -(top_plate_length / 2) + (switch_cutout_pitch / 2) + (top_plate_padding_left_right / 2);
     start_y_offset = (top_plate_width / 2) - (switch_cutout_pitch * 5) + (switch_cutout_pitch / 2) - (top_plate_padding_top_bottom / 2);
     cutout_count = 14;
-    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count);
+    uniform_row_switch_cutout(start_x_offset, start_y_offset, cutout_count, key_size=1);
 }
 
-module cherry_mx_cutout(x, y, z) {
-    $fn = 10;
+module cherry_mx_cutout(x, y, key_size) {
     corner_radius = 0.3;
-    coordinate_offset = 2.6;
     hull() {
         translate([x, y, z])
-            square([switch_cutout_length,
-                    switch_cutout_width],
+            square([switch_cutout_length * key_size,
+                    switch_cutout_width * key_size],
                 center=true);
         union() {
-            translate([x + (corner_radius * coordinate_offset), y + (corner_radius * coordinate_offset), z])
-                circle(radius = corner_radius);
-            translate([x + (corner_radius * coordinate_offset), (y + (switch_cutout_length / 2)) - (corner_radius * coordinate_offset), z])
-                circle(radius = corner_radius);
-            translate([(x + (switch_cutout_width / 2)) - (corner_radius * coordinate_offset), (y + (switch_cutout_length / 2)) - (corner_radius * coordinate_offset), z])
-                circle(radius = corner_radius);
-            translate([(x + (switch_cutout_width / 2)) - (corner_radius * coordinate_offset), y + (corner_radius * coordinate_offset), z])
-                circle(radius = corner_radius);
+            translate([x + (switch_cutout_length / 2), y + (switch_cutout_width / 2)])
+                circle(r = corner_radius, center = true);
+            translate([x + (switch_cutout_length / 2), y - (switch_cutout_width / 2)])
+                circle(r = corner_radius, center = true);
+            translate([x - (switch_cutout_length / 2), y + (switch_cutout_width / 2)])
+                circle(r = corner_radius, center = true);
+            translate([x - (switch_cutout_length / 2), y - (switch_cutout_width / 2)])
+                circle(r = corner_radius, center = true);
         }
     }
 }
