@@ -35,9 +35,8 @@ module top_plate() {
     difference() {
         translate([top_plate_x, top_plate_y, top_plate_z])
             color("gray", 1.0)
-            cube([top_plate_length,
-                  top_plate_width,
-                  top_plate_height],
+            square([top_plate_length,
+                    top_plate_width],
                  center = true);
         union() {
             row_1_switch_cutout();
@@ -95,10 +94,24 @@ module row_5_switch_cutout() {
 }
 
 module cherry_mx_cutout(x, y, z) {
-    translate([x, y, z])
-        cube([switch_cutout_length,
-              switch_cutout_width,
-              10.0]);
+    $fn = 10;
+    corner_radius = 0.3;
+    coordinate_offset = 2.6;
+    hull() {
+        translate([x, y, z])
+            square([switch_cutout_length,
+                    switch_cutout_width]);
+        union() {
+            translate([x + (corner_radius * coordinate_offset), y + (corner_radius * coordinate_offset), z])
+                circle(radius = corner_radius);
+            translate([x + (corner_radius * coordinate_offset), (y + switch_cutout_length) - (corner_radius * coordinate_offset), z])
+                circle(radius = corner_radius);
+            translate([(x + switch_cutout_width) - (corner_radius * coordinate_offset), (y + switch_cutout_length) - (corner_radius * coordinate_offset), z])
+                circle(radius = corner_radius);
+            translate([(x + switch_cutout_width) - (corner_radius * coordinate_offset), y + (corner_radius * coordinate_offset), z])
+                circle(radius = corner_radius);
+        }
+    }
 }
 
 module cherry_mx_switch(x, y, z) {
