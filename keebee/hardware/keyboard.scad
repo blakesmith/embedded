@@ -1,6 +1,6 @@
 $fn = 10;
 
-total_1u_count = 12;
+total_1u_count = 14;
 row_count = 5;
 
 switch_cutout_1u_width = 14.0;
@@ -45,49 +45,68 @@ module top_plate() {
             rounded_corners();
         }
         union() {
+            row_0_switch_cutout();
             row_1_switch_cutout();
             row_2_switch_cutout();
             row_3_switch_cutout();
             row_4_switch_cutout();
-            row_5_switch_cutout();
             mounting_holes();
         }
     }
 }
 
-module row_switch_cutout(row, switch_offset, cutout_count, add_small_stabilizer=false) {
-    start_x_offset = (top_plate_length / 2) - (switch_cutout_1u_pitch / 2) - (top_plate_padding_left_right / 2) - (switch_cutout_1u_pitch * switch_offset);
-    start_y_offset = (top_plate_width / 2) - (switch_cutout_1u_pitch * (row + 1)) + (switch_cutout_1u_pitch / 2) - (top_plate_padding_top_bottom / 2);
+DVORAK_KEY_LABELS = [
+    ["~`",    "1",   "2",   "3", "4", "5", "6",    "7",   "8",   "9",  "0", "[",     "]",   "BS"],
+    ["TAB",   "'",   ",",   ".", "P", "Y", "F",    "G",   "C",   "R",  "L", "/",     "=",   "\\"],
+    ["CTRL",  "A",   "O",   "E", "U", "I", "D",    "H",   "T",   "N",  "S", "-",     "ENT", ""  ],
+    ["SHIFT", ";",   "Q",   "J", "K", "X", "B",    "M",   "W",   "V",  "Z", "SHIFT", " ",   " " ],
+    ["CTRL",  "SUP", "ALT", " ", " ", " ", "SPC",  " ",   "ALT", "FN", "←", "↑",     "↓",   "→" ]
+];
 
-    for (x = [0:cutout_count - 1]) {
-        cherry_mx_cutout(start_x_offset - (x * switch_cutout_1u_pitch),
-                         start_y_offset,
-                         switch_cutout_1u_width,
-                         switch_cutout_1u_length,
-                         add_small_stabilizer);
+module key_label(row, i, x, y) {
+    translate([x, y]) {
+        color("blue", 1.0)
+            text(DVORAK_KEY_LABELS[row][i], halign="center", valign="center", size=4);
     }
 }
 
-module row_1_switch_cutout() {
+module row_switch_cutout(row, switch_offset, cutout_count, add_small_stabilizer=false) {
+    start_x_offset = -(top_plate_length / 2) + (switch_cutout_1u_pitch / 2) + (top_plate_padding_left_right / 2) + (switch_cutout_1u_pitch * switch_offset);
+    start_y_offset = (top_plate_width / 2) - (switch_cutout_1u_pitch * (row + 1)) + (switch_cutout_1u_pitch / 2) - (top_plate_padding_top_bottom / 2);
+
+    for (i = [0:cutout_count - 1]) {
+        x_offset = start_x_offset + (i * switch_cutout_1u_pitch);
+        y_offset = start_y_offset;
+
+        cherry_mx_cutout(x_offset,
+                         y_offset,
+                         switch_cutout_1u_width,
+                         switch_cutout_1u_length,
+                         add_small_stabilizer);
+        %key_label(row, i + floor(switch_offset), x_offset, y_offset);
+    }
+}
+
+module row_0_switch_cutout() {
     row_switch_cutout(row=0, switch_offset=0, cutout_count=total_1u_count);
 }
 
-module row_2_switch_cutout() {
+module row_1_switch_cutout() {
     row_switch_cutout(row=1, switch_offset=0, cutout_count=total_1u_count);
 }
 
-module row_3_switch_cutout() {
+module row_2_switch_cutout() {
     row_switch_cutout(row=2, switch_offset=0, cutout_count=total_1u_count);
 }
 
-module row_4_switch_cutout() {
+module row_3_switch_cutout() {
     row_switch_cutout(row=3, switch_offset=0, cutout_count=total_1u_count);
 }
 
-module row_5_switch_cutout() {
-    row_switch_cutout(row=4, switch_offset=0, cutout_count=5);
-    row_switch_cutout(row=4, switch_offset=5.5, cutout_count=1, add_small_stabilizer=true);
-    row_switch_cutout(row=4, switch_offset=7, cutout_count=5);
+module row_4_switch_cutout() {
+    row_switch_cutout(row=4, switch_offset=0, cutout_count=6);
+    row_switch_cutout(row=4, switch_offset=6.5, cutout_count=1, add_small_stabilizer=true);
+    row_switch_cutout(row=4, switch_offset=8, cutout_count=6);
 }
 
 module cherry_mx_cutout(x, y, switch_cutout_width, switch_cutout_length, add_small_stabilizer=false) {
@@ -164,12 +183,15 @@ module mounting_holes() {
             circle(d=drill_size);
     }
 
-    mounting_hole(0, 2 * switch_cutout_1u_pitch);
+    y_offset = ((row_count - 1 )/ 2) * switch_cutout_1u_pitch;
+    x_offset = ((total_1u_count / 2) - 1) * switch_cutout_1u_pitch;
+
+    mounting_hole(0, y_offset);
     mounting_hole(0, -switch_cutout_1u_pitch);
 
-    mounting_hole(-(5 * switch_cutout_1u_pitch), 2 * switch_cutout_1u_pitch);
-    mounting_hole(-(5 * switch_cutout_1u_pitch), -(2 * switch_cutout_1u_pitch));
+    mounting_hole(-x_offset, y_offset);
+    mounting_hole(-x_offset, -y_offset);
 
-    mounting_hole((5 * switch_cutout_1u_pitch), 2 * switch_cutout_1u_pitch);
-    mounting_hole((5 * switch_cutout_1u_pitch), -(2 * switch_cutout_1u_pitch));
+    mounting_hole(x_offset, y_offset);
+    mounting_hole(x_offset, -y_offset);
 }
