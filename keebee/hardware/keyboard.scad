@@ -20,6 +20,7 @@ spacebar_width = switch_cutout_1u_width;
 plate_height_spacing = 5.0 + 0.3;
 
 union() {
+    *small_stabilizer(0, 0);
     top_plate();
 }
 
@@ -137,17 +138,17 @@ module small_stabilizer(x, y, right=false) {
                 square([stabilizer_length,
                         stabilizer_width],
                        center=true);
-                translate([0, -(stabilizer_width / 2)]) {
+                translate([0, -(stabilizer_width / 2) - (bottom_square_width / 2) + 0.01]) {
                     square([bottom_square_length,
                             bottom_square_width],
                            center=true);
                 }
-                translate([-(stabilizer_length / 2), (left_square_width / 2) - left_square_width_offset]) {
+                translate([-(stabilizer_length / 2) - (left_square_length / 2) + 0.01, (left_square_width / 2) - left_square_width_offset]) {
                     square([left_square_length,
                             left_square_width],
                            center=true);
                 }
-                translate([(stabilizer_length / 2), 0]) {
+                translate([(stabilizer_length / 2) + (right_square_length / 2) - 0.01, 0]) {
                     square([right_square_length,
                             right_square_width],
                            center=true);
