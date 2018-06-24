@@ -98,7 +98,7 @@ module key_label(row, i, x, y) {
     }
 }
 
-module row_switch_cutout(row, switch_offset, cutout_count, add_small_stabilizer=false) {
+module row_switch_cutout(row, switch_offset, cutout_count, switch_size=1, add_small_stabilizer=false) {
     start_x_offset = -(top_plate_length / 2) + (switch_cutout_1u_pitch / 2) + (top_plate_padding_left_right / 2) + (switch_cutout_1u_pitch * switch_offset);
     start_y_offset = (top_plate_width / 2) - (switch_cutout_1u_pitch * (row + 1)) + (switch_cutout_1u_pitch / 2) - (top_plate_padding_top_bottom / 2);
 
@@ -111,7 +111,7 @@ module row_switch_cutout(row, switch_offset, cutout_count, add_small_stabilizer=
                          switch_cutout_1u_width,
                          switch_cutout_1u_length,
                          add_small_stabilizer);
-        %dsa_keycap(x_offset, y_offset, "blue");
+        %dsa_keycap(x_offset, y_offset, "blue", switch_size);
         %key_label(row, i + floor(switch_offset), x_offset, y_offset);
     }
 }
@@ -134,7 +134,7 @@ module row_3_switch_cutout() {
 
 module row_4_switch_cutout() {
     row_switch_cutout(row=4, switch_offset=0, cutout_count=6);
-    row_switch_cutout(row=4, switch_offset=6.5, cutout_count=1, add_small_stabilizer=true);
+    row_switch_cutout(row=4, switch_offset=6.5, cutout_count=1, switch_size=2, add_small_stabilizer=true);
     row_switch_cutout(row=4, switch_offset=8, cutout_count=6);
 }
 
@@ -205,11 +205,11 @@ module small_stabilizer(x, y, right=false) {
     }
 }
 
-module dsa_keycap(x, y, cap_color) {
+module dsa_keycap(x, y, cap_color, switch_size) {
     translate([x, y, dsa_keycap_height / 2]) {
         color(cap_color, 1.0)
             linear_extrude(height = dsa_keycap_height, center = true, scale = 0.69)
-            square([dsa_keycap_bottom_width,
+            square([dsa_keycap_bottom_width * switch_size,
                     dsa_keycap_bottom_length],
                    center=true);
     }
