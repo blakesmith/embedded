@@ -19,6 +19,11 @@ spacebar_width = switch_cutout_1u_width;
 
 plate_height_spacing = 5.0 + 0.3;
 
+cherry_top_height = 3.6;
+cherry_middle_height = 6.6;
+cherry_bottom_width = 15.6;
+cherry_bottom_length = 15.6;
+
 dsa_keycap_bottom_width = 18.415;
 dsa_keycap_bottom_length = 18.415;
 dsa_keycap_top_length = 12.7;
@@ -112,6 +117,7 @@ module row_switch_cutout(row, switch_offset, cutout_count, switch_size=1, add_sm
                          switch_cutout_1u_length,
                          add_small_stabilizer);
         %dsa_keycap(x_offset, y_offset, "blue", switch_size);
+        %cherry_mx_switch(x_offset, y_offset);
         %key_label(row, i + floor(switch_offset), x_offset, y_offset);
     }
 }
@@ -205,8 +211,21 @@ module small_stabilizer(x, y, right=false) {
     }
 }
 
+module cherry_mx_switch(x, y) {
+    offset_z = cherry_middle_height / 2;
+    translate([x, y, offset_z]) {
+        linear_extrude(height = cherry_middle_height,
+                       center = true,
+                       scale = 0.69)
+            square([cherry_bottom_width,
+                    cherry_bottom_length],
+                center=true);
+    }
+}
+
 module dsa_keycap(x, y, cap_color, switch_size) {
-    translate([x, y, dsa_keycap_height / 2]) {
+    offset_z = (dsa_keycap_height / 2) + cherry_middle_height - cherry_top_height;
+    translate([x, y, offset_z]) {
         color(cap_color, 1.0)
             linear_extrude(height = dsa_keycap_height, center = true, scale = 0.69)
             square([dsa_keycap_bottom_width * switch_size,
