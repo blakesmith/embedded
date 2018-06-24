@@ -128,7 +128,7 @@ KEYCAP_COLORS = [
     [C2, C2, C2, C2, C2, C2, C1, C2, C2, C2, C2, C1, C1, C1]
 ];
 
-module key_label(row, i, x, y, label_color="white", shift_color="green", fn_color="red") {
+module key_label(row, i, x, y, label_color="red", shift_color="green", fn_color="orange") {
     offset_z = cherry_middle_height + cherry_top_height;
     translate([x, y, offset_z]) {
         color(label_color, 1.0)
