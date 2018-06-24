@@ -91,8 +91,9 @@ DVORAK_FN_KEY_LABELS = [
 ];
 
 module key_label(row, i, x, y) {
-    translate([x, y]) {
-        color("blue", 1.0)
+    offset_z = cherry_middle_height + cherry_top_height;
+    translate([x, y, offset_z]) {
+        color("white", 1.0)
             text(DVORAK_KEY_LABELS[row][i], halign="center", valign="center", size=4);
         translate([-(switch_cutout_1u_pitch / 4), (switch_cutout_1u_pitch / -4)])
             color("green", 1.0)
