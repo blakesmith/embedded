@@ -70,8 +70,8 @@ DVORAK_KEY_LABELS = [
     ["ESC",   "1",   "2",   "3", "4", "5", "6",    "7",   "8",   "9",  "0", "[",     "]",   "BS"],
     ["TAB",   "'",   ",",   ".", "P", "Y", "F",    "G",   "C",   "R",  "L", "/",     "=",   "\\"],
     ["CTRL",  "A",   "O",   "E", "U", "I", "D",    "H",   "T",   "N",  "S", "-",     "ENT", ""  ],
-    ["SHIFT", ";",   "Q",   "J", "K", "X", "B",    "M",   "W",   "V",  "Z", "SHIFT", " ",   " " ],
-    ["CTRL",  "SUP", "ALT", " ", " ", " ", "SPC",  " ",   "ALT", "FN", "←", "↑",     "↓",   "→" ]
+    ["SHIFT", ";",   "Q",   "J", "K", "X", "B",    "M",   "W",   "V",  "Z", "SHIFT", "↑",   " " ],
+    ["CTRL",  "SUP", "ALT", " ", " ", " ", "SPC",  " ",   "ALT", "FN", " ", "←",     "↓",   "→" ]
 ];
 
 DVORAK_SHIFT_KEY_LABELS = [
@@ -124,8 +124,8 @@ KEYCAP_COLORS = [
     [C1, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2],
     [C2, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C2],
     [C2, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C2, C2],
-    [C2, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C2, C2, C2],
-    [C2, C2, C2, C2, C2, C2, C1, C2, C2, C2, C1, C1, C1, C1]
+    [C2, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C2, C1, C2],
+    [C2, C2, C2, C2, C2, C2, C1, C2, C2, C2, C2, C1, C1, C1]
 ];
 
 module key_label(row, i, x, y, label_color="white", shift_color="green", fn_color="red") {
