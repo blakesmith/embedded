@@ -70,16 +70,11 @@ module small_stabilizer(x, y, right=false) {
 }
 
 module top_plate() {
-    top_plate_x = 0;
-    top_plate_y = 0;
-    top_plate_z = 0;
-
     difference() {
-        translate([top_plate_x, top_plate_y, top_plate_z])
-            color("gray", 1.0)
+        color("gray", 1.0)
             square([top_plate_length,
                     top_plate_width],
-                 center = true);
+                   center = true);
         union() {
             row_1_switch_cutout();
             row_2_switch_cutout();
@@ -147,8 +142,4 @@ module cherry_mx_cutout(x, y, switch_cutout_width, switch_cutout_length, add_sma
         small_stabilizer(x - switch_cutout_length, y, false);
         small_stabilizer(x + switch_cutout_length, y, true);
     }
-}
-
-module cherry_mx_switch(x, y, z) {
-    
 }
