@@ -56,17 +56,39 @@ module top_plate() {
 }
 
 DVORAK_KEY_LABELS = [
-    ["~`",    "1",   "2",   "3", "4", "5", "6",    "7",   "8",   "9",  "0", "[",     "]",   "BS"],
+    ["ESC",   "1",   "2",   "3", "4", "5", "6",    "7",   "8",   "9",  "0", "[",     "]",   "BS"],
     ["TAB",   "'",   ",",   ".", "P", "Y", "F",    "G",   "C",   "R",  "L", "/",     "=",   "\\"],
     ["CTRL",  "A",   "O",   "E", "U", "I", "D",    "H",   "T",   "N",  "S", "-",     "ENT", ""  ],
     ["SHIFT", ";",   "Q",   "J", "K", "X", "B",    "M",   "W",   "V",  "Z", "SHIFT", " ",   " " ],
     ["CTRL",  "SUP", "ALT", " ", " ", " ", "SPC",  " ",   "ALT", "FN", "←", "↑",     "↓",   "→" ]
 ];
 
+DVORAK_SHIFT_KEY_LABELS = [
+    ["`", "!",  "@", "#", "$", "%", "^", "&", "*", "(", ")", "{", "}", " "],
+    [" ", "\"", "<", ">", " ", " ", " ", " ", " ", " ", " ", "?", "+", "|"],
+    [" ", " ",  " ", " ", " ", " ", " ", " ", " ", " ", " ", "_", " ", " "],
+    [" ", ":",  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+    []
+];
+
+DVORAK_FN_KEY_LABELS = [
+    ["~", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "DEL"],
+    [],
+    [],
+    [],
+    []
+];
+
 module key_label(row, i, x, y) {
     translate([x, y]) {
         color("blue", 1.0)
             text(DVORAK_KEY_LABELS[row][i], halign="center", valign="center", size=4);
+        translate([-(switch_cutout_1u_pitch / 4), (switch_cutout_1u_pitch / -4)])
+            color("green", 1.0)
+            text(DVORAK_SHIFT_KEY_LABELS[row][i], halign="center", valign="center", size=3);
+        translate([switch_cutout_1u_pitch / 4, switch_cutout_1u_pitch / -4])
+            color("red", 1.0)
+            text(DVORAK_FN_KEY_LABELS[row][i], halign="center", valign="center", size=3);
     }
 }
 
