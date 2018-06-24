@@ -57,7 +57,7 @@ module top_plate() {
 
 module row_switch_cutout(row, switch_offset, cutout_count, add_small_stabilizer=false) {
     start_x_offset = (top_plate_length / 2) - (switch_cutout_1u_pitch / 2) - (top_plate_padding_left_right / 2) - (switch_cutout_1u_pitch * switch_offset);
-    start_y_offset = (top_plate_width / 2) - (switch_cutout_1u_pitch * row) + (switch_cutout_1u_pitch / 2) - (top_plate_padding_top_bottom / 2);
+    start_y_offset = (top_plate_width / 2) - (switch_cutout_1u_pitch * (row + 1)) + (switch_cutout_1u_pitch / 2) - (top_plate_padding_top_bottom / 2);
 
     for (x = [0:cutout_count - 1]) {
         cherry_mx_cutout(start_x_offset - (x * switch_cutout_1u_pitch),
@@ -69,25 +69,25 @@ module row_switch_cutout(row, switch_offset, cutout_count, add_small_stabilizer=
 }
 
 module row_1_switch_cutout() {
-    row_switch_cutout(row=1, switch_offset=0, cutout_count=total_1u_count);
+    row_switch_cutout(row=0, switch_offset=0, cutout_count=total_1u_count);
 }
 
 module row_2_switch_cutout() {
-    row_switch_cutout(row=2, switch_offset=0, cutout_count=total_1u_count);
+    row_switch_cutout(row=1, switch_offset=0, cutout_count=total_1u_count);
 }
 
 module row_3_switch_cutout() {
-    row_switch_cutout(row=3, switch_offset=0, cutout_count=total_1u_count);
+    row_switch_cutout(row=2, switch_offset=0, cutout_count=total_1u_count);
 }
 
 module row_4_switch_cutout() {
-    row_switch_cutout(row=4, switch_offset=0, cutout_count=total_1u_count);
+    row_switch_cutout(row=3, switch_offset=0, cutout_count=total_1u_count);
 }
 
 module row_5_switch_cutout() {
-    row_switch_cutout(row=5, switch_offset=0, cutout_count=5);
-    row_switch_cutout(row=5, switch_offset=5.5, cutout_count=1, add_small_stabilizer=true);
-    row_switch_cutout(row=5, switch_offset=7, cutout_count=5);
+    row_switch_cutout(row=4, switch_offset=0, cutout_count=5);
+    row_switch_cutout(row=4, switch_offset=5.5, cutout_count=1, add_small_stabilizer=true);
+    row_switch_cutout(row=4, switch_offset=7, cutout_count=5);
 }
 
 module cherry_mx_cutout(x, y, switch_cutout_width, switch_cutout_length, add_small_stabilizer=false) {
