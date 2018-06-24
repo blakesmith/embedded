@@ -19,6 +19,12 @@ spacebar_width = switch_cutout_1u_width;
 
 plate_height_spacing = 5.0 + 0.3;
 
+dsa_keycap_bottom_width = 18.415;
+dsa_keycap_bottom_length = 18.415;
+dsa_keycap_top_length = 12.7;
+dsa_keycap_top_width = 12.7;
+dsa_keycap_height = 7.39;
+
 union() {
     top_plate();
 }
@@ -105,6 +111,7 @@ module row_switch_cutout(row, switch_offset, cutout_count, add_small_stabilizer=
                          switch_cutout_1u_width,
                          switch_cutout_1u_length,
                          add_small_stabilizer);
+        %dsa_keycap(x_offset, y_offset, "blue");
         %key_label(row, i + floor(switch_offset), x_offset, y_offset);
     }
 }
@@ -195,6 +202,16 @@ module small_stabilizer(x, y, right=false) {
                 }
             }
         }
+    }
+}
+
+module dsa_keycap(x, y, cap_color) {
+    translate([x, y, dsa_keycap_height / 2]) {
+        color(cap_color, 1.0)
+            linear_extrude(height = dsa_keycap_height, center = true, scale = 0.69)
+            square([dsa_keycap_bottom_width,
+                    dsa_keycap_bottom_length],
+                   center=true);
     }
 }
 
