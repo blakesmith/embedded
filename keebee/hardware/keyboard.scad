@@ -50,6 +50,7 @@ module top_plate() {
             row_3_switch_cutout();
             row_4_switch_cutout();
             row_5_switch_cutout();
+            mounting_holes();
         }
     }
 }
@@ -156,3 +157,19 @@ module small_stabilizer(x, y, right=false) {
     }
 }
 
+module mounting_holes() {
+    module mounting_hole(x, y) {
+        drill_size = 2.10;
+        translate([x, y])
+            circle(d=drill_size);
+    }
+
+    mounting_hole(0, 2 * switch_cutout_1u_pitch);
+    mounting_hole(0, -switch_cutout_1u_pitch);
+
+    mounting_hole(-(4 * switch_cutout_1u_pitch), 2 * switch_cutout_1u_pitch);
+    mounting_hole(-(4 * switch_cutout_1u_pitch), -switch_cutout_1u_pitch);
+
+    mounting_hole((4 * switch_cutout_1u_pitch), 2 * switch_cutout_1u_pitch);
+    mounting_hole((4 * switch_cutout_1u_pitch), -switch_cutout_1u_pitch);
+}
