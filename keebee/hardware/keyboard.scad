@@ -20,7 +20,6 @@ spacebar_width = switch_cutout_1u_width;
 plate_height_spacing = 5.0 + 0.3;
 
 union() {
-    *small_stabilizer(0, 0);
     top_plate();
 }
 
@@ -168,9 +167,9 @@ module mounting_holes() {
     mounting_hole(0, 2 * switch_cutout_1u_pitch);
     mounting_hole(0, -switch_cutout_1u_pitch);
 
-    mounting_hole(-(4 * switch_cutout_1u_pitch), 2 * switch_cutout_1u_pitch);
-    mounting_hole(-(4 * switch_cutout_1u_pitch), -switch_cutout_1u_pitch);
+    mounting_hole(-(5 * switch_cutout_1u_pitch), 2 * switch_cutout_1u_pitch);
+    mounting_hole(-(5 * switch_cutout_1u_pitch), -(2 * switch_cutout_1u_pitch));
 
-    mounting_hole((4 * switch_cutout_1u_pitch), 2 * switch_cutout_1u_pitch);
-    mounting_hole((4 * switch_cutout_1u_pitch), -switch_cutout_1u_pitch);
+    mounting_hole((5 * switch_cutout_1u_pitch), 2 * switch_cutout_1u_pitch);
+    mounting_hole((5 * switch_cutout_1u_pitch), -(2 * switch_cutout_1u_pitch));
 }
