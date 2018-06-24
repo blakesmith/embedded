@@ -6,7 +6,7 @@ cherry_switch_housing_height = 6.6;
 cherry_switch_housing_height = 5.0;
 cherry_switch_switch_height = 3.6;
 
-total_1u_count = 14;
+total_1u_count = 12;
 row_count = 5;
 
 switch_cutout_1u_width = 14.0;
@@ -68,23 +68,25 @@ module row_switch_cutout(row, switch_offset, cutout_count, key_size) {
 }
 
 module row_1_switch_cutout() {
-    row_switch_cutout(row=1, switch_offset=0, cutout_count=14, key_size=1);
+    row_switch_cutout(row=1, switch_offset=0, cutout_count=total_1u_count, key_size=1);
 }
 
 module row_2_switch_cutout() {
-    row_switch_cutout(row=2, switch_offset=0, cutout_count=14, key_size=1);
+    row_switch_cutout(row=2, switch_offset=0, cutout_count=total_1u_count, key_size=1);
 }
 
 module row_3_switch_cutout() {
-    row_switch_cutout(row=3, switch_offset=0, cutout_count=14, key_size=1);
+    row_switch_cutout(row=3, switch_offset=0, cutout_count=total_1u_count, key_size=1);
 }
 
 module row_4_switch_cutout() {
-    row_switch_cutout(row=4, switch_offset=0, cutout_count=14, key_size=1);
+    row_switch_cutout(row=4, switch_offset=0, cutout_count=total_1u_count, key_size=1);
 }
 
 module row_5_switch_cutout() {
-    row_switch_cutout(row=5, switch_offset=0, cutout_count=14, key_size=1);
+    row_switch_cutout(row=5, switch_offset=0, cutout_count=5, key_size=1);
+    row_switch_cutout(row=5, switch_offset=5.5, cutout_count=1, key_size=1);
+    row_switch_cutout(row=5, switch_offset=7, cutout_count=5, key_size=1);
 }
 
 module cherry_mx_cutout(x, y, switch_cutout_width, switch_cutout_length) {
