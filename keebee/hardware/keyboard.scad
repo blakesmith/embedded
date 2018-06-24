@@ -90,16 +90,54 @@ DVORAK_FN_KEY_LABELS = [
     []
 ];
 
-module key_label(row, i, x, y) {
+TROPIC_PALLETTE = [
+    [246, 66, 66],
+    [255, 138, 34],
+    [163, 232, 220]
+];
+
+BLUE_PALLETTE = [
+    [0, 81, 255],
+    [47, 134, 255],
+    [81, 172, 255],
+];
+
+BLUE_DREAM_PALLETTE = [
+    [15, 29, 9],
+    [18, 200, 253],
+    [236, 235, 245]
+];
+
+MUTE_PALLETTE = [
+    [39, 86, 123],
+    [182, 59, 59],
+    [249, 196, 20]
+];
+
+KEYCAP_PALLETTE = BLUE_DREAM_PALLETTE;
+
+C1 = [KEYCAP_PALLETTE[0][0] / 255, KEYCAP_PALLETTE[0][1] / 255, KEYCAP_PALLETTE[0][2] / 255];
+C2 = [KEYCAP_PALLETTE[1][0] / 255, KEYCAP_PALLETTE[1][1] / 255, KEYCAP_PALLETTE[1][2] / 255];
+C3 = [KEYCAP_PALLETTE[2][0] / 255, KEYCAP_PALLETTE[2][1] / 255, KEYCAP_PALLETTE[2][2] / 255];
+
+KEYCAP_COLORS = [
+    [C1, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2],
+    [C2, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C2],
+    [C2, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C2, C2],
+    [C2, C3, C3, C3, C3, C3, C3, C3, C3, C3, C3, C2, C2, C2],
+    [C2, C2, C2, C2, C2, C2, C1, C2, C2, C2, C1, C1, C1, C1]
+];
+
+module key_label(row, i, x, y, label_color="white", shift_color="green", fn_color="red") {
     offset_z = cherry_middle_height + cherry_top_height;
     translate([x, y, offset_z]) {
-        color("white", 1.0)
+        color(label_color, 1.0)
             text(DVORAK_KEY_LABELS[row][i], halign="center", valign="center", size=4);
         translate([-(switch_cutout_1u_pitch / 4), (switch_cutout_1u_pitch / -4)])
-            color("green", 1.0)
+            color(shift_color, 1.0)
             text(DVORAK_SHIFT_KEY_LABELS[row][i], halign="center", valign="center", size=3);
         translate([switch_cutout_1u_pitch / 4, switch_cutout_1u_pitch / -4])
-            color("red", 1.0)
+            color(fn_color, 1.0)
             text(DVORAK_FN_KEY_LABELS[row][i], halign="center", valign="center", size=3);
     }
 }
@@ -117,7 +155,7 @@ module row_switch_cutout(row, switch_offset, cutout_count, switch_size=1, add_sm
                          switch_cutout_1u_width,
                          switch_cutout_1u_length,
                          add_small_stabilizer);
-        %dsa_keycap(x_offset, y_offset, "blue", switch_size);
+        %dsa_keycap(x_offset, y_offset, KEYCAP_COLORS[row][i + floor(switch_offset)], switch_size);
         %cherry_mx_switch(x_offset, y_offset);
         %key_label(row, i + floor(switch_offset), x_offset, y_offset);
     }
@@ -215,12 +253,13 @@ module small_stabilizer(x, y, right=false) {
 module cherry_mx_switch(x, y) {
     offset_z = cherry_middle_height / 2;
     translate([x, y, offset_z]) {
+        color("black", 1.0)
         linear_extrude(height = cherry_middle_height,
                        center = true,
                        scale = 0.69)
             square([cherry_bottom_width,
                     cherry_bottom_length],
-                center=true);
+                   center=true);
     }
 }
 
