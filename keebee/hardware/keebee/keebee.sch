@@ -196,4 +196,141 @@ Text Label 4700 3400 0    50   ~ 0
 COL9
 Text Label 4700 3500 0    50   ~ 0
 ROW0
+$Comp
+L Regulator_Linear:LM1117-3.3 U?
+U 1 1 5B310EFD
+P 2050 1150
+F 0 "U?" H 2050 1392 50  0000 C CNN
+F 1 "LM1117-3.3" H 2050 1301 50  0000 C CNN
+F 2 "" H 2050 1150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lm1117.pdf" H 2050 1150 50  0001 C CNN
+	1    2050 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1750 1150 1450 1150
+Text Label 1450 1150 0    50   ~ 0
+VBUS
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5B312C80
+P 3750 1150
+F 0 "#PWR?" H 3750 1000 50  0001 C CNN
+F 1 "+3.3V" H 3765 1323 50  0000 C CNN
+F 2 "" H 3750 1150 50  0001 C CNN
+F 3 "" H 3750 1150 50  0001 C CNN
+	1    3750 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2050 1450 2050 1550
+$Comp
+L power:GND #PWR?
+U 1 1 5B313FEA
+P 2050 1600
+F 0 "#PWR?" H 2050 1350 50  0001 C CNN
+F 1 "GND" H 2055 1427 50  0000 C CNN
+F 2 "" H 2050 1600 50  0001 C CNN
+F 3 "" H 2050 1600 50  0001 C CNN
+	1    2050 1600
+	1    0    0    -1  
+$EndComp
+Connection ~ 2050 1550
+Wire Wire Line
+	2050 1550 2050 1600
+$Comp
+L power:GND #PWR?
+U 1 1 5B31724A
+P 3750 1550
+F 0 "#PWR?" H 3750 1300 50  0001 C CNN
+F 1 "GND" H 3755 1377 50  0000 C CNN
+F 2 "" H 3750 1550 50  0001 C CNN
+F 3 "" H 3750 1550 50  0001 C CNN
+	1    3750 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B317DA6
+P 2550 1350
+F 0 "C?" H 2642 1396 50  0000 L CNN
+F 1 "0.1uf" H 2642 1305 50  0000 L CNN
+F 2 "" H 2550 1350 50  0001 C CNN
+F 3 "~" H 2550 1350 50  0001 C CNN
+	1    2550 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B317DF6
+P 2950 1350
+F 0 "C?" H 3042 1396 50  0000 L CNN
+F 1 "0.1uf" H 3042 1305 50  0000 L CNN
+F 2 "" H 2950 1350 50  0001 C CNN
+F 3 "~" H 2950 1350 50  0001 C CNN
+	1    2950 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B317E31
+P 3350 1350
+F 0 "C?" H 3442 1396 50  0000 L CNN
+F 1 "0.1uf" H 3442 1305 50  0000 L CNN
+F 2 "" H 3350 1350 50  0001 C CNN
+F 3 "~" H 3350 1350 50  0001 C CNN
+	1    3350 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 1150 2550 1150
+Wire Wire Line
+	2050 1550 2550 1550
+$Comp
+L Device:C_Small C?
+U 1 1 5B31D042
+P 3750 1350
+F 0 "C?" H 3842 1396 50  0000 L CNN
+F 1 "4.7uf" H 3842 1305 50  0000 L CNN
+F 2 "" H 3750 1350 50  0001 C CNN
+F 3 "~" H 3750 1350 50  0001 C CNN
+	1    3750 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 1150 3750 1250
+Connection ~ 3750 1150
+Wire Wire Line
+	3750 1450 3750 1550
+Connection ~ 3750 1550
+Wire Wire Line
+	3350 1250 3350 1150
+Connection ~ 3350 1150
+Wire Wire Line
+	3350 1150 3750 1150
+Wire Wire Line
+	3350 1450 3350 1550
+Connection ~ 3350 1550
+Wire Wire Line
+	3350 1550 3750 1550
+Wire Wire Line
+	2950 1250 2950 1150
+Connection ~ 2950 1150
+Wire Wire Line
+	2950 1150 3350 1150
+Wire Wire Line
+	2550 1250 2550 1150
+Connection ~ 2550 1150
+Wire Wire Line
+	2550 1150 2950 1150
+Wire Wire Line
+	2550 1450 2550 1550
+Connection ~ 2550 1550
+Wire Wire Line
+	2550 1550 2950 1550
+Wire Wire Line
+	2950 1450 2950 1550
+Connection ~ 2950 1550
+Wire Wire Line
+	2950 1550 3350 1550
 $EndSCHEMATC
