@@ -484,4 +484,55 @@ Wire Wire Line
 	4350 1250 4350 1300
 Wire Wire Line
 	4350 1600 4350 1650
+$Comp
+L Connector:Conn_ARM_JTAG_SWD_10 J2
+U 1 1 5B8052BF
+P 2350 5850
+F 0 "J2" H 1910 5896 50  0000 R CNN
+F 1 "Conn_ARM_JTAG_SWD_10" H 1910 5805 50  0000 R CNN
+F 2 "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD" H 2400 5300 50  0001 L TNN
+F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex_debug_connectors.pdf" V 2000 4600 50  0001 C CNN
+	1    2350 5850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 5250 2350 5050
+$Comp
+L power:+3.3V #PWR02
+U 1 1 5B810A79
+P 2350 5050
+F 0 "#PWR02" H 2350 4900 50  0001 C CNN
+F 1 "+3.3V" H 2365 5223 50  0000 C CNN
+F 2 "" H 2350 5050 50  0001 C CNN
+F 3 "" H 2350 5050 50  0001 C CNN
+	1    2350 5050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2250 6450 2300 6450
+Wire Wire Line
+	2300 6450 2300 6600
+Connection ~ 2300 6450
+Wire Wire Line
+	2300 6450 2350 6450
+$Comp
+L power:GND #PWR01
+U 1 1 5B81573F
+P 2300 6600
+F 0 "#PWR01" H 2300 6350 50  0001 C CNN
+F 1 "GND" H 2305 6427 50  0000 C CNN
+F 2 "" H 2300 6600 50  0001 C CNN
+F 3 "" H 2300 6600 50  0001 C CNN
+	1    2300 6600
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2850 5550
+Wire Wire Line
+	2850 5750 3100 5750
+Text Label 3100 5750 0    50   ~ 0
+SWCLK
+Wire Wire Line
+	2850 5850 3100 5850
+Text Label 3100 5850 0    50   ~ 0
+SWDIO
 $EndSCHEMATC
