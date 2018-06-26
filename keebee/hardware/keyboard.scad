@@ -14,6 +14,8 @@ top_plate_height = 1.6;
 top_plate_width = (row_count * switch_cutout_1u_pitch) + top_plate_padding_top_bottom;
 top_plate_length = (total_1u_count * switch_cutout_1u_pitch) + top_plate_padding_left_right;
 
+echo("Top plate base width", top_plate_width, "Top plate length", top_plate_length);
+
 spacebar_length = switch_cutout_1u_width * 7;
 spacebar_width = switch_cutout_1u_width;
 
