@@ -4,7 +4,7 @@ pcb_thickness = 1.6 + 0.4;
 
 stand_width = pcb_length + 4;
 stand_length = 30.0;
-stand_height = 13.0;
+stand_height = 32.0;
 
 usb_height = 2.80;
 usb_width = 5.10 + 0.15; // Includes tolerance
@@ -42,7 +42,7 @@ module cutout() {
     pcb_cutout_z = (stand_height / 2) - pcb_cutout_depth + 1;
 
     usb_cutout_x = -(usb_cutout_length / 2);
-    usb_cutout_y = -(usb_cutout_thickness / 2);
+    usb_cutout_y = -(usb_cutout_thickness - 2.5);
     usb_cutout_z = (stand_height / 2) - usb_cutout_depth + 1;
 
     union() {
