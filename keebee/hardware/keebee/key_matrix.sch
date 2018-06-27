@@ -1223,36 +1223,6 @@ F 3 "" H 6150 3700 50  0001 C CNN
 	1    6150 3700
 	0    1    1    0   
 $EndComp
-$Comp
-L Device:D D41
-U 1 1 5BCD2582
-P 5950 4350
-F 0 "D41" H 5950 4566 50  0000 C CNN
-F 1 "D" H 5950 4475 50  0000 C CNN
-F 2 "" H 5950 4350 50  0001 C CNN
-F 3 "~" H 5950 4350 50  0001 C CNN
-	1    5950 4350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6150 4400 6100 4400
-Wire Wire Line
-	6100 4400 6100 4350
-Wire Wire Line
-	5800 4350 5750 4350
-Wire Wire Line
-	6150 4000 6150 3950
-$Comp
-L Switch:SW_SPST SW40
-U 1 1 5BCD258D
-P 6150 4200
-F 0 "SW40" V 6050 4250 50  0000 L CNN
-F 1 "SW_SPST" V 5950 3850 50  0000 L CNN
-F 2 "Buttons_Switches_Keyboard:SW_Cherry_MX1A_1.00u_Plate" H 6150 4200 50  0001 C CNN
-F 3 "" H 6150 4200 50  0001 C CNN
-	1    6150 4200
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	6350 1950 6350 2350
 $Comp
@@ -2361,8 +2331,6 @@ Connection ~ 5150 4350
 Wire Wire Line
 	5150 4350 5150 4950
 Connection ~ 5550 3950
-Wire Wire Line
-	5550 3950 6150 3950
 Connection ~ 5150 3850
 Wire Wire Line
 	5150 3850 5150 4350
@@ -2405,14 +2373,6 @@ Connection ~ 6150 3450
 Wire Wire Line
 	6150 3450 6750 3450
 Connection ~ 5750 3850
-Wire Wire Line
-	5750 3850 5750 4350
-Connection ~ 6150 3950
-Wire Wire Line
-	6150 3950 6750 3950
-Connection ~ 5750 4350
-Wire Wire Line
-	5750 4350 5750 5000
 Connection ~ 6350 4350
 Wire Wire Line
 	6350 4350 6350 4950
@@ -2609,4 +2569,10 @@ Wire Wire Line
 	1950 1950 2550 1950
 Wire Wire Line
 	1250 1950 1950 1950
+Wire Wire Line
+	5750 3850 5750 5000
+Wire Wire Line
+	5550 3950 6750 3950
+Text Notes 5750 4200 0    50   ~ 0
+<-- Space Bar
 $EndSCHEMATC
