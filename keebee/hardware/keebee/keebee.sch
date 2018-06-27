@@ -167,7 +167,7 @@ COL12
 Wire Wire Line
 	6000 4000 6150 4000
 Text Label 6150 4000 0    50   ~ 0
-COL11
+COL13
 Text Label 4700 3800 0    50   ~ 0
 ROW3
 Text Label 4700 3900 0    50   ~ 0
