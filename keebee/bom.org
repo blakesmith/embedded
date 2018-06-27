@@ -1,6 +1,8 @@
 #+TITLE: Keebee Bill of Materials
 
-| Name          | Quantity | Part Number  | Price | Link                                                                                            |
-|---------------+----------+--------------+-------+-------------------------------------------------------------------------------------------------|
-| STM32F042K6T6 |        1 | 497-14647-ND |  2.83 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F042K6T6/497-14647-ND/4815294 |
+| Name          | Quantity | Part Number      | Price | Link                                                                                             |
+|---------------+----------+------------------+-------+--------------------------------------------------------------------------------------------------|
+| STM32F042K6T6 |        1 | 497-14647-ND     |  2.83 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F042K6T6/497-14647-ND/4815294  |
+| Diode         |       69 | 1N4148WTPMSCT-ND |  0.14 | https://www.digikey.com/product-detail/en/micro-commercial-co/1N4148W-TP/1N4148WTPMSCT-ND/717311 |
+
 
