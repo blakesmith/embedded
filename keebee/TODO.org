@@ -1,0 +1,17 @@
+#+TITLE: TODO List
+
+* TODO Research USB firmware flashing
+* TODO Order breadboard parts
+  - Cherry switches
+  - Nucleo board: https://www.digikey.com/product-detail/en/stmicroelectronics/NUCLEO-F042K6/497-15980-ND/5428804
+  - Prototype resistors
+* TODO Implement scan matrix driver
+* TODO Figure out USB hook points
+* TODO Map switch presses to keyboard scan codes
+* TODO Test scan matrix driver
+* TODO Test switch fit against printed top plate
+* TODO Layout PCB
+* TODO Test switch and top plate fit against printed PCB
+* TODO Order prototype parts
+* TODO Order PCB
+* TODO Assemble PCB
