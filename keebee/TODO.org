@@ -3,8 +3,9 @@
 * TODO Research USB firmware flashing
 * TODO Order breadboard parts
   - Cherry switches
+  - Keycaps
   - Nucleo board: https://www.digikey.com/product-detail/en/stmicroelectronics/NUCLEO-F042K6/497-15980-ND/5428804
-  - Prototype resistors
+  - Prototype diodes: https://www.digikey.com/product-detail/en/on-semiconductor/1N4148/1N4148FS-ND/458603
 * TODO Implement scan matrix driver
 * TODO Figure out USB hook points
 * TODO Map switch presses to keyboard scan codes
