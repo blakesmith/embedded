@@ -1096,7 +1096,7 @@ U 1 1 5BC49954
 P 5550 4200
 F 0 "SW35" V 5450 4250 50  0000 L CNN
 F 1 "SW_SPST" V 5350 3850 50  0000 L CNN
-F 2 "Buttons_Switches_Keyboard:SW_Cherry_MX1A_1.00u_Plate" H 5550 4200 50  0001 C CNN
+F 2 "Buttons_Switches_Keyboard:SW_Cherry_MX1A_2.00u_Plate" H 5550 4200 50  0001 C CNN
 F 3 "" H 5550 4200 50  0001 C CNN
 	1    5550 4200
 	0    1    1    0   
