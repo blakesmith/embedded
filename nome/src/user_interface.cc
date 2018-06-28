@@ -16,8 +16,7 @@ UserInterface::UserInterface(
     Pinout& pinout,
     const BeatMonitor& beat_monitor)
     : status_led_(pinout.led_ok,
-                  pinout.led_error,
-                  pinout.led_activity),
+                  pinout.led_error),
       knob_(pinout.encoder_clockwise,
             pinout.encoder_counter_clockwise,
             pinout.encoder_button),

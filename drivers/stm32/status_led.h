@@ -6,20 +6,16 @@
 class StatusLed {
 public:
     StatusLed(GPIOPin& led_ok,
-              GPIOPin& led_error,
-              GPIOPin& led_activity);
+              GPIOPin& led_error);
     void Init();
     void ToggleOk();
     void ToggleError();
-    void ToggleActivity();
     void SetOk(bool on);
     void SetError(bool on);
-    void SetActivity(bool on);
     
 private:
     GPIOPin& led_ok_;
     GPIOPin& led_error_;
-    GPIOPin& led_activity_;
 };
 
 #endif

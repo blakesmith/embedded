@@ -14,7 +14,6 @@ struct Pinout {
     // StatusLed
     GPIOPin led_ok;
     GPIOPin led_error;
-    GPIOPin led_activity;
 
     // Pec11 rotary encoder
     GPIOPin encoder_clockwise;

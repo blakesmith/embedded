@@ -14,9 +14,8 @@ GPIOPin sda_pin(gpiob, 9);
 
 GPIOPin ok_led(gpiod, 15);
 GPIOPin error_led(gpiod, 14);
-GPIOPin activity_led(gpiod, 13);
 
-StatusLed status_led(ok_led, error_led, activity_led);
+StatusLed status_led(ok_led, error_led);
 
 I2CBus i2c(I2CBus::Id::ONE, scl_pin, sda_pin);
 AS1115Display display_as1115(i2c, 5);

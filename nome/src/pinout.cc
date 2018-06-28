@@ -9,7 +9,6 @@
 
 static constexpr uint16_t STATUS_OK_LED = 15;
 static constexpr uint16_t STATUS_ERROR_LED = 14;
-static constexpr uint16_t STATUS_ACTIVITY_LED = 13;
 
 // Pec11 rotary encoder
 
@@ -57,7 +56,6 @@ static constexpr uint32_t DAC_DMA_CHANNEL = 0;
 
 static constexpr uint16_t STATUS_OK_LED = 10;
 static constexpr uint16_t STATUS_ERROR_LED = 9;
-static constexpr uint16_t STATUS_ACTIVITY_LED = 8;
 
 // Pec11 rotary encoder
 
@@ -112,7 +110,6 @@ Pinout::Pinout()
       gpiod(GPIOBus::Id::D),
       led_ok(STATUS_LED_BUS, STATUS_OK_LED),
       led_error(STATUS_LED_BUS, STATUS_ERROR_LED),
-      led_activity(STATUS_LED_BUS, STATUS_ACTIVITY_LED),
       encoder_clockwise(ENCODER_BUS, ENCODER_CLOCKWISE),
       encoder_counter_clockwise(ENCODER_BUS, ENCODER_COUNTER_CLOCKWISE),
       encoder_button(ENCODER_BUS, ENCODER_BUTTON),

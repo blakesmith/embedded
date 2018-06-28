@@ -23,9 +23,8 @@ AS1115Display display(i2c, 5);
 
 GPIOPin ok_led(gpioa, 5);
 GPIOPin error_led(gpioa, 6);
-GPIOPin activity_led(gpioa, 7);
 
-StatusLed status_led(ok_led, error_led, activity_led);
+StatusLed status_led(ok_led, error_led);
 
 GPIOPin encoder_clockwise(gpioa, 1);
 GPIOPin encoder_counter_clockwise(gpioa, 2);
