@@ -19,6 +19,8 @@
 | LD1117 3.3V linear regulator           |        1 | 497-1242-1-ND or 497-1241-1-ND |       0.42 | https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S33TR/497-1242-1-ND/586242    |
 | FCI Micro USB Connector                |        1 | 609-4613-1-ND                  |       0.46 | https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378     |
 | Tactile Switch                         |        1 | SW400-ND                       |       0.29 | https://www.digikey.com/product-detail/en/omron-electronics-inc-emc-div/B3F-1000/SW400-ND/33150  |
+| Cherry MX Plate Stabilizer kit         |        1 |                                |       5.00 | https://mechanicalkeyboards.com/shop/index.php?l=product_detail&p=314
+
 
 
 
