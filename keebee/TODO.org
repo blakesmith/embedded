@@ -1,5 +1,6 @@
 #+TITLE: TODO List
 
+* TODO Add stabilizers to BOM
 * TODO Research USB firmware flashing
 * TODO Order breadboard parts
   - Cherry switches
