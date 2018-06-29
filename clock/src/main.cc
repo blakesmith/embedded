@@ -50,11 +50,10 @@ static void Init() {
     gpioa.Init();
     gpiob.Init();
     status_led.Init();
-    status_led.SetError(!rtc.Init());
     i2c.Init();
     display.Init();
     encoder.Init();
-
+    status_led.SetError(!rtc.Init());
     status_led.SetError(!set_time());
 }
 
@@ -111,6 +110,7 @@ int main() {
     Init();
 
     status_led.SetOk(true);
+    for (unsigned int i = 0; i < 320000; i++);
     while (true) {
         update_time();
     }

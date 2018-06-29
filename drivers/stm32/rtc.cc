@@ -50,6 +50,8 @@ bool RTClock::Init() {
         RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
     }
 
+    RCC_RTCCLKCmd(ENABLE);
+
     RTC_StructInit(&rcc_init);
     rcc_init.RTC_HourFormat = RTC_HourFormat_12;
     rcc_init.RTC_AsynchPrediv = GetAsynchPrediv();
@@ -57,7 +59,6 @@ bool RTClock::Init() {
 
     bool success = RTC_Init(&rcc_init) == SUCCESS;
 
-    RCC_RTCCLKCmd(ENABLE);
     RTC_WaitForSynchro();
     return success;
 }
