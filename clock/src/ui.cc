@@ -13,7 +13,8 @@ UI::UI(Display7Seg* display,
       display_needs_refresh_(true),
       update_count_(0),
       ticks_per_half_second_(4096), // Set something reasonably high for initialization
-      colon_toggle_(true)
+      colon_toggle_(true),
+      led_tick_(true)
 { }
 
 void UI::Clear() {
@@ -43,13 +44,16 @@ UI::Action UI::set_change_time() {
     int8_t diff = encoder_->GetCount() - knob_offset_;
     knob_offset_ = encoder_->GetCount();
     switch (set_position_) {
-        case NONE:
+        case NONE: {
+            toggle_led_tick();
             return Action(0, 0);
+        }
         case HOUR:
             return Action(diff, 0);
         case MINUTE:
             return Action(0, diff);
         default:
+            toggle_led_tick();
             return Action(0, 0);
     }
 }
@@ -65,8 +69,16 @@ void UI::refresh_display() {
 }
 
 void UI::toggle_status_led() {
-    status_led_->ToggleOk();
-    status_led_->ToggleError();
+    if (led_tick_) {
+        status_led_->ToggleOk();
+        status_led_->ToggleError();
+    }
+}
+
+void UI::toggle_led_tick() {
+    led_tick_ = !led_tick_;
+    status_led_->SetOk(true);
+    status_led_->SetError(false);
 }
 
 bool UI::is_next_second(const uint8_t current_second) {
