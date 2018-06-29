@@ -52,9 +52,10 @@ UI::Action UI::set_change_time() {
             return Action(diff, 0);
         case MINUTE:
             return Action(0, diff);
-        default:
+        default: {
             toggle_led_tick();
             return Action(0, 0);
+        }
     }
 }
 
