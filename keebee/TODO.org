@@ -1,12 +1,13 @@
 #+TITLE: TODO List
 
-* TODO Add stabilizers to BOM
-* TODO Research USB firmware flashing
-* TODO Order breadboard parts
+* DONE Add stabilizers to BOM
+* DONE Research USB firmware flashing
+* DONE Order breadboard parts
   - Cherry switches
   - Keycaps
   - Nucleo board: https://www.digikey.com/product-detail/en/stmicroelectronics/NUCLEO-F042K6/497-15980-ND/5428804
   - Prototype diodes: https://www.digikey.com/product-detail/en/on-semiconductor/1N4148/1N4148FS-ND/458603
+  - Tactile buttons: https://www.digikey.com/scripts/DkSearch/dksus.dll?Detail&itemSeq=265252329&uq=636659637175005869
 * TODO Implement scan matrix driver
 * TODO Figure out USB hook points
 * TODO Map switch presses to keyboard scan codes
