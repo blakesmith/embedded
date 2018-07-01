@@ -73,13 +73,15 @@ void UI::toggle_status_led() {
     if (led_tick_) {
         status_led_->ToggleOk();
         status_led_->ToggleError();
+    } else {
+        status_led_->SetOk(true);
+        status_led_->SetError(false);
     }
 }
 
 void UI::toggle_led_tick() {
     led_tick_ = !led_tick_;
-    status_led_->SetOk(true);
-    status_led_->SetError(false);
+    toggle_status_led();
 }
 
 bool UI::is_next_second(const uint8_t current_second) {
