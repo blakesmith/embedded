@@ -47,14 +47,6 @@ clock_stm32:
 	--strip=never \
 	//clock:clock
 
-clock_stm32_flash:
-	bazel run \
-	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
-	--cpu=armeabi-v7a-m4 \
-	--define TARGET=stm32f411 \
-	//clock/scripts:discovery_flash
-
-
 clock_stm32_breakout:
 	bazel run \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
