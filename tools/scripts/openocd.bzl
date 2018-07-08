@@ -1,6 +1,6 @@
 def openocd_flash(name, artifact, target):
     native.sh_binary(
-        name = "{}".format(name),
+        name = name,
         srcs = [
             "//tools/scripts:openocd_flash.sh"
         ],
