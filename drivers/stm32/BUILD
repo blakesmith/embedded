@@ -13,6 +13,11 @@ STM_DRIVERS = select({
         "//third_party/STM/stm32l1:stm_cmsis",
         "//third_party/STM/stm32l1:stm_cmsis_device",
         "//third_party/STM/stm32l1:stm_std_periph",
+    ],
+    "//third_party/STM/stm32f0:target_stm32f0": [
+        "//third_party/STM/stm32f0:stm_cmsis",
+        "//third_party/STM/stm32f0:stm_cmsis_device",
+        "//third_party/STM/stm32f0/cube:base",
     ]
 })
 
@@ -28,6 +33,10 @@ COMMON_COPTS = select({
     "//third_party/STM/stm32l1:target_stm32l1": [
         "-fno-rtti",
         "-DSTM32L1XX_MD"
+    ],
+    "//third_party/STM/stm32f0:target_stm32f0": [
+        "-fno-rtti",
+        "-DSTM32F042x6"
     ]
 })
 
@@ -168,3 +177,19 @@ cc_library(
     deps = STM_DRIVERS,
     visibility = ["//visibility:public"]
 )
+
+cc_library(
+    name = "scan_matrix",
+    srcs = [
+        "scan_matrix.cc"
+    ],
+    hdrs = [
+        "scan_matrix.h"
+    ],
+    copts = COMMON_COPTS,
+    deps = [
+        ":gpio_common"
+    ],
+    visibility = ["//visibility:public"]
+)
+

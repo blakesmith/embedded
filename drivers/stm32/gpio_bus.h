@@ -9,6 +9,10 @@
 #include "stm32l1xx_gpio.h"
 #endif
 
+#ifdef STM32F042x6
+#include "stm32f0xx_hal_gpio.h"
+#endif
+
 #include <cstdint>
 
 class GPIOBus {
@@ -36,6 +40,9 @@ private:
 
     GPIO_TypeDef* lookup_gpio_typedef(Id id);
     uint32_t lookup_clock_for(Id id);
+#ifdef STM32F042x6
+    void hal_enable_clock_for(Id id);
+#endif
 };
 
 #endif

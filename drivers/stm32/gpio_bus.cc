@@ -8,6 +8,11 @@
 #include "stm32l1xx_rcc.h"
 #endif
 
+#ifdef STM32F042x6
+#include "stm32f0xx_hal_rcc.h"
+#endif
+
+
 GPIOBus::GPIOBus(Id id)
     : bus_id_(id) {
     gpiox_ = lookup_gpio_typedef(id);
@@ -24,6 +29,9 @@ void GPIOBus::Init() {
 #ifdef STM32L1XX_MD
     RCC_AHBPeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
 #endif
+#ifdef STM32F042x6
+    hal_enable_clock_for(bus_id_);
+#endif
 }
 
 uint32_t GPIOBus::ReadAll() {
@@ -39,8 +47,10 @@ GPIO_TypeDef* GPIOBus::lookup_gpio_typedef(Id id) {
         case Id::A: return GPIOA;
         case Id::B: return GPIOB;
         case Id::C: return GPIOC;
+#if defined(STM32F411xE) || defined(STM32L1XX_MD)
         case Id::D: return GPIOD;
         case Id::E: return GPIOE;
+#endif
         default: return nullptr;
     }
 }
@@ -64,4 +74,25 @@ uint32_t GPIOBus::lookup_clock_for(Id id) {
         default: return 0;
     }
 }
+
+#ifdef STM32F042x6
+void GPIOBus::hal_enable_clock_for(Id id) {
+    switch (id) {
+        case Id::A: {
+            __HAL_RCC_GPIOA_CLK_ENABLE();
+            break;
+        }
+        case Id::B: {
+            __HAL_RCC_GPIOB_CLK_ENABLE();
+            break;
+        }
+        case Id::C: {
+            __HAL_RCC_GPIOC_CLK_ENABLE();
+            break;
+        }
+        default:
+            return;
+    }
+}
+#endif
 

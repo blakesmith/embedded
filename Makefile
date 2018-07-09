@@ -62,6 +62,13 @@ keebee_stm32:
 	--define TARGET=stm32f0 \
 	//keebee:keebee
 
+scan_matrix:
+	bazel build \
+	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
+	--cpu=armeabi-v7a-m0 \
+	--define TARGET=stm32f0 \
+	//drivers/stm32:scan_matrix
+
 stm32f0_base:
 	bazel build \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
