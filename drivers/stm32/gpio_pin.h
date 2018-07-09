@@ -53,7 +53,7 @@ public:
 
     void Set(bool on);
     void Toggle();
-    uint8_t Read();
+    bool Read();
     
     void Init();
     

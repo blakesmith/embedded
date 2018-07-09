@@ -6,12 +6,12 @@ using namespace stm32;
 GPIOBus gpioa(GPIOBus::Id::A);
 GPIOBus gpiob(GPIOBus::Id::B);
 
-const GPIOPin scan_rows[] = {
+GPIOPin scan_rows[] = {
     GPIOPin(gpiob, 3),
     GPIOPin(gpiob, 4)
 };
 
-const GPIOPin scan_columns[] = {
+GPIOPin scan_columns[] = {
     GPIOPin(gpioa, 0),
     GPIOPin(gpioa, 1),
     GPIOPin(gpioa, 2),

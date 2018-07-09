@@ -238,6 +238,15 @@ void GPIOPin::Set(bool on) {
     bus_.get_gpiox()->ODR = bus_.get_gpiox()->ODR | (pin_number_ & toggle);
 }
 
+bool GPIOPin::Read() {
+#if defined(STM32_HAL)
+    const uint32_t reset = GPIO_PIN_RESET;
+#else
+    const uint32_t reset = Bit_RESET;
+#endif
+    return (bus_.get_gpiox()->IDR & pin_number_) != reset;
+}
+
 void GPIOPin::Toggle() {
     bus_.get_gpiox()->ODR ^= pin_number_;
 }
