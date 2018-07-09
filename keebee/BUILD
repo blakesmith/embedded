@@ -14,6 +14,8 @@ cc_binary(
         "-Tthird_party/STM/stm32f0/STM32F042K6Tx_FLASH.ld"
     ],
     deps = [
+        "//drivers/stm32:scan_matrix",
+        "//drivers/stm32:gpio_common",
         "//third_party/STM/stm32f0/common:common_bin",
         "//third_party/STM/stm32f0/cube:base",
         "//third_party/STM/stm32f0:stm32f042_linker_script",

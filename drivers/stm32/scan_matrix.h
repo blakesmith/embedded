@@ -7,8 +7,8 @@ namespace stm32 {
 
 class ScanMatrix {
 public:
-    ScanMatrix(GPIOPin* rows,
-               GPIOPin* columns,
+    ScanMatrix(const GPIOPin* rows,
+               const GPIOPin* columns,
                uint8_t row_count,
                uint8_t column_count);
     ~ScanMatrix() = default;
@@ -16,8 +16,8 @@ public:
     void Init();
 
 private:
-    GPIOPin* rows_;
-    GPIOPin* columns_;
+    const GPIOPin* rows_;
+    const GPIOPin* columns_;
 
     uint8_t row_count_;
     uint8_t column_count_;

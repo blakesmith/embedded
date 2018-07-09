@@ -2,8 +2,8 @@
 
 namespace stm32 {
 
-ScanMatrix::ScanMatrix(GPIOPin* rows,
-                       GPIOPin* columns,
+ScanMatrix::ScanMatrix(const GPIOPin* rows,
+                       const GPIOPin* columns,
                        uint8_t row_count,
                        uint8_t column_count) :
     rows_(rows),

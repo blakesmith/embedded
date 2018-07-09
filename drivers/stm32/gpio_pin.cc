@@ -25,6 +25,7 @@ void GPIOPin::Init() {
 uint32_t GPIOPin::lookup_pin_number_for(uint16_t pin) {
 #if defined(STM32_STD_PERIPH)    
     switch (pin) {
+        case 0: return GPIO_Pin_0;
         case 1: return GPIO_Pin_1;
         case 2: return GPIO_Pin_2;
         case 3: return GPIO_Pin_3;
@@ -44,6 +45,7 @@ uint32_t GPIOPin::lookup_pin_number_for(uint16_t pin) {
     }
 #else
     switch (pin) {
+        case 0: return GPIO_PIN_0;
         case 1: return GPIO_PIN_1;
         case 2: return GPIO_PIN_2;
         case 3: return GPIO_PIN_3;
@@ -67,6 +69,7 @@ uint32_t GPIOPin::lookup_pin_number_for(uint16_t pin) {
 uint16_t GPIOPin::lookup_pin_source_for(uint16_t pin) {
 #if defined(STM32_STD_PERIPH)
     switch (pin) {
+        case 0: return GPIO_PinSource0;
         case 1: return GPIO_PinSource1;
         case 2: return GPIO_PinSource2;
         case 3: return GPIO_PinSource3;
