@@ -15,6 +15,7 @@ cc_binary(
     ],
     deps = [
         "//drivers/stm32:scan_matrix",
+        "//drivers/stm32:status_led",
         "//drivers/stm32:gpio_common",
         "//third_party/STM/stm32f0/common:common_bin",
         "//third_party/STM/stm32f0/cube:base",
