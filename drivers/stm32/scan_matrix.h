@@ -14,6 +14,8 @@ public:
     ~ScanMatrix() = default;
 
     void Init();
+
+    int Scan(bool** key_scans, size_t row_len, size_t column_len);
     bool ScanKey(const uint8_t row,
                  const uint8_t column);
 
