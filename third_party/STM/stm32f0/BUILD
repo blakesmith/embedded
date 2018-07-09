@@ -1,9 +1,9 @@
 licenses(["unencumbered"])
 
 config_setting(
-    name = "target_stm32f0",
+    name = "target_stm32f042",
     define_values = {
-        "TARGET": "stm32f0",
+        "TARGET": "stm32f042",
     },
     visibility = ["//visibility:public"]
 )
