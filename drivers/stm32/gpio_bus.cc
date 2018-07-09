@@ -29,7 +29,7 @@ void GPIOBus::Init() {
 #ifdef STM32L1XX_MD
     RCC_AHBPeriphClockCmd(lookup_clock_for(bus_id_), ENABLE);
 #endif
-#ifdef STM32F042x6
+#ifdef STM32_HAL
     hal_enable_clock_for(bus_id_);
 #endif
 }
@@ -75,7 +75,7 @@ uint32_t GPIOBus::lookup_clock_for(Id id) {
     }
 }
 
-#ifdef STM32F042x6
+#ifdef STM32_HAL
 void GPIOBus::hal_enable_clock_for(Id id) {
     switch (id) {
         case Id::A: {

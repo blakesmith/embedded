@@ -13,15 +13,17 @@ GPIOPin::GPIOPin(GPIOBus& bus,
 }
 
 void GPIOPin::Init() {
-#if defined(STM32F411xE) || defined(STM32F413_423xx) || defined(STM32L1XX_MD)
+#if defined(STM32_STD_PERIPH)
     std_periph_init();
-#else
+#elif defined(STM32_HAL)
     hal_init();
+#else
+#error "You need to define a processor that either uses the STM32 standard peripheral library, or the HAL library"
 #endif
 }
 
 uint32_t GPIOPin::lookup_pin_number_for(uint16_t pin) {
-#if defined(STM32F411xE) || defined(STM32F413_423xx) || defined(STM32L1XX_MD)
+#if defined(STM32_STD_PERIPH)    
     switch (pin) {
         case 1: return GPIO_Pin_1;
         case 2: return GPIO_Pin_2;
@@ -63,7 +65,7 @@ uint32_t GPIOPin::lookup_pin_number_for(uint16_t pin) {
 }
 
 uint16_t GPIOPin::lookup_pin_source_for(uint16_t pin) {
-#if defined(STM32F411xE) || defined(STM32F413_423xx) || defined(STM32L1XX_MD)
+#if defined(STM32_STD_PERIPH)
     switch (pin) {
         case 1: return GPIO_PinSource1;
         case 2: return GPIO_PinSource2;
@@ -88,8 +90,7 @@ uint16_t GPIOPin::lookup_pin_source_for(uint16_t pin) {
 }
 
 // Start standard peripheral init
-#if defined(STM32F411xE) || defined(STM32F413_423xx) || defined(STM32L1XX_MD)
-
+#if defined(STM32_STD_PERIPH)
 /**
  * Init function for the older, standard peripheral library drivers.
  */
@@ -164,7 +165,8 @@ GPIOSpeed_TypeDef GPIOPin::lookup_speed_for(Speed speed) {
 
 #endif // End standard peripheral init
 
-#ifdef STM32F042x6
+#ifdef STM32_HAL
+
 void GPIOPin::hal_init() {
     GPIO_InitTypeDef gpio_init;
 

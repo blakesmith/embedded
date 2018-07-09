@@ -1,18 +1,6 @@
 #ifndef GPIO_PIN_H_
 #define GPIO_PIN_H_
 
-#if defined(STM32F411xE) || defined(STM32F413_423xx)
-#include "stm32f4xx_gpio.h"
-#endif
-
-#ifdef STM32L1XX_MD
-#include "stm32l1xx_gpio.h"
-#endif
-
-#ifdef STM32F042x6
-#include "stm32f0xx_hal_gpio.h"
-#endif
-
 #include "gpio_bus.h"
 
 class GPIOPin {
@@ -91,7 +79,7 @@ private:
     uint32_t lookup_pin_number_for(uint16_t pin_number);
     uint16_t lookup_pin_source_for(uint16_t pin_number);
 
-#if defined(STM32F411xE) || defined(STM32F413_423xx) || defined(STM32L1XX_MD)
+#if defined(STM32_STD_PERIPH)
     // Standard peripheral init
     void std_periph_init();
     uint8_t lookup_alternative_function_for(Af af);
@@ -101,7 +89,7 @@ private:
     GPIOSpeed_TypeDef lookup_speed_for(Speed speed);
 #endif
 
-#ifdef STM32F042x6
+#ifdef STM32_HAL
     // Hal init function
     void hal_init();
     uint8_t hal_lookup_alternative_function_for(Af af);
