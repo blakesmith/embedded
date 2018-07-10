@@ -40,7 +40,7 @@ void ScanMatrix::init_columns() {
     }
 }
 
-int ScanMatrix::Scan(bool** key_scans, size_t row_len, size_t column_len) {
+int ScanMatrix::Scan(bool** key_scans, const size_t row_len, const size_t column_len) {
     if (row_len > row_count_ || column_len > column_count_) {
         return -1;
     }

@@ -15,7 +15,7 @@ public:
 
     void Init();
 
-    int Scan(bool** key_scans, size_t row_len, size_t column_len);
+    int Scan(bool** key_scans, const size_t row_len, const size_t column_len);
     bool ScanKey(const uint8_t row,
                  const uint8_t column);
 
