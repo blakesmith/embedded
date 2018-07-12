@@ -1,9 +1,16 @@
 #include "usb_keyboard.h"
 
+#include "hid/usbd_desc.h"
+
 #include "stm32f0xx_hal_flash.h"
 #include "stm32f0xx_hal_rcc.h"
 
 static uint8_t USBD_StrDesc[USBD_MAX_STR_DESC_SIZ];
+
+static uint8_t USBD_StringSerial[USB_SIZ_STRING_SERIAL] = {
+    USB_SIZ_STRING_SERIAL,
+    USB_DESC_TYPE_STRING,
+};
 
 static constexpr uint16_t USBD_LANG_ID = 0x409; // English, United States
 static const uint8_t USBD_LangIDDesc[USB_LEN_LANGID_STR_DESC] = {
@@ -12,6 +19,36 @@ static const uint8_t USBD_LangIDDesc[USB_LEN_LANGID_STR_DESC] = {
     LOBYTE(USBD_LANG_ID),
     HIBYTE(USBD_LANG_ID),
 };
+
+static void int_to_unicode (uint32_t value , uint8_t *pbuf , uint8_t len) {
+    uint8_t idx = 0;
+  
+    for( idx = 0 ; idx < len ; idx ++) {
+        if(((value >> 28)) < 0xA) {
+            pbuf[ 2* idx] = (value >> 28) + '0';
+        } else {
+            pbuf[2* idx] = (value >> 28) + 'A' - 10; 
+        }
+        value = value << 4;
+        pbuf[ 2* idx + 1] = 0;
+    }
+}
+
+static void set_serial_number(uint8_t* serial_buf) {
+    uint32_t deviceserial0, deviceserial1, deviceserial2;
+  
+    deviceserial0 = *(uint32_t*)DEVICE_ID1;
+    deviceserial1 = *(uint32_t*)DEVICE_ID2;
+    deviceserial2 = *(uint32_t*)DEVICE_ID3;
+  
+    deviceserial0 += deviceserial2;
+  
+    if (deviceserial0 != 0)
+    {
+        int_to_unicode(deviceserial0, USBD_StringSerial,8);
+        int_to_unicode(deviceserial1, &USBD_StringSerial[16], 4);
+    }
+}
 
 static uint8_t* USBD_HID_LangIDStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
     *length = sizeof(USBD_LangIDDesc);
@@ -26,6 +63,14 @@ static uint8_t* USBD_HID_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uint
 static uint8_t* USBD_HID_ProductStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
     USBD_GetString((uint8_t *)"KeeBee USB Keyboard", USBD_StrDesc, length);
     return USBD_StrDesc;
+}
+
+static uint8_t* USBD_HID_SerialStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
+    *length = USB_SIZ_STRING_SERIAL;
+
+    set_serial_number(&USBD_StringSerial[2]);
+
+    return USBD_StringSerial;
 }
 
 static uint8_t* USBD_HID_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
@@ -43,7 +88,7 @@ static USBD_DescriptorsTypeDef hid_descriptors = {
     USBD_HID_LangIDStrDescriptor,
     USBD_HID_ManufacturerStrDescriptor,
     USBD_HID_ProductStrDescriptor,
-    NULL,
+    USBD_HID_SerialStrDescriptor,
     USBD_HID_ConfigStrDescriptor,
     USBD_HID_InterfaceStrDescriptor,
 };
