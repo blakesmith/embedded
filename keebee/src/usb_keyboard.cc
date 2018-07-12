@@ -5,6 +5,31 @@
 #include "stm32f0xx_hal_flash.h"
 #include "stm32f0xx_hal_rcc.h"
 
+static constexpr uint16_t USBD_VID = 0x0483; // Vendor ID
+static constexpr uint16_t USBD_PID = 0x5710; // Product id, can be reassigned?
+static constexpr uint16_t USBD_LANG_ID = 0x409; // English, United States
+
+static const uint8_t USBD_DeviceDesc[USB_LEN_DEV_DESC] = {
+    0x12, // Size of descriptor in bytes
+    USB_DESC_TYPE_DEVICE, // Device descriptor, constant
+    0x00, // USB specification number, byte 1
+    0x02, // USB specification number, byte 2
+    0x03, // USB device class, HID is 3
+    0x01, // USB device subclass, boot device
+    0x01, // USB protocol, keyboard protocol
+    USB_MAX_EP0_SIZE, // USB max packet size for zero endpoint,
+    LOBYTE(USBD_VID), // USB id vendor, byte 1
+    HIBYTE(USBD_VID), // USB id vendor, byte 2
+    LOBYTE(USBD_PID), // USB product vendor, byte 1
+    HIBYTE(USBD_PID), // USB product vendor, byte 2
+    0x00, // USB spec version, set 2.0, byte 1
+    0x02, // USB spec version, set 2.0, byte 2
+    USBD_IDX_MFC_STR, // Index of manufacturer string
+    USBD_IDX_PRODUCT_STR, // Index of product string
+    USBD_IDX_SERIAL_STR, // Index of serial number string
+    USBD_MAX_NUM_CONFIGURATION  // Number of possible configurations
+};
+
 static uint8_t USBD_StrDesc[USBD_MAX_STR_DESC_SIZ];
 
 static uint8_t USBD_StringSerial[USB_SIZ_STRING_SERIAL] = {
@@ -12,7 +37,6 @@ static uint8_t USBD_StringSerial[USB_SIZ_STRING_SERIAL] = {
     USB_DESC_TYPE_STRING,
 };
 
-static constexpr uint16_t USBD_LANG_ID = 0x409; // English, United States
 static const uint8_t USBD_LangIDDesc[USB_LEN_LANGID_STR_DESC] = {
     USB_LEN_LANGID_STR_DESC,
     USB_DESC_TYPE_STRING,
@@ -43,11 +67,15 @@ static void set_serial_number(uint8_t* serial_buf) {
   
     deviceserial0 += deviceserial2;
   
-    if (deviceserial0 != 0)
-    {
+    if (deviceserial0 != 0) {
         int_to_unicode(deviceserial0, USBD_StringSerial,8);
         int_to_unicode(deviceserial1, &USBD_StringSerial[16], 4);
     }
+}
+
+static uint8_t* USBD_HID_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
+    *length = sizeof(USBD_DeviceDesc);
+    return (uint8_t *)USBD_DeviceDesc;
 }
 
 static uint8_t* USBD_HID_LangIDStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
@@ -84,7 +112,7 @@ static uint8_t* USBD_HID_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_
 }
 
 static USBD_DescriptorsTypeDef hid_descriptors = {
-    NULL,
+    USBD_HID_DeviceDescriptor,
     USBD_HID_LangIDStrDescriptor,
     USBD_HID_ManufacturerStrDescriptor,
     USBD_HID_ProductStrDescriptor,
