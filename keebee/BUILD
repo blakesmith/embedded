@@ -4,6 +4,8 @@ cc_binary(
         "src/main.cc",
         "src/stm32f0xx_it.cc",
         "src/stm32f0xx_it.h",
+        "src/usb_keyboard.h",
+        "src/usb_keyboard.cc",
     ],
     copts = [
         "-DSTM32F042x6",
