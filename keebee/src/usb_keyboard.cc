@@ -40,4 +40,7 @@ void USBKeyboard::init_clock() {
 
     // Start CRS automatic synchronization
     HAL_RCCEx_CRSConfig(&crs_init);
+    
+    // Enable power controller clock
+    __HAL_RCC_PWR_CLK_ENABLE();
 }
