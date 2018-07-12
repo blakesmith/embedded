@@ -3,8 +3,19 @@
 #include "stm32f0xx_hal_flash.h"
 #include "stm32f0xx_hal_rcc.h"
 
+static USBD_DescriptorsTypeDef hid_descriptors = {
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
 void USBKeyboard::Init() {
     init_clock();
+    init_usb_device();
 }
 
 void USBKeyboard::init_clock() {
@@ -43,4 +54,10 @@ void USBKeyboard::init_clock() {
     
     // Enable power controller clock
     __HAL_RCC_PWR_CLK_ENABLE();
+}
+
+void USBKeyboard::init_usb_device() {
+    USBD_Init(&usbd_device_, &hid_descriptors, 0);
+    USBD_RegisterClass(&usbd_device_, &USBD_HID);
+    USBD_Start(&usbd_device_);
 }
