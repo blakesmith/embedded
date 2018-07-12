@@ -3,14 +3,36 @@
 #include "stm32f0xx_hal_flash.h"
 #include "stm32f0xx_hal_rcc.h"
 
+static uint8_t USBD_StrDesc[USBD_MAX_STR_DESC_SIZ];
+
+static uint8_t* USBD_HID_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
+    USBD_GetString((uint8_t *)"KeeBee", USBD_StrDesc, length);
+    return USBD_StrDesc;
+}
+
+static uint8_t* USBD_HID_ProductStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
+    USBD_GetString((uint8_t *)"KeeBee USB Keyboard", USBD_StrDesc, length);
+    return USBD_StrDesc;
+}
+
+static uint8_t* USBD_HID_ConfigStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
+    USBD_GetString((uint8_t *)"KeeBee HID Config", USBD_StrDesc, length);
+    return USBD_StrDesc;
+}
+
+static uint8_t* USBD_HID_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
+    USBD_GetString((uint8_t *)"KeeBee HID Interface", USBD_StrDesc, length);
+    return USBD_StrDesc;
+}
+
 static USBD_DescriptorsTypeDef hid_descriptors = {
     NULL,
     NULL,
+    USBD_HID_ManufacturerStrDescriptor,
+    USBD_HID_ProductStrDescriptor,
     NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL
+    USBD_HID_ConfigStrDescriptor,
+    USBD_HID_InterfaceStrDescriptor,
 };
 
 void USBKeyboard::Init() {
