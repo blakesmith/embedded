@@ -5,6 +5,19 @@
 
 static uint8_t USBD_StrDesc[USBD_MAX_STR_DESC_SIZ];
 
+static constexpr uint16_t USBD_LANG_ID = 0x409; // English, United States
+static const uint8_t USBD_LangIDDesc[USB_LEN_LANGID_STR_DESC] = {
+    USB_LEN_LANGID_STR_DESC,
+    USB_DESC_TYPE_STRING,
+    LOBYTE(USBD_LANG_ID),
+    HIBYTE(USBD_LANG_ID),
+};
+
+static uint8_t* USBD_HID_LangIDStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
+    *length = sizeof(USBD_LangIDDesc);
+    return (uint8_t *)USBD_LangIDDesc;
+}
+
 static uint8_t* USBD_HID_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed, uint16_t* length) {
     USBD_GetString((uint8_t *)"KeeBee", USBD_StrDesc, length);
     return USBD_StrDesc;
@@ -27,7 +40,7 @@ static uint8_t* USBD_HID_InterfaceStrDescriptor(USBD_SpeedTypeDef speed, uint16_
 
 static USBD_DescriptorsTypeDef hid_descriptors = {
     NULL,
-    NULL,
+    USBD_HID_LangIDStrDescriptor,
     USBD_HID_ManufacturerStrDescriptor,
     USBD_HID_ProductStrDescriptor,
     NULL,
