@@ -186,6 +186,10 @@
  #include "stm32f0xx_hal_gpio.h"
 #endif /* HAL_GPIO_MODULE_ENABLED */
 
+#ifdef HAL_CORTEX_MODULE_ENABLED
+ #include "stm32f0xx_hal_cortex.h"
+#endif /* HAL_CORTEX_MODULE_ENABLED */
+
 #ifdef HAL_FLASH_MODULE_ENABLED
  #include "stm32f0xx_hal_flash.h"
 #endif /* HAL_FLASH_MODULE_ENABLED */

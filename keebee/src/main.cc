@@ -1,3 +1,4 @@
+#include "stm32f0xx_hal.h"
 #include "drivers/stm32/gpio_bus.h"
 #include "drivers/stm32/scan_matrix.h"
 #include "drivers/stm32/status_led.h"
@@ -40,6 +41,8 @@ ScanMatrix scan_matrix(scan_rows,
                        column_count);
 
 static void Init() {
+    HAL_Init();
+
     gpioa.Init();
     gpiob.Init();
     st1.Init();

@@ -5,6 +5,8 @@ cc_library(
     hdrs = [
         "Inc/stm32f0xx_hal.h",
         "Inc/stm32f0xx_hal_conf.h",
+        "Inc/stm32f0xx_ll_cortex.h",
+        "Inc/stm32f0xx_hal_cortex.h",
         "Inc/stm32f0xx_hal_def.h",
         "Inc/stm32f0xx_hal_flash.h",
         "Inc/stm32f0xx_hal_flash_ex.h",
@@ -18,6 +20,8 @@ cc_library(
         "Inc/stm32f0xx_ll_rcc.h",
     ],
     srcs = [
+        "Src/stm32f0xx_hal.c",
+        "Src/stm32f0xx_hal_cortex.c",
         "Src/stm32f0xx_hal_gpio.c",
         "Src/stm32f0xx_ll_gpio.c",
         "Src/stm32f0xx_hal_pcd.c",
