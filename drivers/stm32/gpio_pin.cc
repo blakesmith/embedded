@@ -234,8 +234,11 @@ uint32_t GPIOPin::hal_lookup_mode_output_for(Mode mode, OType otype) {
 #endif // End hal init functions
 
 void GPIOPin::Set(bool on) {
-    uint16_t toggle = on ? 0xFFFF : 0;
-    bus_.get_gpiox()->ODR = bus_.get_gpiox()->ODR | (pin_number_ & toggle);
+    if (on) {
+        bus_.get_gpiox()->BSRR = pin_number_;
+    } else {
+        bus_.get_gpiox()->BSRR = ((uint32_t)pin_number_ << 16);
+    }
 }
 
 bool GPIOPin::Read() {
