@@ -51,6 +51,9 @@ GPIO_TypeDef* GPIOBus::lookup_gpio_typedef(Id id) {
         case Id::D: return GPIOD;
         case Id::E: return GPIOE;
 #endif
+#if defined(STM32F042x6)
+        case Id::F: return GPIOF;
+#endif
         default: return nullptr;
     }
 }

@@ -25,7 +25,8 @@ public:
         B,
         C,
         D,
-        E
+        E,
+        F,
     };
     
     GPIOBus(Id id);
