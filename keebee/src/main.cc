@@ -21,11 +21,11 @@ GPIOPin scan_columns[] = {
 const uint8_t row_count = sizeof(scan_rows) / sizeof(GPIOPin);
 const uint8_t column_count = sizeof(scan_columns) / sizeof(GPIOPin);
 
-GPIOPin st1_ok(gpioa, 11);
-GPIOPin st1_err(gpioa, 8);
+GPIOPin st1_ok(gpiob, 0);
+GPIOPin st1_err(gpioa, 12);
 
-GPIOPin st2_ok(gpiob, 0);
-GPIOPin st2_err(gpioa, 12);
+GPIOPin st2_ok(gpioa, 10);
+GPIOPin st2_err(gpioa, 9);
 
 StatusLed st1(st1_ok, st1_err);
 StatusLed st2(st2_ok, st2_err);
