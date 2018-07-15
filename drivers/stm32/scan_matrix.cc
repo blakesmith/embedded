@@ -33,28 +33,28 @@ void ScanMatrix::init_columns() {
         GPIOPin& column_pin = columns_[i];
 
         column_pin.set_mode(GPIOPin::Mode::OUT);
-        column_pin.set_pupd(GPIOPin::PuPd::DOWN);
+        column_pin.set_pupd(GPIOPin::PuPd::UP);
         column_pin.set_output(GPIOPin::OType::OPEN_DRAIN);
         column_pin.set_speed(GPIOPin::Speed::TWO_MHZ);
         column_pin.Init();
     }
 }
 
-int ScanMatrix::Scan(bool** key_scans, const size_t row_len, const size_t column_len) {
+int ScanMatrix::Scan(bool* key_scans, const size_t row_len, const size_t column_len) {
     if (row_len > row_count_ || column_len > column_count_) {
         return -1;
     }
-  
+
     for (unsigned int column = 0; column < column_count_; column++) {
         GPIOPin& column_pin = columns_[column];
-        column_pin.Set(true);
+        column_pin.Set(false);
 
         for (unsigned int row = 0; row < row_count_; row++) {
             GPIOPin& row_pin = rows_[row];
-            key_scans[row][column] = row_pin.Read();
+            key_scans[(row*column_count_)+column] = !row_pin.Read();
         }
         
-        column_pin.Set(false);
+        column_pin.Set(true);
     }
 
     return 0;
@@ -68,9 +68,9 @@ bool ScanMatrix::ScanKey(const uint8_t row, const uint8_t column) {
     GPIOPin& row_pin = rows_[row];
     GPIOPin& column_pin = columns_[column];
 
-    column_pin.Set(true);
-    bool read = row_pin.Read();
     column_pin.Set(false);
+    bool read = row_pin.Read();
+    column_pin.Set(true);
     return !read;
 }
 
