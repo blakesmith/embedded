@@ -34,4 +34,23 @@ hex_binary(
     src = ":keebee_stm32"
 )
 
+filegroup(
+    name = "keebee_flash_artifact",
+    srcs = [
+        ":keebee"
+    ],
+    visibility = [
+        "//visibility:public"
+    ]
+)
+
+load("//tools/scripts:openocd.bzl", "openocd_flash")
+
+openocd_flash(
+    name = "keebee_flash",
+    src = "//tools/scripts:openocd_board_flash.sh",
+    artifact = ":keebee_flash_artifact",
+    target = "/usr/share/openocd/scripts/board/st_nucleo_f0.cfg"
+)
+
 

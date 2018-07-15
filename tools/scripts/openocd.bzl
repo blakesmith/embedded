@@ -1,9 +1,7 @@
-def openocd_flash(name, artifact, target):
+def openocd_flash(name, artifact, target, src="//tools/scripts:openocd_flash.sh"):
     native.sh_binary(
         name = name,
-        srcs = [
-            "//tools/scripts:openocd_flash.sh"
-        ],
+        srcs = [src],
         data = [
             artifact
         ],

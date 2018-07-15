@@ -62,6 +62,14 @@ keebee_stm32:
 	--define TARGET=stm32f042 \
 	//keebee:keebee
 
+keebee_flash:
+	bazel run \
+	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
+	--strip=never \
+	--cpu=armeabi-v7a-m0 \
+	--define TARGET=stm32f042 \
+	//keebee:keebee_flash
+
 scan_matrix:
 	bazel build \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
