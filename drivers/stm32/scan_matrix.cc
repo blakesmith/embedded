@@ -22,7 +22,7 @@ void ScanMatrix::init_rows() {
         GPIOPin& row_pin = rows_[i];
 
         row_pin.set_mode(GPIOPin::Mode::IN);
-        row_pin.set_pupd(GPIOPin::PuPd::NONE);
+        row_pin.set_pupd(GPIOPin::PuPd::UP);
         row_pin.set_speed(GPIOPin::Speed::TWO_MHZ);
         row_pin.Init();
     }
@@ -33,7 +33,7 @@ void ScanMatrix::init_columns() {
         GPIOPin& column_pin = columns_[i];
 
         column_pin.set_mode(GPIOPin::Mode::OUT);
-        column_pin.set_pupd(GPIOPin::PuPd::UP);
+        column_pin.set_pupd(GPIOPin::PuPd::DOWN);
         column_pin.set_output(GPIOPin::OType::OPEN_DRAIN);
         column_pin.set_speed(GPIOPin::Speed::TWO_MHZ);
         column_pin.Init();
@@ -71,7 +71,7 @@ bool ScanMatrix::ScanKey(const uint8_t row, const uint8_t column) {
     column_pin.Set(true);
     bool read = row_pin.Read();
     column_pin.Set(false);
-    return read;
+    return !read;
 }
 
 }
