@@ -235,9 +235,17 @@ uint32_t GPIOPin::hal_lookup_mode_output_for(Mode mode, OType otype) {
 
 void GPIOPin::Set(bool on) {
     if (on) {
+#if defined(STM32_USES_HIGH_LOW_BSRR_REGISTERS)
+        bus_.get_gpiox()->BSRRL = pin_number_;
+#else
         bus_.get_gpiox()->BSRR = pin_number_;
+#endif
     } else {
+#if defined(STM32_USES_HIGH_LOW_BSRR_REGISTERS)
+        bus_.get_gpiox()->BSRRH = pin_number_;
+#else
         bus_.get_gpiox()->BSRR = ((uint32_t)pin_number_ << 16);
+#endif
     }
 }
 
