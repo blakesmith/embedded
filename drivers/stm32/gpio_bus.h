@@ -4,12 +4,13 @@
 #if defined(STM32F411xE) || defined(STM32F413_423xx)
 #include "stm32f4xx_gpio.h"
 #define STM32_STD_PERIPH 1
+#define STM32_GPIO_USES_HIGH_LOW_BSRR_REGISTERS 1
 #endif
 
 #ifdef STM32L1XX_MD
 #include "stm32l1xx_gpio.h"
 #define STM32_STD_PERIPH 1
-#define STM32_USES_HIGH_LOW_BSRR_REGISTERS 1
+#define STM32_GPIO_USES_HIGH_LOW_BSRR_REGISTERS 1
 #endif
 
 #ifdef STM32F042x6
