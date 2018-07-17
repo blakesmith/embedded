@@ -126,6 +126,16 @@ void USBKeyboard::Init() {
     init_usb_device();
 }
 
+void USBKeyboard::SendReport(const HIDReport* report) {
+    USBD_HID_SendReport(&usbd_device_, (uint8_t *)report, sizeof(HIDReport));
+}
+
+void USBKeyboard::SendNullReport() {
+    HIDReport report;
+    report.id = 1;
+    SendReport(&report);
+}
+
 void USBKeyboard::init_clock() {
     RCC_ClkInitTypeDef clock_init;
     RCC_OscInitTypeDef osc_init;

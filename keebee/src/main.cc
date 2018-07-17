@@ -60,11 +60,23 @@ static void scan_and_update() {
     st2.SetError(key_scans[3]);
 }
 
+static void send_repeating_keyboard_characters() {
+    USBKeyboard::HIDReport report;
+
+    report.id = 1;
+    report.modifiers = 0x02; // Left shift
+    report.key1 = 0x0F; // The letter 'l'
+    keyboard.SendReport(&report);
+    keyboard.SendNullReport();
+    HAL_Delay(1000);
+}
+
 int main() {
     Init();
 
     while (true) {
-        scan_and_update();
+//        scan_and_update();
+        send_repeating_keyboard_characters();
     }
 }
 

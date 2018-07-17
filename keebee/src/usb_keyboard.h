@@ -6,6 +6,15 @@
 class USBKeyboard {
 public:
     struct HIDReport {
+        HIDReport() : id(0),
+                      modifiers(0),
+                      reserved(0),
+                      key1(0),
+                      key2(0),
+                      key3(0),
+                      key4(0),
+                      key5(0),
+                      key6(0) { }
         uint8_t id;
         uint8_t modifiers;
         uint8_t reserved;
@@ -18,6 +27,8 @@ public:
     };
 
     void Init();
+    void SendReport(const HIDReport* report);
+    void SendNullReport();
 
 private:
     USBD_HandleTypeDef usbd_device_;
