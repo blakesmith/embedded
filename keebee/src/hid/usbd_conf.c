@@ -1,3 +1,4 @@
+#include "usbd_conf.h"
 #include "usbd_core.h"
 #include "stm32f0xx_hal.h"
 #include "stm32f0xx_hal_pcd.h"
@@ -204,3 +205,23 @@ void USBD_LL_Delay(uint32_t Delay) {
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 
+/**
+  * @brief  static single allocation.
+  * @param  size: size of allocated memory
+  * @retval None
+  */
+void *USBD_static_malloc(uint32_t size)
+{
+  static uint32_t mem[MAX_STATIC_ALLOC_SIZE];
+  return mem;
+}
+
+/**
+  * @brief  Dummy memory free
+  * @param  *p pointer to allocated  memory address
+  * @retval None
+  */
+void USBD_static_free(void *p)
+{
+
+}

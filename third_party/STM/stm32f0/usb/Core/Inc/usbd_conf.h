@@ -36,8 +36,6 @@
 /* Includes ------------------------------------------------------------------*/
 //#include "stm32fxxx.h"  /* replace 'stm32xxx' with your HAL driver header filename, ex: stm32f4xx.h */
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
@@ -57,7 +55,7 @@
 #define USBD_MAX_STR_DESC_SIZ                 0x100
 #define USBD_SUPPORT_USER_STRING              0 
 #define USBD_SELF_POWERED                     1
-#define USBD_DEBUG_LEVEL                      2
+#define USBD_DEBUG_LEVEL                      0
 
 /* MSC Class Config */
 #define MSC_MEDIA_PACKET                       8192   
@@ -74,13 +72,17 @@
 
 /** @defgroup USBD_Exported_Macros
   * @{
-  */ 
+  */
 
- /* Memory management macros */   
-#define USBD_malloc               malloc
-#define USBD_free                 free
-#define USBD_memset               memset
-#define USBD_memcpy               memcpy
+void *USBD_static_malloc(uint32_t size);
+void USBD_static_free(void *p);
+
+ /* Memory management macros */
+#define MAX_STATIC_ALLOC_SIZE     4 /*HID Class Driver Structure size*/
+#define USBD_malloc               (uint32_t *)USBD_static_malloc
+#define USBD_free                 USBD_static_free
+#define USBD_memset               // Not used
+#define USBD_memcpy               // Not used
     
  /* DEBUG macros */  
 

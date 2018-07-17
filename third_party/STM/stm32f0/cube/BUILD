@@ -27,6 +27,7 @@ cc_library(
         "Src/stm32f0xx_hal_pcd.c",
         "Src/stm32f0xx_hal_pcd_ex.c",
         "Src/stm32f0xx_hal_rcc.c",
+        "Src/stm32f0xx_hal_rcc_ex.c",
         "Src/stm32f0xx_ll_rcc.c",
     ],
     deps = [

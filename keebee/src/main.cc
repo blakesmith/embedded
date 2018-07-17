@@ -3,6 +3,8 @@
 #include "drivers/stm32/scan_matrix.h"
 #include "drivers/stm32/status_led.h"
 
+#include "usb_keyboard.h"
+
 using namespace stm32;
 
 GPIOBus gpioa(GPIOBus::Id::A);
@@ -37,6 +39,7 @@ ScanMatrix scan_matrix(scan_rows,
                        scan_columns,
                        row_count,
                        column_count);
+USBKeyboard keyboard;
 
 static void Init() {
     HAL_Init();
@@ -46,6 +49,7 @@ static void Init() {
     st1.Init();
     st2.Init();
     scan_matrix.Init();
+    keyboard.Init();
 }
 
 static void scan_and_update() {
