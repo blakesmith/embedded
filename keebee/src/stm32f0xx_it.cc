@@ -37,6 +37,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx_it.h"
+#include "stm32f0xx_hal.h"
+#include "stm32f0xx_hal_pcd.h"
+
+extern PCD_HandleTypeDef pcd;
 
 /** @addtogroup STM32F0xx_HAL_Examples
   * @{
@@ -62,6 +66,8 @@
   * @param  None
   * @retval None
   */
+extern "C" {
+
 void NMI_Handler(void)
 {
 }
@@ -102,8 +108,12 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
-{
+void SysTick_Handler(void) {
+    HAL_IncTick();
+}
+
+void USB_IRQHandler(void) {
+    HAL_PCD_IRQHandler(&pcd);
 }
 
 /******************************************************************************/
@@ -121,6 +131,8 @@ void SysTick_Handler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
+
+}
 
 
 /**

@@ -23,8 +23,8 @@ GPIOPin scan_columns[] = {
 const uint8_t row_count = sizeof(scan_rows) / sizeof(GPIOPin);
 const uint8_t column_count = sizeof(scan_columns) / sizeof(GPIOPin);
 
-GPIOPin st1_ok(gpiob, 0);
-GPIOPin st1_err(gpioa, 12);
+GPIOPin st1_ok(gpiob, 1);
+GPIOPin st1_err(gpiob, 0);
 
 GPIOPin st2_ok(gpioa, 10);
 GPIOPin st2_err(gpioa, 9);
@@ -74,9 +74,11 @@ static void send_repeating_keyboard_characters() {
 int main() {
     Init();
 
+    st1.SetOk(true);
     while (true) {
 //        scan_and_update();
         send_repeating_keyboard_characters();
+        st1.ToggleError();
     }
 }
 
