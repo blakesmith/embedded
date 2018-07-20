@@ -5,8 +5,8 @@
 #include "stm32f0xx_hal_flash.h"
 #include "stm32f0xx_hal_rcc.h"
 
-static constexpr uint16_t USBD_VID = 0x0483; // Vendor ID
-static constexpr uint16_t USBD_PID = 0x5710; // Product id, can be reassigned?
+static constexpr uint16_t USBD_VID = 0xb38; // Vendor ID
+static constexpr uint16_t USBD_PID = 0x0003; // Product id
 static constexpr uint16_t USBD_LANG_ID = 0x409; // English, United States
 
 static const uint8_t USBD_DeviceDesc[USB_LEN_DEV_DESC] = {
