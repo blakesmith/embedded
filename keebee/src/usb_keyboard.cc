@@ -121,9 +121,36 @@ static USBD_DescriptorsTypeDef hid_descriptors = {
     USBD_HID_InterfaceStrDescriptor,
 };
 
+USBKeyboard::USBKeyboard(Layout& layout) : current_layout_(layout) { }
+
+USBKeyboard::USBKeyboard() : current_layout_(DEFAULT_LAYOUT) { }
+
 void USBKeyboard::Init() {
     init_clock();
     init_usb_device();
+}
+
+void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
+    uint8_t current_key = 0;
+    HIDReport report;
+
+    if (key_count != current_layout_.key_count) {
+        return;
+    }
+
+    for (unsigned int i = 0; i < key_count; i++) {
+        if (current_key == 5) {
+            // No more keys left in the current HID report, send what we have.
+            break;
+        }
+
+        if (key_scans[i]) {
+            report.keys[current_key] = current_layout_.keys[i];
+            current_key++;
+        }
+    }
+
+    SendReport(&report);
 }
 
 void USBKeyboard::SendReport(const HIDReport* report) {

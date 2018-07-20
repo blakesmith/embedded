@@ -2,6 +2,8 @@ cc_binary(
     name = "keebee_stm32",
     srcs = [
         "src/main.cc",
+        "src/layout.h",
+        "src/layout.cc",
         "src/stm32f0xx_it.cc",
         "src/stm32f0xx_it.h",
         "src/usb_keyboard.h",

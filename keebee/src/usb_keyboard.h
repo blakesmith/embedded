@@ -2,6 +2,7 @@
 #define KEEBEE_USB_KEEBOARD_H_
 
 #include "hid/usbd_hid.h"
+#include "layout.h"
 
 class USBKeyboard {
 public:
@@ -16,10 +17,16 @@ public:
     void Init();
     void SendReport(const HIDReport* report);
     void SendNullReport();
+    void SendKeyScan(bool* key_scans, uint16_t key_count);
+
+    USBKeyboard(Layout& layout);
+    USBKeyboard();
+    ~USBKeyboard() = default;
 
 private:
     __ALIGN_BEGIN uint8_t report_buf_[REPORT_BUF_SIZE] __ALIGN_END;
     USBD_HandleTypeDef usbd_device_;
+    Layout current_layout_;
 
     void init_clock();
     void init_usb_device();

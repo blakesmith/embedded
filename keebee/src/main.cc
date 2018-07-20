@@ -62,15 +62,7 @@ static void scan_and_update() {
 }
 
 static void send_keyboard_characters() {
-    USBKeyboard::HIDReport report;
-
-    report.modifiers = key_scans[0] ? 0x02 : 0x0;
-    report.keys[0] = key_scans[0] ? 0x04 : 0x0;
-    report.keys[1] = key_scans[1] ? 0x05 : 0x0;
-    report.keys[2] = key_scans[2] ? 0x06 : 0x0;
-    report.keys[3] = key_scans[3] ? 0x07 : 0x0;
-
-    keyboard.SendReport(&report);
+    keyboard.SendKeyScan(key_scans, key_count);
 }
 
 int main() {
