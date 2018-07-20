@@ -127,12 +127,19 @@ void USBKeyboard::Init() {
 }
 
 void USBKeyboard::SendReport(const HIDReport* report) {
-    USBD_HID_SendReport(&usbd_device_, (uint8_t *)report, sizeof(HIDReport));
+    report_buf_[0] = report->modifiers;
+    report_buf_[1] = 0;
+    report_buf_[2] = report->key1;
+    report_buf_[3] = report->key2;
+    report_buf_[4] = report->key3;
+    report_buf_[5] = report->key4;
+    report_buf_[6] = report->key5;
+    report_buf_[7] = report->key6;
+    USBD_HID_SendReport(&usbd_device_, report_buf_, REPORT_BUF_SIZE);
 }
 
 void USBKeyboard::SendNullReport() {
     HIDReport report;
-    report.id = 1;
     SendReport(&report);
 }
 

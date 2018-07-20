@@ -5,19 +5,16 @@
 
 class USBKeyboard {
 public:
+    static constexpr uint8_t REPORT_BUF_SIZE = 8;
     struct HIDReport {
-        HIDReport() : id(0),
-                      modifiers(0),
-                      reserved(0),
+        HIDReport() : modifiers(0),
                       key1(0),
                       key2(0),
                       key3(0),
                       key4(0),
                       key5(0),
                       key6(0) { }
-        uint8_t id;
         uint8_t modifiers;
-        uint8_t reserved;
         uint8_t key1;
         uint8_t key2;
         uint8_t key3;
@@ -31,6 +28,7 @@ public:
     void SendNullReport();
 
 private:
+    __ALIGN_BEGIN uint8_t report_buf_[REPORT_BUF_SIZE] __ALIGN_END;
     USBD_HandleTypeDef usbd_device_;
 
     void init_clock();

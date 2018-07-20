@@ -63,10 +63,14 @@ static void scan_and_update() {
 static void send_repeating_keyboard_characters() {
     USBKeyboard::HIDReport report;
 
-    report.id = 1;
-    report.modifiers = 0x02; // Left shift
-    report.key1 = 0x0F; // The letter 'l'
+    report.key1 = 4; // The letter 'l'
+    report.key2 = 5;
+    report.key3 = 6;
+    report.key4 = 7;
+    report.key5 = 8;
+    report.key6 = 9;
     keyboard.SendReport(&report);
+    HAL_Delay(20);
     keyboard.SendNullReport();
     HAL_Delay(1000);
 }
