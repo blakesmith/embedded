@@ -20,8 +20,9 @@ GPIOPin scan_columns[] = {
     GPIOPin(gpiob, 7)
 };
 
-const uint8_t row_count = sizeof(scan_rows) / sizeof(GPIOPin);
-const uint8_t column_count = sizeof(scan_columns) / sizeof(GPIOPin);
+static constexpr uint8_t row_count = sizeof(scan_rows) / sizeof(GPIOPin);
+static constexpr uint8_t column_count = sizeof(scan_columns) / sizeof(GPIOPin);
+static constexpr uint16_t key_count = row_count * column_count;
 
 GPIOPin st1_ok(gpiob, 1);
 GPIOPin st1_err(gpiob, 0);
@@ -32,7 +33,7 @@ GPIOPin st2_err(gpioa, 9);
 StatusLed st1(st1_ok, st1_err);
 StatusLed st2(st2_ok, st2_err);
 
-bool key_scans[row_count*column_count] = {
+bool key_scans[key_count] = {
 };
 
 ScanMatrix scan_matrix(scan_rows,
@@ -60,19 +61,15 @@ static void scan_and_update() {
     st2.SetError(key_scans[3]);
 }
 
-static void send_repeating_keyboard_characters() {
+static void send_keyboard_characters() {
     USBKeyboard::HIDReport report;
 
-    report.key1 = 4; // The letter 'l'
-    report.key2 = 5;
-    report.key3 = 6;
-    report.key4 = 7;
-    report.key5 = 8;
-    report.key6 = 9;
+    key_scans[0] ? report.keys[0] = 0x04 : 0x0;
+    key_scans[1] ? report.keys[1] = 0x05 : 0x0;
+    key_scans[2] ? report.keys[2] = 0x06 : 0x0;
+    key_scans[3] ? report.keys[3] = 0x07 : 0x0;
+
     keyboard.SendReport(&report);
-    HAL_Delay(20);
-    keyboard.SendNullReport();
-    HAL_Delay(1000);
 }
 
 int main() {
@@ -80,9 +77,9 @@ int main() {
 
     st1.SetOk(true);
     while (true) {
-//        scan_and_update();
-        send_repeating_keyboard_characters();
-        st1.ToggleError();
+        scan_and_update();
+        send_keyboard_characters();
+        HAL_Delay(20);
     }
 }
 
