@@ -12,6 +12,19 @@ public:
                       keys { 0, 0, 0, 0, 0, 0 } { }
         uint8_t modifiers;
         uint8_t keys[6];
+
+        bool operator==(const HIDReport& rhs) const;
+        bool operator!=(const HIDReport& rhs) const;
+
+        void Reset() {
+            modifiers = 0;
+            keys[0] = 0;
+            keys[1] = 0;
+            keys[2] = 0;
+            keys[3] = 0;
+            keys[4] = 0;
+            keys[5] = 0;
+        }
     };
 
     void Init();
@@ -24,9 +37,13 @@ public:
     ~USBKeyboard() = default;
 
 private:
+    Layout current_layout_;
+
     __ALIGN_BEGIN uint8_t report_buf_[REPORT_BUF_SIZE] __ALIGN_END;
     USBD_HandleTypeDef usbd_device_;
-    Layout current_layout_;
+    HIDReport reports_[2];
+    HIDReport* current_report_;
+    HIDReport* last_report_;
 
     void init_clock();
     void init_usb_device();

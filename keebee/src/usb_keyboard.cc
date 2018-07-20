@@ -121,9 +121,27 @@ static USBD_DescriptorsTypeDef hid_descriptors = {
     USBD_HID_InterfaceStrDescriptor,
 };
 
-USBKeyboard::USBKeyboard(Layout& layout) : current_layout_(layout) { }
+bool USBKeyboard::HIDReport::operator==(const USBKeyboard::HIDReport& rhs) const {
+    return this->modifiers == rhs.modifiers &&
+        this->keys[0] == rhs.keys[0] &&
+        this->keys[1] == rhs.keys[1] &&
+        this->keys[2] == rhs.keys[2] &&
+        this->keys[3] == rhs.keys[3] &&
+        this->keys[4] == rhs.keys[4] &&
+        this->keys[5] == rhs.keys[5];
+}
 
-USBKeyboard::USBKeyboard() : current_layout_(DEFAULT_LAYOUT) { }
+bool USBKeyboard::HIDReport::operator!=(const USBKeyboard::HIDReport& rhs) const {
+    return !(*this == rhs);
+}
+
+USBKeyboard::USBKeyboard(Layout& layout) : current_layout_(layout),
+                                           current_report_(&reports_[0]),
+                                           last_report_(&reports_[1]) { }
+
+USBKeyboard::USBKeyboard() : current_layout_(DEFAULT_LAYOUT),
+                             current_report_(&reports_[0]),
+                             last_report_(&reports_[1]) { }
 
 void USBKeyboard::Init() {
     init_clock();
@@ -132,7 +150,8 @@ void USBKeyboard::Init() {
 
 void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
     uint8_t current_key = 0;
-    HIDReport report;
+    HIDReport *report = current_report_;
+    report->Reset();
 
     if (key_count != current_layout_.key_count) {
         return;
@@ -145,12 +164,18 @@ void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
         }
 
         if (key_scans[i]) {
-            report.keys[current_key] = current_layout_.keys[i];
+            report->keys[current_key] = current_layout_.keys[i];
             current_key++;
         }
     }
 
-    SendReport(&report);
+    if (current_report_ != last_report_) {
+        SendReport(report);
+    }
+
+    report = last_report_;
+    last_report_ = current_report_;
+    current_report_ = report;
 }
 
 void USBKeyboard::SendReport(const HIDReport* report) {
