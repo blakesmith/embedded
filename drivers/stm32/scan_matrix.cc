@@ -1,4 +1,5 @@
 #include "scan_matrix.h"
+#include "stm32f0xx_hal.h"
 
 namespace stm32 {
 
@@ -50,6 +51,7 @@ int ScanMatrix::Scan(bool* key_scans, const size_t row_len, const size_t column_
         column_pin.Set(false);
 
         for (unsigned int row = 0; row < row_count_; row++) {
+            HAL_Delay(1);
             GPIOPin& row_pin = rows_[row];
             key_scans[(row*column_count_)+column] = !row_pin.Read();
         }
