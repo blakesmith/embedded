@@ -135,6 +135,16 @@ bool USBKeyboard::HIDReport::operator!=(const USBKeyboard::HIDReport& rhs) const
     return !(*this == rhs);
 }
 
+void USBKeyboard::HIDReport::Reset() {
+    this->modifiers = 0;
+    this->keys[0] = 0;
+    this->keys[1] = 0;
+    this->keys[2] = 0;
+    this->keys[3] = 0;
+    this->keys[4] = 0;
+    this->keys[5] = 0;
+}
+
 int USBKeyboard::HIDReport::Fill(uint8_t* buf, uint16_t size) const {
     if (size < REPORT_BUF_SIZE) {
         return -1;

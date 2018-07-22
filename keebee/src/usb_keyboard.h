@@ -16,16 +16,7 @@ public:
         bool operator==(const HIDReport& rhs) const;
         bool operator!=(const HIDReport& rhs) const;
 
-        void Reset() {
-            modifiers = 0;
-            keys[0] = 0;
-            keys[1] = 0;
-            keys[2] = 0;
-            keys[3] = 0;
-            keys[4] = 0;
-            keys[5] = 0;
-        }
-
+        void Reset();
         int Fill(uint8_t* buf, uint16_t size) const;
     };
 
