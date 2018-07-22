@@ -25,6 +25,8 @@ public:
             keys[4] = 0;
             keys[5] = 0;
         }
+
+        int Fill(uint8_t* buf, uint16_t size) const;
     };
 
     void Init();

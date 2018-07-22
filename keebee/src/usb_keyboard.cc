@@ -135,6 +135,23 @@ bool USBKeyboard::HIDReport::operator!=(const USBKeyboard::HIDReport& rhs) const
     return !(*this == rhs);
 }
 
+int USBKeyboard::HIDReport::Fill(uint8_t* buf, uint16_t size) const {
+    if (size < REPORT_BUF_SIZE) {
+        return -1;
+    }
+
+    buf[0] = this->modifiers;
+    buf[1] = 0;
+    buf[2] = this->keys[0];
+    buf[3] = this->keys[1];
+    buf[4] = this->keys[2];
+    buf[5] = this->keys[3];
+    buf[6] = this->keys[4];
+    buf[7] = this->keys[5];
+
+    return 0;
+}
+
 USBKeyboard::USBKeyboard(Layout& layout) : current_layout_(layout),
                                            current_report_(&reports_[0]),
                                            last_report_(&reports_[1]) { }
@@ -179,14 +196,7 @@ void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
 }
 
 void USBKeyboard::SendReport(const HIDReport* report) {
-    report_buf_[0] = report->modifiers;
-    report_buf_[1] = 0;
-    report_buf_[2] = report->keys[0];
-    report_buf_[3] = report->keys[1];
-    report_buf_[4] = report->keys[2];
-    report_buf_[5] = report->keys[3];
-    report_buf_[6] = report->keys[4];
-    report_buf_[7] = report->keys[5];
+    report->Fill(report_buf_, REPORT_BUF_SIZE);
     USBD_HID_SendReport(&usbd_device_, report_buf_, REPORT_BUF_SIZE);
 }
 
