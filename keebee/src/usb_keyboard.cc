@@ -180,10 +180,6 @@ void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
     HIDReport *report = current_report_;
     report->Reset();
 
-    if (key_count != current_layout_.key_count) {
-        return;
-    }
-
     for (unsigned int i = 0; i < key_count; i++) {
         if (current_key == 5) {
             // No more keys left in the current HID report, send what we have.
@@ -191,7 +187,7 @@ void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
         }
 
         if (key_scans[i]) {
-            report->keys[current_key] = current_layout_.keys[i];
+            report->keys[current_key] = current_layout_.MapKey(i, key_count);
             current_key++;
         }
     }

@@ -3,17 +3,24 @@
 
 #include "stdint.h"
 
-struct Layout {
+struct Layer {
     using Key = uint8_t;
 
     const Key* keys;
     const uint16_t key_count;
 };
 
-const Layout::Key LAYOUT_KEY_A = 0x04;
-const Layout::Key LAYOUT_KEY_B = 0x05;
-const Layout::Key LAYOUT_KEY_C = 0x06;
-const Layout::Key LAYOUT_KEY_D = 0x07;
+struct Layout {
+    const Layer* layers;
+    const uint8_t layer_count;
+
+    uint16_t MapKey(uint16_t key_position, uint16_t key_count);
+};
+
+const Layer::Key LK_A = 0x04;
+const Layer::Key LK_B = 0x05;
+const Layer::Key LK_C = 0x06;
+const Layer::Key LK_D = 0x07;
 
 extern const Layout DEFAULT_LAYOUT;
 
