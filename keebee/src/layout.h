@@ -4,7 +4,7 @@
 #include "stdint.h"
 
 struct Layer {
-    using Key = uint8_t;
+    using Key = uint16_t;
 
     const Key* keys;
     const uint16_t key_count;
