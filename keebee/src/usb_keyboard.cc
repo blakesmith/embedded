@@ -278,6 +278,12 @@ void USBKeyboard::switch_layer(uint8_t layer_index) {
     if (layer_index < 0 || layer_index > (current_layout_.layer_count - 1)) {
         return;
     }
+
+    // Avoid fighting with layer combinations
+    if (layer_index <= current_layer_index_) {
+        return;
+    }
+
     current_layer_index_ = layer_index;
 }
 
