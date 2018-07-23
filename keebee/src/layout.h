@@ -14,7 +14,7 @@ struct Layout {
     const Layer* layers;
     const uint8_t layer_count;
 
-    uint16_t MapKey(uint16_t key_position, uint16_t key_count);
+    Layer::Key MapKey(uint16_t key_position, uint16_t key_count);
 };
 
 const Layer::Key KEY_NONE = 0x00; // No key pressed

@@ -1,6 +1,6 @@
 #include "layout.h"
 
-uint16_t Layout::MapKey(uint16_t key_position, uint16_t key_count) {
+Layer::Key Layout::MapKey(uint16_t key_position, uint16_t key_count) {
     // TODO: Actual layer traversal
     return this->layers[0].keys[key_position];
 }
