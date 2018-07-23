@@ -171,8 +171,9 @@ void USBKeyboard::SendReport(const HIDReport* report) {
     if (report == nullptr) {
         return;
     }
-    report->Fill(report_buf_, REPORT_BUF_SIZE);
-    USBD_HID_SendReport(&usbd_device_, report_buf_, REPORT_BUF_SIZE);
+    if (report->Fill(report_buf_, REPORT_BUF_SIZE) == 0) {
+        USBD_HID_SendReport(&usbd_device_, report_buf_, REPORT_BUF_SIZE);
+    }
 }
 
 void USBKeyboard::SendNullReport() {
