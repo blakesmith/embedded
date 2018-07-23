@@ -41,6 +41,7 @@ public:
 
 private:
     Layout current_layout_;
+    uint8_t current_layer_index_;
 
     __ALIGN_BEGIN uint8_t report_buf_[REPORT_BUF_SIZE] __ALIGN_END;
     USBD_HandleTypeDef usbd_device_;

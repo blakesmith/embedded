@@ -14,8 +14,10 @@ struct Layout {
     const Layer* layers;
     const uint8_t layer_count;
 
-    Layer::Key MapKey(uint16_t key_position, uint16_t key_count);
+    Layer::Key MapKey(uint8_t current_layer, uint16_t key_position, uint16_t key_count);
 };
+
+const Layer::Key KB_LAYER_SHIFT = 0x100;
 
 const Layer::Key KEY_NONE = 0x00; // No key pressed
 const Layer::Key KEY_ERR_OVF = 0x01; //  Keyboard Error Roll Over - used for all slots if too many keys are pressed ("Phantom key")

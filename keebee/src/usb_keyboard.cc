@@ -163,10 +163,12 @@ int USBKeyboard::HIDReport::Fill(uint8_t* buf, uint16_t size) const {
 }
 
 USBKeyboard::USBKeyboard(Layout& layout) : current_layout_(layout),
+                                           current_layer_index_(0),
                                            current_report_(&reports_[0]),
                                            last_report_(&reports_[1]) { }
 
 USBKeyboard::USBKeyboard() : current_layout_(DEFAULT_LAYOUT),
+                             current_layer_index_(0),
                              current_report_(&reports_[0]),
                              last_report_(&reports_[1]) { }
 
@@ -188,7 +190,7 @@ void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
         }
 
         if (key_scans[i]) {
-            const Layer::Key key = current_layout_.MapKey(i, key_count);
+            const Layer::Key key = current_layout_.MapKey(current_layer_index_, i, key_count);
             mapped = map_modifiers(key, report);
 
             if (!mapped) {

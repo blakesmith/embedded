@@ -1,9 +1,14 @@
 #include "layout.h"
 
-Layer::Key Layout::MapKey(uint16_t key_position, uint16_t key_count) {
+Layer::Key Layout::MapKey(uint8_t current_layer, uint16_t key_position, uint16_t key_count) {
     // TODO: Actual layer traversal
-    return this->layers[0].keys[key_position];
+    return this->layers[current_layer].keys[key_position];
 }
+
+const Layer::Key TEST_NUMBER_KEYS[] = {
+    KEY_1, KEY_2,
+    KEY_3, KEY_4
+};
 
 const Layer::Key TEST_LAYER_KEYS[] = {
     KEY_A, KEY_B,
@@ -23,16 +28,22 @@ const Layer TEST_LAYER = {
     .key_count = sizeof(TEST_LAYER_KEYS) / sizeof(Layer::Key)
 };
 
+const Layer TEST_NUMBER_LAYER = {
+    .keys = TEST_NUMBER_KEYS,
+    .key_count = sizeof(TEST_NUMBER_KEYS) / sizeof(Layer::Key)
+};
+
 const Layer DVORAK_LAYER = {
     .keys = DVORAK_LAYER_KEYS,
     .key_count = sizeof(DVORAK_LAYER_KEYS) / sizeof(Layer::Key)
 };
 
 const Layer DEFAULT_LAYERS[] = {
-    TEST_LAYER
+    TEST_LAYER,
+    TEST_NUMBER_LAYER,
 };
 
 const Layout DEFAULT_LAYOUT = {
     .layers = DEFAULT_LAYERS,
-    .layer_count = 1
+    .layer_count = sizeof(DEFAULT_LAYERS) / sizeof(Layer)
 };
