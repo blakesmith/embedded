@@ -51,7 +51,12 @@ private:
 
     void init_clock();
     void init_usb_device();
+    
     bool map_modifiers(const Layer::Key& key, HIDReport* report);
+    bool map_layers(const Layer::Key& key, bool key_scan);
+
+    void switch_layer(uint8_t layer_index);
+    void reset_layer();
 };
 
 #endif

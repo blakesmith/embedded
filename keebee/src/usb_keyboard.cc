@@ -179,7 +179,7 @@ void USBKeyboard::Init() {
 
 void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
     uint8_t current_key = 0;
-    bool mapped;
+    bool control_key;
     HIDReport *report = current_report_;
     report->Reset();
 
@@ -189,11 +189,14 @@ void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
             break;
         }
 
-        if (key_scans[i]) {
-            const Layer::Key key = current_layout_.MapKey(current_layer_index_, i, key_count);
-            mapped = map_modifiers(key, report);
+        const Layer::Key key = current_layout_.MapKey(current_layer_index_, i, key_count);
+        const bool key_scan = key_scans[i];
+        control_key = map_layers(key, key_scan);
 
-            if (!mapped) {
+        if (key_scan) {
+            control_key = control_key || map_modifiers(key, report);
+
+            if (!control_key) {
                 report->keys[current_key] = key;
                 current_key++;
             }
@@ -256,6 +259,30 @@ bool USBKeyboard::map_modifiers(const Layer::Key& key, HIDReport* report) {
         default:
             return false;
     }
+}
+
+bool USBKeyboard::map_layers(const Layer::Key& key, const bool key_scan) {
+    const Layer::Key control_key = key & 0xff00; // Top 8 bits
+    const uint8_t layer_index = key & 0xff; // Bottom 8 bits
+    switch (control_key) {
+        case KB_LAYER_SHIFT: {
+            key_scan ? switch_layer(layer_index) : reset_layer();
+            return true;
+        }
+        default:
+            return false;
+    }
+}
+
+void USBKeyboard::switch_layer(uint8_t layer_index) {
+    if (layer_index < 0 || layer_index > (current_layout_.layer_count - 1)) {
+        return;
+    }
+    current_layer_index_ = layer_index;
+}
+
+void USBKeyboard::reset_layer() {
+    current_layer_index_ = 0;
 }
 
 void USBKeyboard::init_clock() {
