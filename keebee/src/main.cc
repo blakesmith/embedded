@@ -3,6 +3,7 @@
 #include "drivers/stm32/scan_matrix.h"
 #include "drivers/stm32/status_led.h"
 
+#include "key_pipeline.h"
 #include "usb_keyboard.h"
 
 using namespace stm32;
@@ -41,6 +42,7 @@ ScanMatrix scan_matrix(scan_rows,
                        row_count,
                        column_count);
 USBKeyboard keyboard;
+KeyPipeline key_pipeline;
 
 static void Init() {
     HAL_Init();
@@ -62,7 +64,8 @@ static void scan_and_update() {
 }
 
 static void send_keyboard_characters() {
-    keyboard.SendKeyScan(key_scans, key_count);
+    keyboard.SendReport(
+        key_pipeline.MapKeyScans(key_scans, key_count));
 }
 
 int main() {

@@ -162,57 +162,15 @@ int USBKeyboard::HIDReport::Fill(uint8_t* buf, uint16_t size) const {
     return 0;
 }
 
-USBKeyboard::USBKeyboard(Layout& layout) : current_layout_(layout),
-                                           current_layer_index_(0),
-                                           current_report_(&reports_[0]),
-                                           last_report_(&reports_[1]) { }
-
-USBKeyboard::USBKeyboard() : current_layout_(DEFAULT_LAYOUT),
-                             current_layer_index_(0),
-                             current_report_(&reports_[0]),
-                             last_report_(&reports_[1]) { }
-
 void USBKeyboard::Init() {
     init_clock();
     init_usb_device();
 }
 
-void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
-    uint8_t current_key = 0;
-    bool control_key;
-    HIDReport *report = current_report_;
-    report->Reset();
-
-    for (unsigned int i = 0; i < key_count; i++) {
-        if (current_key == 5) {
-            // No more keys left in the current HID report, send what we have.
-            break;
-        }
-
-        const Layer::Key key = current_layout_.MapKey(current_layer_index_, i, key_count);
-        const bool key_scan = key_scans[i];
-        control_key = map_layers(key, key_scan);
-
-        if (key_scan) {
-            control_key = control_key || map_modifiers(key, report);
-
-            if (!control_key) {
-                report->keys[current_key] = key;
-                current_key++;
-            }
-        }
-    }
-
-    if (current_report_ != last_report_) {
-        SendReport(report);
-    }
-
-    report = last_report_;
-    last_report_ = current_report_;
-    current_report_ = report;
-}
-
 void USBKeyboard::SendReport(const HIDReport* report) {
+    if (report == nullptr) {
+        return;
+    }
     report->Fill(report_buf_, REPORT_BUF_SIZE);
     USBD_HID_SendReport(&usbd_device_, report_buf_, REPORT_BUF_SIZE);
 }
@@ -220,75 +178,6 @@ void USBKeyboard::SendReport(const HIDReport* report) {
 void USBKeyboard::SendNullReport() {
     HIDReport report;
     SendReport(&report);
-}
-
-bool USBKeyboard::map_modifiers(const Layer::Key& key, HIDReport* report) {
-    switch (key) {
-        case KEY_LEFTCTRL: {
-            report->modifiers |= MOD_LEFT_CTRL;
-            return true;
-        }
-        case KEY_LEFTSHIFT: {
-            report->modifiers |= MOD_LEFT_SHIFT;
-            return true;
-        }
-        case KEY_LEFTALT: {
-            report->modifiers |= MOD_LEFT_ALT;
-            return true;
-        }
-        case KEY_LEFTMETA: {
-            report->modifiers |= MOD_LEFT_META;
-            return true;
-        }
-        case KEY_RIGHTCTRL: {
-            report->modifiers |= MOD_RIGHT_CTRL;
-            return true;
-        }
-        case KEY_RIGHTSHIFT: {
-            report->modifiers |= MOD_RIGHT_SHIFT;
-            return true;
-        }
-        case KEY_RIGHTALT: {
-            report->modifiers |= MOD_RIGHT_ALT;
-            return true;
-        }
-        case KEY_RIGHTMETA: {
-            report->modifiers |= MOD_RIGHT_META;
-            return true;
-        }
-        default:
-            return false;
-    }
-}
-
-bool USBKeyboard::map_layers(const Layer::Key& key, const bool key_scan) {
-    const Layer::Key control_key = key & 0xff00; // Top 8 bits
-    const uint8_t layer_index = key & 0xff; // Bottom 8 bits
-    switch (control_key) {
-        case KB_LAYER_SHIFT: {
-            key_scan ? switch_layer(layer_index) : reset_layer();
-            return true;
-        }
-        default:
-            return false;
-    }
-}
-
-void USBKeyboard::switch_layer(uint8_t layer_index) {
-    if (layer_index < 0 || layer_index > (current_layout_.layer_count - 1)) {
-        return;
-    }
-
-    // Avoid fighting with layer combinations
-    if (layer_index <= current_layer_index_) {
-        return;
-    }
-
-    current_layer_index_ = layer_index;
-}
-
-void USBKeyboard::reset_layer() {
-    current_layer_index_ = 0;
 }
 
 void USBKeyboard::init_clock() {

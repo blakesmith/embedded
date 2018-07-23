@@ -4,6 +4,8 @@ cc_binary(
         "src/main.cc",
         "src/layout.h",
         "src/layout.cc",
+        "src/key_pipeline.h",
+        "src/key_pipeline.cc",
         "src/stm32f0xx_it.cc",
         "src/stm32f0xx_it.h",
         "src/usb_keyboard.h",
