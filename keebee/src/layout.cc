@@ -7,7 +7,7 @@ Layer::Key Layout::MapKey(uint16_t key_position, uint16_t key_count) {
 
 const Layer::Key TEST_LAYER_KEYS[] = {
     KEY_A, KEY_B,
-    KEY_C, KEY_D
+    KEY_LEFTSHIFT, KEY_D
 };
 
 const Layer::Key DVORAK_LAYER_KEYS[] = {

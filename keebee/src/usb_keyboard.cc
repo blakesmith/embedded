@@ -177,6 +177,7 @@ void USBKeyboard::Init() {
 
 void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
     uint8_t current_key = 0;
+    bool mapped;
     HIDReport *report = current_report_;
     report->Reset();
 
@@ -187,8 +188,13 @@ void USBKeyboard::SendKeyScan(bool* key_scans, uint16_t key_count) {
         }
 
         if (key_scans[i]) {
-            report->keys[current_key] = current_layout_.MapKey(i, key_count);
-            current_key++;
+            const Layer::Key key = current_layout_.MapKey(i, key_count);
+            mapped = map_modifiers(key, report);
+
+            if (!mapped) {
+                report->keys[current_key] = key;
+                current_key++;
+            }
         }
     }
 
@@ -209,6 +215,45 @@ void USBKeyboard::SendReport(const HIDReport* report) {
 void USBKeyboard::SendNullReport() {
     HIDReport report;
     SendReport(&report);
+}
+
+bool USBKeyboard::map_modifiers(const Layer::Key& key, HIDReport* report) {
+    switch (key) {
+        case KEY_LEFTCTRL: {
+            report->modifiers |= MOD_LEFT_CTRL;
+            return true;
+        }
+        case KEY_LEFTSHIFT: {
+            report->modifiers |= MOD_LEFT_SHIFT;
+            return true;
+        }
+        case KEY_LEFTALT: {
+            report->modifiers |= MOD_LEFT_ALT;
+            return true;
+        }
+        case KEY_LEFTMETA: {
+            report->modifiers |= MOD_LEFT_META;
+            return true;
+        }
+        case KEY_RIGHTCTRL: {
+            report->modifiers |= MOD_RIGHT_CTRL;
+            return true;
+        }
+        case KEY_RIGHTSHIFT: {
+            report->modifiers |= MOD_RIGHT_SHIFT;
+            return true;
+        }
+        case KEY_RIGHTALT: {
+            report->modifiers |= MOD_RIGHT_ALT;
+            return true;
+        }
+        case KEY_RIGHTMETA: {
+            report->modifiers |= MOD_RIGHT_META;
+            return true;
+        }
+        default:
+            return false;
+    }
 }
 
 void USBKeyboard::init_clock() {
