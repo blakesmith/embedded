@@ -42,6 +42,26 @@ const Layout TEST_LAYOUT = {
     .layer_count = sizeof(TEST_LAYERS) / sizeof(Layer)
 };
 
+const Layer::Key TEST_LAYER_KEYS_2[] = {
+    KEY_E, KEY_F,
+    KEY_G, KEY_H
+};
+
+const Layer TEST_LAYER_2 = {
+    .keys = TEST_LAYER_KEYS_2,
+    .key_count = sizeof(TEST_LAYER_KEYS_2) / sizeof(Layer::Key)
+};
+
+const Layer TEST_LAYERS_2[] = {
+    TEST_LAYER_2,
+    TEST_NUMBER_LAYER,
+};
+
+const Layout TEST_LAYOUT_2 = {
+    .layers = TEST_LAYERS_2,
+    .layer_count = sizeof(TEST_LAYERS_2) / sizeof(Layer)
+};
+
 const Layer::Key FUNCTION_LAYER_KEYS[] = {
     KEY_GRAVE, KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12, KEY_DELETE,
     KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE,
@@ -82,5 +102,5 @@ const Layout DEFAULT_LAYOUT = TEST_LAYOUT;
 
 const Layout LAYOUTS[] = {
     TEST_LAYOUT,
-    DEFAULT_LAYOUT
+    TEST_LAYOUT_2
 };
