@@ -20,6 +20,7 @@ cc_binary(
         "-Tthird_party/STM/stm32f0/STM32F042K6Tx_FLASH.ld"
     ],
     deps = [
+        "//drivers/stm32:dip_switch",
         "//drivers/stm32:scan_matrix",
         "//drivers/stm32:status_led",
         "//drivers/stm32:gpio_common",

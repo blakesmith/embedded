@@ -193,3 +193,18 @@ cc_library(
     visibility = ["//visibility:public"]
 )
 
+cc_library(
+    name = "dip_switch",
+    srcs = [
+        "dip_switch.cc"
+    ],
+    hdrs = [
+        "dip_switch.h"
+    ],
+    copts = COMMON_COPTS,
+    deps = [
+        ":gpio_common"
+    ],
+    visibility = ["//visibility:public"]
+)
+

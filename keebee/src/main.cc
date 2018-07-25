@@ -1,4 +1,5 @@
 #include "stm32f0xx_hal.h"
+#include "drivers/stm32/dip_switch.h"
 #include "drivers/stm32/gpio_bus.h"
 #include "drivers/stm32/scan_matrix.h"
 #include "drivers/stm32/status_led.h"
@@ -37,6 +38,14 @@ StatusLed st2(st2_ok, st2_err);
 bool key_scans[key_count] = {
 };
 
+GPIOPin dip1(gpioa, 3);
+GPIOPin dip2(gpioa, 4);
+
+GPIOPin dip_pins[] = {
+    dip1, dip2
+};
+
+DipSwitch dip_switch(dip_pins, sizeof(dip_pins) / sizeof(GPIOPin));
 ScanMatrix scan_matrix(scan_rows,
                        scan_columns,
                        row_count,
@@ -51,6 +60,7 @@ static void Init() {
     gpiob.Init();
     st1.Init();
     st2.Init();
+    dip_switch.Init();
     scan_matrix.Init();
     keyboard.Init();
 }
