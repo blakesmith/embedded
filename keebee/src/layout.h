@@ -151,6 +151,7 @@ const Layer::Key KEY_RIGHTALT = 0xe6; // Keyboard Right Alt
 const Layer::Key KEY_RIGHTMETA = 0xe7; // Keyboard Right GUI
 
 extern const Layout DEFAULT_LAYOUT;
+extern const Layout LAYOUTS[];
 
 static constexpr Layer::Key LYR_SHIFT(const uint8_t layer_index) {
     return KB_LAYER_SHIFT | layer_index;

@@ -80,3 +80,7 @@ const Layout DVORAK_LAYOUT = {
 
 const Layout DEFAULT_LAYOUT = TEST_LAYOUT;
 
+const Layout LAYOUTS[] = {
+    TEST_LAYOUT,
+    DEFAULT_LAYOUT
+};

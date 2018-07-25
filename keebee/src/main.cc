@@ -4,6 +4,7 @@
 #include "drivers/stm32/scan_matrix.h"
 #include "drivers/stm32/status_led.h"
 
+#include "layout.h"
 #include "key_pipeline.h"
 #include "usb_keyboard.h"
 
@@ -65,6 +66,23 @@ static void Init() {
     keyboard.Init();
 }
 
+static void check_dip_switch() {
+    uint16_t dip_value = dip_switch.Read();
+
+    switch (dip_value) {
+        case 0: {
+            key_pipeline.SetLayout(const_cast<Layout*>(&LAYOUTS[0]));
+            return;
+        }
+        case 1: {
+            key_pipeline.SetLayout(const_cast<Layout*>(&LAYOUTS[1]));
+            return;
+        }
+        default:
+            return;
+    }
+}
+
 static void scan_and_update() {
     scan_matrix.Scan(key_scans, row_count, column_count);
     st1.SetOk(key_scans[0]);
@@ -83,6 +101,7 @@ int main() {
 
     st1.SetOk(true);
     while (true) {
+        check_dip_switch();
         scan_and_update();
         send_keyboard_characters();
         HAL_Delay(20);
