@@ -1,14 +1,22 @@
 #include "key_pipeline.h"
 
-KeyPipeline::KeyPipeline(Layout& layout) : current_layout_(layout),
-                                           current_layer_index_(0),
-                                           current_report_(&reports_[0]),
-                                           last_report_(&reports_[1]) { }
+KeyPipeline::KeyPipeline(Layout* layout) : current_layout_(layout),
+                                                 current_layer_index_(0),
+                                                 current_report_(&reports_[0]),
+                                                 last_report_(&reports_[1]) { }
 
-KeyPipeline::KeyPipeline() : current_layout_(DEFAULT_LAYOUT),
+KeyPipeline::KeyPipeline() : current_layout_(const_cast<Layout*>(&DEFAULT_LAYOUT)),
                              current_layer_index_(0),
                              current_report_(&reports_[0]),
                              last_report_(&reports_[1]) { }
+
+void KeyPipeline::SetLayout(Layout* layout) {
+    if (layout == current_layout_) {
+        return;
+    } else {
+        current_layout_ = layout;
+    }
+}
 
 const USBKeyboard::HIDReport* KeyPipeline::MapKeyScans(bool* key_scans, uint16_t key_count) {
     uint8_t current_key = 0;
@@ -22,7 +30,7 @@ const USBKeyboard::HIDReport* KeyPipeline::MapKeyScans(bool* key_scans, uint16_t
             break;
         }
 
-        const Layer::Key key = current_layout_.MapKey(current_layer_index_, i, key_count);
+        const Layer::Key key = current_layout_->MapKey(current_layer_index_, i, key_count);
         const bool key_scan = key_scans[i];
         control_key = map_layers(key, key_scan);
 
@@ -101,7 +109,7 @@ bool KeyPipeline::map_layers(const Layer::Key& key, const bool key_scan) {
 }
 
 void KeyPipeline::switch_layer(uint8_t layer_index) {
-    if (layer_index < 0 || layer_index > (current_layout_.layer_count - 1)) {
+    if (layer_index < 0 || layer_index > (current_layout_->layer_count - 1)) {
         return;
     }
 

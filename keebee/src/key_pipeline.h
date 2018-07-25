@@ -6,14 +6,15 @@
 
 class KeyPipeline {
 public:
-    KeyPipeline(Layout& layout);
+    KeyPipeline(Layout* layout);
     KeyPipeline();
     ~KeyPipeline() = default;
-    
+
+    void SetLayout(Layout* layout);
     const USBKeyboard::HIDReport* MapKeyScans(bool* key_scans, uint16_t key_count);
 
 private:
-    Layout current_layout_;
+    Layout* current_layout_;
     uint8_t current_layer_index_;
 
     USBKeyboard::HIDReport reports_[2];
