@@ -5,7 +5,7 @@
 | STM32F042K6T6                          |        1 | 497-14647-ND                   |       2.83 | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F042K6T6/497-14647-ND/4815294  |
 | Diode                                  |       69 | 1N4148WTPMSCT-ND               |       0.14 | https://www.digikey.com/product-detail/en/micro-commercial-co/1N4148W-TP/1N4148WTPMSCT-ND/717311 |
 | Cherry MX Switches                     |       69 | N/A                            | 9.00-10.00 | https://mechanicalkeyboards.com/shop/index.php?l=product_detail&p=708                            |
-| DIP Switch x2                          |        1 | 563-1015-1-ND                  |       1.96 | https://www.digikey.com/product-detail/en/nidec-copal-electronics/CHP-021TA/563-1015-1-ND/948409 |
+| DIP Switch x2                          |        1 | CT3114CT-ND                    |       0.73 | https://www.digikey.com/product-detail/en/cts-electrocomponents/219-2MSTR/CT3114CT-ND/5875766    |
 | LED SMD 0805 Red                       |        1 |                                |            |                                                                                                  |
 | LED SMD 0805 Blue                      |        1 |                                |            |                                                                                                  |
 | DSA 1u Blank Blue (BDJ 10 pack)        |        3 |                                |      10.00 | https://pimpmykeyboard.com/dsa-1-space-pack-of-10/                                               |
@@ -19,7 +19,7 @@
 | LD1117 3.3V linear regulator           |        1 | 497-1242-1-ND or 497-1241-1-ND |       0.42 | https://www.digikey.com/product-detail/en/stmicroelectronics/LD1117S33TR/497-1242-1-ND/586242    |
 | FCI Micro USB Connector                |        1 | 609-4613-1-ND                  |       0.46 | https://www.digikey.com/product-detail/en/amphenol-fci/10118192-0001LF/609-4613-1-ND/2785378     |
 | Tactile Switch                         |        1 | SW400-ND                       |       0.29 | https://www.digikey.com/product-detail/en/omron-electronics-inc-emc-div/B3F-1000/SW400-ND/33150  |
-| Cherry MX Plate Stabilizer kit         |        1 |                                |       5.00 | https://mechanicalkeyboards.com/shop/index.php?l=product_detail&p=314
+| Cherry MX Plate Stabilizer kit         |        1 |                                |       5.00 | https://mechanicalkeyboards.com/shop/index.php?l=product_detail&p=314                            |
 
 
 
