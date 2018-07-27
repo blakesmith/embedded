@@ -40,7 +40,7 @@ Text HLabel 5150 4950 3    50   Input ~ 0
 COL6
 Text HLabel 5750 5000 3    50   Input ~ 0
 COL7
-Text HLabel 6350 5000 3    50   Input ~ 0
+Text HLabel 6350 4950 3    50   Input ~ 0
 COL8
 Text HLabel 6950 5000 3    50   Input ~ 0
 COL9

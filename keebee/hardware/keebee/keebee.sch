@@ -20,7 +20,7 @@ U 1 1 5B304C68
 P 5500 3200
 F 0 "U2" H 5500 2114 50  0000 C CNN
 F 1 "STM32F042K6Tx" H 5500 2023 50  0000 C CNN
-F 2 "Package_QFP:LQFP-32_7x7mm_P0.8mm" H 5100 2300 50  0001 R CNN
+F 2 "Housings_QFP:LQFP-32_7x7mm_Pitch0.8mm" H 5100 2300 50  0001 R CNN
 F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00105814.pdf" H 5500 3200 50  0001 C CNN
 	1    5500 3200
 	1    0    0    -1  
@@ -487,7 +487,7 @@ U 1 1 5B8052BF
 P 2350 5850
 F 0 "J2" H 1910 5896 50  0000 R CNN
 F 1 "Conn_ARM_JTAG_SWD_10" H 1910 5805 50  0000 R CNN
-F 2 "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD" H 2400 5300 50  0001 L TNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch1.27mm_SMD" H 2400 5300 50  0001 L TNN
 F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex_debug_connectors.pdf" V 2000 4600 50  0001 C CNN
 	1    2350 5850
 	1    0    0    -1  
@@ -663,4 +663,6 @@ Wire Wire Line
 Connection ~ 3900 4000
 Wire Wire Line
 	3900 4000 5000 4000
+NoConn ~ 2850 5950
+NoConn ~ 2850 6050
 $EndSCHEMATC
