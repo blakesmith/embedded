@@ -34,9 +34,10 @@ dsa_keycap_height = 7.39;
 
 union() {
     top_plate();
+    !bottom_plate();
 }
 
-module top_plate() {
+module plate() {
     module rounded_corners() {
         corner_radius = 3;
         translate([-(top_plate_length / 2), (top_plate_width / 2)])
@@ -49,14 +50,35 @@ module top_plate() {
             circle(r=corner_radius);
     }
     
-    difference() {
-        color("gray", 1.0)
-            hull() {
-            square([top_plate_length,
-                    top_plate_width],
+    color("gray", 1.0)
+        hull() {
+        square([top_plate_length,
+                top_plate_width],
+               center = true);
+        rounded_corners();
+    }
+}
+
+module bottom_plate() {
+    module bottom_plate_cutout() {
+        length = 35.50;
+        width = 20.0;
+        y_offset = 11.35;
+        x_offset = -9.0;
+        translate([x_offset, y_offset])
+            square([length, width],
                    center = true);
-            rounded_corners();
-        }
+    }
+
+    difference() {
+        plate();
+        bottom_plate_cutout();
+    }
+}
+
+module top_plate() {
+    difference() {
+        plate();
         union() {
             row_0_switch_cutout();
             row_1_switch_cutout();
