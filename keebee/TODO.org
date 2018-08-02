@@ -8,13 +8,17 @@
   - Nucleo board: https://www.digikey.com/product-detail/en/stmicroelectronics/NUCLEO-F042K6/497-15980-ND/5428804
   - Prototype diodes: https://www.digikey.com/product-detail/en/on-semiconductor/1N4148/1N4148FS-ND/458603
   - Tactile buttons: https://www.digikey.com/scripts/DkSearch/dksus.dll?Detail&itemSeq=265252329&uq=636659637175005869
-* TODO Implement scan matrix driver
-* TODO Figure out USB hook points
-* TODO Map switch presses to keyboard scan codes
-* TODO Test scan matrix driver
-* TODO Test switch fit against printed top plate
-* TODO Layout PCB
-* TODO Test switch and top plate fit against printed PCB
-* TODO Order prototype parts
+* DONE Implement scan matrix driver
+* DONE Figure out USB hook points
+* DONE Map switch presses to keyboard scan codes
+* DONE Test scan matrix driver
+* DONE Test switch fit against printed top plate
+* DONE Layout PCB
+* DONE Test switch and top plate fit against printed PCB
 * TODO Order PCB
+* TODO Order prototype parts
 * TODO Assemble PCB
+* TODO Order spacer screws
+* TODO Order acrylic
+* TODO Laser cut acrylic
+* TODO Assemble case
