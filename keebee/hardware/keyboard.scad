@@ -33,8 +33,8 @@ dsa_keycap_top_width = 12.7;
 dsa_keycap_height = 7.39;
 
 union() {
-    top_plate();
-    !bottom_plate();
+    !top_plate();
+    bottom_plate();
 }
 
 module plate() {
@@ -73,6 +73,7 @@ module bottom_plate() {
     difference() {
         plate();
         bottom_plate_cutout();
+        mounting_holes();
     }
 }
 
@@ -300,7 +301,7 @@ module dsa_keycap(x, y, cap_color, switch_size) {
 
 module mounting_holes() {
     module mounting_hole(x, y) {
-        drill_size = 2.10;
+        drill_size = 2.3;
         translate([x, y])
             circle(d=drill_size);
     }
