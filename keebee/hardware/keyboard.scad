@@ -5,7 +5,7 @@ row_count = 5;
 
 switch_cutout_1u_width = 14.0;
 switch_cutout_1u_length = 14.0;
-switch_cutout_1u_padding = 5.05;
+switch_cutout_1u_padding = 5.00;
 switch_cutout_1u_pitch = switch_cutout_1u_width + switch_cutout_1u_padding;
 
 top_plate_padding_top_bottom = 0;
