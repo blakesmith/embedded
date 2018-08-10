@@ -14,17 +14,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L MCU_ST_STM32F0:STM32F042K6Tx U2
-U 1 1 5B304C68
-P 5500 3200
-F 0 "U2" H 5500 2114 50  0000 C CNN
-F 1 "STM32F042K6Tx" H 5500 2023 50  0000 C CNN
-F 2 "Housings_QFP:LQFP-32_7x7mm_Pitch0.8mm" H 5100 2300 50  0001 R CNN
-F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00105814.pdf" H 5500 3200 50  0001 C CNN
-	1    5500 3200
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	5400 4200 5400 4300
 Wire Wire Line
@@ -540,7 +529,7 @@ U 1 1 5D247DE4
 P 4300 2500
 F 0 "SW40" H 4300 2735 50  0000 C CNN
 F 1 "SW_RST" H 4300 2644 50  0000 C CNN
-F 2 "Buttons_Switches_THT:SW_TH_Tactile_Omron_B3F-10xx" H 4300 2500 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm" H 4300 2500 50  0001 C CNN
 F 3 "" H 4300 2500 50  0001 C CNN
 	1    4300 2500
 	1    0    0    -1  
@@ -593,41 +582,6 @@ F 3 "~" H 3600 4650 50  0001 C CNN
 	1    3600 4650
 	0    -1   -1   0   
 $EndComp
-$Comp
-L Switch:SW_DIP_x02 SW_LAYOUT1
-U 1 1 5D259D35
-P 4500 3100
-F 0 "SW_LAYOUT1" H 4500 3467 50  0000 C CNN
-F 1 "SW_DIP_x02" H 4500 3376 50  0000 C CNN
-F 2 "custom_switches:219-2MSTR" H 4500 3100 50  0001 C CNN
-F 3 "" H 4500 3100 50  0001 C CNN
-	1    4500 3100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5000 3000 4800 3000
-Wire Wire Line
-	5000 3100 4800 3100
-Wire Wire Line
-	4200 3100 4100 3100
-Wire Wire Line
-	4100 3100 4100 3400
-$Comp
-L power:GND #PWR04
-U 1 1 5D26310C
-P 4100 3400
-F 0 "#PWR04" H 4100 3150 50  0001 C CNN
-F 1 "GND" H 4105 3227 50  0000 C CNN
-F 2 "" H 4100 3400 50  0001 C CNN
-F 3 "" H 4100 3400 50  0001 C CNN
-	1    4100 3400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4200 3000 4100 3000
-Wire Wire Line
-	4100 3000 4100 3100
-Connection ~ 4100 3100
 Wire Wire Line
 	3600 4000 3600 4150
 Wire Wire Line
@@ -640,7 +594,7 @@ U 1 1 5D28D80C
 P 3900 3700
 F 0 "SW_BOOT0" V 3950 3300 50  0000 L CNN
 F 1 "SW_SPST" V 4050 3300 50  0000 L CNN
-F 2 "Buttons_Switches_THT:SW_TH_Tactile_Omron_B3F-10xx" H 3900 3700 50  0001 C CNN
+F 2 "Button_Switch_THT:SW_PUSH_6mm" H 3900 3700 50  0001 C CNN
 F 3 "" H 3900 3700 50  0001 C CNN
 	1    3900 3700
 	0    1    1    0   
@@ -665,4 +619,17 @@ Wire Wire Line
 	3900 4000 5000 4000
 NoConn ~ 2850 5950
 NoConn ~ 2850 6050
+$Comp
+L MCU_ST_STM32F0:STM32F042K6Tx U2
+U 1 1 5B304C68
+P 5500 3200
+F 0 "U2" H 5500 2114 50  0000 C CNN
+F 1 "STM32F042K6Tx" H 5500 2023 50  0000 C CNN
+F 2 "Housings_QFP:LQFP-32_7x7mm_Pitch0.8mm" H 5100 2300 50  0001 R CNN
+F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00105814.pdf" H 5500 3200 50  0001 C CNN
+	1    5500 3200
+	1    0    0    -1  
+$EndComp
+NoConn ~ 5000 3000
+NoConn ~ 5000 3100
 $EndSCHEMATC
