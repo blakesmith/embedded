@@ -53,9 +53,9 @@ load("//tools/scripts:openocd.bzl", "openocd_flash")
 
 openocd_flash(
     name = "keebee_flash",
-    src = "//tools/scripts:openocd_board_flash.sh",
+    src = "//tools/scripts:openocd_flash.sh",
     artifact = ":keebee_flash_artifact",
-    target = "/usr/share/openocd/scripts/board/st_nucleo_f0.cfg"
+    target = "/usr/share/openocd/scripts/target/stm32f0x.cfg"
 )
 
 

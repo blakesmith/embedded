@@ -27,14 +27,8 @@ static constexpr uint8_t row_count = sizeof(scan_rows) / sizeof(GPIOPin);
 static constexpr uint8_t column_count = sizeof(scan_columns) / sizeof(GPIOPin);
 static constexpr uint16_t key_count = row_count * column_count;
 
-GPIOPin st1_ok(gpiob, 1);
-GPIOPin st1_err(gpiob, 0);
-
-GPIOPin st2_ok(gpioa, 10);
-GPIOPin st2_err(gpioa, 9);
-
-StatusLed st1(st1_ok, st1_err);
-StatusLed st2(st2_ok, st2_err);
+GPIOPin status_ok(gpiob, 8);
+StatusLed status_led(status_ok, status_ok);
 
 bool key_scans[key_count] = {
 };
@@ -59,11 +53,10 @@ static void Init() {
 
     gpioa.Init();
     gpiob.Init();
-    st1.Init();
-    st2.Init();
     dip_switch.Init();
     scan_matrix.Init();
     keyboard.Init();
+    status_led.Init();
 }
 
 static void check_dip_switch() {
@@ -85,10 +78,6 @@ static void check_dip_switch() {
 
 static void scan_and_update() {
     scan_matrix.Scan(key_scans, row_count, column_count);
-    st1.SetOk(key_scans[0]);
-    st1.SetError(key_scans[1]);
-    st2.SetOk(key_scans[2]);
-    st2.SetError(key_scans[3]);
 }
 
 static void send_keyboard_characters() {
@@ -99,7 +88,7 @@ static void send_keyboard_characters() {
 int main() {
     Init();
 
-    st1.SetOk(true);
+    status_led.SetOk(true);
     while (true) {
         check_dip_switch();
         scan_and_update();
