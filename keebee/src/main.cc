@@ -1,5 +1,4 @@
 #include "stm32f0xx_hal.h"
-#include "drivers/stm32/dip_switch.h"
 #include "drivers/stm32/gpio_bus.h"
 #include "drivers/stm32/scan_matrix.h"
 #include "drivers/stm32/status_led.h"
@@ -14,13 +13,28 @@ GPIOBus gpioa(GPIOBus::Id::A);
 GPIOBus gpiob(GPIOBus::Id::B);
 
 GPIOPin scan_rows[] = {
+    GPIOPin(gpiob, 3),
     GPIOPin(gpiob, 4),
-    GPIOPin(gpiob, 5)
+    GPIOPin(gpiob, 5),
+    GPIOPin(gpiob, 6),
+    GPIOPin(gpiob, 7),
 };
 
 GPIOPin scan_columns[] = {
-    GPIOPin(gpiob, 6),
-    GPIOPin(gpiob, 7)
+    GPIOPin(gpioa, 0),
+    GPIOPin(gpioa, 1),
+    GPIOPin(gpioa, 2),
+    GPIOPin(gpioa, 3),
+    GPIOPin(gpioa, 4),
+    GPIOPin(gpioa, 5),
+    GPIOPin(gpioa, 6),
+    GPIOPin(gpioa, 7),
+    GPIOPin(gpiob, 0),
+    GPIOPin(gpiob, 1),
+    GPIOPin(gpioa, 8),
+    GPIOPin(gpioa, 9),
+    GPIOPin(gpioa, 10),
+    GPIOPin(gpioa, 15),
 };
 
 static constexpr uint8_t row_count = sizeof(scan_rows) / sizeof(GPIOPin);
@@ -33,14 +47,6 @@ StatusLed status_led(status_ok, status_ok);
 bool key_scans[key_count] = {
 };
 
-GPIOPin dip1(gpioa, 3);
-GPIOPin dip2(gpioa, 4);
-
-GPIOPin dip_pins[] = {
-    dip1, dip2
-};
-
-DipSwitch dip_switch(dip_pins, sizeof(dip_pins) / sizeof(GPIOPin));
 ScanMatrix scan_matrix(scan_rows,
                        scan_columns,
                        row_count,
@@ -53,34 +59,13 @@ static void Init() {
 
     gpioa.Init();
     gpiob.Init();
-    dip_switch.Init();
     scan_matrix.Init();
     keyboard.Init();
     status_led.Init();
 }
 
-static void check_dip_switch() {
-    uint16_t dip_value = dip_switch.Read();
-
-    switch (dip_value) {
-        case 0: {
-            key_pipeline.SetLayout(const_cast<Layout*>(&LAYOUTS[0]));
-            return;
-        }
-        case 1: {
-            key_pipeline.SetLayout(const_cast<Layout*>(&LAYOUTS[1]));
-            return;
-        }
-        default:
-            return;
-    }
-}
-
 static void scan_and_update() {
     scan_matrix.Scan(key_scans, row_count, column_count);
-}
-
-static void send_keyboard_characters() {
     keyboard.SendReport(
         key_pipeline.MapKeyScans(key_scans, key_count));
 }
@@ -90,9 +75,7 @@ int main() {
 
     status_led.SetOk(true);
     while (true) {
-        check_dip_switch();
         scan_and_update();
-        send_keyboard_characters();
         HAL_Delay(20);
     }
 }
