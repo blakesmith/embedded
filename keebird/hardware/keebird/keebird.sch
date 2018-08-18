@@ -291,4 +291,349 @@ Wire Wire Line
 	8250 7750 8500 7750
 Text Label 8500 7750 0    50   ~ 0
 DATA_15
+Wire Wire Line
+	11400 3250 11150 3250
+Wire Wire Line
+	11400 3350 11150 3350
+Text Label 11150 3350 2    50   ~ 0
+SDRAM_CLK
+Text Label 11150 3250 2    50   ~ 0
+SDRAM_CKE
+Wire Wire Line
+	5850 4150 5650 4150
+Text Label 5650 4150 2    50   ~ 0
+SDRAM_CLK
+Wire Wire Line
+	8250 5350 8550 5350
+Text Label 8550 5350 0    50   ~ 0
+SDRAM_CKE
+Wire Wire Line
+	11400 3850 11150 3850
+Text Label 11150 3850 2    50   ~ 0
+SDRAM_RAS
+Wire Wire Line
+	11400 3750 11150 3750
+Text Label 11150 3750 2    50   ~ 0
+SDRAM_CAS
+Wire Wire Line
+	5850 6150 5650 6150
+Text Label 5650 6150 2    50   ~ 0
+SDRAM_RAS
+Wire Wire Line
+	5850 4850 5650 4850
+Text Label 5650 4850 2    50   ~ 0
+SDRAM_CAS
+Wire Wire Line
+	11400 3650 11150 3650
+Text Label 11150 3650 2    50   ~ 0
+SDRAM_WE
+Wire Wire Line
+	8250 5050 8550 5050
+Text Label 8550 5050 0    50   ~ 0
+SDRAM_WE
+Wire Wire Line
+	11400 3150 11150 3150
+Text Label 11150 3150 2    50   ~ 0
+SDRAM_CS
+Wire Wire Line
+	8250 5250 8550 5250
+Text Label 8550 5250 0    50   ~ 0
+SDRAM_CS
+Wire Wire Line
+	5850 3750 5650 3750
+Text Label 5650 3750 2    50   ~ 0
+SDRAM_BA0
+Wire Wire Line
+	11400 1650 11150 1650
+Text Label 11150 1650 2    50   ~ 0
+SDRAM_BA0
+Wire Wire Line
+	5850 3850 5650 3850
+Text Label 5650 3850 2    50   ~ 0
+SDRAM_BA1
+Wire Wire Line
+	11400 1750 11150 1750
+Text Label 11150 1750 2    50   ~ 0
+SDRAM_BA1
+Wire Wire Line
+	11400 3450 11150 3450
+Text Label 11150 3450 2    50   ~ 0
+SDRAM_NBL0
+Wire Wire Line
+	11400 3550 11150 3550
+Text Label 11150 3550 2    50   ~ 0
+SDRAM_NBL1
+Wire Wire Line
+	5850 6750 5650 6750
+Text Label 5650 6750 2    50   ~ 0
+SDRAM_NBL0
+Wire Wire Line
+	5850 6850 5650 6850
+Text Label 5650 6850 2    50   ~ 0
+SDRAM_NBL1
+Wire Wire Line
+	11900 1350 11900 950 
+Wire Wire Line
+	11900 950  12000 950 
+Wire Wire Line
+	12500 950  12500 1350
+Wire Wire Line
+	12000 1350 12000 950 
+Connection ~ 12000 950 
+Wire Wire Line
+	12000 950  12100 950 
+Wire Wire Line
+	12100 1350 12100 950 
+Connection ~ 12100 950 
+Wire Wire Line
+	12100 950  12200 950 
+Wire Wire Line
+	12200 1350 12200 950 
+Connection ~ 12200 950 
+Wire Wire Line
+	12200 950  12300 950 
+Wire Wire Line
+	12300 1350 12300 950 
+Connection ~ 12300 950 
+Wire Wire Line
+	12300 950  12400 950 
+Wire Wire Line
+	12400 1350 12400 950 
+Connection ~ 12400 950 
+Wire Wire Line
+	12400 950  12500 950 
+Wire Wire Line
+	12200 950  12200 700 
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5B7F0724
+P 12200 700
+F 0 "#PWR?" H 12200 550 50  0001 C CNN
+F 1 "+3.3V" H 12215 873 50  0000 C CNN
+F 2 "" H 12200 700 50  0001 C CNN
+F 3 "" H 12200 700 50  0001 C CNN
+	1    12200 700 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	11900 4150 11900 4450
+Wire Wire Line
+	11900 4450 12000 4450
+Wire Wire Line
+	12500 4450 12500 4150
+Wire Wire Line
+	12000 4150 12000 4450
+Connection ~ 12000 4450
+Wire Wire Line
+	12000 4450 12100 4450
+Wire Wire Line
+	12100 4150 12100 4450
+Connection ~ 12100 4450
+Wire Wire Line
+	12100 4450 12200 4450
+Wire Wire Line
+	12200 4150 12200 4450
+Connection ~ 12200 4450
+Wire Wire Line
+	12200 4450 12300 4450
+Wire Wire Line
+	12300 4150 12300 4450
+Connection ~ 12300 4450
+Wire Wire Line
+	12300 4450 12400 4450
+Wire Wire Line
+	12400 4150 12400 4450
+Connection ~ 12400 4450
+Wire Wire Line
+	12400 4450 12500 4450
+Wire Wire Line
+	12200 4450 12200 4700
+$Comp
+L power:GND #PWR?
+U 1 1 5B80BED7
+P 12200 4700
+F 0 "#PWR?" H 12200 4450 50  0001 C CNN
+F 1 "GND" H 12205 4527 50  0000 C CNN
+F 2 "" H 12200 4700 50  0001 C CNN
+F 3 "" H 12200 4700 50  0001 C CNN
+	1    12200 4700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8900 900  8900 1000
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5B810234
+P 8900 900
+F 0 "#PWR?" H 8900 750 50  0001 C CNN
+F 1 "+3.3V" H 8915 1073 50  0000 C CNN
+F 2 "" H 8900 900 50  0001 C CNN
+F 3 "" H 8900 900 50  0001 C CNN
+	1    8900 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5B810263
+P 8900 1450
+F 0 "#PWR?" H 8900 1200 50  0001 C CNN
+F 1 "GND" H 8905 1277 50  0000 C CNN
+F 2 "" H 8900 1450 50  0001 C CNN
+F 3 "" H 8900 1450 50  0001 C CNN
+	1    8900 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B810299
+P 9100 1150
+F 0 "C?" H 9192 1196 50  0000 L CNN
+F 1 "0.1uf" H 9192 1105 50  0000 L CNN
+F 2 "" H 9100 1150 50  0001 C CNN
+F 3 "~" H 9100 1150 50  0001 C CNN
+	1    9100 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B8102FF
+P 9500 1150
+F 0 "C?" H 9592 1196 50  0000 L CNN
+F 1 "0.1uf" H 9592 1105 50  0000 L CNN
+F 2 "" H 9500 1150 50  0001 C CNN
+F 3 "~" H 9500 1150 50  0001 C CNN
+	1    9500 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B814645
+P 9900 1150
+F 0 "C?" H 9992 1196 50  0000 L CNN
+F 1 "0.1uf" H 9992 1105 50  0000 L CNN
+F 2 "" H 9900 1150 50  0001 C CNN
+F 3 "~" H 9900 1150 50  0001 C CNN
+	1    9900 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B81898C
+P 10300 1150
+F 0 "C?" H 10392 1196 50  0000 L CNN
+F 1 "0.1uf" H 10392 1105 50  0000 L CNN
+F 2 "" H 10300 1150 50  0001 C CNN
+F 3 "~" H 10300 1150 50  0001 C CNN
+	1    10300 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B8210D9
+P 10700 1150
+F 0 "C?" H 10792 1196 50  0000 L CNN
+F 1 "0.1uf" H 10792 1105 50  0000 L CNN
+F 2 "" H 10700 1150 50  0001 C CNN
+F 3 "~" H 10700 1150 50  0001 C CNN
+	1    10700 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B825422
+P 11100 1150
+F 0 "C?" H 11192 1196 50  0000 L CNN
+F 1 "0.1uf" H 11192 1105 50  0000 L CNN
+F 2 "" H 11100 1150 50  0001 C CNN
+F 3 "~" H 11100 1150 50  0001 C CNN
+	1    11100 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B82DB44
+P 11500 1150
+F 0 "C?" H 11592 1196 50  0000 L CNN
+F 1 "0.1uf" H 11592 1105 50  0000 L CNN
+F 2 "" H 11500 1150 50  0001 C CNN
+F 3 "~" H 11500 1150 50  0001 C CNN
+	1    11500 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9100 1050 9100 1000
+Wire Wire Line
+	9100 1000 8900 1000
+Connection ~ 8900 1000
+Wire Wire Line
+	8900 1000 8900 1350
+Wire Wire Line
+	9100 1250 9100 1350
+Wire Wire Line
+	9100 1350 8900 1350
+Connection ~ 8900 1350
+Wire Wire Line
+	8900 1350 8900 1450
+Connection ~ 9100 1350
+Connection ~ 9100 1000
+Wire Wire Line
+	9500 1000 9500 1050
+Wire Wire Line
+	9100 1000 9500 1000
+Wire Wire Line
+	9500 1350 9500 1250
+Wire Wire Line
+	9100 1350 9500 1350
+Wire Wire Line
+	9900 1050 9900 1000
+Wire Wire Line
+	9900 1000 9500 1000
+Connection ~ 9500 1000
+Wire Wire Line
+	9900 1250 9900 1350
+Wire Wire Line
+	9900 1350 9500 1350
+Connection ~ 9500 1350
+Wire Wire Line
+	10300 1250 10300 1350
+Wire Wire Line
+	10300 1350 9900 1350
+Connection ~ 9900 1350
+Wire Wire Line
+	10300 1050 10300 1000
+Wire Wire Line
+	10300 1000 9900 1000
+Connection ~ 9900 1000
+Wire Wire Line
+	10700 1050 10700 1000
+Wire Wire Line
+	10700 1000 10300 1000
+Connection ~ 10300 1000
+Wire Wire Line
+	10700 1250 10700 1350
+Wire Wire Line
+	10700 1350 10300 1350
+Connection ~ 10300 1350
+Wire Wire Line
+	11100 1250 11100 1350
+Wire Wire Line
+	11100 1350 10700 1350
+Connection ~ 10700 1350
+Wire Wire Line
+	11100 1050 11100 1000
+Wire Wire Line
+	11100 1000 10700 1000
+Connection ~ 10700 1000
+Wire Wire Line
+	11500 1050 11500 1000
+Wire Wire Line
+	11500 1000 11100 1000
+Connection ~ 11100 1000
+Wire Wire Line
+	11500 1250 11500 1350
+Wire Wire Line
+	11500 1350 11100 1350
+Connection ~ 11100 1350
+Text Notes 9700 850  0    50   ~ 0
+Place Near RAM\n
 $EndSCHEMATC
