@@ -1,9 +1,10 @@
 #+TITLE: Keebird Bill of Materials
 
-| Name                            | Price  | Digikey Part Number | URL                                                                                                                 |
-|---------------------------------+--------+---------------------+---------------------------------------------------------------------------------------------------------------------|
-| IS42S16400J-7TLI 64MB RAM       | $2.40  | 706-1132-ND         | https://www.digikey.com/product-detail/en/issi-integrated-silicon-solution-inc/IS42S16400J-7TLI/706-1132-ND/2708624 |
-| STM32F429ZIT6 ARM MCU           | $15.52 | 497-14053-ND        | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F429ZIT6/497-14053-ND/4357427                     |
-| W25Q80DVSNIGTR-ND 8MB SPI FLASH | $0.59  | W25Q80DVSNIGCT-ND   | https://www.digikey.com/product-detail/en/winbond-electronics/W25Q80DVSNIG-TR/W25Q80DVSNIGCT-ND/5253805             |
+| Name                            | Price  | Digikey Part Number         | URL                                                                                                                        |
+|---------------------------------+--------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------|
+| IS42S16400J-7TLI 64MB RAM       | $2.40  | 706-1132-ND                 | https://www.digikey.com/product-detail/en/issi-integrated-silicon-solution-inc/IS42S16400J-7TLI/706-1132-ND/2708624        |
+| STM32F429ZIT6 ARM MCU           | $15.52 | 497-14053-ND                | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F429ZIT6/497-14053-ND/4357427                            |
+| W25Q80DVSNIGTR-ND 8MB SPI FLASH | $0.59  | W25Q80DVSNIGCT-ND           | https://www.digikey.com/product-detail/en/winbond-electronics/W25Q80DVSNIG-TR/W25Q80DVSNIGCT-ND/5253805                    |
+| Newhaven Display 3.5" QVGA LCD  | $30.50 | NHD-3.5-320240MF-ATXL#-1-ND | https://www.digikey.com/product-detail/en/newhaven-display-intl/NHD-3.5-320240MF-ATXL-1/NHD-3.5-320240MF-ATXL-1-ND/2165878 |
 
 
