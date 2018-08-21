@@ -166,6 +166,21 @@ cc_library(
 )
 
 cc_library(
+    name = "led",
+    srcs = [
+        "led.cc"
+    ],
+    hdrs = [
+        "led.h"
+    ],
+    copts = COMMON_COPTS,
+    deps = [
+        ":gpio_common"
+    ],
+    visibility = ["//visibility:public"]
+)
+
+cc_library(
     name = "rtc",
     srcs = [
         "rtc.cc"
