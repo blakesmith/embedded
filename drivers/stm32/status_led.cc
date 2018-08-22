@@ -7,16 +7,6 @@ StatusLed::StatusLed(GPIOPin& led_ok,
 {}
 
 void StatusLed::Init() {
-    led_ok_.set_mode(GPIOPin::Mode::OUT);
-    led_ok_.set_output(GPIOPin::OType::PUSH_PULL);
-    led_ok_.set_pupd(GPIOPin::PuPd::DOWN);
-    led_ok_.set_speed(GPIOPin::Speed::TWO_MHZ);
-
-    led_error_.set_mode(GPIOPin::Mode::OUT);
-    led_error_.set_output(GPIOPin::OType::PUSH_PULL);
-    led_error_.set_pupd(GPIOPin::PuPd::DOWN);
-    led_error_.set_speed(GPIOPin::Speed::TWO_MHZ);
-    
     led_ok_.Init();
     led_error_.Init();
 }

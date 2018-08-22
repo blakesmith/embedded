@@ -2,6 +2,7 @@
 #define STATUS_LED_H_
 
 #include "gpio_pin.h"
+#include "led.h"
 
 class StatusLed {
 public:
@@ -14,8 +15,8 @@ public:
     void SetError(bool on);
     
 private:
-    GPIOPin& led_ok_;
-    GPIOPin& led_error_;
+    LED led_ok_;
+    LED led_error_;
 };
 
 #endif

@@ -160,7 +160,8 @@ cc_library(
     ],
     copts = COMMON_COPTS,
     deps = [
-        ":gpio_common"
+        ":gpio_common",
+        ":led"
     ],
     visibility = ["//visibility:public"]
 )

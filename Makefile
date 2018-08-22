@@ -71,12 +71,12 @@ keebee_flash:
 	--define TARGET=stm32f042 \
 	//keebee:keebee_flash
 
-led:
+status_led:
 	bazel build \
 	--crosstool_top=@stm32//tools/arm_compiler:toolchain \
 	--cpu=armeabi-v7a-m0 \
 	--define TARGET=stm32f042 \
-	//drivers/stm32:led
+	//drivers/stm32:status_led
 
 stm32f042_base:
 	bazel build \
