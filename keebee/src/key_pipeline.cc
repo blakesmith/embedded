@@ -32,7 +32,7 @@ const USBKeyboard::HIDReport* KeyPipeline::MapKeyScans(bool* key_scans, uint16_t
 
         const Layer::Key key = current_layout_->MapKey(current_layer_index_, i, key_count);
         const bool key_scan = key_scans[i];
-        control_key = map_layers(key, key_scan);
+        control_key = map_control_keys(key, key_scan);
 
         if (key_scan) {
             control_key = control_key || map_modifiers(key, report);
@@ -95,12 +95,18 @@ bool KeyPipeline::map_modifiers(const Layer::Key& key, USBKeyboard::HIDReport* r
     }
 }
 
-bool KeyPipeline::map_layers(const Layer::Key& key, const bool key_scan) {
+bool KeyPipeline::map_control_keys(const Layer::Key& key, const bool key_scan) {
     const Layer::Key control_key = key & 0xff00; // Top 8 bits
-    const uint8_t layer_index = key & 0xff; // Bottom 8 bits
+    const uint8_t data = key & 0xff; // Bottom 8 bits
     switch (control_key) {
         case KB_LAYER_SHIFT: {
-            key_scan ? switch_layer(layer_index) : reset_layer();
+            key_scan ? switch_layer(data) : reset_layer();
+            return true;
+        }
+        case KB_LAYOUT_SWITCH: {
+            if (key_scan) {
+                switch_layout(data);
+            }
             return true;
         }
         default:
@@ -119,6 +125,14 @@ void KeyPipeline::switch_layer(uint8_t layer_index) {
     }
 
     current_layer_index_ = layer_index;
+}
+
+void KeyPipeline::switch_layout(uint8_t layout_index) {
+    if (layout_index < 0 || layout_index > (LAYOUT_COUNT - 1)) {
+        return;
+    }
+
+    SetLayout(const_cast<Layout*>(&LAYOUTS[layout_index]));
 }
 
 void KeyPipeline::reset_layer() {

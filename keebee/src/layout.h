@@ -18,6 +18,7 @@ struct Layout {
 };
 
 const Layer::Key KB_LAYER_SHIFT = 0x100;
+const Layer::Key KB_LAYOUT_SWITCH = 0x300;
 
 const Layer::Key KEY_NONE = 0x00; // No key pressed
 const Layer::Key KEY_ERR_OVF = 0x01; //  Keyboard Error Roll Over - used for all slots if too many keys are pressed ("Phantom key")
@@ -152,9 +153,14 @@ const Layer::Key KEY_RIGHTMETA = 0xe7; // Keyboard Right GUI
 
 extern const Layout DEFAULT_LAYOUT;
 extern const Layout LAYOUTS[];
+extern const uint8_t LAYOUT_COUNT;
 
 static constexpr Layer::Key LYR_SHIFT(const uint8_t layer_index) {
     return KB_LAYER_SHIFT | layer_index;
+}
+
+static constexpr Layer::Key LOUT_SWITCH(const uint8_t layout_index) {
+    return KB_LAYOUT_SWITCH | layout_index;
 }
 
 #endif

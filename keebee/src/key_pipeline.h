@@ -22,9 +22,10 @@ private:
     USBKeyboard::HIDReport* last_report_;
 
     bool map_modifiers(const Layer::Key& key, USBKeyboard::HIDReport* report);
-    bool map_layers(const Layer::Key& key, bool key_scan);
+    bool map_control_keys(const Layer::Key& key, bool key_scan);
 
     void switch_layer(uint8_t layer_index);
+    void switch_layout(uint8_t layout_index);
     void reset_layer();
 };
 
