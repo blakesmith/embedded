@@ -834,4 +834,65 @@ F 3 "" H 13600 5750 50  0001 C CNN
 $EndComp
 Text Notes 14000 5500 0    50   ~ 0
 Place near LCD Power Pins
+Wire Wire Line
+	8250 2750 8550 2750
+Text Label 8550 2750 0    50   ~ 0
+USB_DM
+Wire Wire Line
+	8250 2850 8550 2850
+Text Label 8550 2850 0    50   ~ 0
+USB_DP
+Wire Wire Line
+	3150 2950 3350 2950
+Text Label 3350 2950 0    50   ~ 0
+USB_DP
+Wire Wire Line
+	3150 3050 3350 3050
+Text Label 3350 3050 0    50   ~ 0
+USB_DM
+NoConn ~ 3150 3150
+Wire Wire Line
+	2850 3350 2850 3400
+$Comp
+L power:GND #PWR?
+U 1 1 5B981332
+P 2850 3500
+F 0 "#PWR?" H 2850 3250 50  0001 C CNN
+F 1 "GND" H 2855 3327 50  0000 C CNN
+F 2 "" H 2850 3500 50  0001 C CNN
+F 3 "" H 2850 3500 50  0001 C CNN
+	1    2850 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3150 2750 3350 2750
+$Comp
+L power:+5V #PWR?
+U 1 1 5B9C3EC4
+P 3350 2750
+F 0 "#PWR?" H 3350 2600 50  0001 C CNN
+F 1 "+5V" V 3365 2878 50  0000 L CNN
+F 2 "" H 3350 2750 50  0001 C CNN
+F 3 "" H 3350 2750 50  0001 C CNN
+	1    3350 2750
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:USB_B_Micro J?
+U 1 1 5B9C425C
+P 2850 2950
+F 0 "J?" H 2905 3417 50  0000 C CNN
+F 1 "USB_B_Micro" H 2905 3326 50  0000 C CNN
+F 2 "" H 3000 2900 50  0001 C CNN
+F 3 "~" H 3000 2900 50  0001 C CNN
+	1    2850 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 3350 2750 3400
+Wire Wire Line
+	2750 3400 2850 3400
+Connection ~ 2850 3400
+Wire Wire Line
+	2850 3400 2850 3500
 $EndSCHEMATC
