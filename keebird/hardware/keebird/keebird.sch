@@ -895,4 +895,79 @@ Wire Wire Line
 Connection ~ 2850 3400
 Wire Wire Line
 	2850 3400 2850 3500
+$Comp
+L Device:Crystal_Small Y?
+U 1 1 5B87EB8B
+P 5150 3100
+F 0 "Y?" V 5104 3188 50  0000 L CNN
+F 1 "8MHZ" V 5195 3188 50  0000 L CNN
+F 2 "" H 5150 3100 50  0001 C CNN
+F 3 "~" H 5150 3100 50  0001 C CNN
+	1    5150 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B87ECB0
+P 4900 3000
+F 0 "C?" V 4671 3000 50  0000 C CNN
+F 1 "24pF" V 4762 3000 50  0000 C CNN
+F 2 "" H 4900 3000 50  0001 C CNN
+F 3 "~" H 4900 3000 50  0001 C CNN
+	1    4900 3000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5B87EDA3
+P 4900 3200
+F 0 "C?" V 4671 3200 50  0000 C CNN
+F 1 "24pF" V 4762 3200 50  0000 C CNN
+F 2 "" H 4900 3200 50  0001 C CNN
+F 3 "~" H 4900 3200 50  0001 C CNN
+	1    4900 3200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5850 3050 5550 3050
+Wire Wire Line
+	5550 3050 5550 3000
+Wire Wire Line
+	5550 3000 5150 3000
+Wire Wire Line
+	5150 3200 5550 3200
+Wire Wire Line
+	5550 3200 5550 3150
+Wire Wire Line
+	5550 3150 5850 3150
+Wire Wire Line
+	5150 3000 5000 3000
+Connection ~ 5150 3000
+Wire Wire Line
+	4800 3000 4650 3000
+Wire Wire Line
+	4650 3000 4650 3100
+Wire Wire Line
+	4650 3200 4800 3200
+Wire Wire Line
+	5000 3200 5150 3200
+Connection ~ 5150 3200
+Wire Wire Line
+	4650 3100 4450 3100
+Wire Wire Line
+	4450 3100 4450 3150
+Connection ~ 4650 3100
+Wire Wire Line
+	4650 3100 4650 3200
+$Comp
+L power:GND #PWR?
+U 1 1 5B8EF0DC
+P 4450 3150
+F 0 "#PWR?" H 4450 2900 50  0001 C CNN
+F 1 "GND" H 4455 2977 50  0000 C CNN
+F 2 "" H 4450 3150 50  0001 C CNN
+F 3 "" H 4450 3150 50  0001 C CNN
+	1    4450 3150
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

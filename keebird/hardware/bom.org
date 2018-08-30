@@ -6,6 +6,5 @@
 | STM32F429ZIT6 ARM MCU                | $15.52 | 497-14053-ND           | https://www.digikey.com/product-detail/en/stmicroelectronics/STM32F429ZIT6/497-14053-ND/4357427                     |
 | W25Q80DVSNIGTR-ND 8MB SPI FLASH      | $0.59  | W25Q80DVSNIGCT-ND      | https://www.digikey.com/product-detail/en/winbond-electronics/W25Q80DVSNIG-TR/W25Q80DVSNIGCT-ND/5253805             |
 | Newhaven Display 1.69" OLED, 160x128 | $28.50 | NHD-1.69-160128UGC3-ND | https://www.digikey.com/product-detail/en/newhaven-display-intl/NHD-1.69-160128UGC3/NHD-1.69-160128UGC3-ND/4756379  |
-
-
+| 8MHZ crystal oscillator              | $0.25  | 535-10212-1-ND         | https://www.digikey.com/product-detail/en/abracon-llc/ABLS-8.000MHZ-B4-T/535-10212-1-ND/2184247                     |
 
