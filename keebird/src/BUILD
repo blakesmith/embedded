@@ -12,6 +12,9 @@ cc_binary(
         "osc.h",
         "osc.cc",
     ],
+    deps = [
+        "//keebird/src/ui:ui"
+    ],
     visibility = [
         "//visibility:public"
     ],
