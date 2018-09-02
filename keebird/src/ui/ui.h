@@ -14,7 +14,7 @@ public:
 
     ~Ui() = default;
 
-    int Init();
+    int Start();
     void Stop();
 
 private:

@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
         return rc;
     }
 
-    rc = ui.Init();
+    rc = ui.Start();
     if (rc < 0) {
         printf("Failed to start UI!\n");
         return rc;

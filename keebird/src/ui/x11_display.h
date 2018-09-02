@@ -15,7 +15,7 @@ public:
                const uint16_t display_height);
     ~X11Display() = default;
 
-    int Init();
+    int Start();
     void Stop();
 
 private:

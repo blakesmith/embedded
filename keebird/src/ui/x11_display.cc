@@ -8,7 +8,7 @@ X11Display::X11Display(const uint16_t display_width,
       display_height_(display_height)
 { }
 
-int X11Display::Init() {
+int X11Display::Start() {
     return 0;
 }
 

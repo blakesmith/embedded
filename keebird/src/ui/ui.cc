@@ -7,8 +7,8 @@ Ui::Ui(const uint16_t display_width,
     : display_(display_width, display_height)
 { }
 
-int Ui::Init() {
-    return display_.Init();
+int Ui::Start() {
+    return display_.Start();
 }
 
 void Ui::Stop() {
