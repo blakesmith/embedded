@@ -70,6 +70,7 @@ int main(int argc, char** argv) {
     audio_thread.join();
     ui_thread.join();
 
+    printf("Received shutdown. Quitting\n");
     sound_out.Stop();
     ui.Stop();
     
