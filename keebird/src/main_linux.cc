@@ -34,7 +34,10 @@ void ui_thread_main(Ui* ui) {
         InputEvent event = ui->Poll();
         switch (event.get_type()) {
             case InputEventType::BUTTON_DOWN: {
-                should_run.store(false);
+                printf("Got key: %c\n", event.get_key_sym());
+                if (event.get_key_sym() == 'q') {
+                    should_run.store(false);
+                }
                 break;
             }
             default:
