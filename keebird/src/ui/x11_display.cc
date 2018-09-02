@@ -52,10 +52,14 @@ int X11Display::Start() {
     XClearWindow(display_, window_);
     XMapWindow(display_, window_);
 
+    return 0;
+}
+
+InputEvent X11Display::Poll() {
     XEvent ev;
     XNextEvent(display_, &ev);
 
-    return 0;
+    return input_.Translate(&ev);
 }
 
 void X11Display::Stop() {

@@ -19,6 +19,7 @@ cc_binary(
         "//visibility:public"
     ],
     linkopts = [
-        "-lasound"
+        "-lasound",
+        "-pthread"
     ]
 )

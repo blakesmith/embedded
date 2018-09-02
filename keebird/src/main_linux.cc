@@ -1,7 +1,10 @@
+#include <atomic>
 #include <cstdio>
+#include <thread>
 
 #include "alsa_output.h"
 #include "audio_pipeline.h"
+#include "ui/input_event.h"
 #include "ui/ui.h"
 
 using namespace keebird;
@@ -15,9 +18,33 @@ static const uint8_t DEFAULT_DOWNBEAT = 4;
 static constexpr uint16_t DISPLAY_WIDTH = 160;
 static constexpr uint16_t DISPLAY_HEIGHT = 128;
 
+std::atomic<bool> should_run(true);
+
+void audio_thread_main(AudioPipeline* pipeline, AlsaOutput* sound_out) {
+    int16_t sample_buffer[FRAMES_PER_PERIOD*CHANNEL_COUNT];
+
+    while (should_run.load()) {
+        pipeline->Fill(sample_buffer, FRAMES_PER_PERIOD, CHANNEL_COUNT);
+        sound_out->Write(sample_buffer, FRAMES_PER_PERIOD);
+    }
+}
+
+void ui_thread_main(Ui* ui) {
+    while (should_run.load()) {
+        InputEvent event = ui->Poll();
+        switch (event.get_type()) {
+            case InputEventType::BUTTON_DOWN: {
+                should_run.store(false);
+                break;
+            }
+            default:
+                continue;
+        }
+    }
+}
+
 int main(int argc, char** argv) {
     int rc;
-    int16_t sample_buffer[FRAMES_PER_PERIOD*CHANNEL_COUNT];
     Ui ui(DISPLAY_WIDTH, DISPLAY_HEIGHT);
     AudioPipeline pipeline(SAMPLE_RATE, CONTROL_RATE);
     AlsaOutput sound_out(SAMPLE_RATE);
@@ -34,14 +61,11 @@ int main(int argc, char** argv) {
         return rc;
     }
 
-    uint32_t seconds = 5;
-    uint32_t total_samples = SAMPLE_RATE * seconds;
-    for (uint32_t current_samples = 0;
-         current_samples < total_samples;
-         current_samples += FRAMES_PER_PERIOD) {
-        pipeline.Fill(sample_buffer, FRAMES_PER_PERIOD, CHANNEL_COUNT);
-        sound_out.Write(sample_buffer, FRAMES_PER_PERIOD);
-    }
+    std::thread audio_thread(audio_thread_main, &pipeline, &sound_out);
+    std::thread ui_thread(ui_thread_main, &ui);
+
+    audio_thread.join();
+    ui_thread.join();
 
     sound_out.Stop();
     ui.Stop();

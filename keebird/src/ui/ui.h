@@ -3,6 +3,7 @@
 
 #include <cstdint>
 
+#include "input_event.h"
 #include "x11_display.h"
 
 namespace keebird {
@@ -16,6 +17,7 @@ public:
 
     int Start();
     void Stop();
+    InputEvent Poll();
 
 private:
     X11Display display_;

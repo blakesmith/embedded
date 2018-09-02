@@ -15,4 +15,8 @@ void Ui::Stop() {
     display_.Stop();
 }
 
+InputEvent Ui::Poll() {
+    return display_.Poll();
+}
+
 }
