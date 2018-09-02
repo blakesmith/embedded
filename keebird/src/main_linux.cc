@@ -9,12 +9,12 @@
 
 using namespace keebird;
 
-static const uint32_t SAMPLE_RATE = 44100;
-static const uint32_t CONTROL_RATE = SAMPLE_RATE / 10;
-static const uint8_t CHANNEL_COUNT = 2;
-static const size_t FRAMES_PER_PERIOD = 128;
-static const uint16_t DEFAULT_BPM = 120;
-static const uint8_t DEFAULT_DOWNBEAT = 4;
+static constexpr uint32_t SAMPLE_RATE = 44100;
+static constexpr uint32_t CONTROL_RATE = SAMPLE_RATE / 10;
+static constexpr uint8_t CHANNEL_COUNT = 2;
+static constexpr size_t FRAMES_PER_PERIOD = 128;
+static constexpr uint16_t DEFAULT_BPM = 120;
+static constexpr uint8_t DEFAULT_DOWNBEAT = 4;
 static constexpr uint16_t DISPLAY_WIDTH = 160;
 static constexpr uint16_t DISPLAY_HEIGHT = 128;
 
