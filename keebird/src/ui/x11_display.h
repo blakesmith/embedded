@@ -23,6 +23,7 @@ private:
     const uint16_t display_height_;
 
     Display* display_;
+    int screen_;
     Window window_;
     GC gc_;
 };

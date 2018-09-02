@@ -44,6 +44,7 @@ int main(int argc, char** argv) {
     }
 
     sound_out.Stop();
+    ui.Stop();
     
     return 0;
 }
