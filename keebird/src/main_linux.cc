@@ -1,8 +1,7 @@
 #include <cstdio>
 
 #include "alsa_output.h"
-
-#include "beat.h"
+#include "audio_pipeline.h"
 
 using namespace keebird;
 
@@ -16,7 +15,7 @@ static const uint8_t DEFAULT_DOWNBEAT = 4;
 int main(int argc, char** argv) {
     int rc;
     int16_t sample_buffer[FRAMES_PER_PERIOD*CHANNEL_COUNT];
-    Beat beat(SAMPLE_RATE, CONTROL_RATE, DEFAULT_BPM, DEFAULT_DOWNBEAT);
+    AudioPipeline pipeline(SAMPLE_RATE, CONTROL_RATE);
     AlsaOutput sound_out(SAMPLE_RATE);
 
     rc = sound_out.Start();
@@ -30,7 +29,7 @@ int main(int argc, char** argv) {
     for (uint32_t current_samples = 0;
          current_samples < total_samples;
          current_samples += FRAMES_PER_PERIOD) {
-        beat.Fill(sample_buffer, FRAMES_PER_PERIOD, CHANNEL_COUNT);
+        pipeline.Fill(sample_buffer, FRAMES_PER_PERIOD, CHANNEL_COUNT);
         sound_out.Write(sample_buffer, FRAMES_PER_PERIOD);
     }
 

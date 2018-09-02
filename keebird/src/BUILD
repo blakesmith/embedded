@@ -3,8 +3,8 @@ cc_binary(
     srcs = [
         "adsr_envelope.h",
         "adsr_envelope.cc",
-        "beat.h",
-        "beat.cc",
+        "audio_pipeline.h",
+        "audio_pipeline.cc",
         "alsa_output.h",
         "alsa_output.cc",
         "main_linux.cc",
