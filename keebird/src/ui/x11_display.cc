@@ -1,4 +1,5 @@
 #include "x11_display.h"
+#include "../util/log.h"
 
 #include <cstdio>
 
@@ -13,10 +14,10 @@ X11Display::X11Display(const uint16_t display_width,
 { }
 
 int X11Display::Start() {
-    printf("X11: Opening display\n");
+    keebird_log_verbose("X11", "Opening display\n");
     display_ = XOpenDisplay(nullptr);
     if (display_ == nullptr) {
-        printf("Failed to open X11 display!\n");
+        keebird_log_verbose("X11", "Failed to open X11 display!\n");
         return -1;
     }
     screen_ = DefaultScreen(display_);
@@ -43,7 +44,7 @@ int X11Display::Start() {
                  window_,
                  StructureNotifyMask | ButtonPressMask | KeyPressMask);
 
-    printf("X11: Creating GC\n");
+    keebird_log_verbose("X11", "Creating GC\n");
     gc_ = XCreateGC(display_, window_, 0, 0);
 
     XSetBackground(display_, gc_, WhitePixel(display_, screen_));
@@ -63,12 +64,12 @@ InputEvent X11Display::Poll() {
 }
 
 void X11Display::Stop() {
-    printf("X11: Freeing GC\n");
+    keebird_log_verbose("X11", "Freeing GC\n");
     XFreeGC(display_, gc_);
-    printf("X11: Destroying window\n");
+    keebird_log_verbose("X11", "Destroying window\n");
     XDestroyWindow(display_, window_);
     if (display_ != nullptr) {
-        printf("X11: Closing display\n");
+        keebird_log_verbose("X11", "Closing display\n");
         XCloseDisplay(display_);
     }
 }

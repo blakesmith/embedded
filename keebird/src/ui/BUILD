@@ -16,7 +16,8 @@ cc_library(
         "//keebird/src:__pkg__"
     ],
     deps = [
-        "//keebird/src/synth:synth"
+        "//keebird/src/synth:synth",
+        "//keebird/src/util:log"
     ],
     linkopts = [
         "-lX11"

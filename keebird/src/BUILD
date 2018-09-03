@@ -9,6 +9,7 @@ cc_binary(
     ],
     deps = [
         "//keebird/src/ui:ui",
+        "//keebird/src/util:log",
         "//keebird/src/util:queues",
         "//keebird/src/synth:synth"
     ],

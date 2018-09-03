@@ -7,6 +7,7 @@
 #include "synth/note.h"
 #include "ui/input_event.h"
 #include "ui/ui.h"
+#include "util/log.h"
 #include "util/readerwriterqueue.h"
 
 using namespace keebird;
@@ -29,7 +30,8 @@ void audio_thread_main(AudioPipeline* pipeline, AlsaOutput* sound_out) {
         InputEvent event(InputEventType::NONE);
         if (event_queue.try_dequeue(event)) {
             if (event.get_type() == InputEventType::NOTE_DOWN) {
-                printf("Got note freq: %f\n", event.get_note()->frequency);
+                keebird_log_verbose("MAIN", "Got note freq: %f\n",
+                                    event.get_note()->frequency);
                 pipeline->Trigger(event.get_note());
             }
         }
@@ -43,19 +45,19 @@ void ui_thread_main(Ui* ui) {
         InputEvent event = ui->Poll();
         switch (event.get_type()) {
             case InputEventType::BUTTON_DOWN: {
-                printf("Got key: %c\n", event.get_key_sym());
+                keebird_log_verbose("MAIN", "Got key: %c\n", event.get_key_sym());
                 if (event.get_key_sym() == 'q') {
                     should_run.store(false);
                 } else {
                     if (!event_queue.try_enqueue(event)) {
-                        printf("Could not enqueue input event, dropping!\n");
+                        keebird_log_verbose("MAIN", "Could not enqueue input event, dropping!\n");
                     }
                 }
                 break;
             }
             case InputEventType::NOTE_DOWN: {
                 if (!event_queue.try_enqueue(event)) {
-                    printf("Could not enqueue input event, dropping!\n");
+                    keebird_log_verbose("MAIN", "Could not enqueue input event, dropping!\n");
                 }
             }
             default:
@@ -72,13 +74,13 @@ int main(int argc, char** argv) {
 
     rc = sound_out.Start();
     if (rc < 0) {
-        printf("Failed to open sound playback device!\n");
+        keebird_log_verbose("MAIN", "Failed to open sound playback device!\n");
         return rc;
     }
 
     rc = ui.Start();
     if (rc < 0) {
-        printf("Failed to start UI!\n");
+        keebird_log_verbose("MAIN", "Failed to start UI!\n");
         return rc;
     }
 
@@ -88,7 +90,7 @@ int main(int argc, char** argv) {
     audio_thread.join();
     ui_thread.join();
 
-    printf("Received shutdown. Quitting\n");
+    keebird_log_verbose("MAIN", "Received shutdown. Quitting\n");
     sound_out.Stop();
     ui.Stop();
     

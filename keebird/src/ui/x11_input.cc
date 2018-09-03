@@ -1,6 +1,8 @@
 #include <X11/Xutil.h>
 
 #include "x11_input.h"
+#include "../util/log.h"
+
 #include <cstdio>
 
 namespace keebird {
@@ -8,7 +10,7 @@ namespace keebird {
 InputEvent X11Input::Translate(XEvent* event) {
     switch (event->type) {
         case KeyPress: {
-            printf("Got keycode: %d\n", event->xkey.keycode);
+            keebird_log_verbose("X11", "Got keycode: %d\n", event->xkey.keycode);
             int len;
             char buf;
             KeySym sym;
