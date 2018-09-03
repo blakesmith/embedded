@@ -1,8 +1,7 @@
 #ifndef KEEBIRD_NOTE_H_
 #define KEEBIRD_NOTE_H_
 
-#include <sstream>
-#include <string>
+#include <cstddef>
 
 struct Note {
     const char* note;
@@ -10,12 +9,6 @@ struct Note {
     const unsigned int octave;
     const double frequency;
     
-    const std::string ToString() const {
-        std::stringstream stream;
-        stream << note << octave << ": " << frequency;
-        return stream.str();
-    }
-
     static const Note* ByIndex(size_t index);
     static const Note* ByNumberAndOctave(unsigned int note_number,
                                          unsigned int octave);
