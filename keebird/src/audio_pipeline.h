@@ -1,9 +1,9 @@
 #ifndef KEEBIRD_AUDIO_PIPELINE_H_
 #define KEEBIRD_AUDIO_PIPELINE_H_
 
-#include "osc.h"
-#include "adsr_envelope.h"
-#include "mixer.h"
+#include "synth/osc.h"
+#include "synth/adsr_envelope.h"
+#include "synth/mixer.h"
 #include "synth/note.h"
 
 #include <cstddef>
