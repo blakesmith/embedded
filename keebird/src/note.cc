@@ -1,5 +1,7 @@
 #include "note.h"
 
+#include <cstring>
+
 static const Note all_notes[] = {
     {"--", 0,  0, 0.0    },
     {"C",  1,  0, 16.35  },
@@ -120,4 +122,31 @@ const Note* Note::ByIndex(size_t index) {
     } else {
         return &all_notes[index];
     }
+}
+
+const Note* Note::ByNumberAndOctave(unsigned int note_number,
+                                    unsigned int octave) {
+    size_t index = (octave * 12) + note_number;
+    return ByIndex(index);
+}
+
+const Note* Note::ByNoteNameAndOctave(const char* note_name,
+                                      unsigned int octave) {
+    unsigned int note_number;
+
+    if (strncmp("C", note_name, 2) == 0) note_number = 1;
+    else if (strncmp("C#", note_name, 2) == 0) note_number = 2;
+    else if (strncmp("D", note_name, 2) == 0) note_number = 3;
+    else if (strncmp("D#", note_name, 2) == 0) note_number = 4;
+    else if (strncmp("E", note_name, 2) == 0) note_number = 5;
+    else if (strncmp("F", note_name, 2) == 0) note_number = 6;
+    else if (strncmp("F#", note_name, 2) == 0) note_number = 7;
+    else if (strncmp("G", note_name, 2) == 0) note_number = 8;
+    else if (strncmp("G#", note_name, 2) == 0) note_number = 9;
+    else if (strncmp("A", note_name, 2) == 0) note_number = 10;
+    else if (strncmp("A#", note_name, 2) == 0) note_number = 11;
+    else if (strncmp("B", note_name, 2) == 0) note_number = 12;
+    else return ByIndex(0);
+
+    return ByNumberAndOctave(note_number, octave);
 }

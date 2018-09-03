@@ -17,6 +17,10 @@ struct Note {
     }
 
     static const Note* ByIndex(size_t index);
+    static const Note* ByNumberAndOctave(unsigned int note_number,
+                                         unsigned int octave);
+    static const Note* ByNoteNameAndOctave(const char* note_name,
+                                           unsigned int octave);
 };
 
 #endif
