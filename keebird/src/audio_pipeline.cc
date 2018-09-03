@@ -40,4 +40,8 @@ void AudioPipeline::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) 
     }
 }
 
+void AudioPipeline::Trigger() {
+    envelope_.Reset();
+}
+
 }

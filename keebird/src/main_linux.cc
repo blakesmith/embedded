@@ -27,7 +27,7 @@ void audio_thread_main(AudioPipeline* pipeline, AlsaOutput* sound_out) {
     while (should_run.load()) {
         InputEvent event(InputEventType::NONE);
         if (event_queue.try_dequeue(event)) {
-            printf("Got event in audio thread!\n");
+            pipeline->Trigger();
         }
         pipeline->Fill(sample_buffer, FRAMES_PER_PERIOD, CHANNEL_COUNT);
         sound_out->Write(sample_buffer, FRAMES_PER_PERIOD);
@@ -43,9 +43,7 @@ void ui_thread_main(Ui* ui) {
                 if (event.get_key_sym() == 'q') {
                     should_run.store(false);
                 } else {
-                    if (event_queue.try_enqueue(event)) {
-                        printf("Enqueued input event\n");
-                    } else {
+                    if (!event_queue.try_enqueue(event)) {
                         printf("Could not enqueue input event, dropping!\n");
                     }
                 }
