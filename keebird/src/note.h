@@ -1,6 +1,9 @@
 #ifndef KEEBIRD_NOTE_H_
 #define KEEBIRD_NOTE_H_
 
+#include <sstream>
+#include <string>
+
 struct Note {
     const char* note;
     const unsigned int note_number;
