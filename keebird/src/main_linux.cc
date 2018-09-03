@@ -6,6 +6,7 @@
 #include "audio_pipeline.h"
 #include "ui/input_event.h"
 #include "ui/ui.h"
+#include "util/readerwriterqueue.h"
 
 using namespace keebird;
 
@@ -16,12 +17,18 @@ static constexpr size_t FRAMES_PER_PERIOD = 128;
 static constexpr uint16_t DISPLAY_WIDTH = 160;
 static constexpr uint16_t DISPLAY_HEIGHT = 128;
 
+
 std::atomic<bool> should_run(true);
+moodycamel::ReaderWriterQueue<InputEvent> event_queue(10);
 
 void audio_thread_main(AudioPipeline* pipeline, AlsaOutput* sound_out) {
     int16_t sample_buffer[FRAMES_PER_PERIOD*CHANNEL_COUNT];
 
     while (should_run.load()) {
+        InputEvent event(InputEventType::NONE);
+        if (event_queue.try_dequeue(event)) {
+            printf("Got event in audio thread!\n");
+        }
         pipeline->Fill(sample_buffer, FRAMES_PER_PERIOD, CHANNEL_COUNT);
         sound_out->Write(sample_buffer, FRAMES_PER_PERIOD);
     }
@@ -35,6 +42,12 @@ void ui_thread_main(Ui* ui) {
                 printf("Got key: %c\n", event.get_key_sym());
                 if (event.get_key_sym() == 'q') {
                     should_run.store(false);
+                } else {
+                    if (event_queue.try_enqueue(event)) {
+                        printf("Enqueued input event\n");
+                    } else {
+                        printf("Could not enqueue input event, dropping!\n");
+                    }
                 }
                 break;
             }
