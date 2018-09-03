@@ -10,6 +10,7 @@ cc_binary(
         "main_linux.cc",
         "mixer.h",
         "note.h",
+        "note.cc",
         "osc.h",
         "osc.cc",
     ],
