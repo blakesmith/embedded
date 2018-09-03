@@ -9,6 +9,7 @@ cc_binary(
         "alsa_output.cc",
         "main_linux.cc",
         "mixer.h",
+        "note.h",
         "osc.h",
         "osc.cc",
     ],
