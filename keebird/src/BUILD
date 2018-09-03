@@ -9,14 +9,13 @@ cc_binary(
         "alsa_output.cc",
         "main_linux.cc",
         "mixer.h",
-        "note.h",
-        "note.cc",
         "osc.h",
         "osc.cc",
     ],
     deps = [
         "//keebird/src/ui:ui",
-        "//keebird/src/util:queues"
+        "//keebird/src/util:queues",
+        "//keebird/src/synth:synth"
     ],
     visibility = [
         "//visibility:public"

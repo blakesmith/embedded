@@ -15,6 +15,9 @@ cc_library(
     visibility = [
         "//keebird/src:__pkg__"
     ],
+    deps = [
+        "//keebird/src/synth:synth"
+    ],
     linkopts = [
         "-lX11"
     ]

@@ -4,7 +4,7 @@
 
 #include "alsa_output.h"
 #include "audio_pipeline.h"
-#include "note.h"
+#include "synth/note.h"
 #include "ui/input_event.h"
 #include "ui/ui.h"
 #include "util/readerwriterqueue.h"
