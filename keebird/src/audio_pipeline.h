@@ -4,6 +4,7 @@
 #include "osc.h"
 #include "adsr_envelope.h"
 #include "mixer.h"
+#include "synth/note.h"
 
 #include <cstddef>
 
@@ -19,6 +20,7 @@ public:
 
     void Fill(int16_t* buffer, size_t frames, uint8_t channel_count);
     void Trigger();
+    void Trigger(const Note* note);
     
 private:
     const uint32_t sample_rate_;

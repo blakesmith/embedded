@@ -28,7 +28,10 @@ void audio_thread_main(AudioPipeline* pipeline, AlsaOutput* sound_out) {
     while (should_run.load()) {
         InputEvent event(InputEventType::NONE);
         if (event_queue.try_dequeue(event)) {
-            pipeline->Trigger();
+            if (event.get_type() == InputEventType::NOTE_DOWN) {
+                printf("Got note freq: %f\n", event.get_note()->frequency);
+                pipeline->Trigger(event.get_note());
+            }
         }
         pipeline->Fill(sample_buffer, FRAMES_PER_PERIOD, CHANNEL_COUNT);
         sound_out->Write(sample_buffer, FRAMES_PER_PERIOD);
@@ -49,6 +52,11 @@ void ui_thread_main(Ui* ui) {
                     }
                 }
                 break;
+            }
+            case InputEventType::NOTE_DOWN: {
+                if (!event_queue.try_enqueue(event)) {
+                    printf("Could not enqueue input event, dropping!\n");
+                }
             }
             default:
                 continue;
