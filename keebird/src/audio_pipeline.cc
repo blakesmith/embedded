@@ -2,7 +2,7 @@
 
 namespace keebird {
 
-static const uint16_t STARTING_FREQ = 880;
+static const uint16_t STARTING_FREQ = 0;
 
 AudioPipeline::AudioPipeline(const uint32_t sample_rate,
                              const uint32_t control_rate)
@@ -11,11 +11,11 @@ AudioPipeline::AudioPipeline(const uint32_t sample_rate,
       samples_per_control_(sample_rate_ / control_rate_),
       phase_(0),
       osc_({
-              {OscShape::TRIANGLE, sample_rate, STARTING_FREQ},
+              {OscShape::SQUARE, sample_rate, STARTING_FREQ},
               {OscShape::SIN, sample_rate, STARTING_FREQ}
           }),
-    envelope_(control_rate, 255, 1, 20, 0, 225, 0) {
-    uint8_t levels[N_OSC] = {200, 55};
+    envelope_(control_rate, 2550, 1, 20, 0, 225, 0) {
+    uint8_t levels[N_OSC] = {200, 30};
     mixer_.set_levels(levels, N_OSC);
     envelope_.Reset();
 }
