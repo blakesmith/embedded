@@ -87,6 +87,8 @@ Osc::Osc(OscShape shape,
 }
 
 void Osc::Tick() {
+    // This phase increment depends on the 'modulo power of two' overflow behavior of unsigned integers in C/C++.
+    // At a sample rate of 44,100hz, this should overflow / wrap around after ~27 hours.
     phase_++;
     value_ = compute_next_value();
 }
@@ -120,10 +122,6 @@ void Osc::compute_phase_increment() {
 
 int16_t Osc::compute_next_value() {
     uint32_t index = ((phase_ * phase_increment_) >> 16) % table_size_;
-    if (index == 0) {
-        // Reset the phase to avoid overflows
-        phase_ = 0;
-    }
 
     return table_[index];
 }

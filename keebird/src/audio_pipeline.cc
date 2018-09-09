@@ -46,8 +46,7 @@ void AudioPipeline::Trigger() {
 
 void AudioPipeline::Trigger(const Note* note) {
     for (size_t j = 0; j < N_OSC; j++) {
-        mixer_.set_input(envelope_.Apply(osc_[j].Value()), j);
-        osc_[j].set_freq((uint16_t)note->frequency);
+        osc_[j].set_freq(note->frequency);
     }
     envelope_.Reset();
 }
