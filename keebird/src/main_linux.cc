@@ -11,6 +11,7 @@
 #include "util/readerwriterqueue.h"
 
 using namespace keebird;
+using namespace synth;
 
 static constexpr uint32_t SAMPLE_RATE = 44100;
 static constexpr uint32_t CONTROL_RATE = SAMPLE_RATE / 10;

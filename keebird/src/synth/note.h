@@ -1,7 +1,9 @@
-#ifndef KEEBIRD_NOTE_H_
-#define KEEBIRD_NOTE_H_
+#ifndef SYNTH_NOTE_H_
+#define SYNTH_NOTE_H_
 
 #include <cstddef>
+
+namespace synth {
 
 struct Note {
     const char* note;
@@ -15,5 +17,7 @@ struct Note {
     static const Note* ByNoteNameAndOctave(const char* note_name,
                                            unsigned int octave);
 };
+
+}
 
 #endif

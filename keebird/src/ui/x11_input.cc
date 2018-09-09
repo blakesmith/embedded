@@ -20,7 +20,7 @@ InputEvent X11Input::Translate(XEvent* event) {
                     return InputEvent(InputEventType::BUTTON_DOWN, buf);
                 } else {
                     return InputEvent(InputEventType::NOTE_DOWN,
-                                      Note::ByIndex(event->xkey.keycode));
+                                      synth::Note::ByIndex(event->xkey.keycode));
                 }
             } else {
                 return InputEvent(InputEventType::NONE);

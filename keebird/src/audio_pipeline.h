@@ -8,6 +8,8 @@
 
 #include <cstddef>
 
+using namespace synth;
+
 namespace keebird {
 
 static constexpr size_t N_OSC = 2;

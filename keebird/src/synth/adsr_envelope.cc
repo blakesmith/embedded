@@ -1,6 +1,6 @@
 #include "adsr_envelope.h"
 
-namespace keebird {
+namespace synth {
 
 AdsrEnvelope::AdsrEnvelope(const uint32_t control_rate,
                            const uint16_t total_duration_fixed_ms,

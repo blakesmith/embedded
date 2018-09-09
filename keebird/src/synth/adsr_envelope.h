@@ -1,10 +1,10 @@
-#ifndef KEEBIRD_ADSR_ENVELOPE_H_
-#define KEEBIRD_ADSR_ENVELOPE_H_
+#ifndef SYNTH_ADSR_ENVELOPE_H_
+#define SYNTH_ADSR_ENVELOPE_H_
 
 #include <cstddef>
 #include <cstdint>
 
-namespace keebird {
+namespace synth {
 
 enum EnvelopeSegment {
     ENVELOPE_SEGMENT_ATTACK = 0,

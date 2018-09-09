@@ -13,7 +13,7 @@ InputEvent::InputEvent(InputEventType type,
 }
 
 InputEvent::InputEvent(InputEventType type,
-                       const Note* note)
+                       const synth::Note* note)
     : type_(type) {
     event_data_.note = note;
 }
@@ -30,9 +30,9 @@ char InputEvent::get_key_sym() const {
     }
 }
 
-const Note* InputEvent::get_note() const {
+const synth::Note* InputEvent::get_note() const {
     if (type_ != InputEventType::NOTE_DOWN) {
-        return Note::ByIndex(0);
+        return synth::Note::ByIndex(0);
     } else {
         return event_data_.note;
     }

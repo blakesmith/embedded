@@ -2,6 +2,8 @@
 
 #include <cstring>
 
+namespace synth {
+
 static const Note all_notes[] = {
     {"--", 0,  0, 0.0    },
     {"C",  1,  0, 16.35  },
@@ -149,4 +151,6 @@ const Note* Note::ByNoteNameAndOctave(const char* note_name,
     else return ByIndex(0);
 
     return ByNumberAndOctave(note_number, octave);
+}
+
 }

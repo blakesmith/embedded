@@ -1,10 +1,10 @@
-#ifndef KEEBIRD_MIXER_H_
-#define KEEBIRD_MIXER_H_
+#ifndef SYNTH_MIXER_H_
+#define SYNTH_MIXER_H_
 
 #include <assert.h>
 #include <string.h>
 
-namespace keebird {
+namespace synth {
 
 template <size_t MIXER_SIZE>
 class Mixer {

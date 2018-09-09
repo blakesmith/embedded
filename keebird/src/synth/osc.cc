@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace keebird {
+namespace synth {
 
 int16_t osc_wavetable[256];
 

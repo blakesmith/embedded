@@ -1,10 +1,10 @@
-#ifndef KEEBIRD_OSC_H_
-#define KEEBIRD_OSC_H_
+#ifndef SYNTH_OSC_H_
+#define SYNTH_OSC_H_
 
 #include <cstdint>
 #include <cstddef>
 
-namespace keebird {
+namespace synth {
 
 enum class OscShape {
     SIN,
