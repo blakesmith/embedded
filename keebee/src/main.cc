@@ -64,10 +64,22 @@ static void Init() {
     status_led.Init();
 }
 
+static void check_for_scans() {
+    bool key_pressed = false;
+    for (unsigned int i = 0; i < key_count; i++) {
+        if (key_scans[i]) {
+            key_pressed = true;
+            break;
+        }
+    }
+    status_led.SetOk(!key_pressed);
+}
+
 static void scan_and_update() {
     scan_matrix.Scan(key_scans, row_count, column_count);
     keyboard.SendReport(
         key_pipeline.MapKeyScans(key_scans, key_count));
+    check_for_scans();
 }
 
 int main() {
@@ -76,7 +88,7 @@ int main() {
     status_led.SetOk(true);
     while (true) {
         scan_and_update();
-        HAL_Delay(20);
+//        HAL_Delay(5);
     }
 }
 
