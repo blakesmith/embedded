@@ -124,11 +124,11 @@ const Layout QWERTY_LAYOUT = {
     .layer_count = sizeof(QWERTY_LAYERS) / sizeof(Layer)
 };
 
-const Layout DEFAULT_LAYOUT = DVORAK_LAYOUT;
+const Layout DEFAULT_LAYOUT = QWERTY_LAYOUT;
 
 const Layout LAYOUTS[] = {
-    DVORAK_LAYOUT,
-    QWERTY_LAYOUT
+    QWERTY_LAYOUT,
+    DVORAK_LAYOUT
 };
 
 const uint8_t LAYOUT_COUNT = sizeof(LAYOUTS) / sizeof(Layout);
