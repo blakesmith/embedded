@@ -88,7 +88,6 @@ int main() {
     status_led.SetOk(true);
     while (true) {
         scan_and_update();
-//        HAL_Delay(5);
     }
 }
 
