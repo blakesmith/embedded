@@ -64,7 +64,7 @@ static void Init() {
     status_led.Init();
 }
 
-static void check_for_scans() {
+static void update_key_press_status() {
     bool key_pressed = false;
     for (unsigned int i = 0; i < key_count; i++) {
         if (key_scans[i]) {
@@ -79,7 +79,7 @@ static void scan_and_update() {
     scan_matrix.Scan(key_scans, row_count, column_count);
     keyboard.SendReport(
         key_pipeline.MapKeyScans(key_scans, key_count));
-    check_for_scans();
+    update_key_press_status();
 }
 
 int main() {

@@ -15,56 +15,6 @@ Layer::Key Layout::MapKey(uint8_t current_layer, uint16_t key_position, uint16_t
     return KEY_NONE;
 }
 
-const Layer::Key TEST_NUMBER_KEYS[] = {
-    KEY_1, KEY_2,
-    KEY_3, KEY_NONE,
-};
-
-const Layer::Key TEST_LAYER_KEYS[] = {
-    KEY_A, KEY_B,
-    KEY_LEFTSHIFT, LYR_SHIFT(1)
-};
-
-const Layer TEST_LAYER = {
-    .keys = TEST_LAYER_KEYS,
-    .key_count = sizeof(TEST_LAYER_KEYS) / sizeof(Layer::Key)
-};
-
-const Layer TEST_NUMBER_LAYER = {
-    .keys = TEST_NUMBER_KEYS,
-    .key_count = sizeof(TEST_NUMBER_KEYS) / sizeof(Layer::Key)
-};
-
-const Layer TEST_LAYERS[] = {
-    TEST_LAYER,
-    TEST_NUMBER_LAYER,
-};
-
-const Layout TEST_LAYOUT = {
-    .layers = TEST_LAYERS,
-    .layer_count = sizeof(TEST_LAYERS) / sizeof(Layer)
-};
-
-const Layer::Key TEST_LAYER_KEYS_2[] = {
-    KEY_E, KEY_F,
-    KEY_G, KEY_H
-};
-
-const Layer TEST_LAYER_2 = {
-    .keys = TEST_LAYER_KEYS_2,
-    .key_count = sizeof(TEST_LAYER_KEYS_2) / sizeof(Layer::Key)
-};
-
-const Layer TEST_LAYERS_2[] = {
-    TEST_LAYER_2,
-    TEST_NUMBER_LAYER,
-};
-
-const Layout TEST_LAYOUT_2 = {
-    .layers = TEST_LAYERS_2,
-    .layer_count = sizeof(TEST_LAYERS_2) / sizeof(Layer)
-};
-
 const Layer::Key FUNCTION_LAYER_KEYS[] = {
     KEY_GRAVE, KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12, KEY_DELETE,
     KEY_NONE, LOUT_SWITCH(0), LOUT_SWITCH(1), KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE,
