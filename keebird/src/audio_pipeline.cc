@@ -10,13 +10,13 @@ AudioPipeline::AudioPipeline(const uint32_t sample_rate,
       control_rate_(control_rate),
       samples_per_control_(sample_rate_ / control_rate_),
       phase_(0),
-      voice_(sample_rate, control_rate)
+      voices_(sample_rate, control_rate)
 { }
 
 void AudioPipeline::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) {
     for (size_t i = 0; i < frames; i++) {
-        voice_.TickAudio();
-        int16_t sample = voice_.Value();
+        voices_.TickAudio();
+        int16_t sample = voices_.Value();
 
         for (size_t j = 0; j < channel_count; j++) {
             buffer[i*channel_count+j] = sample;
@@ -25,13 +25,13 @@ void AudioPipeline::Fill(int16_t* buffer, size_t frames, uint8_t channel_count) 
         phase_++;
 
         if (phase_ % samples_per_control_ == 0) {
-            voice_.TickControl();
+            voices_.TickControl();
         }
     }
 }
 
 void AudioPipeline::Trigger(const Note* note) {
-    voice_.Trigger(note);
+    voices_.Trigger(note);
 }
 
 }
