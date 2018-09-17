@@ -7,14 +7,14 @@ cc_library(
         "mixer.h",
         "osc.h",
         "voice.h",
-        "voice_choir.h",
+        "voice_group.h",
     ],
     srcs = [
         "adsr_envelope.cc",
         "note.cc",
         "osc.cc",
         "voice.cc",
-        "voice_choir.cc"
+        "voice_group.cc"
     ],
     visibility = [
         "//keebird/src:__pkg__",

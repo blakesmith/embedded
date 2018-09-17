@@ -10,11 +10,11 @@ namespace synth {
 
 static constexpr size_t N_VOICES = 12;
 
-class VoiceChoir {
+class VoiceGroup {
 public:
-    VoiceChoir(const uint32_t sample_rate,
+    VoiceGroup(const uint32_t sample_rate,
                const uint32_t control_rate);
-    ~VoiceChoir() = default;
+    ~VoiceGroup() = default;
 
     void Trigger(const Note* note);
     void TickControl();

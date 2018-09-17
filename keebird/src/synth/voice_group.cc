@@ -1,10 +1,10 @@
-#include "voice_choir.h"
+#include "voice_group.h"
 
 #include <cstdio>
 
 namespace synth {
 
-VoiceChoir::VoiceChoir(const uint32_t sample_rate,
+VoiceGroup::VoiceGroup(const uint32_t sample_rate,
                        const uint32_t control_rate)
     : current_voice_index_(0),
       voices_({
@@ -23,13 +23,13 @@ VoiceChoir::VoiceChoir(const uint32_t sample_rate,
         })
 { }
 
-void VoiceChoir::Trigger(const Note* note) {
+void VoiceGroup::Trigger(const Note* note) {
     Voice* next_voice = &voices_[current_voice_index_];
     next_voice->Trigger(note);
     current_voice_index_ = (current_voice_index_ + 1) % N_VOICES;
 }
 
-void VoiceChoir::TickControl() {
+void VoiceGroup::TickControl() {
     Voice* voice;
 
     for (unsigned int i = 0; i < N_VOICES; i++) {
@@ -38,7 +38,7 @@ void VoiceChoir::TickControl() {
     }
 }
 
-void VoiceChoir::TickAudio() {
+void VoiceGroup::TickAudio() {
     Voice* voice;
     
     for (unsigned int i = 0; i < N_VOICES; i++) {
@@ -47,7 +47,7 @@ void VoiceChoir::TickAudio() {
     }
 }
 
-int16_t VoiceChoir::Value() {
+int16_t VoiceGroup::Value() {
     int16_t samples[N_VOICES];
     int32_t sample = 0;
     uint8_t active_voices = 0;

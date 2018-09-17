@@ -5,7 +5,7 @@
 #include "synth/adsr_envelope.h"
 #include "synth/mixer.h"
 #include "synth/note.h"
-#include "synth/voice_choir.h"
+#include "synth/voice_group.h"
 
 #include <cstddef>
 
@@ -31,7 +31,7 @@ private:
     uint32_t samples_per_control_;
     uint32_t phase_;
 
-    VoiceChoir voices_;
+    VoiceGroup voices_;
 };
 
 }
