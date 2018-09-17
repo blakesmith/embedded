@@ -5,6 +5,7 @@
 #include "synth/adsr_envelope.h"
 #include "synth/mixer.h"
 #include "synth/note.h"
+#include "synth/voice.h"
 
 #include <cstddef>
 
@@ -21,7 +22,6 @@ public:
     ~AudioPipeline() = default;
 
     void Fill(int16_t* buffer, size_t frames, uint8_t channel_count);
-    void Trigger();
     void Trigger(const Note* note);
     
 private:
@@ -31,9 +31,7 @@ private:
     uint32_t samples_per_control_;
     uint32_t phase_;
 
-    Osc osc_[N_OSC];
-    AdsrEnvelope envelope_;
-    Mixer<N_OSC> mixer_;
+    Voice voice_;
 };
 
 }

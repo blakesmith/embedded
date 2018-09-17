@@ -14,6 +14,7 @@ namespace synth {
 static constexpr size_t N_OSC = 2;
 
 class Voice {
+public:
     Voice(const uint32_t sample_rate,
           const uint32_t control_rate);
     ~Voice() = default;
