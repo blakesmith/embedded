@@ -1,5 +1,7 @@
 #include "voice_choir.h"
 
+#include <cstdio>
+
 namespace synth {
 
 VoiceChoir::VoiceChoir(const uint32_t sample_rate,
@@ -46,15 +48,26 @@ void VoiceChoir::TickAudio() {
 }
 
 int16_t VoiceChoir::Value() {
-    int16_t sample = 0;
+    int16_t samples[N_VOICES];
+    int32_t sample = 0;
+    uint8_t active_voices = 1;
     Voice* voice;
 
     for (unsigned int i = 0; i < N_VOICES; i++) {
         voice = &voices_[i];
-        sample = sample + voice->Value();
+        samples[i] = voice->Value();
+        if (samples[i] > 0) {
+            active_voices++;
+        }
     }
 
-    return sample;
+    for (unsigned int i = 0; i < N_VOICES; i++) {
+        if (samples[i] > 0) {
+            sample = sample + (samples[i] / active_voices);
+        }
+    }
+
+    return (int16_t)sample;
 }
 
 }
