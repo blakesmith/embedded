@@ -50,7 +50,7 @@ void VoiceChoir::TickAudio() {
 int16_t VoiceChoir::Value() {
     int16_t samples[N_VOICES];
     int32_t sample = 0;
-    uint8_t active_voices = 1;
+    uint8_t active_voices = 0;
     Voice* voice;
 
     for (unsigned int i = 0; i < N_VOICES; i++) {
@@ -59,6 +59,10 @@ int16_t VoiceChoir::Value() {
         if (samples[i] > 0) {
             active_voices++;
         }
+    }
+
+    if (active_voices == 0) {
+        return 0;
     }
 
     for (unsigned int i = 0; i < N_VOICES; i++) {
