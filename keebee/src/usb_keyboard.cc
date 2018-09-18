@@ -14,9 +14,9 @@ static const uint8_t USBD_DeviceDesc[USB_LEN_DEV_DESC] = {
     USB_DESC_TYPE_DEVICE, // Device descriptor, constant
     0x00, // USB specification number, byte 1
     0x02, // USB specification number, byte 2
-    0x03, // USB device class, HID is 3
-    0x01, // USB device subclass, boot device
-    0x01, // USB protocol, keyboard protocol
+    0x00, // USB device class, HID is 3
+    0x00, // USB device subclass, boot device
+    0x00, // USB protocol, keyboard protocol
     USB_MAX_EP0_SIZE, // USB max packet size for zero endpoint,
     LOBYTE(USBD_VID), // USB id vendor, byte 1
     HIBYTE(USBD_VID), // USB id vendor, byte 2
@@ -26,7 +26,7 @@ static const uint8_t USBD_DeviceDesc[USB_LEN_DEV_DESC] = {
     0x02, // USB spec version, set 2.0, byte 2
     USBD_IDX_MFC_STR, // Index of manufacturer string
     USBD_IDX_PRODUCT_STR, // Index of product string
-    USBD_IDX_SERIAL_STR, // Index of serial number string
+    0x00, // Index of serial number string. DISABLE due to mal-formed packets
     USBD_MAX_NUM_CONFIGURATION  // Number of possible configurations
 };
 
