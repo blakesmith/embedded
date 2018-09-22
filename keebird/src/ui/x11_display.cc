@@ -42,7 +42,7 @@ int X11Display::Start() {
                            nullptr);
     XSelectInput(display_,
                  window_,
-                 StructureNotifyMask | ButtonPressMask | KeyPressMask);
+                 StructureNotifyMask | KeyPressMask | KeyReleaseMask);
 
     keebird_log_verbose("X11", "Creating GC\n");
     gc_ = XCreateGC(display_, window_, 0, 0);

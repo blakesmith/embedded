@@ -10,7 +10,7 @@ namespace keebird {
 InputEvent X11Input::Translate(XEvent* event) {
     switch (event->type) {
         case KeyPress: {
-            keebird_log_verbose("X11", "Got keycode: %d\n", event->xkey.keycode);
+            keebird_log_verbose("X11", "Got KeyPress: %d\n", event->xkey.keycode);
             int len;
             char buf;
             KeySym sym;
@@ -26,6 +26,11 @@ InputEvent X11Input::Translate(XEvent* event) {
                 return InputEvent(InputEventType::NONE);
             }
 
+        }
+        case KeyRelease: {
+            keebird_log_verbose("X11", "Got KeyRelease: %d\n", event->xkey.keycode);
+            return InputEvent(InputEventType::NOTE_UP,
+                              synth::Note::ByIndex(event->xkey.keycode));
         }
         default:
             return InputEvent(InputEventType::NONE);
