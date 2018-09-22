@@ -21,6 +21,7 @@ public:
 
 private:
     X11Display display_;
+    InputEvent last_input_event_;
 };
 
 }

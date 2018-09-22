@@ -4,7 +4,8 @@ namespace keebird {
 
 Ui::Ui(const uint16_t display_width,
        const uint16_t display_height)
-    : display_(display_width, display_height)
+    : display_(display_width, display_height),
+      last_input_event_(InputEventType::NONE)
 { }
 
 int Ui::Start() {
@@ -16,7 +17,13 @@ void Ui::Stop() {
 }
 
 InputEvent Ui::Poll() {
-    return display_.Poll();
+    InputEvent event = display_.Poll();
+    if (event == last_input_event_) {
+        return InputEvent(InputEventType::NONE);
+    } else {
+        last_input_event_ = event;
+        return event;
+    }
 }
 
 }

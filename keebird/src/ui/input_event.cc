@@ -25,10 +25,10 @@ bool InputEvent::operator==(const InputEvent& other) const {
                 this->event_data_.key_sym == other.event_data_.key_sym;
         case NOTE_DOWN:
             return other.type_ == NOTE_DOWN &&
-                this->event_data_.note == other.event_data_.note;
+                *(this->event_data_.note) == *(other.event_data_.note);
         case NOTE_UP:
             return other.type_ == NOTE_UP &&
-                this->event_data_.note == other.event_data_.note;
+                *(this->event_data_.note) == *(other.event_data_.note);
         case NONE:
             return other.type_ == NONE;
         default:

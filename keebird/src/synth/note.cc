@@ -153,4 +153,13 @@ const Note* Note::ByNoteNameAndOctave(const char* note_name,
     return ByNumberAndOctave(note_number, octave);
 }
 
+bool Note::operator==(const Note& other) const {
+    return this->note_number == other.note_number &&
+        this->octave == other.octave;
+}
+
+bool Note::operator!=(const Note& other) const {
+    return !(*this == other);
+}
+
 }

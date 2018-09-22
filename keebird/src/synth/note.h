@@ -16,6 +16,9 @@ struct Note {
                                          unsigned int octave);
     static const Note* ByNoteNameAndOctave(const char* note_name,
                                            unsigned int octave);
+
+    bool operator==(const Note& other) const;
+    bool operator!=(const Note& other) const;
 };
 
 }
