@@ -1,6 +1,8 @@
 #include "x11_display.h"
 #include "../util/log.h"
 
+#include <X11/XKBlib.h>
+
 #include <cstdio>
 
 namespace keebird {
@@ -43,6 +45,12 @@ int X11Display::Start() {
     XSelectInput(display_,
                  window_,
                  StructureNotifyMask | KeyPressMask | KeyReleaseMask);
+
+    if (XkbSetDetectableAutoRepeat(display_, true, nullptr)) {
+        keebird_log_verbose("X11", "Disabled auto key repeat\n");
+    } else {
+        keebird_log_verbose("X11", "Warning! Unable to disable auto key repeat!\n");
+    }
 
     keebird_log_verbose("X11", "Creating GC\n");
     gc_ = XCreateGC(display_, window_, 0, 0);
