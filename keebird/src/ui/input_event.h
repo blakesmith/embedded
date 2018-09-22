@@ -22,6 +22,9 @@ public:
     ~InputEvent() = default;
     InputEvent& operator=(const InputEvent& other) = default;
 
+    bool operator==(const InputEvent& other) const;
+    bool operator!=(const InputEvent& other) const;
+
     InputEventType get_type() const;
     char get_key_sym() const;
     const synth::Note* get_note() const;

@@ -18,6 +18,25 @@ InputEvent::InputEvent(InputEventType type,
     event_data_.note = note;
 }
 
+bool InputEvent::operator==(const InputEvent& other) const {
+    switch (type_) {
+        case BUTTON_DOWN:
+            return other.type_ == BUTTON_DOWN &&
+                this->event_data_.key_sym == other.event_data_.key_sym;
+        case NOTE_DOWN:
+            return other.type_ == NOTE_DOWN &&
+                this->event_data_.note == other.event_data_.note;
+        case NONE:
+            return other.type_ == NONE;
+        default:
+            return false;
+    }
+}
+
+bool InputEvent::operator!=(const InputEvent& other) const {
+    return !(*this == other);
+}
+
 InputEventType InputEvent::get_type() const {
     return type_;
 }
