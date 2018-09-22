@@ -9,6 +9,7 @@ enum InputEventType {
     NONE,
     BUTTON_DOWN,
     NOTE_DOWN,
+    NOTE_UP
 };
 
 class InputEvent {

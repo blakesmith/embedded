@@ -26,6 +26,9 @@ bool InputEvent::operator==(const InputEvent& other) const {
         case NOTE_DOWN:
             return other.type_ == NOTE_DOWN &&
                 this->event_data_.note == other.event_data_.note;
+        case NOTE_UP:
+            return other.type_ == NOTE_UP &&
+                this->event_data_.note == other.event_data_.note;
         case NONE:
             return other.type_ == NONE;
         default:
@@ -50,10 +53,11 @@ char InputEvent::get_key_sym() const {
 }
 
 const synth::Note* InputEvent::get_note() const {
-    if (type_ != InputEventType::NOTE_DOWN) {
-        return synth::Note::ByIndex(0);
-    } else {
+    if (type_ == InputEventType::NOTE_DOWN ||
+        type_ == InputEventType::NOTE_UP) {
         return event_data_.note;
+    } else {
+        return synth::Note::ByIndex(0);
     }
 }
 
