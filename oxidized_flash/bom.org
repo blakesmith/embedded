@@ -1,0 +1,10 @@
+#+TITLE: Oxidized Flash: Bill of Materials
+
+| Name                   | Quantity | Part Number         | Price  | Link                                                                                                                                                                                           |
+|------------------------+----------+---------------------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| eMMC 64G Flash         |        1 | 706-1641-ND         | $19.77 | https://www.digikey.com/product-detail/en/issi-integrated-silicon-solution-inc/IS21ES08G-JCLI/706-1641-ND/7927854                                                                              |
+| ATSAMD51G18A-MU        |        1 | ATSAMD51G18A-MU-ND  | $3.62  | https://www.digikey.com/product-detail/en/microchip-technology/ATSAMD51G18A-MU/ATSAMD51G18A-MU-ND/7390367                                                                                      |
+| 128x32 OLED, 0.91"     |        1 | SSD1306 (Driver IC) | $1.73  | https://www.aliexpress.com/item/1pcs-0-91-inch-OLED-module-0-91-blue-OLED-128X32-OLED-LCD-LED-Display-Module/32777216785.html                                                                  |
+| APA102 DotStar RGB LED |        1 | 1528-1436-ND        | $0.45  | https://www.digikey.com/product-detail/en/adafruit-industries-llc/2343/1528-1436-ND/5761204&?gclid=CjwKCAiA4OvhBRAjEiwAU2FoJRjkmpvbh8R053aJ8i0Z9O1ztEsX7FFFzMkV2PuFGS50v-tNzS3hMxoCXhwQAvD_BwE |
+
+
