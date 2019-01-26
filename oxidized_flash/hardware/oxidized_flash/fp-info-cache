@@ -1,4 +1,4 @@
-15340093594659744
+15341642107790212
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -41425,6 +41425,13 @@ eMMC
 0
 153
 153
+Custom_Crystal
+ECS-31B_xtal
+http://www.ecsxtal.com/store/pdf/ecx-31b.pdf
+
+0
+2
+2
 Diode_SMD
 Diode_Bridge_Diotec_ABS
 SMD diode bridge ABS (Diotec), see https://diotec.com/tl_files/diotec/files/pdf/datasheets/abs2.pdf
