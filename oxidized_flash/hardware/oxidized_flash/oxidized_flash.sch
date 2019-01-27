@@ -57,8 +57,6 @@ F 3 "" H 6000 4100 50  0001 C CNN
 	1    6000 4100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1600 3000 1600 3050
 $Comp
 L power:GND #PWR04
 U 1 1 5C4458C7
@@ -70,13 +68,6 @@ F 3 "" H 1600 3100 50  0001 C CNN
 	1    1600 3100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1500 3000 1500 3050
-Wire Wire Line
-	1500 3050 1600 3050
-Connection ~ 1600 3050
-Wire Wire Line
-	1600 3050 1600 3100
 $Comp
 L Regulator_Linear:LM1117-3.3 U1
 U 1 1 5C4462D8
@@ -341,28 +332,15 @@ Wire Wire Line
 Wire Wire Line
 	3750 5050 3650 5050
 Connection ~ 3650 5050
-Wire Wire Line
-	4100 1150 4100 1350
 $Comp
 L power:+3.3V #PWR012
 U 1 1 5C460A45
-P 4100 1150
-F 0 "#PWR012" H 4100 1000 50  0001 C CNN
-F 1 "+3.3V" H 4115 1323 50  0000 C CNN
-F 2 "" H 4100 1150 50  0001 C CNN
-F 3 "" H 4100 1150 50  0001 C CNN
-	1    4100 1150
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR013
-U 1 1 5C460DD5
-P 4100 1350
-F 0 "#PWR013" H 4100 1100 50  0001 C CNN
-F 1 "GND" H 4105 1177 50  0000 C CNN
-F 2 "" H 4100 1350 50  0001 C CNN
-F 3 "" H 4100 1350 50  0001 C CNN
-	1    4100 1350
+P 4250 1150
+F 0 "#PWR012" H 4250 1000 50  0001 C CNN
+F 1 "+3.3V" H 4265 1323 50  0000 C CNN
+F 2 "" H 4250 1150 50  0001 C CNN
+F 3 "" H 4250 1150 50  0001 C CNN
+	1    4250 1150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -376,12 +354,6 @@ F 3 "~" H 4250 1250 50  0001 C CNN
 	1    4250 1250
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4250 1150 4100 1150
-Connection ~ 4100 1150
-Wire Wire Line
-	4250 1350 4100 1350
-Connection ~ 4100 1350
 $Comp
 L Device:C_Small C5
 U 1 1 5C463E98
@@ -432,7 +404,6 @@ Connection ~ 4850 1350
 Wire Wire Line
 	4550 1350 4250 1350
 Connection ~ 4550 1350
-Connection ~ 4250 1350
 $Comp
 L ATSAMD:ATSAMD51G18A-MU U2
 U 1 1 5C4804F6
@@ -1238,4 +1209,25 @@ F 3 " ~" H 1750 2550 50  0001 C CNN
 	1    1600 2600
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	1600 3000 1600 3050
+Wire Wire Line
+	1500 3000 1500 3050
+Wire Wire Line
+	1500 3050 1600 3050
+Connection ~ 1600 3050
+Wire Wire Line
+	1600 3050 1600 3100
+$Comp
+L power:GND #PWR?
+U 1 1 5C829A14
+P 4250 1350
+F 0 "#PWR?" H 4250 1100 50  0001 C CNN
+F 1 "GND" H 4255 1177 50  0000 C CNN
+F 2 "" H 4250 1350 50  0001 C CNN
+F 3 "" H 4250 1350 50  0001 C CNN
+	1    4250 1350
+	1    0    0    -1  
+$EndComp
+Connection ~ 4250 1350
 $EndSCHEMATC
