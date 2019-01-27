@@ -1,4 +1,4 @@
-15341642107790212
+15346287669113119
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -41419,6 +41419,13 @@ SMD SMT ceramic resonator filter filter hand-soldering
 3
 3
 Custom_BGA
+eMMC-FBGA-153_14x14_11.5x13.0mm
+
+eMMC
+0
+139
+139
+Custom_BGA
 FBGA-153_14x14_11.5x13.0mm
 
 eMMC
@@ -41432,6 +41439,20 @@ http://www.ecsxtal.com/store/pdf/ecx-31b.pdf
 0
 2
 2
+Custom_LED
+APA102-2020
+
+
+0
+6
+6
+Custom_USB
+USB-MICRO-B-FCI-10118192
+
+
+0
+11
+6
 Diode_SMD
 Diode_Bridge_Diotec_ABS
 SMD diode bridge ABS (Diotec), see https://diotec.com/tl_files/diotec/files/pdf/datasheets/abs2.pdf
