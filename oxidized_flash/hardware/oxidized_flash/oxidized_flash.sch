@@ -941,30 +941,6 @@ MOSI
 Text Label 4650 2350 0    50   ~ 0
 SCK
 Wire Wire Line
-	2650 2200 2650 2150
-Wire Wire Line
-	2650 2300 2650 2350
-Wire Wire Line
-	2100 2150 2000 2150
-Wire Wire Line
-	2000 2150 2000 2350
-Wire Wire Line
-	2100 2350 2000 2350
-Connection ~ 2000 2350
-Wire Wire Line
-	2000 2350 2000 2450
-$Comp
-L power:GND #PWR06
-U 1 1 5C4E574A
-P 2000 2450
-F 0 "#PWR06" H 2000 2200 50  0001 C CNN
-F 1 "GND" H 2005 2277 50  0001 C CNN
-F 2 "" H 2000 2450 50  0001 C CNN
-F 3 "" H 2000 2450 50  0001 C CNN
-	1    2000 2450
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
 	1950 1950 1950 2400
 Wire Wire Line
 	2650 3200 2200 3200
@@ -1213,47 +1189,4 @@ Wire Wire Line
 	2200 3200 1850 3200
 Text Label 1850 3200 0    50   ~ 0
 SWD_RST
-$Comp
-L Device:C_Small C2
-U 1 1 5C4CF009
-P 2200 2350
-F 0 "C2" V 2300 2450 50  0000 C CNN
-F 1 "22p" V 2350 2350 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 2200 2350 50  0001 C CNN
-F 3 "~" H 2200 2350 50  0001 C CNN
-	1    2200 2350
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	2350 2350 2300 2350
-Wire Wire Line
-	2650 2350 2350 2350
-Connection ~ 2350 2350
-Wire Wire Line
-	2350 2150 2300 2150
-Wire Wire Line
-	2650 2150 2350 2150
-Connection ~ 2350 2150
-$Comp
-L Device:Crystal_Small Y1
-U 1 1 5C4B1D39
-P 2350 2250
-F 0 "Y1" V 2304 2338 50  0000 L CNN
-F 1 "32.768" V 2400 2300 50  0000 L CNN
-F 2 "Custom_Crystal:ECS-31B_xtal" H 2350 2250 50  0001 C CNN
-F 3 "~" H 2350 2250 50  0001 C CNN
-	1    2350 2250
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:C_Small C1
-U 1 1 5C4CE74A
-P 2200 2150
-F 0 "C1" V 1971 2150 50  0000 C CNN
-F 1 "22p" V 2050 2150 50  0000 C CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 2200 2150 50  0001 C CNN
-F 3 "~" H 2200 2150 50  0001 C CNN
-	1    2200 2150
-	0    1    1    0   
-$EndComp
 $EndSCHEMATC
