@@ -1,36 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:power
-LIBS:device
-LIBS:switches
-LIBS:relays
-LIBS:motors
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
 LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
 LIBS:oxidized_flash-cache
 EELAYER 29 0
 EELAYER END
@@ -394,7 +364,7 @@ Wire Wire Line
 	4550 1350 4250 1350
 Connection ~ 4550 1350
 $Comp
-L ATSAMD:ATSAMD51G18A-MU U2
+L oxidized_flash-rescue:ATSAMD51G18A-MU-ATSAMD U2
 U 1 1 5C4804F6
 P 3600 3350
 F 0 "U2" H 2500 2050 50  0000 C CNN
@@ -814,7 +784,7 @@ Connection ~ 9350 3750
 Text Notes 7950 3250 0    50   ~ 0
 Place near MMC card
 $Comp
-L Custom_LED:APA102 D2
+L oxidized_flash-rescue:APA102-Custom_LED D2
 U 1 1 5C5453FD
 P 5450 2350
 F 0 "D2" H 5050 2150 50  0000 C CNN
@@ -1026,7 +996,7 @@ Wire Wire Line
 Wire Wire Line
 	3450 1050 3450 1500
 $Comp
-L Custom_LED:APA102 D3
+L oxidized_flash-rescue:APA102-Custom_LED D3
 U 1 1 5C545A1F
 P 6350 2350
 F 0 "D3" H 5950 2150 50  0000 C CNN
@@ -1039,7 +1009,7 @@ $EndComp
 NoConn ~ 6750 2250
 NoConn ~ 6750 2350
 $Comp
-L Connector:Conn_ARM_JTAG_SWD_10 J2
+L oxidized_flash-rescue:Conn_ARM_JTAG_SWD_10-Connector J2
 U 1 1 5C6F27D1
 P 2100 6000
 F 0 "J2" H 1657 6046 50  0000 R CNN
@@ -1220,7 +1190,7 @@ F 3 "" H 4250 1350 50  0001 C CNN
 $EndComp
 Connection ~ 4250 1350
 $Comp
-L eMMC:IS21ES U3
+L oxidized_flash-rescue:IS21ES-eMMC U3
 U 1 1 5C43BCCB
 P 6000 4100
 F 0 "U3" H 7228 4221 50  0000 L CNN
