@@ -675,4 +675,96 @@ F 3 "" H 10150 5950 50  0001 C CNN
 	1    10150 5950
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	8650 2350 8800 2350
+Wire Wire Line
+	8650 2450 8800 2450
+Wire Wire Line
+	9600 2350 9750 2350
+Wire Wire Line
+	9600 2450 9750 2450
+Wire Wire Line
+	8650 3400 8800 3400
+Wire Wire Line
+	8650 3500 8800 3500
+Wire Wire Line
+	9600 3400 9750 3400
+Wire Wire Line
+	9600 3500 9750 3500
+Wire Wire Line
+	8650 4450 8800 4450
+Wire Wire Line
+	8650 4550 8800 4550
+Wire Wire Line
+	9600 4450 9750 4450
+Wire Wire Line
+	9600 4550 9750 4550
+Wire Wire Line
+	8650 5500 8800 5500
+Wire Wire Line
+	8650 5600 8800 5600
+Wire Wire Line
+	9600 5500 9750 5500
+Wire Wire Line
+	9600 5600 9750 5600
+Wire Wire Line
+	7850 2350 7500 2350
+Text Label 7500 2350 0    50   ~ 0
+LED_SDI
+Wire Wire Line
+	7850 2450 7500 2450
+Text Label 7500 2450 0    50   ~ 0
+LED_CLK
+Wire Wire Line
+	7850 3400 7500 3400
+Wire Wire Line
+	7850 3500 7500 3500
+Wire Wire Line
+	7850 4450 7500 4450
+Wire Wire Line
+	7850 4550 7500 4550
+Wire Wire Line
+	7850 5500 7500 5500
+Wire Wire Line
+	7850 5600 7500 5600
+Text Label 7500 3400 0    50   ~ 0
+LED_SDI1
+Text Label 7500 3500 0    50   ~ 0
+LED_CLK1
+Text Label 7500 4450 0    50   ~ 0
+LED_SDI2
+Text Label 7500 4550 0    50   ~ 0
+LED_CLK2
+Text Label 7500 5500 0    50   ~ 0
+LED_SDI3
+Text Label 7500 5600 0    50   ~ 0
+LED_CLK3
+Wire Wire Line
+	10550 2350 10950 2350
+Wire Wire Line
+	10550 2450 10950 2450
+Wire Wire Line
+	10550 3400 10950 3400
+Wire Wire Line
+	10550 3500 10950 3500
+Wire Wire Line
+	10550 4450 10950 4450
+Wire Wire Line
+	10550 4550 10950 4550
+Wire Wire Line
+	10550 5500 10950 5500
+Wire Wire Line
+	10550 5600 10950 5600
+Text Label 10800 2350 0    50   ~ 0
+LED_SDI1
+Text Label 10800 2450 0    50   ~ 0
+LED_CLK1
+Text Label 10800 3400 0    50   ~ 0
+LED_SDI2
+Text Label 10800 3500 0    50   ~ 0
+LED_CLK2
+Text Label 10800 4450 0    50   ~ 0
+LED_SDI3
+Text Label 10800 4550 0    50   ~ 0
+LED_CLK3
 $EndSCHEMATC
