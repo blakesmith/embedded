@@ -767,4 +767,12 @@ Text Label 10800 4450 0    50   ~ 0
 LED_SDI3
 Text Label 10800 4550 0    50   ~ 0
 LED_CLK3
+Wire Wire Line
+	6150 3850 6500 3850
+Text Label 6200 3850 0    50   ~ 0
+LED_CLK1
+Wire Wire Line
+	6150 4050 6500 4050
+Text Label 6200 4050 0    50   ~ 0
+LED_SDI1
 $EndSCHEMATC
