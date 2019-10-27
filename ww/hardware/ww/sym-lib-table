@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name custom_led)(type Legacy)(uri ${KIPRJMOD}/custom_led.lib)(options "")(descr ""))
+  (lib (name Timer_RTC)(type Legacy)(uri /home/blake/projects/stm32/ww/hardware/Timer_RTC.lib)(options "")(descr ""))
 )
