@@ -23,6 +23,6 @@
 | 1.3k 0603                    |          1 | RR08P1.3KDCT-ND        | $0.11 | https://www.digikey.com/product-detail/en/susumu/RR0816P-132-D/RR08P1.3KDCT-ND/432727                                                                                                                                                                     |
 | 10k 0603                     |          2 | 311-10KGRCT-ND         | $0.10 | https://www.digikey.com/product-detail/en/yageo/RC0603JR-0710KL/311-10KGRCT-ND/729647                                                                                                                                                                     |
 | 300 0603                     |          1 | RR08P300DCT-ND         | $0.11 | https://www.digikey.com/product-detail/en/susumu/RR0816P-301-D/RR08P300DCT-ND/432711                                                                                                                                                                      |
-|                              |            |                        |       |                                                                                                                                                                                                                                                           |
+
 
 

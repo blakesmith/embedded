@@ -770,11 +770,11 @@ LED_CLK3
 Wire Wire Line
 	6150 3850 6500 3850
 Text Label 6200 3850 0    50   ~ 0
-LED_CLK1
+LED_CLK
 Wire Wire Line
 	6150 4050 6500 4050
 Text Label 6200 4050 0    50   ~ 0
-LED_SDI1
+LED_SDI
 $Comp
 L Connector:USB_B J1
 U 1 1 5DB55275
@@ -1567,4 +1567,64 @@ Wire Wire Line
 	2250 850  2250 1400
 Wire Wire Line
 	2250 600  2250 850 
+$Comp
+L Connector:TestPoint TP1
+U 1 1 5DC79086
+P 6200 1250
+F 0 "TP1" H 6200 1300 50  0000 L CNN
+F 1 "TestPoint" H 5850 1550 50  0001 L CNN
+F 2 "Connectors_TestPoints:Test_Point_Pad_1.0x1.0mm" H 6400 1250 50  0001 C CNN
+F 3 "~" H 6400 1250 50  0001 C CNN
+	1    6200 1250
+	1    0    0    -1  
+$EndComp
+Text Label 6200 1650 1    50   ~ 0
+LED_CLK
+Wire Wire Line
+	6200 1250 6200 1650
+$Comp
+L Connector:TestPoint TP2
+U 1 1 5DBEB3FA
+P 6350 1250
+F 0 "TP2" H 6350 1300 50  0000 L CNN
+F 1 "TestPoint" H 6408 1277 50  0001 L CNN
+F 2 "Connectors_TestPoints:Test_Point_Pad_1.0x1.0mm" H 6550 1250 50  0001 C CNN
+F 3 "~" H 6550 1250 50  0001 C CNN
+	1    6350 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6350 1250 6350 1650
+Text Label 6350 1650 1    50   ~ 0
+LED_SDI
+$Comp
+L Connector:TestPoint TP3
+U 1 1 5DBF4FBD
+P 6500 1250
+F 0 "TP3" H 6500 1300 50  0000 L CNN
+F 1 "TestPoint" H 6558 1277 50  0001 L CNN
+F 2 "Connectors_TestPoints:Test_Point_Pad_1.0x1.0mm" H 6700 1250 50  0001 C CNN
+F 3 "~" H 6700 1250 50  0001 C CNN
+	1    6500 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 1250 6500 1650
+Text Label 6500 1650 1    50   ~ 0
+RTC_SCL
+$Comp
+L Connector:TestPoint TP4
+U 1 1 5DBFFF5C
+P 6650 1250
+F 0 "TP4" H 6650 1300 50  0000 L CNN
+F 1 "TestPoint" H 6708 1277 50  0001 L CNN
+F 2 "Connectors_TestPoints:Test_Point_Pad_1.0x1.0mm" H 6850 1250 50  0001 C CNN
+F 3 "~" H 6850 1250 50  0001 C CNN
+	1    6650 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6650 1250 6650 1650
+Text Label 6650 1650 1    50   ~ 0
+RTC_SDA
 $EndSCHEMATC
