@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/blake/projects/stm32/ww/hardware/ww/ww.sch)
-    (date "Sat 02 Nov 2019 01:26:16 PM CDT")
+    (date "Sat 02 Nov 2019 04:08:32 PM CDT")
     (tool "Eeschema 5.1.2-f72e74a~84~ubuntu18.04.1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -152,7 +152,7 @@
       (tstamp 5DB55275))
     (comp (ref BT1)
       (value Battery_Cell)
-      (footprint Connectors_JST:JST_PH_B2B-PH-K_02x2.00mm_Straight)
+      (footprint Connectors_JST:JST_PH_S2B-PH-SM4-TB_02x2.00mm_Angled)
       (datasheet ~)
       (libsource (lib Device) (part Battery_Cell) (description "single battery cell"))
       (sheetpath (names /) (tstamps /))
