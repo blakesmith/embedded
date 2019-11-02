@@ -20,7 +20,7 @@ U 1 1 5DA3CAD6
 P 5650 4050
 F 0 "U5" H 5900 4900 50  0000 C CNN
 F 1 "STM32F042K6Tx" H 6150 5000 50  0000 C CNN
-F 2 "Package_QFP:LQFP-32_7x7mm_P0.8mm" H 5250 3150 50  0001 R CNN
+F 2 "Housings_QFP:LQFP-32_7x7mm_Pitch0.8mm" H 5250 3150 50  0001 R CNN
 F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00105814.pdf" H 5650 4050 50  0001 C CNN
 	1    5650 4050
 	1    0    0    -1  
@@ -803,7 +803,7 @@ U 1 1 5DB5DD30
 P 2250 2200
 F 0 "U1" H 2694 2246 50  0000 L CNN
 F 1 "MCP73812T-420I-OT" H 2400 1700 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23-5" H 2300 1950 50  0001 L CNN
+F 2 "TO_SOT_Packages_SMD:SOT-23-5" H 2300 1950 50  0001 L CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/22036b.pdf" H 2000 2450 50  0001 C CNN
 	1    2250 2200
 	1    0    0    -1  
@@ -995,7 +995,7 @@ U 1 1 5DC13294
 P 4850 2100
 F 0 "U4" H 4850 2342 50  0000 C CNN
 F 1 "LD1117S33TR_SOT223" H 4850 2251 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 4850 2300 50  0001 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-223" H 4850 2300 50  0001 C CNN
 F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/CD00000544.pdf" H 4950 1850 50  0001 C CNN
 	1    4850 2100
 	1    0    0    -1  
@@ -1264,7 +1264,7 @@ U 1 1 5DD0F27B
 P 4850 1200
 F 0 "U3" H 4850 1442 50  0000 C CNN
 F 1 "LD1117S50TR_SOT223" H 4850 1351 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 4850 1400 50  0001 C CNN
+F 2 "TO_SOT_Packages_SMD:SOT-223" H 4850 1400 50  0001 C CNN
 F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/CD00000544.pdf" H 4950 950 50  0001 C CNN
 	1    4850 1200
 	1    0    0    -1  

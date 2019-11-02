@@ -12,11 +12,13 @@ face_width = strap_width * 1.5;
 face_length = 40;
 face_height = 5;
 
+pcb_width = face_width - 2;
+pcb_length = face_length - 2;
+pcb_height = 1.6;
+
 lug_width = (face_width - strap_width) / 2;
 lug_length = 7;
 lug_height = face_height;
-
-pcb_thickness = 1.6;
 
 union() {
     %straps();
@@ -26,6 +28,9 @@ union() {
 
 module face() {
     cube([face_width, face_length, face_height], center=true);
+    translate([0, 0, 3])
+        color("blue")
+        cube([pcb_width, pcb_length, pcb_height], center=true);
     %lights();
 }
 
@@ -71,6 +76,9 @@ module lights() {
     light_pitch_x = ws2812_width + (light_padding_x / (light_columns - 1));
     light_pitch_y = ws2812_length + (light_padding_y / (light_rows - 1));
 
+    echo("light pitch x = ", light_pitch_x);
+    echo("light pitch y = ", light_pitch_y);
+
     start_offset_x = -1 * (face_width  / 2) + (ws2812_width / 2) + (light_margin_x / 2);
     start_offset_y = -1 * (face_length / 2) + (ws2812_length / 2) + (light_margin_y / 2);
     
@@ -78,7 +86,7 @@ module lights() {
         for (y = [0:light_rows - 1]) {
             translate([start_offset_x + (i * light_pitch_x),
                        start_offset_y + (y * light_pitch_y),
-                       face_height / 2])
+                       (face_height / 2) + pcb_height])
                 color("red")
                 cube([ws2812_width, ws2812_length, 1], center=true);
         }
