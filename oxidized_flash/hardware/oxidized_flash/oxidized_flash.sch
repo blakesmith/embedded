@@ -86,8 +86,6 @@ F 3 "" H 1600 1500 50  0001 C CNN
 	1    1600 1500
 	1    0    0    -1  
 $EndComp
-NoConn ~ 4400 4200
-NoConn ~ 4400 4300
 Wire Wire Line
 	3450 4950 3450 5050
 $Comp
@@ -190,10 +188,6 @@ Wire Wire Line
 Connection ~ 4550 1350
 Wire Wire Line
 	3450 1600 3450 1500
-Wire Wire Line
-	1900 2600 2650 2600
-Wire Wire Line
-	1900 2700 2650 2700
 Wire Wire Line
 	3550 1600 3550 1500
 Wire Wire Line
@@ -390,8 +384,6 @@ $EndComp
 Text Label 2450 3400 0    50   ~ 0
 PA20
 Wire Wire Line
-	2450 3400 2650 3400
-Wire Wire Line
 	1900 1200 2100 1200
 Wire Wire Line
 	4400 4650 4750 4650
@@ -487,8 +479,6 @@ Wire Wire Line
 	2400 4100 2400 4050
 Connection ~ 2400 4100
 Wire Wire Line
-	2400 4100 2650 4100
-Wire Wire Line
 	2400 3850 2400 3800
 $Comp
 L power:+3.3V #PWR0103
@@ -501,8 +491,6 @@ F 3 "" H 2400 3800 50  0001 C CNN
 	1    2400 3800
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2650 4200 2000 4200
 Text Label 2000 4200 0    50   ~ 0
 SWD_IO
 $Comp
@@ -592,8 +580,6 @@ Wire Wire Line
 Text Label 2450 3500 0    50   ~ 0
 PA21
 Wire Wire Line
-	2650 3500 2450 3500
-Wire Wire Line
 	750  3850 750  4050
 $Comp
 L power:GND #PWR06
@@ -637,16 +623,102 @@ Wire Wire Line
 NoConn ~ 4400 4750
 Wire Wire Line
 	3450 5050 3450 5300
+NoConn ~ 2650 3200
 $Comp
-L oxidized_flash-rescue:ATSAMD51G18A-MU-ATSAMD U2
-U 1 1 5C4804F6
+L ATSAMD:ATSAMD51G18A-MU U2
+U 1 1 5E0421D4
 P 3600 3350
-F 0 "U2" H 2500 2050 50  0000 C CNN
-F 1 "ATSAMD51G18A-MU" H 2350 1950 50  0000 C CNN
+F 0 "U2" H 3525 5281 50  0000 C CNN
+F 1 "ATSAMD51G18A-MU" H 3525 5190 50  0000 C CNN
 F 2 "Housings_DFN_QFN:QFN-48-1EP_7x7mm_Pitch0.5mm" H 3600 3350 50  0001 C CNN
 F 3 "" H 3600 3350 50  0001 C CNN
 	1    3600 3350
 	1    0    0    -1  
 $EndComp
-NoConn ~ 2650 3200
+$Comp
+L custom_ic:MT25QL U3
+U 1 1 5E04A147
+P 5500 3650
+F 0 "U3" H 5828 3546 50  0000 L CNN
+F 1 "MT25QL" H 5828 3455 50  0000 L CNN
+F 2 "Housings_SSOP:SOP-16_4.4x10.4mm_Pitch1.27mm" H 6450 3500 50  0001 C CNN
+F 3 "" H 6450 3500 50  0001 C CNN
+	1    5500 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4400 3600 5200 3600
+Wire Wire Line
+	1900 2600 2650 2600
+Wire Wire Line
+	1900 2700 2650 2700
+Wire Wire Line
+	2450 3400 2650 3400
+Wire Wire Line
+	2400 4100 2650 4100
+Wire Wire Line
+	2000 4200 2650 4200
+Wire Wire Line
+	2450 3500 2650 3500
+Wire Wire Line
+	4400 3700 5200 3700
+Wire Wire Line
+	4400 3800 5200 3800
+Wire Wire Line
+	4400 3900 5200 3900
+Wire Wire Line
+	4400 4000 5200 4000
+Wire Wire Line
+	4400 4100 5200 4100
+$Comp
+L Device:C_Small C1
+U 1 1 5E055AF7
+P 6250 3750
+F 0 "C1" H 6342 3796 50  0000 L CNN
+F 1 "0.1u" H 6342 3705 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 6250 3750 50  0001 C CNN
+F 3 "~" H 6250 3750 50  0001 C CNN
+	1    6250 3750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 3100 6100 3100
+Wire Wire Line
+	6250 3100 6250 3650
+Wire Wire Line
+	6250 3850 6250 4500
+Wire Wire Line
+	6250 4500 6100 4500
+$Comp
+L power:+3.3V #PWR08
+U 1 1 5E05A40F
+P 6100 2950
+F 0 "#PWR08" H 6100 2800 50  0001 C CNN
+F 1 "+3.3V" H 6115 3123 50  0000 C CNN
+F 2 "" H 6100 2950 50  0001 C CNN
+F 3 "" H 6100 2950 50  0001 C CNN
+	1    6100 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6100 3100 6100 2950
+Connection ~ 6100 3100
+Wire Wire Line
+	6100 3100 6250 3100
+$Comp
+L power:GND #PWR09
+U 1 1 5E05E6A1
+P 6100 4650
+F 0 "#PWR09" H 6100 4400 50  0001 C CNN
+F 1 "GND" H 6105 4477 50  0000 C CNN
+F 2 "" H 6100 4650 50  0001 C CNN
+F 3 "" H 6100 4650 50  0001 C CNN
+	1    6100 4650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6100 4500 6100 4650
+Connection ~ 6100 4500
+Wire Wire Line
+	6100 4500 5550 4500
 $EndSCHEMATC
