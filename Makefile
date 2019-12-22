@@ -84,3 +84,7 @@ stm32f042_base:
 	--cpu=armeabi-v7a-m0 \
 	--define TARGET=stm32f042 \
 	//third_party/STM/stm32f0/cube:base
+
+rusty_led:
+	cargo build \
+	--target thumbv6m-none-eabi
