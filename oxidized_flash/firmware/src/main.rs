@@ -19,8 +19,7 @@ define_pins!(
     struct Pins,
     target_device: target_device,
 
-    // OK LED
-    pin a20 = a20,
+    pin ok_led = a20,
 );
 
 #[entry]
@@ -35,7 +34,7 @@ fn main() -> ! {
         &mut peripherals.NVMCTRL,
     );
     let mut pins = Pins::new(peripherals.PORT);
-    let mut ok_led = pins.a20.into_open_drain_output(&mut pins.port);
+    let mut ok_led = pins.ok_led.into_open_drain_output(&mut pins.port);
     let mut delay = Delay::new(core.SYST, &mut clocks);
 
     loop {
