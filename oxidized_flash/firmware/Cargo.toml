@@ -1,0 +1,23 @@
+[package]
+name = "oxidized_flash"
+version = "0.1.0"
+authors = ["Blake Smith <blakesmith0@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cortex-m = "~0.6"
+panic-halt = "~0.2"
+
+[dependencies.atsamd-hal]
+version = "~0.7"
+default-features = false
+
+[dependencies.cortex-m-rt]
+version = "~0.6"
+optional = true
+
+[features]
+default = ["rt", "atsamd-hal/samd51g19a", "atsamd-hal/samd51"]
+rt = ["cortex-m-rt", "atsamd-hal/samd51g19a-rt"]

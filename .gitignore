@@ -7,3 +7,4 @@ bazel-*
 *cache-*
 *.bak
 *.kicad_pcb-bak
+*target*
