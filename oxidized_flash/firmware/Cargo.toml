@@ -21,3 +21,4 @@ optional = true
 [features]
 default = ["rt", "atsamd-hal/samd51g19a", "atsamd-hal/samd51"]
 rt = ["cortex-m-rt", "atsamd-hal/samd51g19a-rt"]
+
