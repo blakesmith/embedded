@@ -462,35 +462,6 @@ F 3 "" H 2100 5300 50  0001 C CNN
 $EndComp
 Text Label 2000 4100 0    50   ~ 0
 SWD_CLK
-$Comp
-L Device:R_Small R9
-U 1 1 5C752F56
-P 2400 3950
-F 0 "R9" H 2459 3996 50  0000 L CNN
-F 1 "10k" H 2459 3905 50  0000 L CNN
-F 2 "Resistors_SMD:R_0603" H 2400 3950 50  0001 C CNN
-F 3 "~" H 2400 3950 50  0001 C CNN
-	1    2400 3950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2000 4100 2400 4100
-Wire Wire Line
-	2400 4100 2400 4050
-Connection ~ 2400 4100
-Wire Wire Line
-	2400 3850 2400 3800
-$Comp
-L power:+3.3V #PWR0103
-U 1 1 5C770522
-P 2400 3800
-F 0 "#PWR0103" H 2400 3650 50  0001 C CNN
-F 1 "+3.3V" H 2415 3973 50  0000 C CNN
-F 2 "" H 2400 3800 50  0001 C CNN
-F 3 "" H 2400 3800 50  0001 C CNN
-	1    2400 3800
-	1    0    0    -1  
-$EndComp
 Text Label 2000 4200 0    50   ~ 0
 SWD_IO
 $Comp
@@ -655,8 +626,6 @@ Wire Wire Line
 Wire Wire Line
 	2450 3400 2650 3400
 Wire Wire Line
-	2400 4100 2650 4100
-Wire Wire Line
 	2000 4200 2650 4200
 Wire Wire Line
 	2450 3500 2650 3500
@@ -721,4 +690,6 @@ Wire Wire Line
 Connection ~ 6100 4500
 Wire Wire Line
 	6100 4500 5550 4500
+Wire Wire Line
+	2000 4100 2650 4100
 $EndSCHEMATC
