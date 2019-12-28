@@ -87,7 +87,7 @@
       (subtractmaskfromsilk false)
       (outputformat 1)
       (mirror false)
-      (drillshape 1)
+      (drillshape 0)
       (scaleselection 1)
       (outputdirectory ""))
   )
@@ -1826,7 +1826,7 @@
   (segment (start 53.705 35.56) (end 53.34 35.56) (width 0.127) (layer F.Cu) (net 43))
   (segment (start 52.306501 34.526501) (end 52.306501 28.083501) (width 0.127) (layer F.Cu) (net 43))
 
-  (zone (net 1) (net_name GND) (layer B.Cu) (tstamp 5E079D5B) (hatch edge 0.508)
+  (zone (net 1) (net_name GND) (layer B.Cu) (tstamp 5E079E66) (hatch edge 0.508)
     (connect_pads (clearance 0.508))
     (min_thickness 0.254)
     (fill yes (arc_segments 32) (thermal_gap 0.508) (thermal_bridge_width 0.508))
