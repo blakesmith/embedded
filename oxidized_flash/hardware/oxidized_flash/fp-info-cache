@@ -1,4 +1,4 @@
-166381117688953
+169585663088823
 Battery_Holders
 Bulgin_BX0036_1xC
 
@@ -21265,10 +21265,24 @@ Resonator_muRata_DSS6-3pin_w7.0mm_h2.5mm
 0
 0
 0
+Custom_IC
+SOP2-16
+
+
+0
+16
+16
 Custom_LED
 APA102-2020
 
 
+0
+6
+6
+Custom_LED
+LED_RGB_5050-6
+RGB LED 5050-6
+RGB LED 5050-6
 0
 6
 6

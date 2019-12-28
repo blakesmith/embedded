@@ -20,6 +20,7 @@ define_pins!(
     target_device: target_device,
 
     pin ok_led = a20,
+    pin button_switch = a21,
 );
 
 #[entry]

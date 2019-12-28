@@ -15,6 +15,6 @@
 | 10k 0603 Res             |        1 | 311-10KGRCT-ND     | $0.10 | https://www.digikey.com/product-detail/en/yageo/RC0603JR-0710KL/311-10KGRCT-ND/729647                                                                                                          |
 | B3F-1000 Switch          |        1 | B3F-1000           | $0.27 | https://www.digikey.com/products/en?keywords=b3f-1000                                                                                                                                          |
 | MT25QL512 512M SPI Flash |        1 | 557-1651-ND        | $5.29 | https://www.digikey.com/product-detail/en/micron-technology-inc/MT25QL512ABB8ESF-0SIT/557-1651-ND/6036286                                                                                      |
-
+| 
 
 
