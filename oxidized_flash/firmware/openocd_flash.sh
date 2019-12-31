@@ -8,7 +8,7 @@ $OPENOCD -d -f "/usr/local/share/openocd/scripts/interface/jlink.cfg" \
          -c "transport select swd" \
 	 -c "set CHIPNAME samd51g19a" \
          -f $OPENOCD_CONFIG \
-         -c "reset_config none separate" \
+         -c "reset_config none" \
          -c "init" \
          -c "targets" \
          -c "reset halt" \

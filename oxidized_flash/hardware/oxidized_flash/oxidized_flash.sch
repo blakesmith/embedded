@@ -413,12 +413,6 @@ F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex
 	1    2100 6000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2000 6600 2000 6700
-Wire Wire Line
-	2000 6700 2100 6700
-Wire Wire Line
-	2100 6700 2100 6600
 $Comp
 L power:GND #PWR0101
 U 1 1 5C6FEFCE
@@ -430,9 +424,6 @@ F 3 "" H 2100 6800 50  0001 C CNN
 	1    2100 6800
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2100 6700 2100 6800
-Connection ~ 2100 6700
 Text Label 2650 5700 0    50   ~ 0
 SWD_RST
 Wire Wire Line
@@ -592,17 +583,6 @@ NoConn ~ 550  4050
 Wire Wire Line
 	950  1200 1300 1200
 NoConn ~ 4400 4750
-$Comp
-L custom_ic:MT25QL U3
-U 1 1 5E04A147
-P 5500 3650
-F 0 "U3" H 5828 3546 50  0000 L CNN
-F 1 "MT25QL" H 5828 3455 50  0000 L CNN
-F 2 "Custom_IC:SOP2-16" H 6450 3500 50  0001 C CNN
-F 3 "" H 6450 3500 50  0001 C CNN
-	1    5500 3650
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	4400 3600 5200 3600
 Wire Wire Line
@@ -695,4 +675,22 @@ Wire Wire Line
 	2650 3200 2000 3200
 Text Label 2000 3200 0    50   ~ 0
 SWD_RST
+Wire Wire Line
+	2100 6600 2100 6800
+NoConn ~ 2000 6600
+$Comp
+L custom_ic:MT25QL U3
+U 1 1 5E04A147
+P 5500 3650
+F 0 "U3" H 5828 3546 50  0000 L CNN
+F 1 "MT25QL" H 5828 3455 50  0000 L CNN
+F 2 "Custom_IC:SOP2-16" H 6450 3500 50  0001 C CNN
+F 3 "" H 6450 3500 50  0001 C CNN
+	1    5500 3650
+	1    0    0    -1  
+$EndComp
+Text Label 4800 3450 0    50   ~ 0
+SWD_RST
+Wire Wire Line
+	4800 3450 5200 3450
 $EndSCHEMATC

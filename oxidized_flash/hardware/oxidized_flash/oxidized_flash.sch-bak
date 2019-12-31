@@ -413,12 +413,6 @@ F 3 "http://infocenter.arm.com/help/topic/com.arm.doc.faqs/attached/13634/cortex
 	1    2100 6000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2000 6600 2000 6700
-Wire Wire Line
-	2000 6700 2100 6700
-Wire Wire Line
-	2100 6700 2100 6600
 $Comp
 L power:GND #PWR0101
 U 1 1 5C6FEFCE
@@ -430,9 +424,6 @@ F 3 "" H 2100 6800 50  0001 C CNN
 	1    2100 6800
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2100 6700 2100 6800
-Connection ~ 2100 6700
 Text Label 2650 5700 0    50   ~ 0
 SWD_RST
 Wire Wire Line
@@ -695,4 +686,7 @@ Wire Wire Line
 	2650 3200 2000 3200
 Text Label 2000 3200 0    50   ~ 0
 SWD_RST
+Wire Wire Line
+	2100 6600 2100 6800
+NoConn ~ 2000 6600
 $EndSCHEMATC
