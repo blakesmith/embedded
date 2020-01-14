@@ -36,12 +36,15 @@ fn main() -> ! {
     );
     let mut pins = Pins::new(peripherals.PORT);
     let mut ok_led = pins.ok_led.into_open_drain_output(&mut pins.port);
+    let button_switch = pins.button_switch.into_pull_up_input(&mut pins.port);
     let mut delay = Delay::new(core.SYST, &mut clocks);
 
     loop {
-        delay.delay_ms(200u8);
-        ok_led.set_high().unwrap();
-        delay.delay_ms(200u8);
-        ok_led.set_low().unwrap();
+        if button_switch.is_low().unwrap() {
+            delay.delay_ms(200u8);
+            ok_led.set_high().unwrap();
+            delay.delay_ms(200u8);
+            ok_led.set_low().unwrap();
+        }
     }
 }
