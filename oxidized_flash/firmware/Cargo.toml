@@ -9,6 +9,9 @@ edition = "2018"
 [dependencies]
 cortex-m = "~0.6"
 panic-halt = "~0.2"
+smart-leds = "0.3"
+smart-leds-trait = "0.2"
+apa102-spi = "0.3"
 
 [dependencies.atsamd-hal]
 version = "~0.7"

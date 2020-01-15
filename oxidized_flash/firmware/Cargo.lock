@@ -10,6 +10,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "apa102-spi"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d92cd690fd2aae5bc549e2dc392d9082aab3ccf851aa39b0ab84b2934f4c57a3"
+dependencies = [
+ "embedded-hal",
+ "smart-leds-trait",
+]
+
+[[package]]
 name = "as-slice"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -134,10 +144,13 @@ checksum = "b1411551beb3c11dedfb0a90a0fa256b47d28b9ec2cdff34c25a2fa59e45dbdc"
 name = "oxidized_flash"
 version = "0.1.0"
 dependencies = [
+ "apa102-spi",
  "atsamd-hal",
  "cortex-m",
  "cortex-m-rt",
  "panic-halt",
+ "smart-leds",
+ "smart-leds-trait",
 ]
 
 [[package]]
@@ -210,6 +223,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90bde5296fc891b0cef12a6d03ddccc162ce7b2aff54160af9338f8d40df6d19"
 
 [[package]]
+name = "rgb"
+version = "0.8.16"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5ec4ab2cf0b27e111e266e161cf7f9efd20125a161190da1c0945c4a4408fef3"
+
+[[package]]
 name = "rustc_version"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -232,6 +251,24 @@ name = "semver-parser"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "388a1df253eca08550bef6c72392cfe7c30914bf41df5269b68cbd6ff8f570a3"
+
+[[package]]
+name = "smart-leds"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "38dd45fa275f70b4110eac5f5182611ad384f88bb22b68b9a9c3cafd7015290b"
+dependencies = [
+ "smart-leds-trait",
+]
+
+[[package]]
+name = "smart-leds-trait"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fef18e60d41a6fde19e640cd7590c03fb27aa23146bf60e4da85028d7410cee7"
+dependencies = [
+ "rgb",
+]
 
 [[package]]
 name = "stable_deref_trait"
