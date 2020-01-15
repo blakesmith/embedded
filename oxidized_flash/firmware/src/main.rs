@@ -12,7 +12,9 @@ use hal::clock::GenericClockController;
 use hal::delay::Delay;
 use hal::gpio::{Floating, GpioExt, Input, Port};
 use hal::prelude::*;
+use hal::sercom::{PadPin, SPIMaster2};
 use hal::target_device as pac;
+use hal::time::MegaHertz;
 use hal::*;
 
 define_pins!(
@@ -21,6 +23,12 @@ define_pins!(
 
     pin ok_led = a20,
     pin button_switch = a21,
+
+    // APA102 LEDs
+    pin apa_di = a12,
+    pin apa_ci = a13,
+    // Need a NC, since we don't get any data back from the APA102s
+    pin apa_nc = a14,
 );
 
 #[entry]
@@ -37,6 +45,31 @@ fn main() -> ! {
     let mut pins = Pins::new(peripherals.PORT);
     let mut ok_led = pins.ok_led.into_open_drain_output(&mut pins.port);
     let button_switch = pins.button_switch.into_pull_up_input(&mut pins.port);
+
+    let apa_di = pins.apa_di.into_push_pull_output(&mut pins.port);
+    let apa_ci = pins.apa_ci.into_push_pull_output(&mut pins.port);
+    let apa_nc = pins.apa_nc.into_pull_up_input(&mut pins.port);
+    let gclk0 = clocks.gclk0();
+    let _spi: SPIMaster2<
+        hal::sercom::Sercom2Pad2<gpio::Pa14<gpio::PfC>>,
+        hal::sercom::Sercom2Pad0<gpio::Pa12<gpio::PfC>>,
+        hal::sercom::Sercom2Pad1<gpio::Pa13<gpio::PfC>>,
+    > = SPIMaster2::new(
+        &clocks.sercom2_core(&gclk0).unwrap(),
+        MegaHertz(10),
+        hal::hal::spi::Mode {
+            phase: hal::hal::spi::Phase::CaptureOnFirstTransition,
+            polarity: hal::hal::spi::Polarity::IdleLow,
+        },
+        peripherals.SERCOM2,
+        &mut peripherals.MCLK,
+        (
+            apa_nc.into_pad(&mut pins.port),
+            apa_di.into_pad(&mut pins.port),
+            apa_ci.into_pad(&mut pins.port),
+        ),
+    );
+
     let mut delay = Delay::new(core.SYST, &mut clocks);
 
     loop {
