@@ -60,7 +60,7 @@ fn main() -> ! {
         hal::sercom::Sercom2Pad1<gpio::Pa13<gpio::PfC>>,
     > = SPIMaster2::new(
         &clocks.sercom2_core(&gclk0).unwrap(),
-        KiloHertz(400),
+        KiloHertz(5),
         hal::hal::spi::Mode {
             phase: hal::hal::spi::Phase::CaptureOnFirstTransition,
             polarity: hal::hal::spi::Polarity::IdleLow,
@@ -78,16 +78,19 @@ fn main() -> ! {
     let mut delay = Delay::new(core.SYST, &mut clocks);
 
     loop {
-        let c0: [RGB8; 2] = [RGB8 { r: 0, g: 255, b: 0 }, RGB8 { r: 64, g: 0, b: 0 }];
-        let c1: [RGB8; 2] = [RGB8 { r: 0, g: 255, b: 0 }, RGB8 { r: 0, g: 64, b: 0 }];
-        let c2: [RGB8; 2] = [RGB8 { r: 0, g: 255, b: 0 }, RGB8 { r: 0, g: 0, b: 64 }];
+        let c0: [RGB8; 2] = [RGB8 { r: 0, g: 0, b: 0 }, RGB8 { r: 0, g: 0, b: 0 }];
+        let c1: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 64, g: 0, b: 0 }];
+        let c2: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 64, b: 0 }];
+        let c3: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 0, b: 64 }];
+
+        dotstar.write(c0.iter().cloned()).unwrap();
         if button_switch.is_low().unwrap() {
-            dotstar.write(c0.iter().cloned()).unwrap();
-            delay.delay_ms(200u8);
             dotstar.write(c1.iter().cloned()).unwrap();
-            ok_led.set_high().unwrap();
             delay.delay_ms(200u8);
             dotstar.write(c2.iter().cloned()).unwrap();
+            ok_led.set_high().unwrap();
+            delay.delay_ms(200u8);
+            dotstar.write(c3.iter().cloned()).unwrap();
             ok_led.set_low().unwrap();
             delay.delay_ms(200u8);
         }
