@@ -33,6 +33,14 @@ define_pins!(
     pin apa_ci = a13,
     // Need a NC, since we don't get any data back from the APA102s
     pin apa_nc = a14,
+
+    //QSPI
+    pin flash_sck = b10,
+    pin flash_cs = b11,
+    pin flash_d0 = a8,
+    pin flash_d1 = a9,
+    pin flash_d2 = a10,
+    pin flash_d3 = a11,
 );
 
 struct Devices {
