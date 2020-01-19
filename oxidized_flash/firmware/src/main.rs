@@ -1,10 +1,12 @@
 #![no_std]
 #![no_main]
-#![deny(unsafe_code)]
 
 extern crate panic_halt;
 
 extern crate atsamd_hal as hal;
+
+#[allow(dead_code)]
+mod qspi;
 
 use cortex_m_rt::entry;
 
@@ -16,6 +18,9 @@ use hal::sercom::{PadPin, SPIMaster2};
 use hal::target_device as pac;
 use hal::time::KiloHertz;
 use hal::*;
+
+// Vendored for now
+use crate::qspi::Qspi;
 
 use apa102_spi::Apa102;
 use smart_leds::SmartLedsWrite;
@@ -54,6 +59,7 @@ struct Devices {
         >,
     >,
     pub delay: Delay,
+    pub flash: Qspi,
 }
 
 impl Devices {
@@ -95,12 +101,24 @@ impl Devices {
             ),
         );
         let apa102 = Apa102::new(spi);
+        let flash = Qspi::new(
+            &mut peripherals.MCLK,
+            &mut pins.port,
+            peripherals.QSPI,
+            pins.flash_sck,
+            pins.flash_cs,
+            pins.flash_d0,
+            pins.flash_d1,
+            pins.flash_d2,
+            pins.flash_d3,
+        );
         let delay = Delay::new(core.SYST, &mut clocks);
         Devices {
             ok_led,
             button_switch,
             apa102,
             delay,
+            flash,
         }
     }
 }
