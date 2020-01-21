@@ -129,6 +129,11 @@ fn main() -> ! {
 
     let mut response: [u8; 20] = [0; 20];
     devices.flash.read_command(Command::ReadId, &mut response);
+    // Make sure we got a valid response back: Check that there's something set
+    // for the device manufacturer. Set our indicator LED if so.
+    if response.get(19) != Some(&0x0) {
+        devices.ok_led.set_high().unwrap();
+    }
 
     loop {
         let c0: [RGB8; 2] = [RGB8 { r: 0, g: 0, b: 0 }, RGB8 { r: 0, g: 0, b: 0 }];
@@ -141,10 +146,8 @@ fn main() -> ! {
             devices.apa102.write(c1.iter().cloned()).unwrap();
             devices.delay.delay_ms(200u8);
             devices.apa102.write(c2.iter().cloned()).unwrap();
-            devices.ok_led.set_high().unwrap();
             devices.delay.delay_ms(200u8);
             devices.apa102.write(c3.iter().cloned()).unwrap();
-            devices.ok_led.set_low().unwrap();
             devices.delay.delay_ms(200u8);
         }
     }
