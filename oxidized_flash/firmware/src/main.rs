@@ -123,16 +123,12 @@ impl Devices {
     }
 }
 
-fn read_id(flash: &mut Qspi, response: &mut [u8]) {
-    flash.read_command(Command::ReadId, response);
-}
-
 #[entry]
 fn main() -> ! {
     let mut devices = Devices::setup();
 
     let mut response: [u8; 20] = [0; 20];
-    read_id(&mut devices.flash, &mut response);
+    devices.flash.read_command(Command::ReadId, &mut response);
 
     loop {
         let c0: [RGB8; 2] = [RGB8 { r: 0, g: 0, b: 0 }, RGB8 { r: 0, g: 0, b: 0 }];
