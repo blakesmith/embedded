@@ -20,7 +20,7 @@ use hal::time::KiloHertz;
 use hal::*;
 
 // Vendored for now
-use crate::qspi::Qspi;
+use crate::qspi::{Command, Qspi};
 
 use apa102_spi::Apa102;
 use smart_leds::SmartLedsWrite;
@@ -123,9 +123,16 @@ impl Devices {
     }
 }
 
+fn read_id(flash: &mut Qspi, response: &mut [u8]) {
+    flash.read_command(Command::ReadId, response);
+}
+
 #[entry]
 fn main() -> ! {
     let mut devices = Devices::setup();
+
+    let mut response: [u8; 20] = [0; 20];
+    read_id(&mut devices.flash, &mut response);
 
     loop {
         let c0: [RGB8; 2] = [RGB8 { r: 0, g: 0, b: 0 }, RGB8 { r: 0, g: 0, b: 0 }];

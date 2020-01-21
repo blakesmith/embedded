@@ -42,8 +42,8 @@ impl Qspi {
             unsafe { w.baud().bits(14) }; //120MHz / (14+1) = 8MHz
 
             // SPI MODE 0
-            w.cpol().clear_bit();
-            w.cpha().clear_bit()
+            w.cpol().set_bit();
+            w.cpha().set_bit()
         });
 
         qspi.ctrlb.modify(|_, w| {
