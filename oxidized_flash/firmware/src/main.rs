@@ -130,8 +130,9 @@ fn main() -> ! {
     let mut response: [u8; 20] = [0; 20];
     devices.flash.read_command(Command::ReadId, &mut response);
     // Make sure we got a valid response back: Check that there's something set
-    // for the device manufacturer. Set our indicator LED if so.
-    if response.get(19) != Some(&0x0) {
+    // for the device manufacturer. If the response is zero, it means we got
+    // no response. If 255, it means we got an invalid response. Set our indicator LED if success.
+    if response.get(19) != Some(&0x0) && response.get(19) != Some(&0xFF) {
         devices.ok_led.set_high().unwrap();
     }
 
