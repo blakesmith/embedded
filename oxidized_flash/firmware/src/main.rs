@@ -169,13 +169,15 @@ fn main() -> ! {
         devices.apa102.write(success.iter().cloned()).unwrap();
     }
 
+    while devices.button_switch.is_high().unwrap() {}
+
     loop {
         let c1: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 64, g: 0, b: 0 }];
         let c2: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 64, b: 0 }];
         let c3: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 0, b: 64 }];
 
+        devices.apa102.write(c0.iter().cloned()).unwrap();
         if devices.button_switch.is_low().unwrap() {
-            devices.apa102.write(c0.iter().cloned()).unwrap();
             devices.apa102.write(c1.iter().cloned()).unwrap();
             devices.delay.delay_ms(200u8);
             devices.apa102.write(c2.iter().cloned()).unwrap();
