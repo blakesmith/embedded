@@ -123,10 +123,10 @@ impl Devices {
     }
 }
 
-fn wait_write(flash: &mut Qspi, status: &mut [u8; 2]) {
+fn wait_ready(flash: &mut Qspi, status: &mut [u8; 2]) {
     loop {
         flash.read_command(Command::ReadStatus, status);
-        if status.get(1).map(|s| s & 0x01) == Some(0) {
+        if status.get(1).map(|s| s & 0x03) == Some(0) {
             return;
         }
     }
@@ -139,7 +139,7 @@ fn main() -> ! {
 
     let mut response: [u8; 20] = [0; 20];
     devices.flash.read_command(Command::ReadId, &mut response);
-    wait_write(&mut devices.flash, &mut status);
+    wait_ready(&mut devices.flash, &mut status);
     // Make sure we got a valid response back: Check that there's something set
     // for the device manufacturer. If the response is zero, it means we got
     // no response. If 255, it means we got an invalid response. Set our indicator LED if success.
@@ -149,17 +149,19 @@ fn main() -> ! {
 
     let db: [u8; 4] = [0xDE, 0xAD, 0xBE, 0xEF];
     let mut deadbeef: [u8; 4] = [0; 4];
-    devices.flash.write_command(Command::WriteEnable, &[]);
-    devices.flash.write_command(Command::EraseChip, &[]);
-    wait_write(&mut devices.flash, &mut status);
     // devices.flash.write_command(Command::WriteEnable, &[]);
-    // devices.flash.erase_command(Command::EraseSector, 0x0);
-    // wait_write(&mut devices.flash, &mut status);
+    // devices.flash.write_command(Command::EraseChip, &[]);
+    // wait_ready(&mut devices.flash, &mut status);
+    wait_ready(&mut devices.flash, &mut status);
+    devices.flash.write_command(Command::WriteEnable, &[]);
+    wait_ready(&mut devices.flash, &mut status);
+    devices.flash.erase_command(Command::EraseSector, 0x0);
+    wait_ready(&mut devices.flash, &mut status);
     devices.flash.write_command(Command::WriteEnable, &[]);
     devices.flash.write_memory(0x0, &db);
-    wait_write(&mut devices.flash, &mut status);
+    wait_ready(&mut devices.flash, &mut status);
     devices.flash.read_memory(0x0, &mut deadbeef);
-    wait_write(&mut devices.flash, &mut status);
+    wait_ready(&mut devices.flash, &mut status);
 
     let c0: [RGB8; 2] = [RGB8 { r: 0, g: 0, b: 0 }, RGB8 { r: 0, g: 0, b: 0 }];
     devices.apa102.write(c0.iter().cloned()).unwrap();
