@@ -152,9 +152,9 @@ fn main() -> ! {
     devices.flash.write_command(Command::WriteEnable, &[]);
     devices.flash.write_command(Command::EraseChip, &[]);
     wait_write(&mut devices.flash, &mut status);
-    devices.flash.write_command(Command::WriteEnable, &[]);
-    devices.flash.erase_command(Command::EraseSector, 0x0);
-    wait_write(&mut devices.flash, &mut status);
+    // devices.flash.write_command(Command::WriteEnable, &[]);
+    // devices.flash.erase_command(Command::EraseSector, 0x0);
+    // wait_write(&mut devices.flash, &mut status);
     devices.flash.write_command(Command::WriteEnable, &[]);
     devices.flash.write_memory(0x0, &db);
     wait_write(&mut devices.flash, &mut status);

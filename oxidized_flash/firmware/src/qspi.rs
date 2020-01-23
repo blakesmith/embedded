@@ -163,27 +163,27 @@ impl Qspi {
 
     pub fn read_memory(&self, addr: u32, buf: &mut [u8]) {
         self.qspi.instrframe.write(|w| {
-            w.width().single_bit_spi();
+            w.width().quad_output();
             w.addrlen()._24bits();
             w.tfrtype().readmemory();
             w.instren().set_bit();
             w.dataen().set_bit();
-            w.addren().set_bit()
-            //            unsafe { w.dummylen().bits(8) }
+            w.addren().set_bit();
+            unsafe { w.dummylen().bits(8) }
         });
-        unsafe { self.run_read_instruction(Command::Read, addr, buf) };
+        unsafe { self.run_read_instruction(Command::QuadRead, addr, buf) };
     }
 
     pub fn write_memory(&self, addr: u32, buf: &[u8]) {
         self.qspi.instrframe.write(|w| {
-            w.width().single_bit_spi();
+            w.width().quad_output();
             w.addrlen()._24bits();
             w.tfrtype().writememory();
             w.instren().set_bit();
             w.dataen().set_bit();
             w.addren().set_bit()
         });
-        unsafe { self.run_write_instruction(Command::PageProgram, addr, buf) };
+        unsafe { self.run_write_instruction(Command::QuadPageProgram, addr, buf) };
     }
 
     pub fn set_clk_divider(&self, value: u8) {
