@@ -123,12 +123,23 @@ impl Devices {
     }
 }
 
+fn wait_write(flash: &mut Qspi, status: &mut [u8; 2]) {
+    loop {
+        flash.read_command(Command::ReadStatus, status);
+        if status.get(1).map(|s| s & 0x01) == Some(0) {
+            return;
+        }
+    }
+}
+
 #[entry]
 fn main() -> ! {
     let mut devices = Devices::setup();
+    let mut status: [u8; 2] = [0; 2];
 
     let mut response: [u8; 20] = [0; 20];
     devices.flash.read_command(Command::ReadId, &mut response);
+    wait_write(&mut devices.flash, &mut status);
     // Make sure we got a valid response back: Check that there's something set
     // for the device manufacturer. If the response is zero, it means we got
     // no response. If 255, it means we got an invalid response. Set our indicator LED if success.
@@ -136,14 +147,35 @@ fn main() -> ! {
         devices.ok_led.set_high().unwrap();
     }
 
+    let db: [u8; 4] = [0xDE, 0xAD, 0xBE, 0xEF];
+    let mut deadbeef: [u8; 4] = [0; 4];
+    devices.flash.write_command(Command::WriteEnable, &[]);
+    devices.flash.write_command(Command::EraseChip, &[]);
+    wait_write(&mut devices.flash, &mut status);
+    devices.flash.write_command(Command::WriteEnable, &[]);
+    devices.flash.erase_command(Command::EraseSector, 0x0);
+    wait_write(&mut devices.flash, &mut status);
+    devices.flash.write_command(Command::WriteEnable, &[]);
+    devices.flash.write_memory(0x0, &db);
+    wait_write(&mut devices.flash, &mut status);
+    devices.flash.read_memory(0x0, &mut deadbeef);
+    wait_write(&mut devices.flash, &mut status);
+
+    let c0: [RGB8; 2] = [RGB8 { r: 0, g: 0, b: 0 }, RGB8 { r: 0, g: 0, b: 0 }];
+    devices.apa102.write(c0.iter().cloned()).unwrap();
+
+    if deadbeef == db {
+        let success: [RGB8; 2] = [RGB8 { r: 0, g: 0, b: 32 }, RGB8 { r: 0, g: 0, b: 0 }];
+        devices.apa102.write(success.iter().cloned()).unwrap();
+    }
+
     loop {
-        let c0: [RGB8; 2] = [RGB8 { r: 0, g: 0, b: 0 }, RGB8 { r: 0, g: 0, b: 0 }];
         let c1: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 64, g: 0, b: 0 }];
         let c2: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 64, b: 0 }];
         let c3: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 0, b: 64 }];
 
-        devices.apa102.write(c0.iter().cloned()).unwrap();
         if devices.button_switch.is_low().unwrap() {
+            devices.apa102.write(c0.iter().cloned()).unwrap();
             devices.apa102.write(c1.iter().cloned()).unwrap();
             devices.delay.delay_ms(200u8);
             devices.apa102.write(c2.iter().cloned()).unwrap();

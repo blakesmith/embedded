@@ -84,7 +84,6 @@ impl Qspi {
         });
 
         while self.qspi.intflag.read().instrend().bit_is_clear() {}
-        self.qspi.intflag.modify(|_, w| w.instrend().set_bit());
     }
 
     unsafe fn run_read_instruction(&self, command: Command, addr: u32, buf: &mut [u8]) {
@@ -102,7 +101,6 @@ impl Qspi {
         });
 
         while self.qspi.intflag.read().instrend().bit_is_clear() {}
-        self.qspi.intflag.modify(|_, w| w.instrend().set_bit());
     }
 
     pub fn run_command(&self, command: Command) {
@@ -110,7 +108,8 @@ impl Qspi {
             w.width().single_bit_spi();
             w.addrlen()._24bits();
             w.tfrtype().read();
-            w.instren().set_bit()
+            w.instren().set_bit();
+            w.dataen().clear_bit()
         });
         unsafe {
             self.run_read_instruction(command, 0, &mut []);
@@ -152,6 +151,7 @@ impl Qspi {
         self.qspi.instrframe.write(|w| {
             w.width().single_bit_spi();
             w.addrlen()._24bits();
+            w.dataen().clear_bit();
             w.tfrtype().write();
             w.instren().set_bit();
             w.addren().set_bit()
@@ -163,27 +163,27 @@ impl Qspi {
 
     pub fn read_memory(&self, addr: u32, buf: &mut [u8]) {
         self.qspi.instrframe.write(|w| {
-            w.width().quad_output();
+            w.width().single_bit_spi();
             w.addrlen()._24bits();
-            w.tfrtype().read();
+            w.tfrtype().readmemory();
             w.instren().set_bit();
             w.dataen().set_bit();
-            w.addren().set_bit();
-            unsafe { w.dummylen().bits(8) }
+            w.addren().set_bit()
+            //            unsafe { w.dummylen().bits(8) }
         });
-        unsafe { self.run_read_instruction(Command::QuadRead, addr, buf) };
+        unsafe { self.run_read_instruction(Command::Read, addr, buf) };
     }
 
     pub fn write_memory(&self, addr: u32, buf: &[u8]) {
         self.qspi.instrframe.write(|w| {
-            w.width().quad_output();
+            w.width().single_bit_spi();
             w.addrlen()._24bits();
-            w.tfrtype().write();
+            w.tfrtype().writememory();
             w.instren().set_bit();
             w.dataen().set_bit();
             w.addren().set_bit()
         });
-        unsafe { self.run_write_instruction(Command::QuadPageProgram, addr, buf) };
+        unsafe { self.run_write_instruction(Command::PageProgram, addr, buf) };
     }
 
     pub fn set_clk_divider(&self, value: u8) {
