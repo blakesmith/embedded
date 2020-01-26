@@ -12,7 +12,7 @@ dependencies = [
 [[package]]
 name = "apa102-spi"
 version = "0.3.2"
-source = "git+https://github.com/blakesmith/apa102-spi-rs?branch=pixel_type#307a4949bee843e2839f917540cd90881107d2d2"
+source = "git+https://github.com/smart-leds-rs/apa102-spi-rs.git#0477b55b4c33fdab132f3728683d180b205cbe71"
 dependencies = [
  "embedded-hal",
  "smart-leds-trait",

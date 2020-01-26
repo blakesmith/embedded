@@ -22,7 +22,7 @@ use hal::*;
 // Vendored for now
 use crate::qspi::{Command, Qspi};
 
-use apa102_spi::{Apa102, PixelType};
+use apa102_spi::{Apa102, PixelOrder};
 use smart_leds::SmartLedsWrite;
 use smart_leds_trait::RGB8;
 
@@ -100,7 +100,7 @@ impl Devices {
                 apa_ci.into_pad(&mut pins.port),
             ),
         );
-        let apa102 = Apa102::new_with_custom_postamble(spi, 4, true, PixelType::RBG);
+        let apa102 = Apa102::new_with_options(spi, 4, true, PixelOrder::RBG);
         let flash = Qspi::new(
             &mut peripherals.MCLK,
             &mut pins.port,

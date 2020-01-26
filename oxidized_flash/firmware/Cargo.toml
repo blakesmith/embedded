@@ -11,7 +11,8 @@ cortex-m = "~0.6"
 panic-halt = "~0.2"
 smart-leds = "0.3"
 smart-leds-trait = "0.2"
-apa102-spi = { git = "https://github.com/blakesmith/apa102-spi-rs", branch = "pixel_type" }
+# Needed until this PR is in a released version: https://github.com/smart-leds-rs/apa102-spi-rs/pull/7
+apa102-spi = { git = "https://github.com/smart-leds-rs/apa102-spi-rs.git", branch = "master" }
 
 [dependencies.atsamd-hal]
 version = "~0.7"
