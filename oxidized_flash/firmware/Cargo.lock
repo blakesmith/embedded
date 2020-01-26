@@ -12,8 +12,7 @@ dependencies = [
 [[package]]
 name = "apa102-spi"
 version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d92cd690fd2aae5bc549e2dc392d9082aab3ccf851aa39b0ab84b2934f4c57a3"
+source = "git+https://github.com/blakesmith/apa102-spi-rs?branch=pixel_type#307a4949bee843e2839f917540cd90881107d2d2"
 dependencies = [
  "embedded-hal",
  "smart-leds-trait",

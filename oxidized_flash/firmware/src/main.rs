@@ -22,7 +22,7 @@ use hal::*;
 // Vendored for now
 use crate::qspi::{Command, Qspi};
 
-use apa102_spi::Apa102;
+use apa102_spi::{Apa102, PixelType};
 use smart_leds::SmartLedsWrite;
 use smart_leds_trait::RGB8;
 
@@ -100,7 +100,7 @@ impl Devices {
                 apa_ci.into_pad(&mut pins.port),
             ),
         );
-        let apa102 = Apa102::new(spi);
+        let apa102 = Apa102::new_with_custom_postamble(spi, 4, true, PixelType::RBG);
         let flash = Qspi::new(
             &mut peripherals.MCLK,
             &mut pins.port,
@@ -149,14 +149,15 @@ fn main() -> ! {
 
     let db: [u8; 4] = [0xDE, 0xAD, 0xBE, 0xEF];
     let mut deadbeef: [u8; 4] = [0; 4];
-    // devices.flash.write_command(Command::WriteEnable, &[]);
-    // devices.flash.write_command(Command::EraseChip, &[]);
-    // wait_ready(&mut devices.flash, &mut status);
-    wait_ready(&mut devices.flash, &mut status);
     devices.flash.write_command(Command::WriteEnable, &[]);
     wait_ready(&mut devices.flash, &mut status);
-    devices.flash.erase_command(Command::EraseSector, 0x0);
+    devices.flash.write_command(Command::EraseChip, &[]);
     wait_ready(&mut devices.flash, &mut status);
+    // wait_ready(&mut devices.flash, &mut status);
+    // devices.flash.write_command(Command::WriteEnable, &[]);
+    // wait_ready(&mut devices.flash, &mut status);
+    // devices.flash.erase_command(Command::EraseSector, 0x0);
+    // wait_ready(&mut devices.flash, &mut status);
     devices.flash.write_command(Command::WriteEnable, &[]);
     devices.flash.write_memory(0x0, &db);
     wait_ready(&mut devices.flash, &mut status);
