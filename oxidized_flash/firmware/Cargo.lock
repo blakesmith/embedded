@@ -42,6 +42,7 @@ dependencies = [
  "nb",
  "paste",
  "rand_core",
+ "usb-device",
  "vcell",
  "void",
 ]
@@ -297,6 +298,12 @@ name = "unicode-xid"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "826e7639553986605ec5979c7dd957c7895e93eabed50ab2ffa7f6128a75097c"
+
+[[package]]
+name = "usb-device"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e09f7a42b2591eb587456754fadf0e58d21721601431fd333a4a18c0646112a8"
 
 [[package]]
 name = "vcell"

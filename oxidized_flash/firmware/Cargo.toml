@@ -23,7 +23,6 @@ version = "~0.6"
 optional = true
 
 [features]
-default = ["rt", "atsamd-hal/samd51g19a", "atsamd-hal/samd51", "atsamd-hal/unproven"]
+default = ["rt", "atsamd-hal/samd51g19a", "atsamd-hal/samd51", "atsamd-hal/unproven", "atsamd-hal/usb"]
 rt = ["cortex-m-rt", "atsamd-hal/samd51g19a-rt"]
-
 

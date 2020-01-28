@@ -12,11 +12,14 @@ use cortex_m_rt::entry;
 
 use hal::clock::GenericClockController;
 use hal::delay::Delay;
-use hal::gpio::{Floating, GpioExt, Input, OpenDrain, Output, Port, PullUp};
+use hal::gpio::{Floating, GpioExt, Input, IntoFunction, OpenDrain, Output, Port, PullUp};
 use hal::prelude::*;
 use hal::sercom::{PadPin, SPIMaster2};
 use hal::target_device as pac;
 use hal::time::KiloHertz;
+use hal::usb::usb_device::bus::UsbBusAllocator;
+use hal::usb::usb_device::prelude::{UsbDevice, UsbDeviceBuilder, UsbVidPid};
+use hal::usb::UsbBus;
 use hal::*;
 
 // Vendored for now
@@ -25,6 +28,9 @@ use crate::qspi::{Command, Qspi};
 use apa102_spi::{Apa102, PixelOrder};
 use smart_leds::SmartLedsWrite;
 use smart_leds_trait::RGB8;
+
+static mut USB_ALLOCATOR: Option<UsbBusAllocator<UsbBus>> = None;
+static mut USB_DEV: Option<UsbDevice<UsbBus>> = None;
 
 define_pins!(
     struct Pins,
@@ -46,6 +52,10 @@ define_pins!(
     pin flash_d1 = a9,
     pin flash_d2 = a10,
     pin flash_d3 = a11,
+
+    // USB
+    pin usb_dp = a25,
+    pin usb_dm = a24,
 );
 
 struct Devices {
@@ -113,6 +123,28 @@ impl Devices {
             pins.flash_d3,
         );
         let delay = Delay::new(core.SYST, &mut clocks);
+
+        unsafe {
+            let bus_allocator = {
+                USB_ALLOCATOR = Some(UsbBusAllocator::new(UsbBus::new(
+                    &clocks.usb(&gclk0).unwrap(),
+                    &mut peripherals.MCLK,
+                    pins.usb_dm.into_function(&mut pins.port),
+                    pins.usb_dp.into_function(&mut pins.port),
+                    peripherals.USB,
+                )));
+                USB_ALLOCATOR.as_ref().unwrap()
+            };
+
+            USB_DEV = Some(
+                UsbDeviceBuilder::new(bus_allocator, UsbVidPid(0xb38, 0x0003))
+                    .manufacturer("Oxidized")
+                    .product("Oxidized Flash")
+                    .serial_number("DS")
+                    .build(),
+            );
+        }
+
         Devices {
             ok_led,
             button_switch,
