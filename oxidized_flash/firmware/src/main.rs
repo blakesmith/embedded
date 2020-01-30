@@ -5,6 +5,7 @@ extern crate panic_halt;
 
 extern crate atsamd_hal as hal;
 
+mod hid;
 #[allow(dead_code)]
 mod qspi;
 

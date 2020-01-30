@@ -151,6 +151,7 @@ dependencies = [
  "panic-halt",
  "smart-leds",
  "smart-leds-trait",
+ "usb-device",
 ]
 
 [[package]]
