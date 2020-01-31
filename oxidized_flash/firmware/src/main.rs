@@ -9,6 +9,7 @@ mod hid;
 #[allow(dead_code)]
 mod qspi;
 
+use cortex_m::peripheral::NVIC;
 use cortex_m_rt::entry;
 
 use hal::clock::GenericClockController;
@@ -23,6 +24,10 @@ use hal::usb::usb_device::prelude::{UsbDevice, UsbDeviceBuilder, UsbVidPid};
 use hal::usb::UsbBus;
 use hal::*;
 
+use pac::interrupt;
+
+use crate::hid::KeyboardHidClass;
+
 // Vendored for now
 use crate::qspi::{Command, Qspi};
 
@@ -32,6 +37,7 @@ use smart_leds_trait::RGB8;
 
 static mut USB_ALLOCATOR: Option<UsbBusAllocator<UsbBus>> = None;
 static mut USB_DEV: Option<UsbDevice<UsbBus>> = None;
+static mut USB_KEYBOARD: Option<KeyboardHidClass<UsbBus>> = None;
 
 define_pins!(
     struct Pins,
@@ -76,7 +82,7 @@ struct Devices {
 impl Devices {
     fn setup() -> Devices {
         let mut peripherals = pac::Peripherals::take().unwrap();
-        let core = pac::CorePeripherals::take().unwrap();
+        let mut core = pac::CorePeripherals::take().unwrap();
         let mut clocks = GenericClockController::with_internal_32kosc(
             peripherals.GCLK,
             &mut peripherals.MCLK,
@@ -137,6 +143,7 @@ impl Devices {
                 USB_ALLOCATOR.as_ref().unwrap()
             };
 
+            USB_KEYBOARD = Some(KeyboardHidClass::new(bus_allocator));
             USB_DEV = Some(
                 UsbDeviceBuilder::new(bus_allocator, UsbVidPid(0xb38, 0x0003))
                     .manufacturer("Oxidized")
@@ -144,6 +151,15 @@ impl Devices {
                     .serial_number("DS")
                     .build(),
             );
+        }
+
+        unsafe {
+            core.NVIC.set_priority(interrupt::USB_OTHER, 1);
+            core.NVIC.set_priority(interrupt::USB_TRCPT0, 1);
+            core.NVIC.set_priority(interrupt::USB_TRCPT1, 1);
+            NVIC::unmask(interrupt::USB_OTHER);
+            NVIC::unmask(interrupt::USB_TRCPT0);
+            NVIC::unmask(interrupt::USB_TRCPT1);
         }
 
         Devices {
@@ -222,4 +238,29 @@ fn main() -> ! {
             devices.delay.delay_ms(200u8);
         }
     }
+}
+
+fn poll_usb() {
+    unsafe {
+        USB_DEV.as_mut().map(|device| {
+            USB_KEYBOARD.as_mut().map(|keyboard| {
+                device.poll(&mut [keyboard]);
+            });
+        });
+    }
+}
+
+#[interrupt]
+fn USB_OTHER() {
+    poll_usb();
+}
+
+#[interrupt]
+fn USB_TRCPT0() {
+    poll_usb();
+}
+
+#[interrupt]
+fn USB_TRCPT1() {
+    poll_usb();
 }
