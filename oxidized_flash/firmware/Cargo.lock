@@ -32,6 +32,8 @@ dependencies = [
 [[package]]
 name = "atsamd-hal"
 version = "0.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "db54e444b4585e7844c4d8459b4af5ef093c42a05ba40eb1cee57c4b5e7bebe8"
 dependencies = [
  "atsamd51g19a",
  "bitfield",
@@ -48,6 +50,8 @@ dependencies = [
 [[package]]
 name = "atsamd51g19a"
 version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a399e5a303cb159487230e6b1cb7b87fd86abcef37df36f8fc081ae77621629"
 dependencies = [
  "bare-metal",
  "cortex-m",
@@ -299,6 +303,8 @@ checksum = "826e7639553986605ec5979c7dd957c7895e93eabed50ab2ffa7f6128a75097c"
 [[package]]
 name = "usb-device"
 version = "0.2.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cf754e40744ea12a0f0ee22a20a4223414d14fe466ac6e2f3522e74e715daa3b"
 
 [[package]]
 name = "vcell"
