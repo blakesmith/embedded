@@ -13,6 +13,7 @@ use cortex_m::peripheral::NVIC;
 use cortex_m_rt::entry;
 
 use hal::clock::GenericClockController;
+use hal::dbgprint;
 use hal::delay::Delay;
 use hal::gpio::{Floating, GpioExt, Input, IntoFunction, OpenDrain, Output, Port, PullUp};
 use hal::prelude::*;
@@ -24,6 +25,8 @@ use hal::usb::usb_device::prelude::{UsbDevice, UsbDeviceBuilder, UsbVidPid};
 use hal::usb::UsbBus;
 use hal::*;
 
+use pac::gclk::genctrl::SRC_A;
+use pac::gclk::pchctrl::GEN_A;
 use pac::interrupt;
 
 use crate::hid::KeyboardHidClass;
@@ -131,10 +134,16 @@ impl Devices {
         );
         let delay = Delay::new(core.SYST, &mut clocks);
 
+        while peripherals.OSCCTRL.dfllctrla.read().enable() == false {}
+
+        let usb_gclk = clocks
+            .configure_gclk_divider_and_source(GEN_A::GCLK2, 1, SRC_A::DFLL, false)
+            .unwrap();
+        let usb_clock = &clocks.usb(&usb_gclk).unwrap();
         unsafe {
             let bus_allocator = {
                 USB_ALLOCATOR = Some(UsbBusAllocator::new(UsbBus::new(
-                    &clocks.usb(&gclk0).unwrap(),
+                    usb_clock,
                     &mut peripherals.MCLK,
                     pins.usb_dm.into_function(&mut pins.port),
                     pins.usb_dp.into_function(&mut pins.port),
@@ -143,12 +152,13 @@ impl Devices {
                 USB_ALLOCATOR.as_ref().unwrap()
             };
 
-            USB_KEYBOARD = Some(KeyboardHidClass::new(bus_allocator));
+            USB_KEYBOARD = Some(KeyboardHidClass::new(&bus_allocator));
             USB_DEV = Some(
-                UsbDeviceBuilder::new(bus_allocator, UsbVidPid(0xb38, 0x0003))
+                UsbDeviceBuilder::new(&bus_allocator, UsbVidPid(0xb38, 0x0003))
                     .manufacturer("Oxidized")
                     .product("Oxidized Flash")
                     .serial_number("DS")
+                    .max_packet_size_0(64)
                     .build(),
             );
         }
@@ -183,6 +193,8 @@ fn wait_ready(flash: &mut Qspi, status: &mut [u8; 2]) {
 
 #[entry]
 fn main() -> ! {
+    dbgprint!("Booting!");
+
     let mut devices = Devices::setup();
     let mut status: [u8; 2] = [0; 2];
 
@@ -227,6 +239,7 @@ fn main() -> ! {
         let c1: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 64, g: 0, b: 0 }];
         let c2: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 64, b: 0 }];
         let c3: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 0, b: 64 }];
+        devices.delay.delay_ms(200u8);
 
         devices.apa102.write(c0.iter().cloned()).unwrap();
         if devices.button_switch.is_low().unwrap() {

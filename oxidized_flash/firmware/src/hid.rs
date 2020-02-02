@@ -1,3 +1,4 @@
+use hal::dbgprint;
 use usb_device::class_prelude::*;
 use usb_device::Result;
 
@@ -92,31 +93,23 @@ impl<B: UsbBus> UsbClass<B> for KeyboardHidClass<'_, B> {
 
         writer.endpoint(&self.endpoint)?;
 
+        dbgprint!("Done sending descriptors");
+
         Ok(())
     }
 
     fn control_in(&mut self, xfer: ControlIn<B>) {
         let req = xfer.request();
 
-        if !(req.request_type == control::RequestType::Class
-            && req.recipient == control::Recipient::Interface
+        if !(req.recipient == control::Recipient::Interface
             && req.index == u8::from(self.interface) as u16)
         {
             return;
         }
 
-        match req.request {
-            // Send HID specific descriptors
-            control::Request::GET_DESCRIPTOR
-                if req.descriptor_type_index().1 == USB_DESCRIPTOR_TYPE_HID =>
-            {
-                xfer.accept_with_static(USB_HID_DESCRIPTOR).ok();
-            }
-            control::Request::GET_DESCRIPTOR
-                if req.descriptor_type_index().1 == USB_DESCRIPTOR_TYPE_HIDREPORT =>
-            {
-                xfer.accept_with_static(USB_HID_REPORT_DESCRIPTOR).ok();
-            }
+        match req.descriptor_type_index().0 {
+            USB_DESCRIPTOR_TYPE_HID => { xfer.accept_with_static(USB_HID_DESCRIPTOR).ok(); }
+            USB_DESCRIPTOR_TYPE_HIDREPORT => { xfer.accept_with_static(USB_HID_REPORT_DESCRIPTOR).ok(); }
             _ => {
                 xfer.reject().ok();
             }
