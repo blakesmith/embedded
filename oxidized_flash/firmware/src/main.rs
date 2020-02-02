@@ -134,8 +134,6 @@ impl Devices {
         );
         let delay = Delay::new(core.SYST, &mut clocks);
 
-        while peripherals.OSCCTRL.dfllctrla.read().enable() == false {}
-
         let usb_gclk = clocks
             .configure_gclk_divider_and_source(GEN_A::GCLK2, 1, SRC_A::DFLL, false)
             .unwrap();
