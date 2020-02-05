@@ -11,6 +11,7 @@ mod qspi;
 
 use cortex_m::peripheral::NVIC;
 use cortex_m_rt::entry;
+use cortex_m::interrupt::free as disable_interrupts;
 
 use hal::clock::GenericClockController;
 use hal::dbgprint;
@@ -29,7 +30,7 @@ use pac::gclk::genctrl::SRC_A;
 use pac::gclk::pchctrl::GEN_A;
 use pac::interrupt;
 
-use crate::hid::KeyboardHidClass;
+use crate::hid::{Key, KeyboardHidClass};
 
 // Vendored for now
 use crate::qspi::{Command, Qspi};
@@ -235,18 +236,17 @@ fn main() -> ! {
 
     loop {
         let c1: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 64, g: 0, b: 0 }];
-        let c2: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 64, b: 0 }];
-        let c3: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 0, g: 0, b: 64 }];
-        devices.delay.delay_ms(200u8);
 
-        devices.apa102.write(c0.iter().cloned()).unwrap();
         if devices.button_switch.is_low().unwrap() {
             devices.apa102.write(c1.iter().cloned()).unwrap();
-            devices.delay.delay_ms(200u8);
-            devices.apa102.write(c2.iter().cloned()).unwrap();
-            devices.delay.delay_ms(200u8);
-            devices.apa102.write(c3.iter().cloned()).unwrap();
-            devices.delay.delay_ms(200u8);
+            disable_interrupts(|_| unsafe {
+                USB_KEYBOARD.as_mut().map(|keyboard| {
+                    keyboard.add_key(Key::MediaPlayPause);
+                    keyboard.send_report();
+                });
+            });
+        } else {
+            devices.apa102.write(c0.iter().cloned()).unwrap();
         }
     }
 }

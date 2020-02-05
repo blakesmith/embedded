@@ -5,6 +5,8 @@ use usb_device::Result;
 pub struct KeyboardHidClass<'a, B: UsbBus> {
     interface: InterfaceNumber,
     endpoint: EndpointIn<'a, B>,
+    report: HIDReport,
+    buf: [u8; 8],
 }
 
 impl<B: UsbBus> KeyboardHidClass<'_, B> {
@@ -12,6 +14,20 @@ impl<B: UsbBus> KeyboardHidClass<'_, B> {
         KeyboardHidClass {
             interface: alloc.interface(),
             endpoint: alloc.interrupt(8, 10),
+            report: HIDReport::new(),
+            buf: [0u8; 8],
+        }
+    }
+
+    pub fn add_key(&mut self, key: Key) {
+        self.report.add_key(key);
+    }
+
+    pub fn send_report(&mut self) {
+        if self.report.has_keys() {
+            self.report.fill(&mut self.buf);
+            while !self.endpoint.write(&self.buf).is_ok() { }
+            self.report.reset();
         }
     }
 }
@@ -116,3 +132,81 @@ impl<B: UsbBus> UsbClass<B> for KeyboardHidClass<'_, B> {
         }
     }
 }
+
+struct HIDReport {
+    current_key: usize,
+    keys: [u8; 6],
+}
+
+
+// Scan codes taken from: https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2
+#[repr(u8)]
+#[derive(Copy, Clone, Eq, PartialEq, Debug)]
+#[allow(dead_code)]
+pub enum Key {
+    MediaPlayPause = 0xe8,
+    MediaStop = 0xe9,
+    MediaPrev = 0xea,
+    MediaNext = 0xeb,
+}
+
+impl Key {
+    pub fn raw(&self) -> u8 {
+        *self as u8
+    }
+}
+
+impl HIDReport {
+    pub fn new() -> Self {
+        Self {
+            current_key: 0,
+            keys: [0u8; 6],
+        }
+    }
+
+    pub fn add_key(&mut self, key: Key) {
+        if self.current_key == 5 {
+            return;
+        }
+        self.keys[self.current_key] = key.raw();
+        self.current_key = self.current_key + 1;
+    }
+
+    pub fn has_keys(&self) -> bool {
+        for k in &self.keys {
+            if *k != 0 {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    pub fn reset(&mut self) {
+        self.current_key = 0;
+        for i in & mut self.keys { *i = 0 }
+    }
+
+    pub fn fill(&self, buf: &mut [u8]) {
+        buf[0] = 0; // Omit modifiers for now.
+        buf[1] = 0; // Gap
+        buf[2] = self.keys[0];
+        buf[3] = self.keys[1];
+        buf[4] = self.keys[2];
+        buf[5] = self.keys[3];
+        buf[6] = self.keys[4];
+        buf[7] = self.keys[5];
+    }
+}
+
+impl PartialEq for HIDReport {
+    fn eq(&self, other: &Self) -> bool {
+        self.keys[0] == other.keys[0] &&
+            self.keys[1] == other.keys[1] &&
+            self.keys[2] == other.keys[2] &&
+            self.keys[3] == other.keys[3] &&
+            self.keys[4] == other.keys[4] &&
+            self.keys[5] == other.keys[5]
+    }
+}
+
+impl Eq for HIDReport {}
