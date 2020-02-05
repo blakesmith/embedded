@@ -241,7 +241,7 @@ fn main() -> ! {
             devices.apa102.write(c1.iter().cloned()).unwrap();
             disable_interrupts(|_| unsafe {
                 USB_KEYBOARD.as_mut().map(|keyboard| {
-                    keyboard.add_key(Key::MediaPlayPause);
+                    keyboard.add_key(Key::A);
                     keyboard.send_report();
                 });
             });

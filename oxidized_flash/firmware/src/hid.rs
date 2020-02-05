@@ -26,8 +26,10 @@ impl<B: UsbBus> KeyboardHidClass<'_, B> {
     pub fn send_report(&mut self) {
         if self.report.has_keys() {
             self.report.fill(&mut self.buf);
-            while !self.endpoint.write(&self.buf).is_ok() { }
+            let _ = self.endpoint.write(&self.buf);
             self.report.reset();
+            self.report.fill(&mut self.buf);
+            let _ = self.endpoint.write(&self.buf);
         }
     }
 }
@@ -148,6 +150,7 @@ pub enum Key {
     MediaStop = 0xe9,
     MediaPrev = 0xea,
     MediaNext = 0xeb,
+    A = 0x04,
 }
 
 impl Key {
