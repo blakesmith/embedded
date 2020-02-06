@@ -28,11 +28,9 @@ impl<B: UsbBus> KeyboardHidClass<'_, B> {
     }
 
     pub fn send_media_report(&mut self) {
-        if self.report.has_media() {
-            self.report.fill_media(&mut self.buf);
-            let _ = self.endpoint.write(&self.buf);
-            self.report.reset();
-        }
+        self.report.fill_media(&mut self.buf[0..2]);
+        let _ = self.endpoint.write(&self.buf[0..2]);
+        self.report.reset();
     }
 
     pub fn send_key_report(&mut self) {
@@ -221,19 +219,6 @@ impl HIDReport {
 
     pub fn add_media_key(&mut self, media_key: MediaKey) {
         self.media_keys |= media_key.raw();
-    }
-
-    pub fn has_keys(&self) -> bool {
-        for k in &self.keys {
-            if *k != 0 {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    pub fn has_media(&self) -> bool {
-        return self.media_keys != 0;
     }
 
     pub fn reset(&mut self) {
