@@ -30,7 +30,7 @@ use pac::gclk::genctrl::SRC_A;
 use pac::gclk::pchctrl::GEN_A;
 use pac::interrupt;
 
-use crate::hid::{Key, KeyboardHidClass};
+use crate::hid::{Key, MediaKey, KeyboardHidClass};
 
 // Vendored for now
 use crate::qspi::{Command, Qspi};
@@ -241,10 +241,16 @@ fn main() -> ! {
             devices.apa102.write(c1.iter().cloned()).unwrap();
             disable_interrupts(|_| unsafe {
                 USB_KEYBOARD.as_mut().map(|keyboard| {
+                    keyboard.add_media_key(MediaKey::PlayPause);
+                    keyboard.send_media_report();
+                    devices.delay.delay_ms(30u8);
                     keyboard.add_key(Key::A);
-                    keyboard.send_report();
+                    keyboard.send_key_report();
+                    devices.delay.delay_ms(30u8);
+                    keyboard.send_key_report();
                 });
             });
+            devices.delay.delay_ms(200u8);
         } else {
             devices.apa102.write(c0.iter().cloned()).unwrap();
         }

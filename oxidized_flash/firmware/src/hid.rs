@@ -6,7 +6,7 @@ pub struct KeyboardHidClass<'a, B: UsbBus> {
     interface: InterfaceNumber,
     endpoint: EndpointIn<'a, B>,
     report: HIDReport,
-    buf: [u8; 8],
+    buf: [u8; 5],
 }
 
 impl<B: UsbBus> KeyboardHidClass<'_, B> {
@@ -15,7 +15,7 @@ impl<B: UsbBus> KeyboardHidClass<'_, B> {
             interface: alloc.interface(),
             endpoint: alloc.interrupt(8, 10),
             report: HIDReport::new(),
-            buf: [0u8; 8],
+            buf: [0u8; 5],
         }
     }
 
@@ -23,14 +23,22 @@ impl<B: UsbBus> KeyboardHidClass<'_, B> {
         self.report.add_key(key);
     }
 
-    pub fn send_report(&mut self) {
-        if self.report.has_keys() {
-            self.report.fill(&mut self.buf);
+    pub fn add_media_key(&mut self, media_key: MediaKey) {
+        self.report.add_media_key(media_key);
+    }
+
+    pub fn send_media_report(&mut self) {
+        if self.report.has_media() {
+            self.report.fill_media(&mut self.buf);
             let _ = self.endpoint.write(&self.buf);
             self.report.reset();
-            self.report.fill(&mut self.buf);
-            let _ = self.endpoint.write(&self.buf);
         }
+    }
+
+    pub fn send_key_report(&mut self) {
+        self.report.fill_keys(&mut self.buf);
+        let _ = self.endpoint.write(&self.buf);
+        self.report.reset();
     }
 }
 
@@ -59,29 +67,46 @@ const USB_HID_DESCRIPTOR: &[u8] = &[
 ];
 
 const USB_HID_REPORT_DESCRIPTOR: &[u8] = &[
-    0x05, 0x01, // USAGE_PAGE (Generic Desktop)
-    0x09, 0x06, // USAGE (Keyboard)
-    0xa1, 0x01, // COLLECTION (Application)
-    0x05, 0x07, // USAGE_PAGE (Keyboard)
-    0x19, 0xe0, // USAGE_MINIMUM (Keyboard LeftControl)
-    0x29, 0xe7, // USAGE_MAXIMUM (Keyboard Right GUI)
-    0x15, 0x00, // LOGICAL_MINIMUM (0)
-    0x25, 0x01, // LOGICAL_MAXIMUM (1)
-    0x75, 0x01, // REPORT_SIZE (1)
-    0x95, 0x08, // REPORT_COUNT (8)
-    0x81, 0x02, // INPUT (Data,Var,Abs) //1 byte
-    0x95, 0x01, // REPORT_COUNT (1)
-    0x75, 0x08, // REPORT_SIZE (8)
-    0x81, 0x03, // INPUT (Cnst,Var,Abs) //1 byte
-    0x95, 0x06, // REPORT_COUNT (6)
-    0x75, 0x08, // REPORT_SIZE (8)
-    0x15, 0x00, // LOGICAL_MINIMUM (0)
-    0x25, 0x65, // LOGICAL_MAXIMUM (101)
-    0x05, 0x07, // USAGE_PAGE (Keyboard)
-    0x19, 0x00, // USAGE_MINIMUM (Reserved (no event indicated))
-    0x29, 0x65, // USAGE_MAXIMUM (Keyboard Application)
-    0x81, 0x00, // INPUT (Data,Ary,Abs) //6 bytes
-    0xc0, // END_COLLECTION
+    0x05, 0x01,        // Usage Page (Generic Desktop Ctrls)
+    0x09, 0x06,        // Usage (Keyboard)
+    0xA1, 0x01,        // Collection (Application)
+    0x85, 0x01,        //   Report ID (1)
+    0x05, 0x07,        //   Usage Page (Kbrd/Keypad)
+    0x75, 0x01,        //   Report Size (1)
+    0x95, 0x08,        //   Report Count (8)
+    0x19, 0xE0,        //   Usage Minimum (0xE0)
+    0x29, 0xE7,        //   Usage Maximum (0xE7)
+    0x15, 0x00,        //   Logical Minimum (0)
+    0x25, 0x01,        //   Logical Maximum (1)
+    0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0x95, 0x03,        //   Report Count (3)
+    0x75, 0x08,        //   Report Size (8)
+    0x15, 0x00,        //   Logical Minimum (0)
+    0x25, 0x64,        //   Logical Maximum (100)
+    0x05, 0x07,        //   Usage Page (Kbrd/Keypad)
+    0x19, 0x00,        //   Usage Minimum (0x00)
+    0x29, 0x65,        //   Usage Maximum (0x65)
+    0x81, 0x00,        //   Input (Data,Array,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0xC0,              // End Collection
+    0x05, 0x0C,        // Usage Page (Consumer)
+    0x09, 0x01,        // Usage (Consumer Control)
+    0xA1, 0x01,        // Collection (Application)
+    0x85, 0x02,        //   Report ID (2)
+    0x05, 0x0C,        //   Usage Page (Consumer)
+    0x15, 0x00,        //   Logical Minimum (0)
+    0x25, 0x01,        //   Logical Maximum (1)
+    0x75, 0x01,        //   Report Size (1)
+    0x95, 0x07,        //   Report Count (7)
+    0x09, 0xB5,        //   Usage (Scan Next Track)
+    0x09, 0xB6,        //   Usage (Scan Previous Track)
+    0x09, 0xB7,        //   Usage (Stop)
+    0x09, 0xB8,        //   Usage (Eject)
+    0x09, 0xCD,        //   Usage (Play/Pause)
+    0x09, 0xE2,        //   Usage (Mute)
+    0x09, 0xE9,        //   Usage (Volume Increment)
+    0x09, 0xEA,        //   Usage (Volume Decrement)
+    0x81, 0x02,        //   Input (Data,Var,Abs,No Wrap,Linear,Preferred State,No Null Position)
+    0xC0,              // End Collection
 ];
 
 impl<B: UsbBus> UsbClass<B> for KeyboardHidClass<'_, B> {
@@ -137,20 +162,38 @@ impl<B: UsbBus> UsbClass<B> for KeyboardHidClass<'_, B> {
 
 struct HIDReport {
     current_key: usize,
-    keys: [u8; 6],
+    keys: [u8; 3],
+    media_keys: u8,
 }
 
 
-// Scan codes taken from: https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2
+// Scan codes taken from: https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Debug)]
 #[allow(dead_code)]
 pub enum Key {
-    MediaPlayPause = 0xe8,
-    MediaStop = 0xe9,
-    MediaPrev = 0xea,
-    MediaNext = 0xeb,
     A = 0x04,
+}
+
+// See documentation here: https://notes.iopush.net/custom-usb-hid-device-descriptor-media-keyboard/
+#[repr(u8)]
+#[derive(Copy, Clone, Eq, PartialEq, Debug)]
+#[allow(dead_code)]
+pub enum MediaKey {
+    ScanNext = 0x01,
+    ScanPrev = 0x02,
+    Stop = 0x04,
+    Eject = 0x08,
+    PlayPause = 0x10,
+    Mute = 0x20,
+    VolumeUp = 0x40,
+    VolumeDown = 0x80,
+}
+
+impl MediaKey {
+    pub fn raw(&self) -> u8 {
+        *self as u8
+    }
 }
 
 impl Key {
@@ -163,16 +206,21 @@ impl HIDReport {
     pub fn new() -> Self {
         Self {
             current_key: 0,
-            keys: [0u8; 6],
+            keys: [0u8; 3],
+            media_keys: 0,
         }
     }
 
     pub fn add_key(&mut self, key: Key) {
-        if self.current_key == 5 {
+        if self.current_key == 3 {
             return;
         }
         self.keys[self.current_key] = key.raw();
         self.current_key = self.current_key + 1;
+    }
+
+    pub fn add_media_key(&mut self, media_key: MediaKey) {
+        self.media_keys |= media_key.raw();
     }
 
     pub fn has_keys(&self) -> bool {
@@ -184,20 +232,27 @@ impl HIDReport {
         return false;
     }
 
-    pub fn reset(&mut self) {
-        self.current_key = 0;
-        for i in & mut self.keys { *i = 0 }
+    pub fn has_media(&self) -> bool {
+        return self.media_keys != 0;
     }
 
-    pub fn fill(&self, buf: &mut [u8]) {
-        buf[0] = 0; // Omit modifiers for now.
-        buf[1] = 0; // Gap
+    pub fn reset(&mut self) {
+        self.current_key = 0;
+        self.media_keys = 0;
+        for i in &mut self.keys { *i = 0 }
+    }
+
+    pub fn fill_media(&self, buf: &mut [u8]) {
+        buf[0] = 2; // Report id
+        buf[1] = self.media_keys;
+    }
+
+    pub fn fill_keys(&self, buf: &mut [u8]) {
+        buf[0] = 1; // Report id
+        buf[1] = 0; // Omit modifiers for now
         buf[2] = self.keys[0];
         buf[3] = self.keys[1];
         buf[4] = self.keys[2];
-        buf[5] = self.keys[3];
-        buf[6] = self.keys[4];
-        buf[7] = self.keys[5];
     }
 }
 
@@ -206,9 +261,7 @@ impl PartialEq for HIDReport {
         self.keys[0] == other.keys[0] &&
             self.keys[1] == other.keys[1] &&
             self.keys[2] == other.keys[2] &&
-            self.keys[3] == other.keys[3] &&
-            self.keys[4] == other.keys[4] &&
-            self.keys[5] == other.keys[5]
+            self.media_keys == other.media_keys
     }
 }
 
