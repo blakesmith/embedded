@@ -229,7 +229,7 @@ impl HIDReport {
         }
     }
 
-    pub fn add_key(&mut self, key: Key) {
+    fn add_key(&mut self, key: Key) {
         match key {
             Key::Normal(scan_code) => {
                 if self.current_key == 2 {
@@ -244,18 +244,18 @@ impl HIDReport {
         }
     }
 
-    pub fn reset(&mut self) {
+    fn reset(&mut self) {
         self.current_key = 0;
         self.media_keys = 0;
         for i in &mut self.keys { *i = 0 }
     }
 
-    pub fn fill_media(&self, buf: &mut [u8]) {
+    fn fill_media(&self, buf: &mut [u8]) {
         buf[0] = 2; // Report id
         buf[1] = self.media_keys;
     }
 
-    pub fn fill_keys(&self, buf: &mut [u8]) {
+    fn fill_keys(&self, buf: &mut [u8]) {
         buf[0] = 1; // Report id
         buf[1] = 0; // Omit modifiers for now
         buf[2] = self.keys[0];
