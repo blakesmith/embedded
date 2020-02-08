@@ -227,7 +227,7 @@ impl HIDReport {
     }
 
     pub fn add_key(&mut self, key: Key) {
-        if self.current_key == 3 {
+        if self.current_key == 2 {
             return;
         }
         self.keys[self.current_key] = key.raw();
