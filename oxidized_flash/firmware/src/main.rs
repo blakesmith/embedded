@@ -30,13 +30,13 @@ use pac::gclk::genctrl::SRC_A;
 use pac::gclk::pchctrl::GEN_A;
 use pac::interrupt;
 
-use crate::hid::{Key, MediaKey, KeyboardHidClass};
+use crate::hid::{MediaKey, KeyboardHidClass};
 
 // Vendored for now
 use crate::qspi::{Command, Qspi};
 
 use apa102_spi::{Apa102, PixelOrder};
-use smart_leds::SmartLedsWrite;
+use smart_leds::{SmartLedsWrite, gamma};
 use smart_leds_trait::RGB8;
 
 static mut USB_ALLOCATOR: Option<UsbBusAllocator<UsbBus>> = None;
@@ -240,10 +240,10 @@ fn main() -> ! {
         disable_interrupts(|_| unsafe {
             USB_KEYBOARD.as_mut().map(|keyboard| {
                 if devices.button_switch.is_low().unwrap() {
-                    devices.apa102.write(c1.iter().cloned()).unwrap();
+                    devices.apa102.write(gamma(c1.iter().cloned())).unwrap();
                     keyboard.add_media_key(MediaKey::PlayPause);
                 } else {
-                    devices.apa102.write(c0.iter().cloned()).unwrap();
+                    devices.apa102.write(gamma(c0.iter().cloned())).unwrap();
                     keyboard.reset_report();
                 }
 
