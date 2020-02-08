@@ -237,20 +237,21 @@ fn main() -> ! {
     loop {
         let c1: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 64, g: 0, b: 0 }];
 
-        if devices.button_switch.is_low().unwrap() {
-            devices.apa102.write(c1.iter().cloned()).unwrap();
-            disable_interrupts(|_| unsafe {
-                USB_KEYBOARD.as_mut().map(|keyboard| {
+        disable_interrupts(|_| unsafe {
+            USB_KEYBOARD.as_mut().map(|keyboard| {
+                if devices.button_switch.is_low().unwrap() {
+                    devices.apa102.write(c1.iter().cloned()).unwrap();
                     keyboard.add_media_key(MediaKey::PlayPause);
+                } else {
+                    devices.apa102.write(c0.iter().cloned()).unwrap();
+                    keyboard.reset_report();
+                }
+
+                if keyboard.report_has_changed() {
                     keyboard.send_media_report();
-                    devices.delay.delay_ms(30u8);
-                    keyboard.send_media_report();
-                });
+                }
             });
-            devices.delay.delay_ms(200u8);
-        } else {
-            devices.apa102.write(c0.iter().cloned()).unwrap();
-        }
+        });
     }
 }
 

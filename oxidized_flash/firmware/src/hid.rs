@@ -5,8 +5,9 @@ use usb_device::Result;
 pub struct KeyboardHidClass<'a, B: UsbBus> {
     interface: InterfaceNumber,
     endpoint: EndpointIn<'a, B>,
-    report: HIDReport,
+    reports: [HIDReport; 2],
     buf: [u8; 5],
+    current_report: usize,
 }
 
 impl<B: UsbBus> KeyboardHidClass<'_, B> {
@@ -14,29 +15,44 @@ impl<B: UsbBus> KeyboardHidClass<'_, B> {
         KeyboardHidClass {
             interface: alloc.interface(),
             endpoint: alloc.interrupt(8, 10),
-            report: HIDReport::new(),
+            reports: [HIDReport::new(), HIDReport::new()],
             buf: [0u8; 5],
+            current_report: 0,
         }
     }
 
     pub fn add_key(&mut self, key: Key) {
-        self.report.add_key(key);
+        self.reports[self.current_report].add_key(key);
     }
 
     pub fn add_media_key(&mut self, media_key: MediaKey) {
-        self.report.add_media_key(media_key);
+        self.reports[self.current_report].add_media_key(media_key);
+    }
+
+    pub fn reset_report(&mut self) {
+        self.reports[self.current_report].reset();
     }
 
     pub fn send_media_report(&mut self) {
-        self.report.fill_media(&mut self.buf[0..2]);
+        self.reports[self.current_report].fill_media(&mut self.buf[0..2]);
         let _ = self.endpoint.write(&self.buf[0..2]);
-        self.report.reset();
+        self.swap_reports();
     }
 
     pub fn send_key_report(&mut self) {
-        self.report.fill_keys(&mut self.buf);
+        self.reports[self.current_report].fill_keys(&mut self.buf);
         let _ = self.endpoint.write(&self.buf);
-        self.report.reset();
+        self.swap_reports();
+    }
+
+    pub fn report_has_changed(&self) -> bool {
+        self.reports[self.current_report] != self.reports[(self.current_report + 1) % 2]
+    }
+
+    fn swap_reports(&mut self) {
+        let next_report = (self.current_report + 1) % 2;
+        self.reports[next_report] = self.reports[self.current_report];
+        self.current_report = (self.current_report + 1) % 2;
     }
 }
 
@@ -158,6 +174,7 @@ impl<B: UsbBus> UsbClass<B> for KeyboardHidClass<'_, B> {
     }
 }
 
+#[derive(Copy, Clone)]
 struct HIDReport {
     current_key: usize,
     keys: [u8; 3],
