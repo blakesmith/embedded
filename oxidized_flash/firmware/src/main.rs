@@ -244,10 +244,7 @@ fn main() -> ! {
                     keyboard.add_media_key(MediaKey::PlayPause);
                     keyboard.send_media_report();
                     devices.delay.delay_ms(30u8);
-                    keyboard.add_key(Key::A);
-                    keyboard.send_key_report();
-                    devices.delay.delay_ms(30u8);
-                    keyboard.send_key_report();
+                    keyboard.send_media_report();
                 });
             });
             devices.delay.delay_ms(200u8);
