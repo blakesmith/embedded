@@ -30,7 +30,7 @@ use pac::gclk::genctrl::SRC_A;
 use pac::gclk::pchctrl::GEN_A;
 use pac::interrupt;
 
-use crate::hid::{MediaKey, KeyboardHidClass};
+use crate::hid::{Key, MediaCode, KeyboardHidClass};
 
 // Vendored for now
 use crate::qspi::{Command, Qspi};
@@ -241,7 +241,7 @@ fn main() -> ! {
             USB_KEYBOARD.as_mut().map(|keyboard| {
                 if devices.button_switch.is_low().unwrap() {
                     devices.apa102.write(gamma(c1.iter().cloned())).unwrap();
-                    keyboard.add_media_key(MediaKey::PlayPause);
+                    keyboard.add_key(Key::Media(MediaCode::PlayPause));
                 } else {
                     devices.apa102.write(gamma(c0.iter().cloned())).unwrap();
                     keyboard.reset_report();

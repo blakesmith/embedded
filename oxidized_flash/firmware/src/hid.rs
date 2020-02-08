@@ -25,10 +25,6 @@ impl<B: UsbBus> KeyboardHidClass<'_, B> {
         self.reports[self.current_report].add_key(key);
     }
 
-    pub fn add_media_key(&mut self, media_key: MediaKey) {
-        self.reports[self.current_report].add_media_key(media_key);
-    }
-
     pub fn reset_report(&mut self) {
         self.reports[self.current_report].reset();
     }
@@ -183,10 +179,17 @@ struct HIDReport {
 
 
 // Scan codes taken from: https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf
-#[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Debug)]
 #[allow(dead_code)]
 pub enum Key {
+    Normal(ScanCode),
+    Media(MediaCode),
+}
+
+#[repr(u8)]
+#[derive(Copy, Clone, Eq, PartialEq, Debug)]
+#[allow(dead_code)]
+pub enum ScanCode {
     A = 0x04,
 }
 
@@ -194,7 +197,7 @@ pub enum Key {
 #[repr(u8)]
 #[derive(Copy, Clone, Eq, PartialEq, Debug)]
 #[allow(dead_code)]
-pub enum MediaKey {
+pub enum MediaCode {
     ScanNext = 0x01,
     ScanPrev = 0x02,
     Stop = 0x04,
@@ -205,13 +208,13 @@ pub enum MediaKey {
     VolumeDown = 0x80,
 }
 
-impl MediaKey {
+impl MediaCode {
     pub fn raw(&self) -> u8 {
         *self as u8
     }
 }
 
-impl Key {
+impl ScanCode {
     pub fn raw(&self) -> u8 {
         *self as u8
     }
@@ -227,15 +230,18 @@ impl HIDReport {
     }
 
     pub fn add_key(&mut self, key: Key) {
-        if self.current_key == 2 {
-            return;
+        match key {
+            Key::Normal(scan_code) => {
+                if self.current_key == 2 {
+                    return;
+                }
+                self.keys[self.current_key] = scan_code.raw();
+                self.current_key = self.current_key + 1;
+            },
+            Key::Media(media_code) => {
+                self.media_keys |= media_code.raw();
+            }
         }
-        self.keys[self.current_key] = key.raw();
-        self.current_key = self.current_key + 1;
-    }
-
-    pub fn add_media_key(&mut self, media_key: MediaKey) {
-        self.media_keys |= media_key.raw();
     }
 
     pub fn reset(&mut self) {
