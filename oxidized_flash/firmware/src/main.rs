@@ -9,9 +9,9 @@ mod hid;
 #[allow(dead_code)]
 mod qspi;
 
+use cortex_m::interrupt::free as disable_interrupts;
 use cortex_m::peripheral::NVIC;
 use cortex_m_rt::entry;
-use cortex_m::interrupt::free as disable_interrupts;
 
 use hal::clock::GenericClockController;
 use hal::dbgprint;
@@ -21,6 +21,8 @@ use hal::prelude::*;
 use hal::sercom::{PadPin, SPIMaster2};
 use hal::target_device as pac;
 use hal::time::KiloHertz;
+use hal::timer::TimerCounter3;
+
 use hal::usb::usb_device::bus::UsbBusAllocator;
 use hal::usb::usb_device::prelude::{UsbDevice, UsbDeviceBuilder, UsbVidPid};
 use hal::usb::UsbBus;
@@ -30,18 +32,21 @@ use pac::gclk::genctrl::SRC_A;
 use pac::gclk::pchctrl::GEN_A;
 use pac::interrupt;
 
-use crate::hid::{Key, MediaCode, KeyboardHidClass};
+use crate::hid::{Key, KeyboardHidClass, MediaCode};
 
 // Vendored for now
 use crate::qspi::{Command, Qspi};
 
 use apa102_spi::{Apa102, PixelOrder};
-use smart_leds::{SmartLedsWrite, gamma};
+use smart_leds::{gamma, SmartLedsWrite};
 use smart_leds_trait::RGB8;
 
 static mut USB_ALLOCATOR: Option<UsbBusAllocator<UsbBus>> = None;
 static mut USB_DEV: Option<UsbDevice<UsbBus>> = None;
 static mut USB_KEYBOARD: Option<KeyboardHidClass<UsbBus>> = None;
+
+static mut TIMER: Option<TimerCounter3> = None;
+static mut OK_LED_STATE: bool = false;
 
 define_pins!(
     struct Pins,
@@ -139,6 +144,7 @@ impl Devices {
             .configure_gclk_divider_and_source(GEN_A::GCLK2, 1, SRC_A::DFLL, false)
             .unwrap();
         let usb_clock = &clocks.usb(&usb_gclk).unwrap();
+
         unsafe {
             let bus_allocator = {
                 USB_ALLOCATOR = Some(UsbBusAllocator::new(UsbBus::new(
@@ -160,15 +166,23 @@ impl Devices {
                     .max_packet_size_0(64)
                     .build(),
             );
-        }
 
-        unsafe {
+            TIMER = Some(TimerCounter3::tc3_(
+                &clocks.tc2_tc3(&gclk0).unwrap(),
+                peripherals.TC3,
+                &mut peripherals.MCLK,
+            ));
+            TIMER.as_mut().map(|timer| timer.start(8.hz()));
+            TIMER.as_mut().map(|timer| timer.enable_interrupt());
+
             core.NVIC.set_priority(interrupt::USB_OTHER, 1);
             core.NVIC.set_priority(interrupt::USB_TRCPT0, 1);
             core.NVIC.set_priority(interrupt::USB_TRCPT1, 1);
+            core.NVIC.set_priority(interrupt::TC3, 2);
             NVIC::unmask(interrupt::USB_OTHER);
             NVIC::unmask(interrupt::USB_TRCPT0);
             NVIC::unmask(interrupt::USB_TRCPT1);
+            NVIC::unmask(interrupt::TC3);
         }
 
         Devices {
@@ -238,6 +252,11 @@ fn main() -> ! {
         let c1: [RGB8; 2] = [RGB8 { r: 0, g: 64, b: 0 }, RGB8 { r: 64, g: 0, b: 0 }];
 
         disable_interrupts(|_| unsafe {
+            if OK_LED_STATE {
+                devices.ok_led.set_high().unwrap()
+            } else {
+                devices.ok_led.set_low().unwrap()
+            }
             USB_KEYBOARD.as_mut().map(|keyboard| {
                 if devices.button_switch.is_low().unwrap() {
                     devices.apa102.write(gamma(c1.iter().cloned())).unwrap();
@@ -278,4 +297,15 @@ fn USB_TRCPT0() {
 #[interrupt]
 fn USB_TRCPT1() {
     poll_usb();
+}
+
+#[interrupt]
+fn TC3() {
+    unsafe {
+        TIMER.as_mut().map(|timer| {
+            if timer.wait().is_ok() {
+                OK_LED_STATE = !OK_LED_STATE;
+            }
+        });
+    }
 }
