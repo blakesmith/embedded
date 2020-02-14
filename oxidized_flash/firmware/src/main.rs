@@ -47,6 +47,7 @@ static mut USB_KEYBOARD: Option<KeyboardHidClass<UsbBus>> = None;
 
 static mut TIMER: Option<TimerCounter3> = None;
 static mut OK_LED_STATE: bool = false;
+static mut TIMER_COUNT: u32 = 0;
 
 define_pins!(
     struct Pins,
@@ -259,6 +260,7 @@ fn main() -> ! {
             }
             USB_KEYBOARD.as_mut().map(|keyboard| {
                 if devices.button_switch.is_low().unwrap() {
+                    TIMER_COUNT = 0;
                     devices.apa102.write(gamma(c1.iter().cloned())).unwrap();
                     keyboard.add_key(Key::Media(MediaCode::PlayPause));
                 } else {
@@ -305,6 +307,7 @@ fn TC3() {
         TIMER.as_mut().map(|timer| {
             if timer.wait().is_ok() {
                 OK_LED_STATE = !OK_LED_STATE;
+                TIMER_COUNT = (TIMER_COUNT + 1) % 0xFFFF;
             }
         });
     }
